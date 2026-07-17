@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2026 · <span>Tecnología e Ingeniería II</span> · Castilla y León · Ordinaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.hdr-back{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:.8rem;color:var(--mut);
+  border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap;transition:.16s}
+.hdr-back:hover{color:var(--txt);border-color:var(--acc);background:rgba(56,189,248,.08)}
+.hdr-back svg{transition:.16s}
+.hdr-back:hover svg{transform:translateX(-3px)}
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards,.hdr-back{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2026 · <span>Tecnología e Ingeniería II</span> · Castilla y León · Ordinaria</h1>
+    <div class="sub">Prueba de Acceso a la Universidad · Castilla y León · Curso 2025-2026 · Examen resuelto y comentado</div>
+  </div>
+  <a class="hdr-back" href="index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    Exámenes de Castilla y León
+  </a>
+  <div class="pill">90 min · 2,5 pt/pregunta</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Apartado 1 · Diagramas de equilibrio</div>
+<a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">Diagrama de fases Cu-Ag</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Apartado 2 · Estructuras / Máquinas térmicas</div>
+<a class="q" href="#q2a" onclick="go('q2a');return false;" id="l-q2a">P1 · Estructuras (viga)</a>
+<a class="q" href="#q2b" onclick="go('q2b');return false;" id="l-q2b">P2 · Máquinas térmicas (motor)</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Apartado 3 · Neumática / Corriente alterna</div>
+<a class="q" href="#q3a" onclick="go('q3a');return false;" id="l-q3a">P1 · Neumática</a>
+<a class="q" href="#q3b" onclick="go('q3b');return false;" id="l-q3b">P2 · Corriente alterna (R-L)</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#34d399"></span> Apartado 4 · Electrónica digital / Control</div>
+<a class="q" href="#q4a" onclick="go('q4a');return false;" id="l-q4a">P1 · Electrónica digital</a>
+<a class="q" href="#q4b" onclick="go('q4b');return false;" id="l-q4b">P2 · Sistemas y control</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2026 · <span>Tecnología e Ingeniería II</span> · Castilla y León · Ordinaria</h2>
+    <p>El examen consta de <b>cuatro apartados obligatorios</b>. El primero tiene una única pregunta; en los tres siguientes se elige <b>una de las dos</b> preguntas propuestas. Aquí se resuelven <b>todas</b> para repasar. Selecciona un apartado o una pregunta en la barra lateral. Cada una incluye el enunciado oficial, una introducción con los conceptos que se aplican y la solución paso a paso.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../examens/Castilla y Leon/Tecnologia_CastillayLeon_2026_ordinaria.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#f59e0b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M14 66V20l24 30 24-30v46'/><path d='M14 50h48'/><circle cx='74' cy='30' r='4'/></svg></div>
+      <h3>Apartado 1 · Diagramas de equilibrio</h3>
+      <p>Reacción eutectoide y diagrama de fases Cu-Ag: fases, enfriamiento eutéctico y regla de la palanca.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">Diagrama Cu-Ag</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#22d3ee' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M12 30v34M12 46h60'/><path d='M24 30v10M36 30v10M48 30v10M60 30v10'/><path d='M20 40l4 6 4-6M32 40l4 6 4-6M44 40l4 6 4-6M56 40l4 6 4-6'/></svg></div>
+      <h3>Apartado 2 · Estructuras / Máquinas térmicas</h3>
+      <p>Opción A: viga en voladizo con carga distribuida (reacciones, cortante y flector). Opción B: bomba de calor y motor alternativo.</p>
+      <div class="qlinks"><a class="k2" href="#q2a" onclick="go('q2a');return false;">Viga voladizo</a><a class="k2" href="#q2b" onclick="go('q2b');return false;">Motor alternativo</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#a78bfa' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='16' y='30' width='40' height='20' rx='2'/><path d='M56 40h14M70 34v12'/><path d='M20 62q6-12 12 0t12 0 12 0'/></svg></div>
+      <h3>Apartado 3 · Neumática / Corriente alterna</h3>
+      <p>Opción A: instalación neumática con cilindro de doble efecto y válvulas. Opción B: circuito R-L en paralelo en corriente alterna.</p>
+      <div class="qlinks"><a class="k3" href="#q3a" onclick="go('q3a');return false;">Neumática</a><a class="k3" href="#q3b" onclick="go('q3b');return false;">R-L paralelo CA</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#34d399' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='18' y='24' width='30' height='32' rx='3'/><path d='M48 40h16'/><circle cx='72' cy='40' r='8'/><path d='M69 40h6M72 37v6'/></svg></div>
+      <h3>Apartado 4 · Electrónica digital / Control</h3>
+      <p>Opción A: suma binaria y contador de entradas activas (Karnaugh). Opción B: ciberseguridad, lazos de control y función de transferencia.</p>
+      <div class="qlinks"><a class="k4" href="#q4a" onclick="go('q4a');return false;">Karnaugh</a><a class="k4" href="#q4b" onclick="go('q4b');return false;">Función transferencia</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1">
+  <div class="crumb">Inicio / APARTADO 1</div>
+  <div class="qtitle"><span class="tag t1">APARTADO 1</span> Pregunta única · Diagrama de fases Cu-Ag</div>
+  <div class="qmeta">Materiales · 2,5 puntos (cuestión:0,5 · a:0,5 · b:0,5 · c:1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>Cuestión.</b> ¿Qué es una reacción eutectoide? <span class='pts'>(0,5 ptos)</span></p><p><b>Problema.</b> Dado el siguiente diagrama de fases correspondiente a una aleación cobre-plata:</p><ol type='a'><li>Dibujar un esquema del diagrama de fases y, sobre él, indicar las fases presentes en las regiones del diagrama. ¿Cuál es la temperatura de fusión de los metales puros Cu y Ag? <span class='pts'>(0,5 ptos.)</span></li><li>Describir el proceso de enfriamiento de una aleación con composición eutéctica al descender la temperatura desde 900 ºC hasta 600 ºC, indicando las transformaciones de fase que tienen lugar. <span class='pts'>(0,5 ptos.)</span></li><li>Para una aleación con una composición del 50 % de Ag a una temperatura de 781 ºC, determinar las fases presentes, la composición de cada una de las fases y la cantidad de cada fase. Utilizar las composiciones indicadas en la gráfica. <span class='pts'>(1 pto.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><img src='fig/diagrama_fases.png' alt='Diagrama de fases cobre-plata' style='max-width:520px;width:100%;background:#fff;border-radius:8px;padding:6px'><figcaption>Diagrama de fases Cu-Ag (composición en % en peso de Ag).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li><b>Reacción eutéctica:</b> a temperatura constante, un líquido se transforma al enfriar en dos sólidos: \(L \rightarrow \alpha+\beta\).</li><li><b>Reacción eutectoide:</b> lo mismo pero partiendo de un <b>sólido</b>: \(\gamma \rightarrow \alpha+\beta\).</li><li><b>Regla de la palanca</b> (fracción de cada fase en una región bifásica), con \(C_0\) la composición global y \(C_\alpha,\,C_L\) los extremos de la isoterma (línea de reparto).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1">
+    <h5>Cuestión · Reacción eutectoide</h5><p>Una <b>reacción eutectoide</b> es una transformación de fase <b>invariante</b> (ocurre a temperatura constante) en la que, al enfriar, una <b>única fase sólida</b> se transforma simultáneamente en <b>dos fases sólidas</b> distintas:</p><div class='formula'>$$\gamma \;\xrightarrow{\;\text{enfriamiento}\;}\; \alpha + \beta$$</div><p>Es análoga a la eutéctica, pero partiendo de un sólido en lugar de un líquido. El ejemplo clásico es el acero: la austenita se transforma en ferrita + cementita (perlita) a 727 ºC.</p><div class='res'><b>Reacción eutectoide:</b> un sólido → dos sólidos, a temperatura constante.</div><h5>a) Esquema, fases y temperaturas de fusión</h5><p>El diagrama Cu-Ag es un <b>eutéctico simple</b> con dos disoluciones sólidas de solubilidad limitada: \(\alpha\) (rica en Cu) y \(\beta\) (rica en Ag). Las regiones son:</p><ul><li><b>L</b> — líquido (parte superior).</li><li><b>\(\alpha\)</b> — disolución sólida rica en Cu (extremo izquierdo).</li><li><b>\(\beta\)</b> — disolución sólida rica en Ag (extremo derecho).</li><li><b>\(\alpha+L\)</b> y <b>\(\beta+L\)</b> — regiones bifásicas sólido + líquido.</li><li><b>\(\alpha+\beta\)</b> — región bifásica sólida (por debajo de la isoterma de 780 ºC).</li></ul><p>Las temperaturas de fusión de los metales puros son los extremos de las líneas de líquido:</p><div class='formula'>$$T_{f}(\mathrm{Cu})=1084{,}5\ ^{\circ}\mathrm C \qquad T_{f}(\mathrm{Ag})=961{,}93\ ^{\circ}\mathrm C$$</div><div class='res'><b>Resultado:</b> \(T_f(\mathrm{Cu})=1084{,}5\ ^\circ\mathrm C\) y \(T_f(\mathrm{Ag})=961{,}93\ ^\circ\mathrm C\). Punto eutéctico: 71,9 % Ag a 780 ºC.</div><h5>b) Enfriamiento de la composición eutéctica (71,9 % Ag) de 900 ºC a 600 ºC</h5><ul><li><b>900 ºC:</b> la aleación está totalmente <b>líquida</b> (L, 71,9 % Ag).</li><li><b>De 900 ºC a 780 ºC:</b> se enfría el líquido sin cambio de fase (sigue siendo 100 % L).</li><li><b>780 ºC (temperatura eutéctica):</b> ocurre la <b>reacción eutéctica</b> isoterma, en la que todo el líquido se transforma de golpe en las dos fases sólidas:<div class='formula'>$$L\,(71{,}9\%)\;\rightarrow\;\alpha\,(7{,}9\%\,\mathrm{Ag})+\beta\,(91{,}2\%\,\mathrm{Ag})$$</div>Se forma la característica microestructura eutéctica (láminas alternas de \(\alpha\) y \(\beta\)).</li><li><b>De 780 ºC a 600 ºC:</b> la aleación permanece como mezcla sólida <b>\(\alpha+\beta\)</b>. Las composiciones de \(\alpha\) y \(\beta\) varían ligeramente siguiendo las líneas <i>solvus</i> (\(\alpha\) va perdiendo Ag y \(\beta\) va perdiendo Cu).</li></ul><div class='res'><b>Resultado:</b> \(L \rightarrow\) enfriamiento \(\rightarrow\) reacción eutéctica a 780 ºC \(\rightarrow\) mezcla sólida \(\alpha+\beta\).</div><h5>c) Aleación 50 % Ag a 781 ºC — regla de la palanca</h5><p>A 781 ºC (justo por encima de la isoterma eutéctica de 780 ºC), la vertical del 50 % de Ag cae en la región bifásica <b>\(\alpha+L\)</b>. La línea de reparto a esa temperatura tiene por extremos:</p><ul><li>fase \(\alpha\): \(C_\alpha = 7{,}9\%\ \mathrm{Ag}\)</li><li>fase líquida L: \(C_L = 71{,}9\%\ \mathrm{Ag}\)</li></ul><p><b>Fases presentes:</b> sólido \(\alpha\) y líquido L. Aplicamos la regla de la palanca con \(C_0=50\%\):</p><div class='formula'>$$W_\alpha=\frac{C_L-C_0}{C_L-C_\alpha}=\frac{71{,}9-50}{71{,}9-7{,}9}=\frac{21{,}9}{64}=0{,}342$$</div><div class='formula'>$$W_L=\frac{C_0-C_\alpha}{C_L-C_\alpha}=\frac{50-7{,}9}{71{,}9-7{,}9}=\frac{42{,}1}{64}=0{,}658$$</div><div class='res'><b>Resultado:</b> a 781 ºC coexisten <b>\(\alpha\)</b> (7,9 % Ag) y <b>líquido</b> (71,9 % Ag), en proporciones <b>\(W_\alpha\approx 34{,}2\%\)</b> y <b>\(W_L\approx 65{,}8\%\)</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q2a" onclick="go('q2a');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2a">
+  <div class="crumb">Inicio / APARTADO 2 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t2">APARTADO 2 · OPCIÓN A</span> Pregunta 1 (Opción A) · Estructuras: viga en voladizo</div>
+  <div class="qmeta">Estructuras · 2,5 puntos (a:0,5 · b:1,25 · c:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>La viga que se muestra en la figura tiene aplicada la fuerza distribuida como se indica (empotramiento en A, extremo B libre; \(W=5.000\ \mathrm{N/m}\), longitud 10 m).</p><ol type='a'><li>Calcular las reacciones en los apoyos. <span class='pts'>(0,5 ptos.)</span></li><li>Calcular los esfuerzos cortantes y momentos flectores. <span class='pts'>(1,25 ptos.)</span></li><li>Representar los diagramas de los esfuerzos cortantes y momentos flectores. <span class='pts'>(0,75 ptos.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 660 300' width='100%' style='max-width:560px' font-family='Inter,sans-serif'><text x='355' y='38' fill='#e2e8f0' font-size='19' text-anchor='middle'>W = 5.000 N/m</text><line x1='110' y1='60' x2='600' y2='60' stroke='#38bdf8' stroke-width='2.2'/><line x1='110' y1='60' x2='110' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='105,148 115,148 110,159' fill='#38bdf8'/><line x1='159' y1='60' x2='159' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='154,148 164,148 159,159' fill='#38bdf8'/><line x1='208' y1='60' x2='208' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='203,148 213,148 208,159' fill='#38bdf8'/><line x1='257' y1='60' x2='257' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='252,148 262,148 257,159' fill='#38bdf8'/><line x1='306' y1='60' x2='306' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='301,148 311,148 306,159' fill='#38bdf8'/><line x1='355' y1='60' x2='355' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='350,148 360,148 355,159' fill='#38bdf8'/><line x1='404' y1='60' x2='404' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='399,148 409,148 404,159' fill='#38bdf8'/><line x1='453' y1='60' x2='453' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='448,148 458,148 453,159' fill='#38bdf8'/><line x1='502' y1='60' x2='502' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='497,148 507,148 502,159' fill='#38bdf8'/><line x1='551' y1='60' x2='551' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='546,148 556,148 551,159' fill='#38bdf8'/><line x1='600' y1='60' x2='600' y2='150' stroke='#38bdf8' stroke-width='2'/><polygon points='595,148 605,148 600,159' fill='#38bdf8'/><rect x='110' y='159' width='490' height='16' rx='1.5' fill='#1e293b' stroke='#e2e8f0' stroke-width='2'/><line x1='106' y1='128' x2='106' y2='206' stroke='#e2e8f0' stroke-width='3'/><line x1='106' y1='134' x2='94' y2='145' stroke='#94a3b8' stroke-width='1.6'/><line x1='106' y1='147' x2='94' y2='158' stroke='#94a3b8' stroke-width='1.6'/><line x1='106' y1='160' x2='94' y2='171' stroke='#94a3b8' stroke-width='1.6'/><line x1='106' y1='173' x2='94' y2='184' stroke='#94a3b8' stroke-width='1.6'/><line x1='106' y1='186' x2='94' y2='197' stroke='#94a3b8' stroke-width='1.6'/><line x1='106' y1='199' x2='94' y2='210' stroke='#94a3b8' stroke-width='1.6'/><text x='120' y='198' fill='#e2e8f0' font-size='18' font-weight='600'>A</text><text x='578' y='198' fill='#e2e8f0' font-size='18' font-weight='600'>B</text><line x1='110' y1='250' x2='600' y2='250' stroke='#94a3b8' stroke-width='1.5'/><polygon points='110,250 122,245 122,255' fill='#94a3b8'/><polygon points='600,250 588,245 588,255' fill='#94a3b8'/><line x1='110' y1='243' x2='110' y2='257' stroke='#94a3b8' stroke-width='1.5'/><line x1='600' y1='243' x2='600' y2='257' stroke='#94a3b8' stroke-width='1.5'/><text x='355' y='242' fill='#cbd5e1' font-size='17' text-anchor='middle'>10 m</text></svg><figcaption>Viga en voladizo empotrada en A con carga uniformemente distribuida.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q2a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Es una <b>viga en voladizo</b> (empotrada en A, libre en B). El empotramiento aporta una <b>reacción vertical</b> \(R_A\) y un <b>momento de empotramiento</b> \(M_A\).</li><li>La carga distribuida uniforme equivale a una resultante \(R=W\cdot L\) aplicada en el centro de la viga.</li><li>Equilibrio: \(\sum F_y=0\) y \(\sum M=0\).</li><li>Esfuerzo cortante \(V(x)\) y momento flector \(M(x)\) por tramos; se cumple \(\dfrac{dM}{dx}=V\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q2a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2a">
+    <h5>a) Reacciones en el empotramiento</h5><p>Resultante de la carga distribuida:</p><div class='formula'>$$R=W\cdot L=5000\cdot 10=50\,000\ \mathrm N=50\ \mathrm{kN}$$</div><p>aplicada en el centro de la viga (a 5 m de A). Equilibrio de fuerzas verticales y de momentos respecto de A:</p><div class='formula'>$$R_A=W\cdot L=50\,000\ \mathrm N=50\ \mathrm{kN}\ (\uparrow)$$</div><div class='formula'>$$M_A=W\cdot L\cdot \frac{L}{2}=\frac{W L^2}{2}=\frac{5000\cdot 10^2}{2}=250\,000\ \mathrm{N\cdot m}=250\ \mathrm{kN\cdot m}$$</div><div class='res'><b>Resultado:</b> \(R_A=50\ \mathrm{kN}\) (hacia arriba) y momento de empotramiento \(M_A=250\ \mathrm{kN\cdot m}\).</div><h5>b) Esfuerzos cortantes y momentos flectores</h5><p>Tomamos una sección a una distancia \(x\) medida <b>desde el extremo libre B</b> (así no interviene el empotramiento). La porción a la derecha soporta la carga \(W\cdot x\):</p><div class='formula'>$$V(x)=W\cdot x=5000\,x\quad(0\le x\le 10)$$</div><div class='formula'>$$M(x)=-W\cdot x\cdot\frac{x}{2}=-\frac{W x^2}{2}=-2500\,x^2$$</div><p>Valores en los extremos:</p><table class='dat'><tr><th>Sección</th><th>Cortante \(V\)</th><th>Momento flector \(M\)</th></tr><tr><td>B (extremo libre, \(x=0\))</td><td>0</td><td>0</td></tr><tr><td>Centro (\(x=5\) m)</td><td>25 kN</td><td>−62,5 kN·m</td></tr><tr><td>A (empotramiento, \(x=10\) m)</td><td>50 kN</td><td>−250 kN·m</td></tr></table><p>El cortante varía de forma <b>lineal</b> (de 0 en B a 50 kN en A) y el momento flector de forma <b>parabólica</b> (de 0 en B a −250 kN·m en A). El signo negativo indica flexión con las fibras superiores traccionadas (momento de empotramiento).</p><div class='res'><b>Resultado:</b> \(V_{\max}=50\ \mathrm{kN}\) y \(M_{\max}=250\ \mathrm{kN\cdot m}\), ambos en el empotramiento A.</div><h5>c) Diagramas de esfuerzos</h5><figure class='fig'><svg viewBox='0 0 520 220' width='100%' style='max-width:480px' font-family='Inter,sans-serif'><text x='260' y='20' fill='#e2e8f0' font-size='15' text-anchor='middle'>Esfuerzo cortante V</text><line x1='60' y1='170' x2='480' y2='170' stroke='#94a3b8' stroke-width='1.5'/><polygon points='60,170 60,55 480,170' fill='#22d3ee' fill-opacity='0.25' stroke='#22d3ee' stroke-width='2.5'/><text x='48' y='190' fill='#cbd5e1' font-size='14' text-anchor='middle'>A</text><text x='480' y='190' fill='#cbd5e1' font-size='14' text-anchor='middle'>B</text><text x='72' y='50' fill='#22d3ee' font-size='14'>50 kN</text><text x='452' y='165' fill='#cbd5e1' font-size='13'>0</text></svg><figcaption>Diagrama de cortantes: lineal, máximo 50 kN en el empotramiento A y nulo en B.</figcaption></figure><figure class='fig'><svg viewBox='0 0 520 230' width='100%' style='max-width:480px' font-family='Inter,sans-serif'><text x='260' y='20' fill='#e2e8f0' font-size='15' text-anchor='middle'>Momento flector M</text><line x1='60' y1='55' x2='480' y2='55' stroke='#94a3b8' stroke-width='1.5'/><path d='M480 55 L438 56.3 L397 60 L356 66.2 L315 74.8 L274 85.8 L233 99.3 L191 115.2 L150 133.5 L109 154.3 L60 185' fill='none' stroke='#f59e0b' stroke-width='2.5'/><path d='M480 55 L438 56.3 L397 60 L356 66.2 L315 74.8 L274 85.8 L233 99.3 L191 115.2 L150 133.5 L109 154.3 L60 185 L60 55 Z' fill='#f59e0b' fill-opacity='0.18'/><text x='48' y='200' fill='#cbd5e1' font-size='14' text-anchor='middle'>A</text><text x='480' y='48' fill='#cbd5e1' font-size='14' text-anchor='middle'>B</text><text x='70' y='205' fill='#f59e0b' font-size='14'>−250 kN·m</text><text x='452' y='48' fill='#cbd5e1' font-size='13'>0</text></svg><figcaption>Diagrama de momentos flectores: parabólico, nulo en B y máximo (−250 kN·m) en A.</figcaption></figure>
+  </div>
+  <div class="nav-q">
+    <a href="#q1" onclick="go('q1');return false;">← Anterior</a>
+    <a href="#q2b" onclick="go('q2b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2b">
+  <div class="crumb">Inicio / APARTADO 2 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t2">APARTADO 2 · OPCIÓN B</span> Pregunta 2 (Opción B) · Máquinas térmicas: bomba de calor y motor</div>
+  <div class="qmeta">Termodinámica y motores · 2,5 puntos (cuestión:0,75 · a:0,5 · b:0,5 · c:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>Cuestión.</b> Explicar el funcionamiento de una bomba de calor, describir sus componentes y escribir la fórmula de la eficiencia. <span class='pts'>(0,75 ptos.)</span></p><p><b>Problema.</b> Un motor alternativo de 4 cilindros genera un par máximo de \(M_{\max}=300\ \mathrm{N\cdot m}\) cuando gira a \(n=3750\ \mathrm{rpm}\). El diámetro de cada cilindro es de 80 mm, la carrera es de 92 mm y el volumen de la cámara de combustión de cada cilindro es de 58,5 cm³. Calcular:</p><ol type='a'><li>La cilindrada total del motor. <span class='pts'>(0,5 ptos.)</span></li><li>La potencia desarrollada por el motor operando en par máximo. <span class='pts'>(0,5 ptos.)</span></li><li>La relación volumétrica de compresión. <span class='pts'>(0,75 ptos.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q2b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li><b>Cilindrada unitaria:</b> \(V_u=\dfrac{\pi}{4}D^2\cdot S\); <b>total:</b> \(V_T=z\cdot V_u\) (z = nº de cilindros).</li><li><b>Potencia a partir del par:</b> \(P=M\cdot\omega\), con \(\omega=\dfrac{2\pi n}{60}\).</li><li><b>Relación de compresión:</b> \(r=\dfrac{V_u+V_c}{V_c}\) (volumen total del cilindro entre volumen de la cámara).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q2b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2b">
+    <h5>Cuestión · La bomba de calor</h5><p>Una <b>bomba de calor</b> es una máquina térmica que, consumiendo un trabajo (energía eléctrica en el compresor), <b>transfiere calor desde un foco frío a un foco caliente</b> (en sentido contrario al espontáneo). Recorre el ciclo frigorífico pero aprovechando el calor cedido en el foco caliente para calefacción. Sus <b>componentes</b> son:</p><ul><li><b>Compresor:</b> comprime el fluido refrigerante en estado vapor, elevando su presión y temperatura (aporta el trabajo).</li><li><b>Condensador:</b> el vapor cede calor \(Q_c\) al foco caliente (el local a calefactar) y se condensa.</li><li><b>Válvula de expansión:</b> reduce bruscamente la presión, enfriando el refrigerante.</li><li><b>Evaporador:</b> el refrigerante absorbe calor \(Q_f\) del foco frío (el exterior) y se evapora.</li></ul><p>Su <b>eficiencia</b> (COP, coeficiente de desempeño) se define como el calor útil aportado al foco caliente entre el trabajo consumido:</p><div class='formula'>$$\varepsilon=\mathrm{COP}=\frac{Q_c}{W}=\frac{Q_c}{Q_c-Q_f}$$</div><div class='res'>La bomba de calor mueve calor del foco frío al caliente consumiendo trabajo; su eficiencia \(\varepsilon=Q_c/W>1\).</div><h5>a) Cilindrada total</h5><p>Con \(D=8\ \mathrm{cm}\) y carrera \(S=9{,}2\ \mathrm{cm}\), la cilindrada unitaria:</p><div class='formula'>$$V_u=\frac{\pi}{4}D^2\,S=\frac{\pi}{4}(8)^2(9{,}2)=462{,}5\ \mathrm{cm^3}$$</div><div class='formula'>$$V_T=z\cdot V_u=4\cdot 462{,}5=1849{,}8\ \mathrm{cm^3}\approx 1{,}85\ \mathrm L$$</div><div class='res'><b>Resultado:</b> \(V_T\approx 1850\ \mathrm{cm^3}\;(1{,}85\ \mathrm{L})\).</div><h5>b) Potencia en par máximo</h5><p>Velocidad angular:</p><div class='formula'>$$\omega=\frac{2\pi n}{60}=\frac{2\pi\cdot 3750}{60}=392{,}7\ \mathrm{rad/s}$$</div><div class='formula'>$$P=M_{\max}\cdot\omega=300\cdot 392{,}7=117\,810\ \mathrm W\approx 117{,}8\ \mathrm{kW}$$</div><div class='res'><b>Resultado:</b> \(P\approx 117{,}8\ \mathrm{kW}\;(\approx 160\ \mathrm{CV})\).</div><h5>c) Relación volumétrica de compresión</h5><p>El volumen máximo del cilindro es \(V_u+V_c\) (PMI) y el mínimo es \(V_c\) (PMS):</p><div class='formula'>$$r=\frac{V_u+V_c}{V_c}=\frac{462{,}5+58{,}5}{58{,}5}=\frac{521}{58{,}5}=8{,}9$$</div><div class='res'><b>Resultado:</b> \(r\approx 8{,}9:1\) (típico de un motor de gasolina).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2a" onclick="go('q2a');return false;">← Anterior</a>
+    <a href="#q3a" onclick="go('q3a');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3a">
+  <div class="crumb">Inicio / APARTADO 3 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t3">APARTADO 3 · OPCIÓN A</span> Pregunta 1 (Opción A) · Neumática e hidráulica</div>
+  <div class="qmeta">Neumática · 2,5 puntos (a:1 · b:1 · c:0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En la instalación neumática de la figura:</p><ol type='a'><li>Identificar y describir sus componentes. <span class='pts'>(1 pto.)</span></li><li>Explicar el funcionamiento. <span class='pts'>(1 pto.)</span></li><li>¿Qué ocurre si, al montar la instalación, el regulador «1.01» se conecta al revés? <span class='pts'>(0,5 ptos.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><img src='fig/neumatica.png' alt='Esquema de la instalación neumática' style='max-width:420px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Instalación neumática con cilindro de doble efecto (1.0), válvula 5/2 (1.1) y finales de carrera 3/2 (1.2 y 1.3).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q3a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Nomenclatura de circuitos neumáticos: <b>0.x</b> = elementos de alimentación; <b>1.0</b> = actuador; <b>1.1</b> = válvula principal; <b>1.2/1.3</b> = elementos de mando (finales de carrera).</li><li><b>Válvula 5/2:</b> 5 vías, 2 posiciones; gobierna un cilindro de doble efecto.</li><li><b>Regulador de caudal unidireccional</b> (estranguladora + antirretorno): controla la velocidad del vástago dejando paso libre en un sentido y estrangulado en el otro.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q3a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3a">
+    <h5>a) Identificación de los componentes</h5><ul><li><b>0.1 — Grupo o unidad de acondicionamiento del aire</b> (filtro + regulador de presión con manómetro), conectado a la fuente de aire comprimido. Prepara y regula el aire de la red.</li><li><b>1.0 — Cilindro de doble efecto:</b> actuador lineal que sale y entra por acción del aire en ambas cámaras.</li><li><b>1.01 — Regulador de caudal unidireccional</b> (válvula estranguladora con antirretorno): regula la <b>velocidad</b> del vástago.</li><li><b>1.1 — Válvula distribuidora 5/2 biestable</b> con pilotaje neumático por ambos lados: es la válvula principal que dirige el aire a una u otra cámara del cilindro.</li><li><b>1.2 y 1.3 — Válvulas 3/2 (NC) accionadas por rodillo y con retorno por muelle:</b> actúan como <b>finales de carrera</b> (detectores de posición) que envían las señales de pilotaje a la válvula 1.1.</li></ul><div class='res'>Circuito de mando de un cilindro de doble efecto con válvula 5/2 pilotada por dos finales de carrera 3/2.</div><h5>b) Funcionamiento</h5><p>Es un circuito de <b>vaivén automático</b>. Con el cilindro en su posición inicial, el rodillo de <b>1.2</b> está accionado y envía una señal de aire que <b>pilota la válvula 1.1</b>, que conmuta y da presión a la cámara posterior del cilindro <b>1.0</b>: el <b>vástago sale</b> (avance). El <b>regulador 1.01</b> estrangula el caudal y fija la velocidad de ese movimiento.</p><p>Al llegar al final del recorrido, el vástago acciona el rodillo de <b>1.3</b>, que envía la señal de pilotaje al <b>lado opuesto</b> de 1.1. La válvula vuelve a conmutar, invierte la alimentación del cilindro y el <b>vástago retrocede</b> hasta accionar de nuevo 1.2, reiniciándose el ciclo. Así se mantiene el movimiento alternativo de salida y entrada.</p><div class='res'>1.2 → pilota 1.1 → sale el vástago; al final, 1.3 → pilota 1.1 → entra el vástago. Ciclo de vaivén.</div><h5>c) Si el regulador 1.01 se conecta al revés</h5><p>Un regulador de caudal unidireccional deja pasar el aire <b>libremente</b> en un sentido (por el antirretorno) y lo <b>estrangula</b> en el sentido contrario. Montado correctamente regula la velocidad en la carrera deseada (control del escape). Si se conecta <b>al revés</b>, el antirretorno permite el paso libre justo en el sentido que se quería controlar y estrangula el otro: la <b>regulación de velocidad deja de funcionar</b> en esa carrera, el cilindro se mueve a velocidad plena (sin control) y el estrangulamiento actúa sobre el movimiento equivocado. El resultado es un movimiento brusco y una regulación de velocidad inservible.</p><div class='res'><b>Resultado:</b> el antirretorno cortocircuita al estrangulador en el sentido a controlar; la velocidad ya no se regula en esa carrera (movimiento incontrolado/brusco).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2b" onclick="go('q2b');return false;">← Anterior</a>
+    <a href="#q3b" onclick="go('q3b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3b">
+  <div class="crumb">Inicio / APARTADO 3 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t3">APARTADO 3 · OPCIÓN B</span> Pregunta 2 (Opción B) · Circuitos de corriente alterna</div>
+  <div class="qmeta">Corriente alterna · 2,5 puntos (a:0,75 · b:0,75 · c:0,25 · d:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En un circuito eléctrico se conectan <b>en paralelo</b> una resistencia de 1000 Ω y una bobina de 0,15 H. Si aplicamos una tensión al circuito de 230 V eficaces, con una frecuencia de 50 Hz, calcular:</p><ol type='a'><li>Impedancia equivalente total del circuito. <span class='pts'>(0,75 ptos.)</span></li><li>Intensidades en todas las ramas del circuito. <span class='pts'>(0,75 ptos.)</span></li><li>Factor de potencia. <span class='pts'>(0,25 ptos.)</span></li><li>Balance de potencias: activa, reactiva y aparente. <span class='pts'>(0,75 ptos.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 500 270' width='100%' style='max-width:440px' font-family='Inter,sans-serif'><line x1='70' y1='55' x2='360' y2='55' stroke='#e2e8f0' stroke-width='2.4'/><line x1='70' y1='215' x2='360' y2='215' stroke='#e2e8f0' stroke-width='2.4'/><line x1='70' y1='55' x2='70' y2='115' stroke='#e2e8f0' stroke-width='2.4'/><line x1='70' y1='155' x2='70' y2='215' stroke='#e2e8f0' stroke-width='2.4'/><circle cx='70' cy='135' r='20' fill='none' stroke='#a78bfa' stroke-width='2.4'/><path d='M56 135 q 7 -12 14 0 t 14 0' fill='none' stroke='#a78bfa' stroke-width='2.2'/><text x='40' y='131' fill='#c4b5fd' font-size='15' text-anchor='end'>230 V</text><text x='40' y='149' fill='#94a3b8' font-size='12.5' text-anchor='end'>50 Hz</text><line x1='220' y1='55' x2='220' y2='95' stroke='#e2e8f0' stroke-width='2.4'/><rect x='203' y='95' width='34' height='72' rx='2' fill='none' stroke='#38bdf8' stroke-width='2.4'/><line x1='220' y1='167' x2='220' y2='215' stroke='#e2e8f0' stroke-width='2.4'/><text x='248' y='137' fill='#7dd3fc' font-size='15'>R = 1000 Ω</text><line x1='360' y1='55' x2='360' y2='95' stroke='#e2e8f0' stroke-width='2.4'/><path d='M360 95 q 13 9 0 18 q 13 9 0 18 q 13 9 0 18 q 13 9 0 18' fill='none' stroke='#f59e0b' stroke-width='2.4'/><line x1='360' y1='167' x2='360' y2='215' stroke='#e2e8f0' stroke-width='2.4'/><text x='384' y='137' fill='#fbbf24' font-size='15'>L = 0,15 H</text><circle cx='220' cy='55' r='3.4' fill='#e2e8f0'/><circle cx='220' cy='215' r='3.4' fill='#e2e8f0'/></svg><figcaption>Resistencia y bobina en paralelo alimentadas a 230 V / 50 Hz.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q3b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li><b>Reactancia inductiva:</b> \(X_L=2\pi f L\).</li><li>En <b>paralelo</b> la tensión es común; conviene trabajar con <b>admitancias</b>: \(Y=\dfrac1R-\dfrac{j}{X_L}\), y \(Z=1/Y\).</li><li>Intensidad de cada rama: \(I=V/Z_{\text{rama}}\). La de la R está en fase; la de la L retrasa 90°.</li><li>Potencias: \(P=\dfrac{V^2}{R}\), \(Q=\dfrac{V^2}{X_L}\), \(S=\sqrt{P^2+Q^2}=V\,I\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q3b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3b">
+    <h5>Datos previos · reactancia de la bobina</h5><div class='formula'>$$X_L=2\pi f L=2\pi\cdot 50\cdot 0{,}15=47{,}12\ \Omega$$</div><h5>a) Impedancia equivalente</h5><p>Al estar en paralelo sumamos admitancias:</p><div class='formula'>$$Y=\frac1R-\frac{j}{X_L}=\frac{1}{1000}-\frac{j}{47{,}12}=0{,}001-j\,0{,}02122\ \mathrm S$$</div><div class='formula'>$$|Z|=\frac{1}{|Y|}=\frac{R\,X_L}{\sqrt{R^2+X_L^2}}=\frac{1000\cdot 47{,}12}{\sqrt{1000^2+47{,}12^2}}=47{,}07\ \Omega$$</div><p>El ángulo de la impedancia es \(\varphi=+87{,}3^\circ\) (inductivo). En forma binómica \(Z\approx 2{,}22+j\,47{,}0\ \Omega\).</p><div class='res'><b>Resultado:</b> \(Z\approx 47{,}07\ \Omega\ \angle\,87{,}3^\circ\).</div><h5>b) Intensidades en las ramas</h5><div class='formula'>$$I_R=\frac{V}{R}=\frac{230}{1000}=0{,}23\ \mathrm A\ \text{(en fase con V)}$$</div><div class='formula'>$$I_L=\frac{V}{X_L}=\frac{230}{47{,}12}=4{,}88\ \mathrm A\ \text{(retrasa }90^\circ)$$</div><div class='formula'>$$I=\sqrt{I_R^2+I_L^2}=\sqrt{0{,}23^2+4{,}88^2}=4{,}89\ \mathrm A\ \angle-87{,}3^\circ$$</div><div class='res'><b>Resultado:</b> \(I_R=0{,}23\ \mathrm A\), \(I_L=4{,}88\ \mathrm A\), \(I_{\text{total}}\approx 4{,}89\ \mathrm A\).</div><h5>c) Factor de potencia</h5><div class='formula'>$$\cos\varphi=\frac{I_R}{I}=\frac{0{,}23}{4{,}89}=0{,}047\ \text{(inductivo)}$$</div><div class='res'><b>Resultado:</b> \(\cos\varphi\approx 0{,}047\) en retraso (circuito muy inductivo).</div><h5>d) Balance de potencias</h5><div class='formula'>$$P=\frac{V^2}{R}=\frac{230^2}{1000}=52{,}9\ \mathrm W$$</div><div class='formula'>$$Q=\frac{V^2}{X_L}=\frac{230^2}{47{,}12}=1122{,}5\ \mathrm{VAr}$$</div><div class='formula'>$$S=\sqrt{P^2+Q^2}=V\,I=230\cdot 4{,}89=1124\ \mathrm{VA}$$</div><div class='res'><b>Resultado:</b> \(P\approx 52{,}9\ \mathrm W\), \(Q\approx 1122{,}5\ \mathrm{VAr}\), \(S\approx 1124\ \mathrm{VA}\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3a" onclick="go('q3a');return false;">← Anterior</a>
+    <a href="#q4a" onclick="go('q4a');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4a">
+  <div class="crumb">Inicio / APARTADO 4 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t4">APARTADO 4 · OPCIÓN A</span> Pregunta 1 (Opción A) · Electrónica digital</div>
+  <div class="qmeta">Electrónica digital · 2,5 puntos (cuestión:0,75 · a:0,5 · b:0,5 · c:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>Cuestión.</b> Realizar la suma binaria de los números \(43_{10}\) y \(26_{10}\). <span class='pts'>(0,75 ptos.)</span></p><p><b>Problema.</b> Un circuito consta de tres entradas y una salida de dos bits, de forma que el número binario representado en la salida es el número de entradas activadas.</p><ol type='a'><li>Obtener la tabla de verdad del circuito. <span class='pts'>(0,5 ptos.)</span></li><li>Obtener el mapa de Karnaugh. <span class='pts'>(0,5 ptos.)</span></li><li>Simplificar la o las funciones lógicas correspondientes. <span class='pts'>(0,75 ptos.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q4a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Conversión decimal→binario por divisiones sucesivas y suma binaria bit a bit con acarreos.</li><li>El circuito cuenta cuántas entradas valen 1 (0 a 3): la salida de 2 bits \((S_1S_0)\) es exactamente un <b>sumador completo</b> (full-adder).</li><li><b>Karnaugh</b> para simplificar cada salida: \(S_1\) (bit de mayor peso = mayoría) y \(S_0\) (bit de menor peso = paridad).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q4a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4a">
+    <h5>Cuestión · Suma binaria de 43 y 26</h5><p>Conversión a binario: \(43_{10}=101011_2\) y \(26_{10}=011010_2\). Sumamos con acarreos:</p><div class='formula'>$$\begin{array}{r}101011\\+\;011010\\\hline 1000101\end{array}$$</div><p>Comprobación: \(1000101_2=64+4+1=69_{10}\) y \(43+26=69\). ✓</p><div class='res'><b>Resultado:</b> \(43_{10}+26_{10}=1000101_2=69_{10}\).</div><h5>a) Tabla de verdad</h5><p>Entradas A, B, C; salida \(S_1S_0\) = número de entradas a 1 (en binario):</p><table class='dat'><tr><th>A</th><th>B</th><th>C</th><th>Nº de 1</th><th>\(S_1\)</th><th>\(S_0\)</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>2</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>2</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>2</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>3</td><td>1</td><td>1</td></tr></table><h5>b) Mapas de Karnaugh</h5><p>Se hace un mapa para cada salida (filas = A; columnas = BC en código Gray):</p><table class='dat'><tr><th>\(S_1\)</th><th>BC=00</th><th>01</th><th>11</th><th>10</th></tr><tr><td>A=0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>A=1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr></table><table class='dat'><tr><th>\(S_0\)</th><th>BC=00</th><th>01</th><th>11</th><th>10</th></tr><tr><td>A=0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>A=1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr></table><h5>c) Simplificación de las funciones</h5><p><b>Salida \(S_1\)</b> (bit de mayor peso): en el mapa se agrupan tres parejas de unos → función de <b>mayoría</b>:</p><div class='formula'>$$S_1=A\cdot B+A\cdot C+B\cdot C$$</div><p><b>Salida \(S_0\)</b> (bit de menor peso): los unos forman un tablero de ajedrez, no agrupable; es la <b>paridad</b> (OR-exclusiva de las tres entradas):</p><div class='formula'>$$S_0=A\oplus B\oplus C$$</div><div class='res'><b>Resultado:</b> \(S_1=AB+AC+BC\) (mayoría) y \(S_0=A\oplus B\oplus C\) (paridad). Es un sumador completo de 1 bit.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3b" onclick="go('q3b');return false;">← Anterior</a>
+    <a href="#q4b" onclick="go('q4b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4b">
+  <div class="crumb">Inicio / APARTADO 4 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t4">APARTADO 4 · OPCIÓN B</span> Pregunta 2 (Opción B) · Sistemas emergentes y control</div>
+  <div class="qmeta">Sistemas informáticos y control · 2,5 puntos (a:0,5 · b:0,5 · problema:1,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>Cuestiones.</b></p><ol type='a'><li>Explicar cuál es la diferencia entre «spyware» y «ransomware». <span class='pts'>(0,5 ptos.)</span></li><li>Un sistema de riego automático de una parcela, ¿se podría considerar un sistema de control en lazo abierto o en lazo cerrado? Justifique su respuesta. <span class='pts'>(0,5 ptos.)</span></li></ol><p><b>Problema.</b> Calcular la función de transferencia \(Y(s)/R(s)\) del sistema de control cuyo diagrama de bloques se muestra en la figura. <span class='pts'>(1,5 ptos.)</span></p>
+    <figure class="fig"><figure class='fig'><img src='fig/bloques.png' alt='Diagrama de bloques del sistema de control' style='max-width:520px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Diagrama de bloques del sistema de control.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cyl_2026_ordinaria/q4b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li><b>Lazo abierto:</b> la señal de control no depende de la salida (no hay realimentación). <b>Lazo cerrado:</b> se mide la salida con un sensor y se realimenta para corregir el error.</li><li>Para la función de transferencia: nombrar la señal a la salida de cada sumador, plantear sus ecuaciones y despejar \(Y/R\). Aquí hay dos ramas de <b>anticipación</b> (feedforward) que llevan la señal de error \(E\) a los dos sumadores siguientes, y una <b>realimentación negativa</b> unitaria de la salida.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cyl_2026_ordinaria/q4b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4b">
+    <h5>a) Spyware frente a ransomware</h5><ul><li><b>Spyware:</b> software espía que se instala de forma oculta y <b>recopila información</b> del usuario (hábitos de navegación, credenciales, datos personales) enviándola a terceros sin su consentimiento. No bloquea el equipo; su objetivo es <b>espiar y robar información</b> pasando desapercibido.</li><li><b>Ransomware:</b> software malicioso que <b>cifra o secuestra</b> los datos o el sistema y exige un <b>rescate</b> (normalmente en criptomoneda) para liberarlos.</li></ul><p><b>Diferencia:</b> el spyware roba información de forma sigilosa; el ransomware bloquea/cifra los datos y extorsiona pidiendo un pago.</p><h5>b) Riego automático: ¿lazo abierto o cerrado?</h5><p><b>Depende de si hay realimentación:</b></p><ul><li>Si el riego funciona por <b>tiempo/programación</b> (por ejemplo, regar 10 minutos a una hora fija) sin comprobar el estado real del terreno, es un sistema en <b>lazo abierto</b>: la acción no depende de la salida.</li><li>Si dispone de un <b>sensor de humedad</b> del suelo que mide la variable controlada y el sistema ajusta el riego según ese valor (regando solo cuando la humedad baja de un umbral), entonces hay realimentación y es un sistema en <b>lazo cerrado</b>.</li></ul><div class='res'><b>Justificación:</b> lo determinante es la <b>realimentación</b>. Con sensor que compara la humedad real con la deseada → lazo cerrado; sin medida de la salida (solo temporizado) → lazo abierto.</div><h5>Problema · Función de transferencia \(Y(s)/R(s)\)</h5><p>Llamamos \(E\) a la salida del primer sumador. Por la realimentación negativa unitaria:</p><div class='formula'>$$E=R-Y$$</div><p>La señal \(E\) se lleva por anticipación a los dos sumadores siguientes (ambas entradas positivas). El segundo sumador da \(G_1E+E\), que entra en \(G_2\); el tercer sumador suma la salida de \(G_2\) y de nuevo \(E\):</p><div class='formula'>$$Y=G_2\big(G_1E+E\big)+E=\big(G_1G_2+G_2+1\big)E$$</div><p>Sustituyendo \(E=R-Y\):</p><div class='formula'>$$Y=\big(G_1G_2+G_2+1\big)(R-Y)$$</div><p>Agrupando \(Y\) y llamando \(A=G_1G_2+G_2+1\):</p><div class='formula'>$$Y(1+A)=A\,R\;\Rightarrow\;\frac{Y}{R}=\frac{A}{1+A}$$</div><div class='formula'>$$\boxed{\dfrac{Y(s)}{R(s)}=\dfrac{G_1G_2+G_2+1}{G_1G_2+G_2+2}}$$</div><div class='res'><b>Resultado:</b> \(\dfrac{Y(s)}{R(s)}=\dfrac{G_1(s)G_2(s)+G_2(s)+1}{G_1(s)G_2(s)+G_2(s)+2}\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q4a" onclick="go('q4a');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Dpto. Tecnología · Solucionario PAU 2026 · Castilla y León · Tecnología e Ingeniería II (Ordinaria)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>

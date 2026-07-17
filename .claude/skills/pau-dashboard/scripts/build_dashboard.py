@@ -20,12 +20,18 @@ CSS_PATH = os.path.join(HERE, "..", "assets", "plantilla_estilos.css")
 
 # Estilos añadidos para botón PDF y modo impresión (heredados del dashboard real)
 EXTRA_CSS = """
+.hdr-back{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:.8rem;color:var(--mut);
+  border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap;transition:.16s}
+.hdr-back:hover{color:var(--txt);border-color:var(--acc);background:rgba(56,189,248,.08)}
+.hdr-back svg{transition:.16s}
+.hdr-back:hover svg{transform:translateX(-3px)}
 .btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
   border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
   padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
 .btn-pdf:hover{background:rgba(251,191,36,.12)}
 @media print{
-  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards,.hdr-back{display:none!important}
 }
 """
 
@@ -73,6 +79,10 @@ def build(data):
     <h1>{meta.get('cabecera_titulo','Examen resuelto')}</h1>
     <div class="sub">{meta.get('subtitulo','')}</div>
   </div>
+  <a class="hdr-back" href="{meta.get('indice_url','index.html')}">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    {meta.get('indice_nombre','Índice de exámenes')}
+  </a>
   {f'<div class="pill">{pill}</div>' if pill else ''}
 </header>
 <div class="wrap">""")

@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Genera el JSON del examen Extremadura PAU 2025 (modelo) para pau-dashboard."""
+import json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+# ---------------- FIGURAS ----------------
+
+def fig_rc(vlab='220 V / 50 Hz', clab='C = 100 &micro;F', rlab='R = 100 &ohm;'):
+    xl, xr, yt, yb = 70, 470, 70, 200
+    s = ("<svg viewBox='0 0 540 250' width='100%' style='max-width:470px;height:auto' "
+         "fill='none' font-family='Inter,system-ui,sans-serif' stroke='#e2e8f0' stroke-width='2.2'>")
+    s += f"<text x='40' y='{yt+5}' fill='#e2e8f0' font-size='15' text-anchor='end'>F</text>"
+    s += f"<text x='40' y='125' fill='#e2e8f0' font-size='15' text-anchor='end'>N</text>"
+    s += f"<line x1='55' y1='{yt}' x2='{xr}' y2='{yt}'/><line x1='55' y1='120' x2='{xr}' y2='120'/>"
+    s += f"<text x='260' y='40' fill='#c4b5fd' font-size='15' font-weight='700' text-anchor='middle'>{vlab}</text>"
+    s += f"<circle cx='150' cy='{yt}' r='3.4' fill='#e2e8f0'/><circle cx='{xr}' cy='{yt}' r='3.4' fill='#e2e8f0'/>"
+    s += f"<circle cx='150' cy='120' r='3.4' fill='#e2e8f0'/><circle cx='400' cy='120' r='3.4' fill='#e2e8f0'/>"
+    s += f"<line x1='150' y1='{yt}' x2='150' y2='{yb-45}'/>"
+    s += f"<line x1='130' y1='{yb-45}' x2='170' y2='{yb-45}'/><line x1='130' y1='{yb-30}' x2='170' y2='{yb-30}'/>"
+    s += f"<line x1='150' y1='{yb-30}' x2='150' y2='{yb}'/><line x1='150' y1='{yb-45}' x2='150' y2='{yb-60}'/>"
+    s += f"<text x='150' y='{yb+28}' fill='#7dd3fc' font-size='14' text-anchor='middle'>{clab}</text>"
+    s += f"<line x1='150' y1='{yb}' x2='300' y2='{yb}'/>"
+    s += f"<rect x='300' y='{yb-13}' width='70' height='26' fill='none' stroke='#f59e0b' stroke-width='2.2'/>"
+    s += f"<line x1='370' y1='{yb}' x2='400' y2='{yb}'/><line x1='400' y1='{yb}' x2='400' y2='120'/>"
+    s += f"<text x='335' y='{yb+30}' fill='#fbbf24' font-size='14' text-anchor='middle'>{rlab}</text>"
+    s += "</svg>"
+    return s
+
+def fig_logic_q3():
+    """a,b -> NAND -> OR con c -> Salida."""
+    s = ("<svg viewBox='0 0 470 210' width='100%' style='max-width:440px;height:auto' "
+         "fill='none' font-family='Inter,system-ui,sans-serif' stroke='#e2e8f0' stroke-width='2'>")
+    s += "<text x='24' y='55' fill='#e2e8f0' font-size='15'>a</text><text x='24' y='82' fill='#e2e8f0' font-size='15'>b</text>"
+    s += "<text x='24' y='168' fill='#e2e8f0' font-size='15'>c</text>"
+    s += "<line x1='38' y1='50' x2='120' y2='50'/><line x1='38' y1='77' x2='120' y2='77'/>"
+    # NAND
+    s += "<path d='M120 34 L152 34 A29 29 0 0 1 152 92 L120 92 Z' fill='none' stroke='#38bdf8' stroke-width='2.2'/>"
+    s += "<circle cx='186' cy='63' r='5' fill='none' stroke='#38bdf8' stroke-width='2.2'/>"
+    s += "<line x1='191' y1='63' x2='250' y2='63'/><line x1='250' y1='63' x2='250' y2='120'/>"
+    # OR
+    s += "<line x1='38' y1='163' x2='250' y2='163'/>"
+    s += "<path d='M262 120 Q300 120 345 150 Q300 180 262 180 Q282 150 262 120 Z' fill='none' stroke='#34d399' stroke-width='2.2'/>"
+    s += "<line x1='250' y1='120' x2='268' y2='128'/><line x1='250' y1='163' x2='262' y2='163'/>"
+    s += "<line x1='345' y1='150' x2='410' y2='150'/><text x='416' y='155' fill='#e2e8f0' font-size='15'>Salida</text>"
+    s += "</svg>"
+    return s
+
+def fig_nand_q3():
+    """Implementacion de S=(ab)'+c con 4 NAND de 2 entradas."""
+    s = ("<svg viewBox='0 0 500 230' width='100%' style='max-width:460px;height:auto' "
+         "fill='none' font-family='Inter,system-ui,sans-serif' stroke='#e2e8f0' stroke-width='2'>")
+    def nand(x, y, col='#38bdf8', w=46, h=44):
+        r = f"<path d='M{x} {y} L{x+w-h/2} {y} A{h/2} {h/2} 0 0 1 {x+w-h/2} {y+h} L{x} {y+h} Z' fill='none' stroke='{col}' stroke-width='2.2'/>"
+        r += f"<circle cx='{x+w-h/2+h/2+5}' cy='{y+h/2}' r='4.5' fill='none' stroke='{col}' stroke-width='2.2'/>"
+        return r
+    # g1 = NAND(a,b)
+    s += nand(90, 20); s += "<text x='66' y='30' fill='#e2e8f0' font-size='13'>a</text><text x='66' y='52' fill='#e2e8f0' font-size='13'>b</text>"
+    s += "<line x1='78' y1='30' x2='90' y2='30'/><line x1='78' y1='50' x2='90' y2='50'/>"
+    s += "<text x='150' y='16' fill='#94a3b8' font-size='12'>(ab)'</text>"
+    # g2 = NAND(g1,g1) = (ab)  -> inversor
+    s += nand(200, 20, '#a78bfa'); s += "<line x1='155' y1='42' x2='200' y2='30'/><line x1='155' y1='42' x2='200' y2='50'/>"
+    # g3 = NAND(c,c) = c'
+    s += nand(90, 140, '#a78bfa'); s += "<text x='66' y='163' fill='#e2e8f0' font-size='13'>c</text>"
+    s += "<line x1='78' y1='150' x2='90' y2='150'/><line x1='78' y1='150' x2='90' y2='170'/><line x1='90' y1='170' x2='90' y2='150'/>"
+    s += "<line x1='90' y1='160' x2='90' y2='150'/>"
+    # g4 = NAND(g2, g3) = S
+    s += nand(320, 80, '#f59e0b', 54, 56)
+    s += "<line x1='265' y1='42' x2='290' y2='42'/><line x1='290' y1='42' x2='290' y2='96'/><line x1='290' y1='96' x2='320' y2='96'/>"
+    s += "<line x1='155' y1='162' x2='290' y2='162'/><line x1='290' y1='162' x2='290' y2='120'/><line x1='290' y1='120' x2='320' y2='120'/>"
+    s += "<line x1='384' y1='108' x2='450' y2='108'/><text x='456' y='113' fill='#e2e8f0' font-size='15'>S</text>"
+    s += "</svg>"
+    return s
+
+TV_Q3 = ("<table class='dat'><tr><th>a</th><th>b</th><th>c</th><th>S</th></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>0</td><td>0</td><td>0</td><td>1</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>0</td><td>0</td><td>1</td><td>1</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>0</td><td>1</td><td>0</td><td>1</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>0</td><td>1</td><td>1</td><td>1</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>1</td><td>0</td><td>0</td><td>1</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>1</td><td>0</td><td>1</td><td>1</td></tr>"
+         "<tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>"
+         "<tr style='background:rgba(74,222,128,.14)'><td>1</td><td>1</td><td>1</td><td>1</td></tr></table>")
+
+data = {
+ "meta": {
+  "titulo": "Tecnología e Ingeniería II",
+  "subtitulo": "Prueba de Acceso a la Universidad (PAU) · Universidad de Extremadura · Curso 2024-2025 · Examen modelo resuelto y comentado",
+  "cabecera_titulo": "PAU 2025 · <span>Tecnología e Ingeniería II</span> · Extremadura · Modelo",
+  "pill": "90 min · 4 preguntas · 2,5 pt/pregunta",
+  "enunciado_pdf": "../../examens/Extremadura/Tecnologia_Extremadura_2025_modelo.pdf",
+  "pdf_dir": "pdf_ext_2025_modelo",
+  "footer": "Dpto. Tecnología · Solucionario PAU 2025 · Extremadura · Tecnología e Ingeniería II (Modelo)",
+  "intro_inicio": "El examen consta de <b>4 preguntas obligatorias</b> de 2,5 puntos. La primera es de opción única (carácter competencial); en las otras tres se elige <b>una de las dos</b> cuestiones. Aquí se resuelven <b>todas</b> para repasar. Selecciona un apartado o una pregunta en la barra lateral.",
+  "indice_nombre": "Exámenes de Extremadura",
+  "indice_url": "index.html"
+ },
+ "bloques": [
+  {
+   "id": "b1", "titulo": "Pregunta 1 · Sistemas mecánicos (neumática)", "color": "#f59e0b",
+   "descripcion_tarjeta": "Prensa neumática con cilindro de doble efecto: fuerzas, consumo de aire y trabajo.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#f59e0b' stroke-width='3'><rect x='12' y='20' width='42' height='20'/><path d='M54 30h24'/><path d='M20 20v20'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q1", "titulo": "Pregunta 1 · Prensa neumática (cilindro doble efecto)", "etiqueta": "SISTEMAS MECÁNICOS",
+     "menu": "P1 · Prensa neumática", "titulo_corto": "P1",
+     "meta": "Pregunta única y obligatoria · 2,5 puntos",
+     "enunciado_html": "<p>Para compactar materiales se emplea un cilindro <b>de doble efecto</b> con diámetro de émbolo 15 cm, diámetro de vástago 3 cm, carrera 40 cm y rendimiento del 85 %. El compresor proporciona una presión de <b>7 bar</b> y la prensa realiza <b>60 ciclos/hora</b>.</p><ol type='1' style='padding-left:1.2em'><li>Fuerza máxima de compresión en el avance, en N. <span class='pts'>(0,75 puntos)</span></li><li>Fuerza máxima de retorno, en N. <span class='pts'>(0,75 puntos)</span></li><li>Consumo de aire de la instalación, en m³/h. <span class='pts'>(0,5 puntos)</span></li><li>Trabajo realizado por el pistón en el avance. <span class='pts'>(0,5 puntos)</span></li></ol>",
+     "figura_enunciado_svg": "",
+     "aplica_html": "<p>Fuerza real = rendimiento &times; presión &times; área. En avance actúa el área del émbolo; en retroceso, el área del émbolo menos la del vástago. El consumo en condiciones normales usa la <b>relación de compresión</b> \\(n=\\frac{p_{abs}}{p_{atm}}\\). El trabajo es fuerza por carrera.</p>",
+     "solucion_html": "<p>Datos: \\(D=0{,}15\\,\\mathrm{m}\\), \\(d=0{,}03\\,\\mathrm{m}\\), carrera \\(=0{,}40\\,\\mathrm{m}\\), \\(\\eta=0{,}85\\), \\(p=7\\,\\mathrm{bar}=7\\cdot10^5\\,\\mathrm{Pa}\\).</p><h5>1. Fuerza de compresión (avance)</h5><div class='formula'>$$A_{emb}=\\frac{\\pi\\cdot 0{,}15^2}{4}=0{,}01767\\,\\mathrm{m^2}$$</div><div class='formula'>$$F_{av}=\\eta\\,p\\,A_{emb}=0{,}85\\cdot 7\\cdot10^5\\cdot 0{,}01767=10\\,515\\,\\mathrm{N}$$</div><div class='res'><b>F<sub>avance</sub> &asymp; 10 515 N</b></div><h5>2. Fuerza de retorno</h5><div class='formula'>$$A_{ret}=\\frac{\\pi(0{,}15^2-0{,}03^2)}{4}=0{,}01696\\,\\mathrm{m^2}$$</div><div class='formula'>$$F_{ret}=0{,}85\\cdot 7\\cdot10^5\\cdot 0{,}01696=10\\,094\\,\\mathrm{N}$$</div><div class='res'><b>F<sub>retorno</sub> &asymp; 10 094 N</b></div><h5>3. Consumo de aire</h5><p>Volumen geométrico por ciclo (avance + retroceso):</p><div class='formula'>$$V_c=(A_{emb}+A_{ret})\\cdot L=(0{,}01767+0{,}01696)\\cdot 0{,}40=0{,}01385\\,\\mathrm{m^3}$$</div><p>Relación de compresión \\(n=\\frac{7+1}{1}=8\\); con 60 ciclos/h:</p><div class='formula'>$$Q=n\\,V_c\\cdot 60=8\\cdot 0{,}01385\\cdot 60=6{,}65\\,\\mathrm{m^3/h}$$</div><div class='res'><b>Q &asymp; 6,65 m³/h</b></div><h5>4. Trabajo en el avance</h5><div class='formula'>$$W=F_{av}\\cdot L=10\\,515\\cdot 0{,}40=4206\\,\\mathrm{J}$$</div><div class='res'><b>W &asymp; 4206 J</b></div>"
+    }
+   ]
+  },
+  {
+   "id": "b2", "titulo": "Pregunta 2 · Materiales y fabricación", "color": "#22d3ee",
+   "descripcion_tarjeta": "Opción A: ensayo de dureza Brinell. Opción B: barra de acero a tracción.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#22d3ee' stroke-width='3'><circle cx='45' cy='24' r='12'/><path d='M33 46h24'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q2a", "titulo": "Pregunta 2.1 (Opción A) · Ensayo de dureza Brinell", "etiqueta": "OPCIÓN A",
+     "menu": "P2.1 (A) · Dureza Brinell", "titulo_corto": "P2.1",
+     "meta": "2,5 puntos (a: 1,0 · b: 0,5 · c: 1,0)",
+     "enunciado_html": "<p>En un ensayo Brinell se aplica una carga de 1600 kp a un penetrador de 8 mm, obteniéndose una huella de 3,15 mm.</p><ol type='a'><li>¿Cuál es la dureza del material? <span class='pts'>(1 punto)</span></li><li>¿Se obtendría el mismo valor con penetrador de 6 mm y carga de 900 kp? <span class='pts'>(0,5 puntos)</span></li><li>En ese caso, ¿cuál sería el diámetro de la huella? <span class='pts'>(1 punto)</span></li></ol>",
+     "figura_enunciado_svg": "",
+     "aplica_html": "<p>\\(\\mathrm{HB}=\\frac{2F}{\\pi D(D-\\sqrt{D^2-d^2})}\\). Para que dos ensayos sean comparables debe conservarse la constante de ensayo \\(K=\\frac{F}{D^2}\\); si es la misma, la dureza coincide y las huellas son geométricamente semejantes.</p>",
+     "solucion_html": "<h5>a) Dureza Brinell</h5><div class='formula'>$$\\sqrt{D^2-d^2}=\\sqrt{64-3{,}15^2}=7{,}354\\,\\mathrm{mm}$$</div><div class='formula'>$$\\mathrm{HB}=\\frac{2\\cdot 1600}{\\pi\\cdot 8\\,(8-7{,}354)}=\\frac{3200}{16{,}24}=197$$</div><div class='res'><b>HB &asymp; 197 kp/mm²</b></div><h5>b) ¿Mismo valor con D=6 mm y F=900 kp?</h5><p>Constante de ensayo: \\(K=\\frac{F}{D^2}=\\frac{1600}{64}=25\\) y \\(\\frac{900}{36}=25\\). Coinciden, por lo que <b>sí</b> se obtiene la misma dureza.</p><div class='res'><b>Sí: K = 25 en ambos casos &rArr; HB = 197</b></div><h5>c) Diámetro de la huella (D=6 mm)</h5><p>Por semejanza \\(d=d_0\\dfrac{D}{D_0}=3{,}15\\cdot\\dfrac{6}{8}=2{,}36\\,\\mathrm{mm}\\) (se comprueba resolviendo la fórmula de HB).</p><div class='res'><b>d &asymp; 2,36 mm</b></div>"
+    },
+    {
+     "id": "q2b", "titulo": "Pregunta 2.2 (Opción B) · Barra de acero a tracción", "etiqueta": "OPCIÓN B",
+     "menu": "P2.2 (B) · Barra a tracción", "titulo_corto": "P2.2",
+     "meta": "2,5 puntos (a: 0,75 · b: 0,5 · c: 0,75 · d: 0,5)",
+     "enunciado_html": "<p>Barra cilíndrica de acero, límite elástico 5000 kp/cm², sometida a 8500 kp de tracción. Longitud 400 mm, diámetro 50 mm, \\(E=2{,}1\\cdot10^6\\,\\mathrm{kp/cm^2}\\). Determina:</p><ol type='a'><li>Si recupera su longitud inicial al cesar la fuerza. <span class='pts'>(0,75 puntos)</span></li><li>La deformación (&epsilon;, en %). <span class='pts'>(0,5 puntos)</span></li><li>La mayor carga con coeficiente de seguridad 5. <span class='pts'>(0,75 puntos)</span></li><li>El diámetro para que el alargamiento no supere 0,50 mm. <span class='pts'>(0,5 puntos)</span></li></ol>",
+     "figura_enunciado_svg": "",
+     "aplica_html": "<p>Tensión de trabajo \\(\\sigma=\\frac{F}{A}\\). Recupera longitud si \\(\\sigma<\\sigma_E\\) (régimen elástico). Deformación \\(\\varepsilon=\\frac{\\sigma}{E}\\). Carga admisible \\(F=\\frac{\\sigma_E}{n}A\\). Diámetro por \\(\\Delta L=\\frac{FL}{AE}\\).</p>",
+     "solucion_html": "<p>Datos: \\(A=\\frac{\\pi\\cdot 5^2}{4}=19{,}63\\,\\mathrm{cm^2}\\), \\(L=40\\,\\mathrm{cm}\\).</p><h5>a) ¿Recupera su longitud?</h5><div class='formula'>$$\\sigma=\\frac{F}{A}=\\frac{8500}{19{,}63}=433\\,\\mathrm{kp/cm^2}<\\sigma_E=5000$$</div><p>Trabaja muy por debajo del límite elástico, así que <b>sí</b> recupera su longitud inicial.</p><div class='res'><b>Sí (&sigma; = 433 kp/cm² &lt; 5000)</b></div><h5>b) Deformación</h5><div class='formula'>$$\\varepsilon=\\frac{\\sigma}{E}=\\frac{433}{2{,}1\\cdot10^6}=2{,}06\\cdot10^{-4}=0{,}0206\\,\\%$$</div><div class='res'><b>&epsilon; &asymp; 0,0206 %</b></div><h5>c) Carga máxima con n = 5</h5><div class='formula'>$$\\sigma_{adm}=\\frac{\\sigma_E}{n}=\\frac{5000}{5}=1000\\,\\mathrm{kp/cm^2}$$</div><div class='formula'>$$F_{max}=\\sigma_{adm}\\,A=1000\\cdot 19{,}63=19\\,635\\,\\mathrm{kp}$$</div><div class='res'><b>F<sub>máx</sub> &asymp; 19 635 kp</b></div><h5>d) Diámetro para &Delta;L &le; 0,05 cm</h5><div class='formula'>$$A\\ge\\frac{FL}{\\Delta L\\,E}=\\frac{8500\\cdot 40}{0{,}05\\cdot 2{,}1\\cdot10^6}=3{,}24\\,\\mathrm{cm^2}$$</div><div class='formula'>$$d=\\sqrt{\\frac{4A}{\\pi}}=\\sqrt{\\frac{4\\cdot 3{,}24}{\\pi}}=2{,}03\\,\\mathrm{cm}$$</div><div class='res'><b>d &ge; 20,3 mm</b></div>"
+    }
+   ]
+  },
+  {
+   "id": "b3", "titulo": "Pregunta 3 · Sistemas eléctricos y electrónicos", "color": "#a78bfa",
+   "descripcion_tarjeta": "Opción A: circuito RC serie en alterna. Opción B: función lógica y puertas NAND.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#a78bfa' stroke-width='3'><path d='M8 30q10-16 20 0t20 0 20 0'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q3a", "titulo": "Pregunta 3.1 (Opción A) · Circuito RC serie", "etiqueta": "OPCIÓN A",
+     "menu": "P3.1 (A) · Circuito RC serie", "titulo_corto": "P3.1",
+     "meta": "2,5 puntos (a: 0,75 · b: 0,5 · c: 0,5 · d: 0,75)",
+     "enunciado_html": "<p>En el circuito de la figura (220 V / 50 Hz, C = 100 &micro;F y R = 100 &ohm; en serie), determina:</p><ol type='a'><li>La intensidad que circula. <span class='pts'>(0,75 puntos)</span></li><li>La caída de tensión en cada elemento. <span class='pts'>(0,5 puntos)</span></li><li>El factor de potencia. <span class='pts'>(0,5 puntos)</span></li><li>Las potencias activa, reactiva y aparente. <span class='pts'>(0,75 puntos)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'>" + fig_rc() + "<figcaption>Circuito RC serie: C = 100 &micro;F y R = 100 &ohm; a 220 V / 50 Hz.</figcaption></figure>",
+     "aplica_html": "<p>\\(X_C=\\frac{1}{2\\pi f C}\\); \\(Z=\\sqrt{R^2+X_C^2}\\); \\(I=\\frac{V}{Z}\\); \\(\\cos\\varphi=\\frac{R}{Z}\\). Potencias: \\(S=VI\\), \\(P=I^2R\\), \\(Q=I^2X_C\\).</p>",
+     "solucion_html": "<h5>a) Intensidad</h5><div class='formula'>$$X_C=\\frac{1}{2\\pi\\cdot 50\\cdot 100\\cdot10^{-6}}=31{,}83\\,\\Omega$$</div><div class='formula'>$$Z=\\sqrt{100^2+31{,}83^2}=104{,}9\\,\\Omega\\;\\Rightarrow\\; I=\\frac{220}{104{,}9}=2{,}10\\,\\mathrm{A}$$</div><div class='res'><b>I &asymp; 2,10 A</b></div><h5>b) Caídas de tensión</h5><div class='formula'>$$V_R=IR=2{,}10\\cdot 100=209{,}7\\,\\mathrm{V}\\qquad V_C=IX_C=2{,}10\\cdot 31{,}83=66{,}8\\,\\mathrm{V}$$</div><div class='res'><b>V<sub>R</sub> &asymp; 209,7 V &nbsp;·&nbsp; V<sub>C</sub> &asymp; 66,8 V</b></div><h5>c) Factor de potencia</h5><div class='formula'>$$\\cos\\varphi=\\frac{R}{Z}=\\frac{100}{104{,}9}=0{,}953\\;(\\varphi\\approx17{,}6^\\circ,\\text{ capacitivo})$$</div><div class='res'><b>cos&phi; &asymp; 0,953</b></div><h5>d) Potencias</h5><div class='formula'>$$S=VI=220\\cdot 2{,}10=461\\,\\mathrm{VA}$$</div><div class='formula'>$$P=I^2R=2{,}10^2\\cdot 100=440\\,\\mathrm{W}\\qquad Q=I^2X_C=2{,}10^2\\cdot 31{,}83=140\\,\\mathrm{VAr}$$</div><div class='res'><b>S &asymp; 461 VA &nbsp;·&nbsp; P &asymp; 440 W &nbsp;·&nbsp; Q &asymp; 140 VAr</b></div>"
+    },
+    {
+     "id": "q3b", "titulo": "Pregunta 3.2 (Opción B) · Circuito lógico y NAND", "etiqueta": "OPCIÓN B",
+     "menu": "P3.2 (B) · Circuito lógico", "titulo_corto": "P3.2",
+     "meta": "2,5 puntos (a: 0,5 · b: 1,0 · c: 1,0)",
+     "enunciado_html": "<p>Dado el circuito lógico de la figura:</p><ol type='a'><li>Determina su función lógica de salida. <span class='pts'>(0,5 puntos)</span></li><li>Halla la tabla de verdad. <span class='pts'>(1 punto)</span></li><li>Constrúyelo con puertas NAND de dos entradas. <span class='pts'>(1 punto)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'>" + fig_logic_q3() + "<figcaption>Puerta NAND de entradas a, b seguida de una OR con la entrada c.</figcaption></figure>",
+     "aplica_html": "<p>Se sigue la señal por las puertas: primero la NAND \\((a\\,b)'\\), luego la OR con \\(c\\). La conversión a NAND usa que un inversor es una NAND con las dos entradas unidas y \\(X+Y=\\overline{\\overline X\\cdot\\overline Y}\\).</p>",
+     "solucion_html": "<h5>a) Función de salida</h5><div class='formula'>$$S=\\overline{a\\cdot b}+c$$</div><h5>b) Tabla de verdad</h5><p>\\(S=0\\) únicamente cuando \\(a=b=1\\) y \\(c=0\\):</p>" + TV_Q3 + "<h5>c) Implementación con NAND de dos entradas</h5><p>\\(S=\\overline{a b}+c=\\overline{\\overline{(\\overline{ab})}\\cdot\\overline c}=\\overline{(ab)\\cdot\\overline c}\\). Se usan 4 NAND-2: \\(g_1=\\overline{ab}\\), \\(g_2=\\overline{g_1}\\) (inversor), \\(g_3=\\overline{c}\\) (inversor) y \\(g_4=\\overline{g_2\\,g_3}=g_1+c\\):</p><figure class='fig'>" + fig_nand_q3() + "<figcaption>Implementación de S = (ab)' + c con cuatro puertas NAND de dos entradas.</figcaption></figure>"
+    }
+   ]
+  },
+  {
+   "id": "b4", "titulo": "Pregunta 4 · Sistemas mecánicos", "color": "#34d399",
+   "descripcion_tarjeta": "Opción A: motor de combustión de cuatro cilindros. Opción B: frigorífico de Carnot.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#34d399' stroke-width='3'><circle cx='30' cy='30' r='14'/><path d='M30 8v-4M8 30H4M56 30h-4'/><rect x='58' y='22' width='16' height='16'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q4a", "titulo": "Pregunta 4.1 (Opción A) · Motor de cuatro cilindros", "etiqueta": "OPCIÓN A",
+     "menu": "P4.1 (A) · Motor 4 cilindros", "titulo_corto": "P4.1",
+     "meta": "2,5 puntos (a: 0,5 · b: 0,5 · c: 0,5 · d: 1,0)",
+     "enunciado_html": "<p>Un motor de 4 cilindros desarrolla 50 CV a 3200 rpm. Diámetro de pistón 50 mm, carrera 80 mm y \\(R_c=9/1\\). Calcula:</p><ol type='a'><li>Cilindrada del motor. <span class='pts'>(0,5 puntos)</span></li><li>Volumen de la cámara de combustión. <span class='pts'>(0,5 puntos)</span></li><li>Par motor. <span class='pts'>(0,5 puntos)</span></li><li>Si consume 6,5 kg/h con \\(P_C=42500\\,\\mathrm{kJ/kg}\\), la potencia absorbida (CV) y el rendimiento. <span class='pts'>(1 punto)</span></li></ol>",
+     "figura_enunciado_svg": "",
+     "aplica_html": "<p>\\(V_T=n\\frac{\\pi D^2}{4}S\\); \\(V_c=\\frac{V_u}{R_c-1}\\); \\(M=\\frac{P}{\\omega}\\); \\(\\eta=\\frac{P_e}{P_{abs}}\\) con \\(P_{abs}=\\dot m\\,P_C\\).</p>",
+     "solucion_html": "<p>Datos: \\(n=4\\), \\(D=5\\,\\mathrm{cm}\\), \\(S=8\\,\\mathrm{cm}\\), \\(R_c=9\\), \\(N=3200\\,\\mathrm{rpm}\\), \\(P_e=50\\,\\mathrm{CV}\\).</p><h5>a) Cilindrada</h5><div class='formula'>$$V_u=\\frac{\\pi\\cdot 5^2}{4}\\cdot 8=157{,}1\\,\\mathrm{cm^3}\\;\\Rightarrow\\; V_T=4\\cdot 157{,}1=628{,}3\\,\\mathrm{cm^3}$$</div><div class='res'><b>V<sub>T</sub> &asymp; 628 cm³</b></div><h5>b) Volumen de la cámara</h5><div class='formula'>$$V_c=\\frac{157{,}1}{8}=19{,}6\\,\\mathrm{cm^3}$$</div><div class='res'><b>V<sub>c</sub> &asymp; 19,6 cm³</b></div><h5>c) Par motor</h5><p>\\(P_e=50\\,\\mathrm{CV}=36\\,775\\,\\mathrm{W}\\); \\(\\omega=3200\\cdot\\frac{2\\pi}{60}=335{,}1\\,\\mathrm{rad/s}\\).</p><div class='formula'>$$M=\\frac{36\\,775}{335{,}1}=109{,}7\\,\\mathrm{N\\cdot m}$$</div><div class='res'><b>M &asymp; 109,7 N&middot;m</b></div><h5>d) Potencia absorbida y rendimiento</h5><div class='formula'>$$P_{abs}=\\dot m\\,P_C=6{,}5\\cdot 42500=276\\,250\\,\\mathrm{kJ/h}=76{,}7\\,\\mathrm{kW}=104{,}3\\,\\mathrm{CV}$$</div><div class='formula'>$$\\eta=\\frac{P_e}{P_{abs}}=\\frac{50}{104{,}3}=0{,}479$$</div><div class='res'><b>P<sub>abs</sub> &asymp; 104,3 CV &nbsp;·&nbsp; &eta; &asymp; 47,9 %</b></div>"
+    },
+    {
+     "id": "q4b", "titulo": "Pregunta 4.2 (Opción B) · Frigorífico de Carnot", "etiqueta": "OPCIÓN B",
+     "menu": "P4.2 (B) · Frigorífico", "titulo_corto": "P4.2",
+     "meta": "2,5 puntos (a: 1,0 · b: 1,0 · c: 0,5)",
+     "enunciado_html": "<p>Para mantener &minus;5 &deg;C, un frigorífico absorbe calor del congelador a 1,68&middot;10<sup>8</sup> J/día. La temperatura exterior es 22 &deg;C. Determina:</p><ol type='a'><li>La eficiencia y la potencia mínima necesaria. <span class='pts'>(1 punto)</span></li><li>La potencia real con rendimiento del 60 % del ideal de Carnot. <span class='pts'>(1 punto)</span></li><li>El calor cedido al foco caliente en condiciones reales. <span class='pts'>(0,5 puntos)</span></li></ol>",
+     "figura_enunciado_svg": "",
+     "aplica_html": "<p>\\(\\mathrm{COP}_C=\\frac{T_f}{T_c-T_f}\\) (K). Potencia mínima \\(P=\\frac{\\dot Q_f}{\\mathrm{COP}}\\). Con rendimiento real del 60 %: \\(\\mathrm{COP}_{real}=0{,}6\\,\\mathrm{COP}_C\\). Calor cedido \\(\\dot Q_c=\\dot Q_f+\\dot W\\).</p>",
+     "solucion_html": "<p>Datos: \\(T_f=268\\,\\mathrm{K}\\), \\(T_c=295\\,\\mathrm{K}\\), \\(\\dot Q_f=\\frac{1{,}68\\cdot10^8}{86400}=1944\\,\\mathrm{W}\\).</p><h5>a) Eficiencia y potencia mínima</h5><div class='formula'>$$\\mathrm{COP}_C=\\frac{268}{295-268}=\\frac{268}{27}=9{,}93$$</div><div class='formula'>$$P_{min}=\\frac{\\dot Q_f}{\\mathrm{COP}_C}=\\frac{1944}{9{,}93}=195{,}9\\,\\mathrm{W}$$</div><div class='res'><b>COP = 9,93 &nbsp;·&nbsp; P<sub>mín</sub> &asymp; 196 W</b></div><h5>b) Potencia real (60 % de Carnot)</h5><div class='formula'>$$\\mathrm{COP}_{real}=0{,}6\\cdot 9{,}93=5{,}96\\;\\Rightarrow\\; P_{real}=\\frac{1944}{5{,}96}=326{,}5\\,\\mathrm{W}$$</div><div class='res'><b>P<sub>real</sub> &asymp; 326,5 W</b></div><h5>c) Calor cedido al foco caliente (real)</h5><div class='formula'>$$\\dot Q_c=\\dot Q_f+\\dot W=1944+326{,}5=2270{,}9\\,\\mathrm{W}$$</div><div class='res'><b>Q<sub>c</sub> &asymp; 2271 W (&asymp; 1,96&middot;10<sup>8</sup> J/día)</b></div>"
+    }
+   ]
+  }
+ ]
+}
+
+out = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "ext_2025_modelo.json"))
+with open(out, "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=1)
+print("JSON escrito:", out)
