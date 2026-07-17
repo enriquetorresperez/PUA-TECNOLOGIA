@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2026 · Tecnología e Ingeniería II · Extraordinaria (Madrid) — Soluciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js">
+
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js">
+
+</script>
+<style>
+:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2026 · <span>Tecnología e Ingeniería II</span> · Convocatoria Extraordinaria</h1>
+    <div class="sub">Universidades Públicas de la Comunidad de Madrid · Curso 2025-2026 · Examen resuelto y comentado</div>
+  </div>
+  <div class="pill">90 min · 2 pt/cuestión</div>
+</header>
+
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+
+  <div class="blk c1">
+    <div class="bt"><span class="dot"></span> Bloque 1 · Proyectos</div>
+    <a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">Cuestión 1 · Trabajo en equipo y metodologías</a>
+  </div>
+  <div class="blk c2">
+    <div class="bt"><span class="dot"></span> Bloque 2 · Materiales</div>
+    <a class="q" href="#q21" onclick="go('q21');return false;" id="l-q21">Cuestión 2.1 · Ensayo de tracción</a>
+    <a class="q" href="#q22" onclick="go('q22');return false;" id="l-q22">Cuestión 2.2 · Fabricación de metales</a>
+  </div>
+  <div class="blk c3">
+    <div class="bt"><span class="dot"></span> Bloque 3 · Sist. Mecánicos</div>
+    <a class="q" href="#q31" onclick="go('q31');return false;" id="l-q31">Cuestión 3.1 · Viga: cortante y flector</a>
+    <a class="q" href="#q32" onclick="go('q32');return false;" id="l-q32">Cuestión 3.2 · Prensa hidráulica</a>
+  </div>
+  <div class="blk c4">
+    <div class="bt"><span class="dot"></span> Bloque 4 · Sist. Eléctricos</div>
+    <a class="q" href="#q41" onclick="go('q41');return false;" id="l-q41">Cuestión 4.1 · Circuito de CA paralelo</a>
+    <a class="q" href="#q42" onclick="go('q42');return false;" id="l-q42">Cuestión 4.2 · Karnaugh y puertas lógicas</a>
+  </div>
+  <div class="blk c5">
+    <div class="bt"><span class="dot"></span> Bloque 5 · Informáticos y Automáticos</div>
+    <a class="q" href="#q51" onclick="go('q51');return false;" id="l-q51">Cuestión 5.1 · Ciberseguridad</a>
+    <a class="q" href="#q52" onclick="go('q52');return false;" id="l-q52">Cuestión 5.2 · Sistemas de control</a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= HOME ================= -->
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>Examen resuelto · PAU Tecnología e Ingeniería II (Extraordinaria 2026)</h2>
+    <p>Selecciona un bloque o una cuestión en la barra lateral. Cada cuestión incluye el <b>enunciado oficial</b>, una introducción con <b>los conceptos que vamos a aplicar</b> y la <b>solución paso a paso</b> con fórmulas, diagramas y resultados destacados. Recuerda: la Cuestión 1 es obligatoria; en los bloques 2 a 5 se responde <b>una</b> de las dos cuestiones.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap"><a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_soluciones_completas.pdf" target="_blank" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../documentos/tec/tec_2026_ext.pdf" target="_blank">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico">
+        <svg width="120" height="70" viewBox="0 0 120 70" fill="none">
+          <circle cx="38" cy="26" r="9" stroke="#f59e0b" stroke-width="2.5"/>
+          <path d="M24 52c0-8 6-13 14-13s14 5 14 13" stroke="#f59e0b" stroke-width="2.5"/>
+          <circle cx="76" cy="26" r="9" stroke="#f59e0b" stroke-width="2.5" opacity=".55"/>
+          <path d="M62 52c0-8 6-13 14-13s14 5 14 13" stroke="#f59e0b" stroke-width="2.5" opacity=".55"/>
+          <path d="M96 18l4 2-1 4 3 3 4-1 2 4-3 2v4l3 2-2 4-4-1-3 3 1 4-4 2-2-3h-4" stroke="#fbbf24" stroke-width="1.6" opacity=".8"/>
+        </svg>
+      </div>
+      <h3>Bloque 1 · Proyectos de I+D y tecnología sostenible</h3>
+      <p>Técnicas de trabajo en equipo y metodologías de desarrollo (ágiles vs. tradicionales) aplicadas a una empresa de software.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">Cuestión 1</a></div>
+    </div>
+
+    <div class="card h2">
+      <div class="ico">
+        <svg width="120" height="70" viewBox="0 0 120 70" fill="none">
+          <path d="M14 58 V12 M14 58 H108" stroke="#64748b" stroke-width="2"/>
+          <path d="M14 58 C 30 20, 40 16, 60 14 C 80 12, 96 12, 102 16" stroke="#22d3ee" stroke-width="2.6" fill="none"/>
+          <path d="M40 58 V22" stroke="#22d3ee" stroke-width="1" stroke-dasharray="3 3" opacity=".6"/>
+        </svg>
+      </div>
+      <h3>Bloque 2 · Materiales y fabricación</h3>
+      <p>Ensayo de tracción (módulo E, deformación, dimensionado con coeficiente de seguridad) o procesos de fabricación: ensamblaje, laminación y estampación.</p>
+      <div class="qlinks">
+        <a class="k2" href="#q21" onclick="go('q21');return false;">Cuestión 2.1</a>
+        <a class="k2" href="#q22" onclick="go('q22');return false;">Cuestión 2.2</a>
+      </div>
+    </div>
+
+    <div class="card h3x">
+      <div class="ico">
+        <svg width="120" height="70" viewBox="0 0 120 70" fill="none">
+          <rect x="14" y="30" width="92" height="7" fill="#a78bfa"/>
+          <path d="M20 37 l-6 10 h12 z" fill="none" stroke="#a78bfa" stroke-width="2"/>
+          <circle cx="100" cy="43" r="4" stroke="#a78bfa" stroke-width="2"/>
+          <path d="M44 12 v14 M78 12 v14" stroke="#c4b5fd" stroke-width="2.4"/>
+          <path d="M44 26 l-4-6 h8z M78 26 l-4-6 h8z" fill="#c4b5fd"/>
+        </svg>
+      </div>
+      <h3>Bloque 3 · Sistemas mecánicos</h3>
+      <p>Viga biapoyada: reacciones y diagramas de esfuerzo cortante y momento flector, o prensa hidráulica (principio de Pascal).</p>
+      <div class="qlinks">
+        <a class="k3" href="#q31" onclick="go('q31');return false;">Cuestión 3.1</a>
+        <a class="k3" href="#q32" onclick="go('q32');return false;">Cuestión 3.2</a>
+      </div>
+    </div>
+
+    <div class="card h4">
+      <div class="ico">
+        <svg width="120" height="70" viewBox="0 0 120 70" fill="none">
+          <circle cx="26" cy="35" r="11" stroke="#34d399" stroke-width="2.4"/>
+          <path d="M20 35 q3 -6 6 0 t6 0" stroke="#34d399" stroke-width="2" fill="none"/>
+          <path d="M37 35 h12 l4-8 6 16 6-16 6 16 4-8 h12" stroke="#6ee7b7" stroke-width="2.2" fill="none"/>
+          <path d="M92 27 v16 M98 27 v16" stroke="#34d399" stroke-width="2.4"/>
+        </svg>
+      </div>
+      <h3>Bloque 4 · Sistemas eléctricos y electrónicos</h3>
+      <p>Circuito de corriente alterna en paralelo (impedancias, potencias, corriente del generador) o simplificación por Karnaugh y circuito con puertas lógicas.</p>
+      <div class="qlinks">
+        <a class="k4" href="#q41" onclick="go('q41');return false;">Cuestión 4.1</a>
+        <a class="k4" href="#q42" onclick="go('q42');return false;">Cuestión 4.2</a>
+      </div>
+    </div>
+
+    <div class="card h5">
+      <div class="ico">
+        <svg width="120" height="70" viewBox="0 0 120 70" fill="none">
+          <path d="M30 14 l14 5 v12 c0 10-6 17-14 21 c-8-4-14-11-14-21 V19z" stroke="#fb7185" stroke-width="2.3" fill="none"/>
+          <path d="M24 33 l5 5 8-10" stroke="#fda4af" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+          <rect x="62" y="26" width="18" height="14" rx="2" stroke="#fb7185" stroke-width="2"/>
+          <rect x="92" y="26" width="18" height="14" rx="2" stroke="#fb7185" stroke-width="2"/>
+          <path d="M80 33 h12 M110 33 h6 v18 h-52 v-11" stroke="#fda4af" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <h3>Bloque 5 · Sistemas informáticos emergentes y automáticos</h3>
+      <p>Amenazas de ciberseguridad (virus, troyanos, phishing, spam) o elementos de un sistema de control y función de transferencia.</p>
+      <div class="qlinks">
+        <a class="k5" href="#q51" onclick="go('q51');return false;">Cuestión 5.1</a>
+        <a class="k5" href="#q52" onclick="go('q52');return false;">Cuestión 5.2</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Q1 ================= -->
+<section class="view" id="q1">
+  <div class="crumb">Inicio / Bloque 1 / Cuestión 1</div>
+  <div class="qtitle"><span class="tag t1">BLOQUE 1</span> Cuestión 1 · Trabajo en equipo y metodologías de desarrollo</div>
+  <div class="qmeta">Cuestión única y obligatoria (carácter competencial) · <span class="pts">2 puntos (a: 1,0 · b: 1,0)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Una fábrica de producción de material electrónico está teniendo problemas con el software que indica los paquetes enviados a empresas y la recepción adecuada en destino, por falta de precisión en el intercambio de datos. Este software está gestionado por un equipo de personas de la empresa que se dedica a la programación.</p>
+    <ol type="a">
+      <li>Razone brevemente qué técnicas de trabajo en equipo podrían haber contribuido a prevenir estos fallos. <span class="pts">(1 punto)</span></li>
+      <li>Analice cuál sería, a su juicio, la mejor metodología de trabajo en una empresa de estas características. <span class="pts">(1 punto)</span></li>
+    </ol>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q1_proyectos.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Es la cuestión competencial del examen: no hay cálculos, sino <b>argumentación técnica</b>. Aplicaremos los contenidos del bloque de proyectos:</p>
+    <ul>
+      <li><b>Técnicas de trabajo en equipo</b>: comunicación, revisión por pares, reuniones de seguimiento, documentación y pruebas.</li>
+      <li><b>Metodologías de gestión de proyectos</b>: tradicionales (cascada) frente a <b>ágiles</b> (Scrum, Kanban), justificando la elección para un equipo de software.</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q1_proyectos.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s1">
+    <h5>a) Técnicas de trabajo en equipo que habrían prevenido los fallos</h5>
+    <p>El problema descrito (falta de precisión en el intercambio de datos entre el software de envío y el de recepción) es un fallo típico de <b>coordinación y comunicación</b> dentro del equipo de programación. Podrían haberlo prevenido, entre otras:</p>
+    <ul>
+      <li><b>Reuniones periódicas de coordinación</b> (p. ej. reuniones diarias breves o semanales de seguimiento): permiten detectar a tiempo malentendidos sobre el formato de los datos que intercambian los módulos.</li>
+      <li><b>Revisión por pares del código y del diseño</b> (<i>code review</i>, programación por parejas): un segundo programador revisa el trabajo del primero, detectando errores e inconsistencias antes de que lleguen a producción.</li>
+      <li><b>Documentación y especificación común</b>: definir por escrito y de forma consensuada el protocolo o formato de intercambio de datos (interfaces bien especificadas), de modo que todos los miembros trabajen con las mismas reglas.</li>
+      <li><b>Pruebas conjuntas y sistemáticas</b> (tests de integración): verificar de forma planificada que los módulos de envío y recepción funcionan correctamente juntos, no solo por separado.</li>
+      <li><b>Reparto claro de roles y responsabilidades</b> y uso de herramientas colaborativas (control de versiones, gestores de tareas), que evitan duplicidades y versiones incompatibles del software.</li>
+    </ul>
+    <div class="res"><b>Idea clave:</b> comunicación estructurada + revisión mutua + especificaciones y pruebas comunes = prevención de fallos de integración.</div>
+
+    <h5>b) Metodología de trabajo más adecuada</h5>
+    <p>Para una empresa con un equipo propio de programación que mantiene un software en uso y que debe corregir fallos con rapidez, la opción más adecuada es una <b>metodología ágil</b>, y en particular <b>Scrum</b>:</p>
+    <ul>
+      <li>El trabajo se organiza en <b>ciclos cortos (sprints)</b> de 1–4 semanas, al final de los cuales se entrega una versión funcional y probada del software: los errores se detectan y corrigen pronto.</li>
+      <li>Hay <b>reuniones diarias</b> de sincronización y una <b>revisión y retrospectiva</b> al final de cada sprint, lo que refuerza precisamente las técnicas de equipo del apartado a).</li>
+      <li>Existe una <b>lista priorizada de tareas</b> (product backlog) gestionada por un responsable de producto, de modo que los fallos críticos (como el del intercambio de datos) se atienden primero.</li>
+      <li>Es una metodología <b>adaptativa</b>: admite cambios de requisitos frecuentes, algo habitual en software de logística, frente al modelo en cascada, demasiado rígido para este contexto.</li>
+    </ul>
+    <p>Puede complementarse con prácticas de <b>Kanban</b> (tablero visual del flujo de trabajo) y de integración continua (pruebas automáticas en cada cambio).</p>
+    <div class="res"><b>Conclusión:</b> una metodología ágil tipo <b>Scrum</b>, con entregas incrementales, comunicación diaria y mejora continua, es la mejor opción para este equipo de desarrollo.</div>
+  </div>
+  <div class="nav-q"><a href="#home" onclick="go('home');return false;">← Inicio</a><a href="#q21" onclick="go('q21');return false;">Cuestión 2.1 →</a></div>
+</section>
+
+<!-- ================= Q2.1 ================= -->
+<section class="view" id="q21">
+  <div class="crumb">Inicio / Bloque 2 / Cuestión 2.1</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2</span> Cuestión 2.1 · Ensayo de tracción uniaxial</div>
+  <div class="qmeta">A elegir entre 2.1 y 2.2 · <span class="pts">2 puntos (a: 0,8 · b: 0,6 · c: 0,6)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En un ensayo convencional de tracción uniaxial realizado sobre un cierto material se ha obtenido la curva carga-alargamiento de la figura. Para ello se utilizó una probeta de sección circular de <b>12 mm de diámetro</b>. La longitud base del extensómetro empleado era igual a <b>40 mm</b>.</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 330" width="100%" style="max-width:560px">
+        <line x1="70" y1="280" x2="530" y2="280" stroke="#94a3c0" stroke-width="1.5"/>
+        <line x1="70" y1="280" x2="70" y2="25" stroke="#94a3c0" stroke-width="1.5"/>
+        <g stroke="#26324e" stroke-width="1">
+          <line x1="70" y1="237" x2="530" y2="237"/><line x1="70" y1="194" x2="530" y2="194"/>
+          <line x1="70" y1="151" x2="530" y2="151"/><line x1="70" y1="108" x2="530" y2="108"/>
+          <line x1="70" y1="65" x2="530" y2="65"/>
+          <line x1="160" y1="280" x2="160" y2="30"/><line x1="250" y1="280" x2="250" y2="30"/>
+          <line x1="340" y1="280" x2="340" y2="30"/><line x1="430" y1="280" x2="430" y2="30"/><line x1="520" y1="280" x2="520" y2="30"/>
+        </g>
+        <g fill="#94a3c0" font-size="12" font-family="JetBrains Mono">
+          <text x="58" y="284" text-anchor="end">0</text><text x="58" y="241" text-anchor="end">20</text>
+          <text x="58" y="198" text-anchor="end">40</text><text x="58" y="155" text-anchor="end">60</text>
+          <text x="58" y="112" text-anchor="end">80</text><text x="58" y="69" text-anchor="end">100</text>
+          <text x="58" y="34" text-anchor="end">120</text>
+          <text x="70" y="298" text-anchor="middle">0,0</text><text x="160" y="298" text-anchor="middle">1,0</text>
+          <text x="250" y="298" text-anchor="middle">2,0</text><text x="340" y="298" text-anchor="middle">3,0</text>
+          <text x="430" y="298" text-anchor="middle">4,0</text><text x="520" y="298" text-anchor="middle">5,0</text>
+          <text x="300" y="322" text-anchor="middle" font-size="13">Alargamiento, ΔL (mm)</text>
+          <text x="24" y="150" transform="rotate(-90 24 150)" text-anchor="middle" font-size="13">F (kN)</text>
+        </g>
+        <path d="M70 280 L142 87 C 160 45, 180 40, 250 33 C 320 27, 380 26, 440 25 C 470 25, 490 27, 484 39"
+              stroke="#22d3ee" stroke-width="3" fill="none"/>
+        <g stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="5 4">
+          <line x1="115" y1="280" x2="115" y2="151"/><line x1="70" y1="151" x2="115" y2="151"/>
+        </g>
+        <circle cx="115" cy="151" r="4" fill="#f59e0b"/>
+        <text x="122" y="146" fill="#f59e0b" font-size="12" font-family="JetBrains Mono">(0,5 ; 60)</text>
+        <g stroke="#4ade80" stroke-width="1.4" stroke-dasharray="5 4">
+          <line x1="440" y1="280" x2="440" y2="25"/><line x1="70" y1="25" x2="440" y2="25"/>
+        </g>
+        <text x="446" y="45" fill="#4ade80" font-size="12" font-family="JetBrains Mono">Fmáx ≈ 118 kN</text>
+      </svg>
+      <figcaption>Curva carga–alargamiento con las lecturas empleadas: punto de la zona elástica (naranja) y carga máxima (verde).</figcaption>
+    </figure>
+    <ol type="a">
+      <li>Obtenga el módulo de elasticidad del material (en GPa). <span class="pts">(0,8 puntos)</span></li>
+      <li>Calcule la deformación total (en %) que experimentó la probeta durante el ensayo. <span class="pts">(0,6 puntos)</span></li>
+      <li>Determine el tamaño de lado (en mm) que debería tener una barra cuadrada del material indicado de un sistema que trabaja a tracción uniaxial para no romper en servicio al ser sometida a una carga de tracción de 200 kN, con un coeficiente de seguridad a rotura de 2,0. <span class="pts">(0,6 puntos)</span></li>
+    </ol>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q2-1_traccion.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li><b>Ley de Hooke</b> en la zona elástica: \( \sigma = E\,\varepsilon \), con tensión \( \sigma = F/A_0 \) y deformación unitaria \( \varepsilon = \Delta L/L_0 \).</li>
+      <li>Lectura de la <b>curva carga–alargamiento</b>: un punto de la zona lineal para obtener \(E\) y el alargamiento final para la deformación total.</li>
+      <li><b>Dimensionado resistente</b> con coeficiente de seguridad: \( \sigma_{adm} = \sigma_R / n \) y \( A \ge F/\sigma_{adm} \).</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s21')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q2-1_traccion.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s21">
+    <h5>Datos y sección de la probeta</h5>
+    <p>Diámetro \(d = 12\ \text{mm}\); longitud base del extensómetro \(L_0 = 40\ \text{mm}\).</p>
+    <div class="formula">$$A_0=\frac{\pi d^2}{4}=\frac{\pi\cdot 12^2}{4}=113{,}10\ \text{mm}^2$$</div>
+
+    <h5>a) Módulo de elasticidad E (0,8 pt)</h5>
+    <p>Tomamos un punto claramente situado en la <b>zona lineal (elástica)</b> de la curva: \(F = 60\ \text{kN}\) para \(\Delta L = 0{,}5\ \text{mm}\).</p>
+    <div class="formula">$$\sigma=\frac{F}{A_0}=\frac{60\,000\ \text{N}}{113{,}10\ \text{mm}^2}=530{,}5\ \text{MPa}
+    \qquad
+    \varepsilon=\frac{\Delta L}{L_0}=\frac{0{,}5}{40}=0{,}0125$$</div>
+    <div class="formula">$$E=\frac{\sigma}{\varepsilon}=\frac{530{,}5\ \text{MPa}}{0{,}0125}=42\,440\ \text{MPa}$$</div>
+    <div class="res"><b>E ≈ 42,4 GPa</b> (el valor puede oscilar ligeramente, ≈ 40–45 GPa, según el punto leído en la recta).</div>
+
+    <h5>b) Deformación total de la probeta (0,6 pt)</h5>
+    <p>El alargamiento máximo alcanzado en el ensayo, leído al final de la curva, es \(\Delta L_{max} \approx 4{,}6\ \text{mm}\):</p>
+    <div class="formula">$$\varepsilon_{total}=\frac{\Delta L_{max}}{L_0}=\frac{4{,}6}{40}=0{,}115$$</div>
+    <div class="res"><b>ε<sub>total</sub> ≈ 11,5 %</b> (admisible ≈ 11–12 % según la lectura del extremo de la curva).</div>
+
+    <h5>c) Lado de la barra cuadrada (0,6 pt)</h5>
+    <p><b>1.</b> Tensión de rotura del material, con la carga máxima de la curva \(F_{max}\approx 118\ \text{kN}\):</p>
+    <div class="formula">$$\sigma_R=\frac{F_{max}}{A_0}=\frac{118\,000}{113{,}10}=1043{,}4\ \text{MPa}$$</div>
+    <p><b>2.</b> Tensión admisible con coeficiente de seguridad a rotura \(n = 2{,}0\):</p>
+    <div class="formula">$$\sigma_{adm}=\frac{\sigma_R}{n}=\frac{1043{,}4}{2}=521{,}7\ \text{MPa}$$</div>
+    <p><b>3.</b> Sección necesaria para soportar \(F = 200\ \text{kN}\) y lado de la barra cuadrada \((A=a^2)\):</p>
+    <div class="formula">$$A\ge\frac{F}{\sigma_{adm}}=\frac{200\,000}{521{,}7}=383{,}4\ \text{mm}^2
+    \qquad
+    a=\sqrt{383{,}4}=19{,}6\ \text{mm}$$</div>
+    <div class="res"><b>a ≈ 19,6 mm</b> → en la práctica se adoptaría una barra cuadrada de <b>20 mm de lado</b>.</div>
+  </div>
+  <div class="nav-q"><a href="#q1" onclick="go('q1');return false;">← Cuestión 1</a><a href="#q22" onclick="go('q22');return false;">Cuestión 2.2 →</a></div>
+</section>
+
+<!-- ================= Q2.2 ================= -->
+<section class="view" id="q22">
+  <div class="crumb">Inicio / Bloque 2 / Cuestión 2.2</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2</span> Cuestión 2.2 · Técnicas de fabricación de materiales metálicos</div>
+  <div class="qmeta">A elegir entre 2.1 y 2.2 · <span class="pts">2 puntos (a: 1,0 · b: 0,5 · c: 0,5)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Respecto a las técnicas de fabricación de materiales metálicos:</p>
+    <ol type="a">
+      <li>Explique qué son los procesos de ensamblaje, indique cuáles son los dos tipos principales de operaciones de ensamblaje, indicando las diferencias principales entre ambos y poniendo algún ejemplo. <span class="pts">(1 punto)</span></li>
+      <li>Describa en qué consiste un proceso de laminación de chapas metálicas. <span class="pts">(0,5 puntos)</span></li>
+      <li>Describa en qué consiste un proceso de estampación. <span class="pts">(0,5 puntos)</span></li>
+    </ol>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q2-2_fabricacion.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestión teórica de <b>procesos de fabricación</b>. Repasamos:</p>
+    <ul>
+      <li><b>Uniones</b> entre piezas: desmontables frente a fijas (permanentes), con ejemplos.</li>
+      <li><b>Conformado por deformación plástica</b>: laminación (rodillos) y estampación (matriz y punzón sobre chapa).</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s22')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q2-2_fabricacion.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s22">
+    <h5>a) Procesos de ensamblaje (1 pt)</h5>
+    <p>Los <b>procesos de ensamblaje</b> son las operaciones mediante las cuales se <b>unen dos o más piezas</b> previamente fabricadas para formar un conjunto o producto final, garantizando la posición relativa y la transmisión de esfuerzos entre ellas. Se distinguen dos tipos principales:</p>
+    <table class="dat">
+      <tr><th></th><th>Uniones desmontables</th><th>Uniones fijas (permanentes)</th></tr>
+      <tr><td><b>Definición</b></td><td>Permiten separar las piezas sin dañarlas, cuantas veces se necesite (montaje/desmontaje, mantenimiento).</td><td>La unión es definitiva: para separar las piezas hay que destruir el elemento de unión o dañarlas.</td></tr>
+      <tr><td><b>Ejemplos</b></td><td>Tornillos y tuercas, pasadores, chavetas, grapas, uniones roscadas.</td><td>Soldadura, remachado, adhesivos (pegado).</td></tr>
+      <tr><td><b>Diferencias</b></td><td>Reversibles; facilitan reparación y reciclaje; suelen requerir elementos normalizados.</td><td>Irreversibles; mayor rigidez y estanqueidad; menor coste por unión en grandes series.</td></tr>
+    </table>
+    <div class="res"><b>Ejemplo comparativo:</b> la carcasa de un motor se atornilla (desmontable, para poder abrirla en mantenimiento); el chasis de un coche se suelda por puntos (fijo, no debe separarse nunca).</div>
+
+    <h5>b) Laminación de chapas metálicas (0,5 pt)</h5>
+    <p>La <b>laminación</b> es un proceso de <b>conformado por deformación plástica</b> en el que el metal se hace pasar entre <b>dos rodillos (cilindros) que giran en sentidos opuestos</b>, separados una distancia menor que el espesor inicial del material. Al pasar, el material se <b>comprime, reduce su espesor y aumenta su longitud</b>, obteniéndose chapas, planchas o perfiles de sección uniforme. Puede realizarse:</p>
+    <ul>
+      <li><b>En caliente</b>, por encima de la temperatura de recristalización: grandes reducciones de espesor con menor esfuerzo.</li>
+      <li><b>En frío</b>: mejor acabado superficial, tolerancias más estrictas y endurecimiento del material (acritud).</li>
+    </ul>
+
+    <h5>c) Estampación (0,5 pt)</h5>
+    <p>La <b>estampación</b> es un proceso de conformado por deformación plástica de <b>chapa metálica</b> en el que la pieza se obtiene <b>prensando la chapa entre una matriz y un punzón (estampa)</b> que tienen grabada la forma deseada. Al aplicar la presión (normalmente en una prensa), la chapa <b>adopta la forma de la estampa</b>, pudiendo combinarse operaciones de embutición, doblado y corte. Puede hacerse en frío (chapas finas, gran precisión, p. ej. carrocerías de automóvil, menaje) o en caliente (piezas de mayor espesor). Es un proceso muy rápido y adecuado para <b>grandes series</b>.</p>
+  </div>
+  <div class="nav-q"><a href="#q21" onclick="go('q21');return false;">← Cuestión 2.1</a><a href="#q31" onclick="go('q31');return false;">Cuestión 3.1 →</a></div>
+</section>
+
+<!-- ================= Q3.1 ================= -->
+<section class="view" id="q31">
+  <div class="crumb">Inicio / Bloque 3 / Cuestión 3.1</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3</span> Cuestión 3.1 · Viga biapoyada: cortante y flector</div>
+  <div class="qmeta">A elegir entre 3.1 y 3.2 · <span class="pts">2 puntos (a: 0,5 · b: 1,5)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>De la viga que se muestra en la figura:</p>
+    <ol type="a">
+      <li>Calcule las reacciones en los apoyos. <span class="pts">(0,5 puntos)</span></li>
+      <li>Represente los diagramas de esfuerzo cortante y momento flector. <span class="pts">(1,5 puntos)</span></li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 620 150" width="100%" style="max-width:620px">
+        <rect x="60" y="70" width="500" height="12" fill="#3b4b73" stroke="#a78bfa"/>
+        <path d="M60 82 l-11 18 h22 z" fill="none" stroke="#a78bfa" stroke-width="2"/>
+        <line x1="42" y1="100" x2="78" y2="100" stroke="#a78bfa" stroke-width="2"/>
+        <circle cx="560" cy="92" r="7" fill="none" stroke="#a78bfa" stroke-width="2"/>
+        <line x1="542" y1="101" x2="578" y2="101" stroke="#a78bfa" stroke-width="2"/>
+        <g stroke="#fb7185" stroke-width="2.6" fill="#fb7185">
+          <line x1="260" y1="24" x2="260" y2="64"/><path d="M260 70 l-6 -11 h12 z"/>
+          <line x1="360" y1="24" x2="360" y2="64"/><path d="M360 70 l-6 -11 h12 z"/>
+        </g>
+        <g fill="#e7ecf7" font-size="13" font-family="JetBrains Mono">
+          <text x="260" y="16" text-anchor="middle">500 N</text>
+          <text x="360" y="16" text-anchor="middle">500 N</text>
+          <text x="52" y="62">A</text><text x="562" y="62">B</text>
+        </g>
+        <g stroke="#94a3c0" stroke-width="1" fill="#94a3c0" font-size="11" font-family="JetBrains Mono">
+          <line x1="60" y1="118" x2="260" y2="118"/><text x="160" y="132" text-anchor="middle">6 m</text>
+          <line x1="360" y1="118" x2="560" y2="118"/><text x="460" y="132" text-anchor="middle">6 m</text>
+          <line x1="60" y1="140" x2="560" y2="140"/><text x="310" y="136" text-anchor="middle">15 m</text>
+        </g>
+      </svg>
+    </figure>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q3-1_viga.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li><b>Equilibrio estático</b> de la viga: \( \sum F_y = 0 \) y \( \sum M = 0 \) para hallar las reacciones (aquí, además, la simetría simplifica el cálculo).</li>
+      <li><b>Diagramas de esfuerzos</b>: el cortante \(V(x)\) salta en cada carga puntual y el flector \(M(x)\) es lineal por tramos, con pendiente igual al cortante (\(dM/dx = V\)).</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s31')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q3-1_viga.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s31">
+    <h5>a) Reacciones en los apoyos (0,5 pt)</h5>
+    <p>Viga de \(L = 15\) m con cargas de 500 N en \(x = 6\) m y \(x = 9\) m (a 6 m de cada extremo). Tomando momentos respecto de A:</p>
+    <div class="formula">$$\sum M_A=0:\quad R_B\cdot 15 - 500\cdot 6 - 500\cdot 9 = 0
+    \;\Rightarrow\; R_B=\frac{3000+4500}{15}=500\ \text{N}$$</div>
+    <div class="formula">$$\sum F_y=0:\quad R_A=500+500-R_B=500\ \text{N}$$</div>
+    <div class="res"><b>R<sub>A</sub> = R<sub>B</sub> = 500 N</b> (resultado esperable por la simetría del sistema).</div>
+
+    <h5>b) Diagramas de esfuerzo cortante V(x) y momento flector M(x) (1,5 pt)</h5>
+    <p><b>Cortante por tramos</b> (secciones desde la izquierda):</p>
+    <ul>
+      <li>Tramo 0 &lt; x &lt; 6: \(V = R_A = +500\ \text{N}\)</li>
+      <li>Tramo 6 &lt; x &lt; 9: \(V = 500 - 500 = 0\)</li>
+      <li>Tramo 9 &lt; x &lt; 15: \(V = 500 - 500 - 500 = -500\ \text{N}\)</li>
+    </ul>
+    <p><b>Momento flector</b> (lineal por tramos; nulo en los apoyos):</p>
+    <ul>
+      <li>\(M(x)=500x\) → \(M(6)=3000\ \mathrm{N{\cdot}m}\)</li>
+      <li>Entre 6 y 9 m el cortante es nulo → <b>momento constante</b>: \(M = 3000\ \mathrm{N{\cdot}m}\) (flexión pura).</li>
+      <li>\(M(x)=500x-500(x-6)-500(x-9)=500(15-x)\) → \(M(15)=0\)</li>
+    </ul>
+    <div class="formula">$$M_{max}=3000\ \mathrm{N{\cdot}m}\quad\text{entre } x=6\ \text{m y } x=9\ \text{m}$$</div>
+    <figure class="fig">
+      <svg viewBox="0 0 620 430" width="100%" style="max-width:620px">
+        <!-- beam ref -->
+        <rect x="60" y="18" width="500" height="8" fill="#3b4b73"/>
+        <g stroke="#fb7185" stroke-width="2" fill="#fb7185">
+          <line x1="260" y1="0" x2="260" y2="12"/><path d="M260 17 l-5 -9 h10 z"/>
+          <line x1="360" y1="0" x2="360" y2="12"/><path d="M360 17 l-5 -9 h10 z"/>
+        </g>
+        <!-- V diagram -->
+        <text x="30" y="95" fill="#22d3ee" font-size="13" font-family="Sora" font-weight="700">V (N)</text>
+        <line x1="60" y1="130" x2="560" y2="130" stroke="#94a3c0" stroke-width="1.4"/>
+        <polygon points="60,130 60,80 260,80 260,130" fill="#22d3ee" opacity=".25" stroke="#22d3ee" stroke-width="2"/>
+        <polygon points="360,130 360,180 560,180 560,130" fill="#22d3ee" opacity=".25" stroke="#22d3ee" stroke-width="2"/>
+        <line x1="260" y1="130" x2="360" y2="130" stroke="#22d3ee" stroke-width="2"/>
+        <g fill="#e7ecf7" font-size="12" font-family="JetBrains Mono">
+          <text x="160" y="72" text-anchor="middle">+500</text>
+          <text x="310" y="122" text-anchor="middle">0</text>
+          <text x="460" y="198" text-anchor="middle">−500</text>
+        </g>
+        <!-- M diagram -->
+        <text x="30" y="250" fill="#a78bfa" font-size="13" font-family="Sora" font-weight="700">M (N·m)</text>
+        <line x1="60" y1="390" x2="560" y2="390" stroke="#94a3c0" stroke-width="1.4"/>
+        <polygon points="60,390 260,270 360,270 560,390" fill="#a78bfa" opacity=".22" stroke="#a78bfa" stroke-width="2.4"/>
+        <line x1="260" y1="390" x2="260" y2="270" stroke="#94a3c0" stroke-dasharray="4 4"/>
+        <line x1="360" y1="390" x2="360" y2="270" stroke="#94a3c0" stroke-dasharray="4 4"/>
+        <g fill="#e7ecf7" font-size="12" font-family="JetBrains Mono">
+          <text x="310" y="260" text-anchor="middle">Mmax = 3000 N·m</text>
+          <text x="60" y="408" text-anchor="middle">0</text><text x="260" y="408" text-anchor="middle">6</text>
+          <text x="360" y="408" text-anchor="middle">9</text><text x="560" y="408" text-anchor="middle">15</text>
+          <text x="310" y="426" text-anchor="middle" fill="#94a3c0">x (m)</text>
+        </g>
+      </svg>
+      <figcaption>Diagramas de esfuerzo cortante (rectangular, con tramo nulo central) y momento flector (trapezoidal, máximo constante de 3000 N·m entre las cargas).</figcaption>
+    </figure>
+    <div class="res"><b>V:</b> +500 N (0–6 m), 0 (6–9 m), −500 N (9–15 m). <b>M:</b> crece linealmente hasta <b>3000 N·m</b>, se mantiene constante entre 6 y 9 m, y decrece linealmente hasta 0 en B.</div>
+  </div>
+  <div class="nav-q"><a href="#q22" onclick="go('q22');return false;">← Cuestión 2.2</a><a href="#q32" onclick="go('q32');return false;">Cuestión 3.2 →</a></div>
+</section>
+
+<!-- ================= Q3.2 ================= -->
+<section class="view" id="q32">
+  <div class="crumb">Inicio / Bloque 3 / Cuestión 3.2</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3</span> Cuestión 3.2 · Prensa hidráulica</div>
+  <div class="qmeta">A elegir entre 3.1 y 3.2 · <span class="pts">2 puntos (a: 1,0 · b: 0,5 · c: 0,5)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En una prensa hidráulica cuyos émbolos tienen un radio de <b>12 cm</b> y <b>24 cm</b> respectivamente, se aplica sobre el émbolo de menor diámetro una fuerza de <b>50 N</b>, obteniendo un desplazamiento en dicho émbolo de <b>10 cm</b>.</p>
+    <ol type="a">
+      <li>Determine la fuerza que se obtiene en el émbolo de mayor diámetro. <span class="pts">(1 punto)</span></li>
+      <li>Calcule el desplazamiento del émbolo grande. <span class="pts">(0,5 puntos)</span></li>
+      <li>Si se quisiera obtener una fuerza de 250 N en el émbolo grande manteniendo la fuerza de 50 N aplicada en el pequeño, ¿qué radio debería tener dicho émbolo grande? <span class="pts">(0,5 puntos)</span></li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 480 190" width="100%" style="max-width:480px">
+        <path d="M40 60 v100 h400 v-110 M40 160 h400" fill="none"/>
+        <path d="M40 55 V160 H440 V50 M110 55 V120 H370 V50" fill="#22314f" stroke="#94a3c0" stroke-width="2" fill-rule="evenodd"/>
+        <rect x="42" y="78" width="66" height="14" fill="#a78bfa"/>
+        <rect x="372" y="70" width="66" height="14" fill="#a78bfa"/>
+        <g stroke="#4ade80" stroke-width="2.6" fill="#4ade80">
+          <line x1="75" y1="70" x2="75" y2="34"/><path d="M75 28 l-6 11 h12 z" transform="rotate(180 75 33.5)"/>
+        </g>
+        <g stroke="#fb7185" stroke-width="2.6" fill="#fb7185">
+          <line x1="405" y1="30" x2="405" y2="62"/><path d="M405 68 l-6 -11 h12 z"/>
+        </g>
+        <g fill="#e7ecf7" font-size="13" font-family="JetBrains Mono">
+          <text x="88" y="30">F₂ = ?</text>
+          <text x="330" y="26">F₁ = 50 N</text>
+          <text x="60" y="112" fill="#94a3c0" font-size="11">r₂ = 24 cm</text>
+          <text x="376" y="104" fill="#94a3c0" font-size="11">r₁ = 12 cm</text>
+        </g>
+      </svg>
+      <figcaption>Prensa hidráulica: el fluido incompresible transmite la presión del émbolo pequeño (r₁) al grande (r₂).</figcaption>
+    </figure>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q3-2_prensa.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li><b>Principio de Pascal</b>: la presión se transmite íntegramente por el fluido → \( \dfrac{F_1}{A_1}=\dfrac{F_2}{A_2} \), con \(A=\pi r^2\).</li>
+      <li><b>Conservación del volumen</b> de fluido (incompresible): \( A_1\,d_1 = A_2\,d_2 \).</li>
+      <li>Despeje inverso del radio necesario para una fuerza objetivo.</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s32')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q3-2_prensa.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s32">
+    <h5>Datos</h5>
+    <p>Émbolo pequeño: \(r_1 = 12\) cm, \(F_1 = 50\) N, \(d_1 = 10\) cm. Émbolo grande: \(r_2 = 24\) cm. Relación de áreas:</p>
+    <div class="formula">$$\frac{A_2}{A_1}=\frac{\pi r_2^2}{\pi r_1^2}=\left(\frac{24}{12}\right)^2=4$$</div>
+
+    <h5>a) Fuerza en el émbolo grande (1 pt)</h5>
+    <p>Por el principio de Pascal, la presión es la misma bajo ambos émbolos:</p>
+    <div class="formula">$$\frac{F_1}{A_1}=\frac{F_2}{A_2}\;\Rightarrow\; F_2=F_1\cdot\frac{A_2}{A_1}=50\cdot 4$$</div>
+    <div class="res"><b>F₂ = 200 N</b> — la prensa multiplica la fuerza por 4 (ventaja mecánica = relación de áreas).</div>
+
+    <h5>b) Desplazamiento del émbolo grande (0,5 pt)</h5>
+    <p>El volumen de fluido desplazado por el émbolo pequeño es el que recibe el grande:</p>
+    <div class="formula">$$A_1\,d_1=A_2\,d_2\;\Rightarrow\; d_2=d_1\cdot\frac{A_1}{A_2}=\frac{10}{4}$$</div>
+    <div class="res"><b>d₂ = 2,5 cm</b> — lo que se gana en fuerza se pierde en recorrido (el trabajo se conserva: \(F_1 d_1 = F_2 d_2 = 5\) J).</div>
+
+    <h5>c) Radio necesario para obtener 250 N (0,5 pt)</h5>
+    <div class="formula">$$\frac{F_1}{\pi r_1^2}=\frac{F_2'}{\pi r_2'^2}\;\Rightarrow\;
+    r_2'=r_1\sqrt{\frac{F_2'}{F_1}}=12\cdot\sqrt{\frac{250}{50}}=12\sqrt{5}$$</div>
+    <div class="res"><b>r₂′ = 26,8 cm</b> (≈ 0,268 m). Comprobación: \((26{,}83/12)^2=5\) → \(50\cdot 5=250\) N ✓</div>
+  </div>
+  <div class="nav-q"><a href="#q31" onclick="go('q31');return false;">← Cuestión 3.1</a><a href="#q41" onclick="go('q41');return false;">Cuestión 4.1 →</a></div>
+</section>
+
+<!-- ================= Q4.1 ================= -->
+<section class="view" id="q41">
+  <div class="crumb">Inicio / Bloque 4 / Cuestión 4.1</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4</span> Cuestión 4.1 · Circuito de corriente alterna en paralelo</div>
+  <div class="qmeta">A elegir entre 4.1 y 4.2 · <span class="pts">2 puntos (a: 0,5 · b: 0,5 · c: 0,5 · d: 0,5)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dado el siguiente circuito, determine:</p>
+    <ol type="a">
+      <li>El valor de la autoinducción L y la capacidad C. <span class="pts">(0,5 puntos)</span></li>
+      <li>El valor eficaz de la corriente por cada uno de los componentes. <span class="pts">(0,5 puntos)</span></li>
+      <li>La potencia activa, reactiva y aparente en el generador. <span class="pts">(0,5 puntos)</span></li>
+      <li>El valor eficaz de la corriente que circula por el generador. <span class="pts">(0,5 puntos)</span></li>
+    </ol>
+    <p><b>Datos:</b> \( e(t)=100\sqrt{2}\,\operatorname{sen}(100\,t)\ \text{V} \); &nbsp; R₁ = 20 Ω; R₂ = 20 Ω; X<sub>L</sub> = 10 Ω; X<sub>C</sub> = 5 Ω.</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 200" width="100%" style="max-width:560px">
+        <path d="M70 40 H510 M70 160 H510 M70 40 V70 M70 130 V160" stroke="#94a3c0" stroke-width="2" fill="none"/>
+        <circle cx="70" cy="100" r="22" fill="none" stroke="#34d399" stroke-width="2.4"/>
+        <path d="M58 100 q6 -9 12 0 t12 0" stroke="#34d399" stroke-width="2" fill="none"/>
+        <text x="34" y="105" fill="#e7ecf7" font-size="14" font-family="JetBrains Mono">E</text>
+        <g stroke="#34d399" stroke-width="2.4" fill="none">
+          <path d="M180 40 V70 l-8 6 16 8 -16 8 16 8 -16 8 8 6 V160"/>
+          <path d="M290 40 V70 l-8 6 16 8 -16 8 16 8 -16 8 8 6 V160"/>
+          <path d="M400 40 V72 M400 128 V160"/>
+          <path d="M400 72 q10 7 0 14 q10 7 0 14 q10 7 0 14 q10 7 0 14" />
+          <path d="M480 40 V92 M480 108 V160 M462 92 H498 M462 108 H498"/>
+        </g>
+        <g fill="#e7ecf7" font-size="13" font-family="JetBrains Mono">
+          <text x="196" y="104">R₁</text><text x="306" y="104">R₂</text>
+          <text x="416" y="104">L</text><text x="504" y="104">C</text>
+        </g>
+      </svg>
+    </figure>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q4-1_alterna.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li>Identificación de \(V_{ef}\) y \(\omega\) a partir de \(e(t)=V_{max}\operatorname{sen}(\omega t)\).</li>
+      <li><b>Reactancias</b>: \(X_L=\omega L\) y \(X_C = 1/(\omega C)\).</li>
+      <li>En paralelo, <b>la tensión es común</b>: ley de Ohm rama a rama, \(I = V/X\).</li>
+      <li><b>Triángulo de potencias</b>: \(P\) (resistencias), \(Q = Q_L - Q_C\), \(S=\sqrt{P^2+Q^2}\) y \(I_{gen}=S/V\) (o suma fasorial de corrientes).</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s41')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q4-1_alterna.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s41">
+    <h5>Lectura del generador</h5>
+    <p>Comparando \(e(t)=100\sqrt2\,\operatorname{sen}(100t)\) con \(V_{max}\operatorname{sen}(\omega t)\):</p>
+    <div class="formula">$$V_{ef}=\frac{V_{max}}{\sqrt2}=\frac{100\sqrt2}{\sqrt2}=100\ \text{V}\qquad \omega=100\ \text{rad/s}$$</div>
+
+    <h5>a) Autoinducción L y capacidad C (0,5 pt)</h5>
+    <div class="formula">$$X_L=\omega L\;\Rightarrow\; L=\frac{X_L}{\omega}=\frac{10}{100}=0{,}1\ \text{H}$$</div>
+    <div class="formula">$$X_C=\frac{1}{\omega C}\;\Rightarrow\; C=\frac{1}{\omega X_C}=\frac{1}{100\cdot 5}=2\cdot 10^{-3}\ \text{F}$$</div>
+    <div class="res"><b>L = 0,1 H</b> · <b>C = 2 mF (2000 µF)</b></div>
+
+    <h5>b) Corriente eficaz por cada componente (0,5 pt)</h5>
+    <p>Al estar en paralelo, todos los componentes soportan \(V = 100\) V:</p>
+    <table class="dat">
+      <tr><th>Componente</th><th>Cálculo</th><th>I eficaz</th><th>Desfase respecto a V</th></tr>
+      <tr><td>R₁</td><td>100 / 20</td><td><b>5 A</b></td><td>En fase (0°)</td></tr>
+      <tr><td>R₂</td><td>100 / 20</td><td><b>5 A</b></td><td>En fase (0°)</td></tr>
+      <tr><td>L</td><td>100 / 10</td><td><b>10 A</b></td><td>Retrasada 90°</td></tr>
+      <tr><td>C</td><td>100 / 5</td><td><b>20 A</b></td><td>Adelantada 90°</td></tr>
+    </table>
+
+    <h5>c) Potencias en el generador (0,5 pt)</h5>
+    <p><b>Activa</b> (solo la disipan las resistencias):</p>
+    <div class="formula">$$P=\frac{V^2}{R_1}+\frac{V^2}{R_2}=\frac{100^2}{20}+\frac{100^2}{20}=500+500=1000\ \text{W}$$</div>
+    <p><b>Reactiva</b> (la bobina consume, el condensador aporta):</p>
+    <div class="formula">$$Q=Q_L-Q_C=\frac{V^2}{X_L}-\frac{V^2}{X_C}=\frac{100^2}{10}-\frac{100^2}{5}=1000-2000=-1000\ \text{VAr}$$</div>
+    <p><b>Aparente</b>:</p>
+    <div class="formula">$$S=\sqrt{P^2+Q^2}=\sqrt{1000^2+(-1000)^2}=1000\sqrt2\approx 1414\ \text{VA}$$</div>
+    <div class="res"><b>P = 1000 W · Q = −1000 VAr (carácter capacitivo) · S ≈ 1414,2 VA</b> · cos φ = P/S = 0,707 (corriente adelantada 45°).</div>
+
+    <h5>d) Corriente eficaz del generador (0,5 pt)</h5>
+    <p>Suma fasorial de las corrientes de rama (tomando V como referencia):</p>
+    <div class="formula">$$\vec I=\underbrace{(5+5)}_{\text{activa}}+j\,\underbrace{(20-10)}_{\text{reactiva}}=10+10j\ \text{A}
+    \;\Rightarrow\; I=\sqrt{10^2+10^2}$$</div>
+    <p>O bien directamente con la potencia aparente: \(I = S/V = 1414{,}2/100\).</p>
+    <div class="res"><b>I<sub>gen</sub> = 10√2 ≈ 14,14 A</b>, adelantada 45° respecto de la tensión.</div>
+  </div>
+  <div class="nav-q"><a href="#q32" onclick="go('q32');return false;">← Cuestión 3.2</a><a href="#q42" onclick="go('q42');return false;">Cuestión 4.2 →</a></div>
+</section>
+
+<!-- ================= Q4.2 ================= -->
+<section class="view" id="q42">
+  <div class="crumb">Inicio / Bloque 4 / Cuestión 4.2</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4</span> Cuestión 4.2 · Simplificación por Karnaugh (producto de sumas)</div>
+  <div class="qmeta">A elegir entre 4.1 y 4.2 · <span class="pts">2 puntos (a: 1,0 · b: 1,0)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dada la función lógica <b>F(A,B,C,D) = Σm (0, 1, 3, 5, 7)</b> se pide:</p>
+    <ol type="a">
+      <li>Obtenga la expresión más simplificada de la función como producto de sumas, usando el método de Karnaugh. <span class="pts">(1 punto)</span></li>
+      <li>Dibuje el circuito correspondiente del apartado anterior utilizando solo puertas NOT y puertas AND y OR de dos entradas. <span class="pts">(1 punto)</span></li>
+    </ol>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q4-2_karnaugh.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li><b>Mapa de Karnaugh de 4 variables</b> agrupando los <b>ceros</b> (para producto de sumas se simplifica \( \bar F \) y se aplica De Morgan) en grupos de 8, 4, 2… lo mayores posible.</li>
+      <li>Traducción de cada grupo de ceros a una <b>suma (maxterm simplificado)</b>: variable a 1 → complementada; variable a 0 → sin complementar.</li>
+      <li>Implementación con <b>puertas NOT, AND y OR de dos entradas</b>.</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s42')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q4-2_karnaugh.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s42">
+    <h5>a) Producto de sumas por Karnaugh (1 pt)</h5>
+    <p>Colocamos un 1 en los minterms 0, 1, 3, 5, 7 y un 0 en el resto. Para obtener el <b>producto de sumas</b> agrupamos los <b>ceros</b>:</p>
+    <figure class="fig">
+      <svg viewBox="0 0 460 300" width="100%" style="max-width:460px">
+        <g stroke="#94a3c0" stroke-width="1.4" fill="none">
+          <rect x="110" y="70" width="280" height="200"/>
+          <line x1="180" y1="70" x2="180" y2="270"/><line x1="250" y1="70" x2="250" y2="270"/><line x1="320" y1="70" x2="320" y2="270"/>
+          <line x1="110" y1="120" x2="390" y2="120"/><line x1="110" y1="170" x2="390" y2="170"/><line x1="110" y1="220" x2="390" y2="220"/>
+        </g>
+        <g fill="#94a3c0" font-size="13" font-family="JetBrains Mono">
+          <text x="145" y="60" text-anchor="middle">00</text><text x="215" y="60" text-anchor="middle">01</text>
+          <text x="285" y="60" text-anchor="middle">11</text><text x="355" y="60" text-anchor="middle">10</text>
+          <text x="98" y="100" text-anchor="end">00</text><text x="98" y="150" text-anchor="end">01</text>
+          <text x="98" y="200" text-anchor="end">11</text><text x="98" y="250" text-anchor="end">10</text>
+          <text x="250" y="30" text-anchor="middle" fill="#e7ecf7" font-family="Sora" font-weight="700">CD →</text>
+          <text x="52" y="175" fill="#e7ecf7" font-family="Sora" font-weight="700">AB ↓</text>
+        </g>
+        <g font-size="16" font-family="JetBrains Mono" text-anchor="middle">
+          <text x="145" y="101" fill="#4ade80">1</text><text x="215" y="101" fill="#4ade80">1</text><text x="285" y="101" fill="#4ade80">1</text><text x="355" y="101" fill="#fb7185">0</text>
+          <text x="145" y="151" fill="#fb7185">0</text><text x="215" y="151" fill="#4ade80">1</text><text x="285" y="151" fill="#4ade80">1</text><text x="355" y="151" fill="#fb7185">0</text>
+          <text x="145" y="201" fill="#fb7185">0</text><text x="215" y="201" fill="#fb7185">0</text><text x="285" y="201" fill="#fb7185">0</text><text x="355" y="201" fill="#fb7185">0</text>
+          <text x="145" y="251" fill="#fb7185">0</text><text x="215" y="251" fill="#fb7185">0</text><text x="285" y="251" fill="#fb7185">0</text><text x="355" y="251" fill="#fb7185">0</text>
+        </g>
+        <rect x="114" y="176" width="272" height="90" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.4"/>
+        <rect x="116" y="126" width="60" height="92" rx="10" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-dasharray="6 4"/>
+        <rect x="326" y="126" width="60" height="92" rx="10" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-dasharray="6 4"/>
+        <rect x="328" y="76" width="56" height="190" rx="10" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-dasharray="2 4"/>
+      </svg>
+      <figcaption>Grupos de ceros: naranja → 8 ceros con A=1 → (Ā) · cian → 4 ceros con B=1, D=0 (columnas de los extremos, rejilla cerrada) → (B̄+D) · violeta → 4 ceros con C=1, D=0 → (C̄+D).</figcaption>
+    </figure>
+    <ul>
+      <li><b>Grupo de 8</b> (filas AB = 11 y 10): en todas las celdas A = 1 → suma \((\bar A)\).</li>
+      <li><b>Grupo de 4</b> (m4, m6, m12, m14): B = 1 y D = 0 → suma \((\bar B + D)\).</li>
+      <li><b>Grupo de 4</b> (m2, m6, m10, m14): C = 1 y D = 0 → suma \((\bar C + D)\).</li>
+    </ul>
+    <div class="formula">$$\boxed{\;F(A,B,C,D)=\bar A\cdot(\bar B+D)\cdot(\bar C+D)\;}$$</div>
+    <p><i>Comprobación rápida:</i> m0 (0000): \(1\cdot1\cdot1=1\) ✓ · m7 (0111): \(1\cdot1\cdot1=1\) ✓ · m2 (0010): \(\bar C + D = 0\Rightarrow F=0\) ✓ · m8 (1000): \(\bar A=0\Rightarrow F=0\) ✓</p>
+
+    <h5>b) Circuito con puertas NOT, AND y OR de 2 entradas (1 pt)</h5>
+    <p>Se necesitan 3 puertas NOT (para Ā, B̄, C̄), 2 puertas OR de dos entradas y 2 puertas AND de dos entradas:</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 300" width="100%" style="max-width:640px">
+        <g fill="#e7ecf7" font-size="14" font-family="JetBrains Mono">
+          <text x="20" y="55">A</text><text x="20" y="120">B</text><text x="20" y="185">D</text><text x="20" y="250">C</text>
+        </g>
+        <g stroke="#94a3c0" stroke-width="1.8" fill="none">
+          <line x1="34" y1="50" x2="70" y2="50"/><line x1="34" y1="115" x2="70" y2="115"/>
+          <line x1="34" y1="180" x2="196" y2="180"/><line x1="34" y1="245" x2="70" y2="245"/>
+        </g>
+        <!-- NOT gates -->
+        <g stroke="#fb7185" stroke-width="2" fill="#161f33">
+          <path d="M70 38 L100 50 L70 62 Z"/><circle cx="105" cy="50" r="4.5"/>
+          <path d="M70 103 L100 115 L70 127 Z"/><circle cx="105" cy="115" r="4.5"/>
+          <path d="M70 233 L100 245 L70 257 Z"/><circle cx="105" cy="245" r="4.5"/>
+        </g>
+        <g fill="#fb7185" font-size="11" font-family="JetBrains Mono">
+          <text x="115" y="43">Ā</text><text x="115" y="108">B̄</text><text x="115" y="240">C̄</text>
+        </g>
+        <!-- OR gates (2 in) -->
+        <g stroke="#22d3ee" stroke-width="2" fill="#161f33">
+          <path d="M196 128 q14 20 0 40 q30 -2 44 -20 q-14 -18 -44 -20 z"/>
+          <path d="M196 195 q14 20 0 40 q30 -2 44 -20 q-14 -18 -44 -20 z"/>
+        </g>
+        <g fill="#22d3ee" font-size="10" font-family="Sora" font-weight="700">
+          <text x="207" y="152">OR</text><text x="207" y="219">OR</text>
+        </g>
+        <!-- AND gates -->
+        <g stroke="#4ade80" stroke-width="2" fill="#161f33">
+          <path d="M330 158 h26 a22 22 0 0 1 0 44 h-26 z"/>
+          <path d="M460 90 h26 a22 22 0 0 1 0 44 h-26 z"/>
+        </g>
+        <g fill="#4ade80" font-size="10" font-family="Sora" font-weight="700">
+          <text x="334" y="184">AND</text><text x="464" y="116">AND</text>
+        </g>
+        <!-- wiring -->
+        <g stroke="#94a3c0" stroke-width="1.8" fill="none">
+          <path d="M110 50 H430 V101 H460"/>
+          <path d="M110 115 V136 H196"/>
+          <path d="M196 180 H176 V214 H196"/>
+          <circle cx="176" cy="180" r="3" fill="#94a3c0" stroke="none"/>
+          <path d="M110 245 V226 H196"/>
+          <path d="M240 148 H300 V168 H330"/>
+          <path d="M240 215 H300 V192 H330"/>
+          <path d="M378 180 H430 V123 H460"/>
+          <path d="M508 112 H560"/>
+        </g>
+        <text x="568" y="117" fill="#e7ecf7" font-size="15" font-family="JetBrains Mono">F</text>
+      </svg>
+      <figcaption>F = Ā · (B̄ + D) · (C̄ + D). La señal D se bifurca hacia las dos puertas OR; las dos AND de dos entradas encadenan el producto de las tres sumas.</figcaption>
+    </figure>
+    <div class="res"><b>Recuento de puertas:</b> 3 × NOT, 2 × OR-2 y 2 × AND-2 (las dos AND en cascada equivalen al producto de tres términos con puertas de solo dos entradas).</div>
+  </div>
+  <div class="nav-q"><a href="#q41" onclick="go('q41');return false;">← Cuestión 4.1</a><a href="#q51" onclick="go('q51');return false;">Cuestión 5.1 →</a></div>
+</section>
+
+<!-- ================= Q5.1 ================= -->
+<section class="view" id="q51">
+  <div class="crumb">Inicio / Bloque 5 / Cuestión 5.1</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5</span> Cuestión 5.1 · Amenazas en ciberseguridad</div>
+  <div class="qmeta">A elegir entre 5.1 y 5.2 · <span class="pts">2 puntos (a: 1,0 · b: 0,5 · c: 0,5)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Describa en qué consisten las siguientes amenazas en ciberseguridad:</p>
+    <ol type="a">
+      <li>Virus y troyanos. <span class="pts">(1 punto)</span></li>
+      <li><i>Phishing</i>. <span class="pts">(0,5 puntos)</span></li>
+      <li><i>Spam</i>. <span class="pts">(0,5 puntos)</span></li>
+    </ol>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q5-1_ciberseguridad.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestión teórica del bloque de <b>sistemas informáticos emergentes</b>: clasificación del <b>malware</b> (software malicioso) y de las técnicas de <b>ingeniería social</b>, señalando qué caracteriza a cada amenaza, cómo se propaga y qué daño produce.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s51')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q5-1_ciberseguridad.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s51">
+    <h5>a) Virus y troyanos (1 pt)</h5>
+    <p><b>Virus informático:</b> programa malicioso que se <b>inserta o adjunta a otros archivos o programas legítimos</b> y que, cuando estos se ejecutan, se activa y se <b>reproduce a sí mismo</b>, infectando otros ficheros del sistema y propagándose a otros equipos (memorias USB, correo, descargas…). Necesita la intervención del usuario (ejecutar el fichero infectado) y sus efectos van desde ralentizar el equipo hasta corromper o borrar datos.</p>
+    <p><b>Troyano:</b> programa malicioso que se presenta <b>camuflado como software legítimo, útil o inofensivo</b> (un juego, una utilidad, un adjunto) para que el propio usuario lo instale. A diferencia del virus, <b>no se replica</b>: su objetivo es abrir una <b>puerta trasera</b> en el equipo que permite al atacante controlarlo remotamente, robar contraseñas y datos bancarios, espiar al usuario o instalar otro malware.</p>
+    <div class="res"><b>Diferencia esencial:</b> el virus se autorreplica infectando ficheros; el troyano engaña al usuario haciéndose pasar por software legítimo y no se replica, pero cede el control o los datos al atacante.</div>
+
+    <h5>b) Phishing (0,5 pt)</h5>
+    <p>Técnica de <b>ingeniería social</b> (no es propiamente un programa) en la que el atacante <b>suplanta la identidad</b> de una entidad de confianza —un banco, una administración, una empresa de mensajería— mediante correos electrónicos, SMS (<i>smishing</i>) o webs falsas que imitan a las originales. Su objetivo es que la víctima, creyendo estar en el sitio legítimo, <b>revele datos confidenciales</b>: contraseñas, números de tarjeta, credenciales de acceso. Se combate verificando remitentes y URLs, desconfiando de mensajes urgentes y usando autenticación en dos pasos.</p>
+
+    <h5>c) Spam (0,5 pt)</h5>
+    <p>Envío <b>masivo e indiscriminado de mensajes no solicitados</b>, generalmente de carácter publicitario, por correo electrónico u otros medios (mensajería, redes sociales). Aunque suele ser solo molesto, constituye una amenaza porque <b>satura</b> los servidores y buzones, consume recursos y tiempo, y con frecuencia es el <b>vehículo de otras amenazas</b>: enlaces de phishing, adjuntos con malware o fraudes. Se mitiga con filtros antispam y evitando publicar o ceder la dirección de correo.</p>
+  </div>
+  <div class="nav-q"><a href="#q42" onclick="go('q42');return false;">← Cuestión 4.2</a><a href="#q52" onclick="go('q52');return false;">Cuestión 5.2 →</a></div>
+</section>
+
+<!-- ================= Q5.2 ================= -->
+<section class="view" id="q52">
+  <div class="crumb">Inicio / Bloque 5 / Cuestión 5.2</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5</span> Cuestión 5.2 · Sistemas de control y función de transferencia</div>
+  <div class="qmeta">A elegir entre 5.1 y 5.2 · <span class="pts">2 puntos (a: 0,9 · b: 1,1)</span></div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type="a">
+      <li>Defina los siguientes elementos de un sistema de control: sensor, actuador, controlador. <span class="pts">(0,9 puntos)</span></li>
+      <li>Simplifique el diagrama de bloques y obtenga la función de transferencia Y/R. <span class="pts">(1,1 puntos)</span></li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 620 190" width="100%" style="max-width:620px">
+        <g stroke="#fb7185" stroke-width="2" fill="#161f33">
+          <rect x="90" y="45" width="70" height="44" rx="4"/>
+          <rect x="300" y="45" width="70" height="44" rx="4"/>
+          <rect x="440" y="45" width="70" height="44" rx="4"/>
+          <rect x="330" y="130" width="70" height="40" rx="4"/>
+          <circle cx="235" cy="67" r="15"/>
+        </g>
+        <g fill="#e7ecf7" font-size="15" font-family="Sora" font-weight="600" text-anchor="middle">
+          <text x="125" y="73">F</text><text x="335" y="73">C</text><text x="475" y="73">G</text><text x="365" y="156">H</text>
+          <text x="235" y="72" font-size="13">⊗</text>
+        </g>
+        <g stroke="#94a3c0" stroke-width="1.8" fill="none">
+          <path d="M30 67 H90 M160 67 H220 M250 67 H300 M370 67 H440 M510 67 H590"/>
+          <path d="M545 67 V150 H400"/>
+          <path d="M330 150 H235 V82"/>
+        </g>
+        <g fill="#94a3c0">
+          <path d="M88 67 l-9 -5 v10 z"/><path d="M218 67 l-9 -5 v10 z"/><path d="M298 67 l-9 -5 v10 z"/>
+          <path d="M438 67 l-9 -5 v10 z"/><path d="M588 67 l-9 -5 v10 z"/>
+          <path d="M235 84 l-5 9 h10 z" transform="rotate(180 235 88.5)"/>
+          <path d="M332 150 l9 -5 v10 z" transform="rotate(180 336.5 150)"/>
+          <circle cx="545" cy="67" r="3"/>
+        </g>
+        <g fill="#e7ecf7" font-size="13" font-family="JetBrains Mono">
+          <text x="36" y="58">R</text><text x="190" y="58">E'</text><text x="268" y="58">E</text><text x="398" y="58">U</text><text x="570" y="58">Y</text>
+          <text x="248" y="102" fill="#fb7185">−</text><text x="212" y="60" fill="#4ade80">+</text>
+        </g>
+      </svg>
+      <figcaption>Diagrama de bloques: R → F → comparador (−H·Y) → C → G → Y, con realimentación H desde la salida.</figcaption>
+    </figure>
+    <a class="enlace-pdf" href="pdf_tec_26_ext/pau2026ext_q5-2_control.pdf" target="_blank">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul>
+      <li>Definiciones de los <b>elementos de un lazo de control</b>: sensor (mide), controlador (decide) y actuador (ejecuta).</li>
+      <li><b>Álgebra de bloques</b>: reducción del lazo de realimentación negativa \( \dfrac{G_{directa}}{1+G_{directa}\,H} \) y bloques en serie (producto).</li>
+    </ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s52')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_26_ext/pau2026ext_q5-2_control.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s52">
+    <h5>a) Definiciones (0,9 pt)</h5>
+    <ul>
+      <li><b>Sensor:</b> elemento que <b>mide la magnitud física de la salida</b> del sistema (temperatura, posición, velocidad, nivel…) y la convierte en una señal —normalmente eléctrica— que puede compararse con la referencia. Es el elemento de <b>realimentación</b> del lazo (p. ej., un termómetro o una sonda PT100 en un horno).</li>
+      <li><b>Actuador:</b> elemento que <b>ejecuta la acción de control sobre el proceso</b>, transformando la señal (de baja potencia) que recibe del controlador en una actuación física capaz de modificar el sistema: motores, electroválvulas, resistencias calefactoras, cilindros neumáticos…</li>
+      <li><b>Controlador:</b> elemento que <b>compara la señal de referencia (consigna) con la medida del sensor</b>, calcula el error y, aplicando una ley de control (todo/nada, PID…), <b>genera la señal de mando</b> que se envía al actuador para llevar la salida al valor deseado (p. ej., un termostato o un autómata programable).</li>
+    </ul>
+    <div class="res"><b>En resumen:</b> el sensor <i>mide</i>, el controlador <i>decide</i> y el actuador <i>actúa</i> sobre el proceso.</div>
+
+    <h5>b) Simplificación y función de transferencia Y/R (1,1 pt)</h5>
+    <p><b>Paso 1 — Ecuaciones del diagrama.</b> Llamando E a la salida del comparador:</p>
+    <div class="formula">$$E = F\,R - H\,Y \qquad\quad Y = G\,U = G\,C\,E$$</div>
+    <p><b>Paso 2 — Sustituimos E:</b></p>
+    <div class="formula">$$Y = G\,C\,(F\,R - H\,Y)\;\;\Rightarrow\;\; Y + C\,G\,H\,Y = C\,G\,F\,R$$</div>
+    <p><b>Paso 3 — Despejamos Y/R:</b></p>
+    <div class="formula">$$Y\,(1 + C\,G\,H) = C\,G\,F\,R
+    \;\;\Rightarrow\;\;
+    \boxed{\;\dfrac{Y}{R}=\dfrac{F\,C\,G}{1 + C\,G\,H}\;}$$</div>
+    <p><i>Interpretación con álgebra de bloques:</i> el lazo C–G con realimentación negativa H se reduce a \( \frac{CG}{1+CGH} \); el bloque F, en serie y fuera del lazo, multiplica el resultado.</p>
+    <div class="res"><b>Y/R = F·C·G / (1 + C·G·H)</b></div>
+  </div>
+  <div class="nav-q"><a href="#q51" onclick="go('q51');return false;">← Cuestión 5.1</a><a href="#home" onclick="go('home');return false;">Inicio →</a></div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06A2 2 0 1 1 7.07 4.24l.06.06a1.7 1.7 0 0 0 1.87.34h0a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55h0a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v0a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></svg>
+  <span><b>Dpto. Tecnología del IES CASTILLA</b> · Prof. Enrique Torres Pérez</span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+
+
+</script>
+</body>
+</html>

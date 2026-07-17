@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Ordinaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Ordinaria</h1>
+    <div class="sub">Universidades Públicas de la Comunidad de Madrid · Curso 2024-2025 · Convocatoria Ordinaria · Examen resuelto y comentado</div>
+  </div>
+  <div class="pill">90 min · 2 pt/cuestión</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#4ade80"></span> Bloque 1 · Proyectos</div>
+<a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">C1 · Ampliación central eólica</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Bloque 2 · Materiales y fabricación</div>
+<a class="q" href="#q2-1" onclick="go('q2-1');return false;" id="l-q2-1">C2.1 · Ensayo Charpy</a>
+<a class="q" href="#q2-2" onclick="go('q2-2');return false;" id="l-q2-2">C2.2 · Diagrama Fe-C</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#fb7185"></span> Bloque 3 · Sistemas mecánicos</div>
+<a class="q" href="#q3-1" onclick="go('q3-1');return false;" id="l-q3-1">C3.1 · Viga: cortante y flector</a>
+<a class="q" href="#q3-2" onclick="go('q3-2');return false;" id="l-q3-2">C3.2 · Cilindro neumático</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Bloque 4 · Sistemas eléctricos y electrónicos</div>
+<a class="q" href="#q4-1" onclick="go('q4-1');return false;" id="l-q4-1">C4.1 · Circuito CA (R∥L∥C)</a>
+<a class="q" href="#q4-2" onclick="go('q4-2');return false;" id="l-q4-2">C4.2 · Multiplexor</a>
+</div>
+<div class="blk c5">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Bloque 5 · Sistemas informáticos y automáticos</div>
+<a class="q" href="#q5-1" onclick="go('q5-1');return false;" id="l-q5-1">C5.1 · IA y ciberseguridad</a>
+<a class="q" href="#q5-2" onclick="go('q5-2');return false;" id="l-q5-2">C5.2 · Diagrama de bloques</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Ordinaria</h2>
+    <p>Selecciona un bloque o una cuestión en la barra lateral. Cada cuestión incluye el enunciado oficial, una introducción con los conceptos que vamos a aplicar y la solución paso a paso. El Bloque 1 es obligatorio; en los Bloques 2 a 5 se responde <b>una de las dos</b> cuestiones (aquí se resuelven ambas).</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_tec_25_ord/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../documentos/tec/tecnologia_25_ord.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox="0 0 100 70" width="90"><line x1="50" y1="30" x2="50" y2="60" stroke="#94a3c0" stroke-width="3"/><circle cx="50" cy="28" r="3" fill="#4ade80"/><line x1="50" y1="28" x2="50" y2="8" stroke="#4ade80" stroke-width="3"/><line x1="50" y1="28" x2="68" y2="38" stroke="#4ade80" stroke-width="3"/><line x1="50" y1="28" x2="32" y2="38" stroke="#4ade80" stroke-width="3"/></svg></div>
+      <h3>Bloque 1 · Proyectos</h3>
+      <p>Sostenibilidad de una central eólica y metodologías ágiles.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">C1</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox="0 0 100 70" width="90"><line x1="14" y1="60" x2="86" y2="60" stroke="#94a3c0" stroke-width="2"/><line x1="14" y1="10" x2="14" y2="60" stroke="#94a3c0" stroke-width="2"/><path d="M14 55 C40 50 55 25 82 12" fill="none" stroke="#22d3ee" stroke-width="3"/></svg></div>
+      <h3>Bloque 2 · Materiales y fabricación</h3>
+      <p>Ensayo Charpy (resiliencia) y diagrama Fe-C.</p>
+      <div class="qlinks"><a class="k2" href="#q2-1" onclick="go('q2-1');return false;">C2.1</a><a class="k2" href="#q2-2" onclick="go('q2-2');return false;">C2.2</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox="0 0 100 70" width="90"><rect x="16" y="30" width="68" height="8" fill="#94a3c0"/><polygon points="20,38 12,52 28,52" fill="none" stroke="#22d3ee" stroke-width="2.5"/><polygon points="80,38 72,52 88,52" fill="none" stroke="#22d3ee" stroke-width="2.5"/><line x1="50" y1="10" x2="50" y2="30" stroke="#fb7185" stroke-width="3"/><polygon points="50,32 45,22 55,22" fill="#fb7185"/></svg></div>
+      <h3>Bloque 3 · Sistemas mecánicos</h3>
+      <p>Esfuerzos en una viga y cilindro neumático con rendimiento.</p>
+      <div class="qlinks"><a class="k3" href="#q3-1" onclick="go('q3-1');return false;">C3.1</a><a class="k3" href="#q3-2" onclick="go('q3-2');return false;">C3.2</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox="0 0 100 70" width="90"><path d="M10 40 q12 -26 24 0 t24 0 t24 0" fill="none" stroke="#a78bfa" stroke-width="3"/></svg></div>
+      <h3>Bloque 4 · Sistemas eléctricos y electrónicos</h3>
+      <p>Circuito RLC en paralelo y multiplexor 4:1.</p>
+      <div class="qlinks"><a class="k4" href="#q4-1" onclick="go('q4-1');return false;">C4.1</a><a class="k4" href="#q4-2" onclick="go('q4-2');return false;">C4.2</a></div>
+    </div>
+    <div class="card h5">
+      <div class="ico"><svg viewBox="0 0 100 70" width="90"><rect x="20" y="20" width="26" height="20" rx="3" fill="none" stroke="#22d3ee" stroke-width="2.5"/><circle cx="70" cy="30" r="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><line x1="70" y1="30" x2="70" y2="22" stroke="#f59e0b" stroke-width="2"/><line x1="70" y1="30" x2="76" y2="34" stroke="#f59e0b" stroke-width="2"/><line x1="46" y1="30" x2="58" y2="30" stroke="#94a3c0" stroke-width="2"/></svg></div>
+      <h3>Bloque 5 · Sistemas informáticos y automáticos</h3>
+      <p>Ética de la IA, ciberseguridad y diagramas de bloques.</p>
+      <div class="qlinks"><a class="k5" href="#q5-1" onclick="go('q5-1');return false;">C5.1</a><a class="k5" href="#q5-2" onclick="go('q5-2');return false;">C5.2</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1">
+  <div class="crumb">Inicio / BLOQUE 1</div>
+  <div class="qtitle"><span class="tag t1">BLOQUE 1</span> Cuestión 1 · Sostenibilidad y metodología del proyecto</div>
+  <div class="qmeta">Cuestión única y obligatoria · 2 puntos (a: 1,0 · b: 1,0)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Una empresa desarrolla un proyecto de <b>ampliación de una central eólica</b> con la instalación de 15 nuevos aerogeneradores, además de adecuar la infraestructura, actualizar los sistemas de control y monitorización y conectar los nuevos generadores a la red.</p><ol type="a"><li>Razone cuatro aspectos que deberían tenerse en cuenta para mejorar la sostenibilidad de la central en la zona. <span class="pts">(1 punto)</span></li><li>Para instalar un software de supervisión inteligente que visualice en tiempo real el rendimiento y reduzca los tiempos de inactividad, justifique qué metodología de trabajo sería la más conveniente. <span class="pts">(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestión de <b>tecnología sostenible</b> y <b>gestión de proyectos</b>. En a) buscamos criterios de sostenibilidad ambiental, social y de recursos; en b) elegimos una metodología de desarrollo software adecuada a un proyecto cambiante y con retroalimentación continua.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1">
+    <h5>a) Cuatro aspectos para mejorar la sostenibilidad (0,25 c/u)</h5><ul><li><b>Impacto ambiental sobre fauna y flora:</b> proteger los ecosistemas locales (aves, rutas migratorias) y el suelo.</li><li><b>Uso responsable de recursos y materiales:</b> materiales reciclables o de bajo impacto en fabricación, instalación y mantenimiento; minimizar el uso de recursos no renovables (agua).</li><li><b>Integración en el paisaje y la comunidad:</b> reducir el impacto visual y sonoro sobre la calidad de vida.</li><li><b>Eficiencia y almacenamiento de energía:</b> operación y mantenimiento eficientes y sistemas de almacenamiento para un suministro estable pese a la intermitencia del viento.</li></ul><div class="res"><b>Idea clave:</b> la sostenibilidad no es solo eficiencia energética: abarca impacto ambiental, recursos, integración social y optimización de la operación. (Válidas otras respuestas coherentes y justificadas.)</div><h5>b) Metodología más conveniente</h5><p>La metodología <b>Agile (ágil)</b> es la más adecuada para implantar el sistema de supervisión, por sus características:</p><ul><li><b>Flexibilidad y rapidez ante cambios:</b> los requisitos evolucionan con la retroalimentación de los usuarios; Agile se adapta sin interrumpir todo el desarrollo (ideal en sistemas complejos de monitoreo en tiempo real).</li><li><b>Colaboración:</b> comunicación constante entre desarrolladores, ingenieros y gestores, ajustando el sistema a las necesidades reales.</li><li><b>Entrega iterativa y eficiente:</b> pruebas y retroalimentación continuas garantizan fiabilidad desde las primeras etapas, clave para minimizar tiempos de inactividad.</li></ul><div class="res"><b>Metodología Agile</b> (desarrollo iterativo e incremental), por su flexibilidad, colaboración y entrega temprana de valor.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q2-1" onclick="go('q2-1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2-1">
+  <div class="crumb">Inicio / BLOQUE 2</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2</span> Cuestión 2.1 · Ensayo Charpy (resiliencia)</div>
+  <div class="qmeta">Opción A · 2 puntos</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En un ensayo <b>Charpy</b> con un péndulo de masa <b>m = 15 kg</b> y brazo de <b>75 cm</b>, se mide la resiliencia de una probeta de sección rectangular <b>10 × 12 mm²</b>. El péndulo cae desde una altura inicial <b>H = 60 cm</b> y se obtiene una resiliencia de <b>48,5 J/cm²</b>.</p><p>Determine, en cm, la <b>altura final</b> que alcanzó el péndulo tras romper la probeta. <span class="pts">(2 puntos)</span></p><p class="pts">Nota: g = 9,8 m/s².</p>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q2-1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La <b>resiliencia</b> es la energía absorbida por unidad de sección: \(\rho=E/S\). La energía absorbida es la diferencia de energías potenciales del péndulo entre la altura inicial y la final: \(E=mg(H-h)\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2-1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q2-1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2-1">
+    <h5>1) Energía absorbida por la probeta</h5><p>Sección: \(S=1\,\mathrm{cm}\times1{,}2\,\mathrm{cm}=1{,}2\ \mathrm{cm^2}\).</p><div class="formula">$$E=\rho\cdot S=48{,}5\cdot1{,}2=58{,}2\ \mathrm{J}$$</div><h5>2) Balance de energía del péndulo</h5><div class="formula">$$E_i=m\,g\,H=15\cdot9{,}8\cdot0{,}60=88{,}2\ \mathrm{J}$$</div><div class="formula">$$E_f=E_i-E=88{,}2-58{,}2=30{,}0\ \mathrm{J}$$</div><h5>3) Altura final</h5><div class="formula">$$E_f=m\,g\,h\Rightarrow h=\frac{30{,}0}{15\cdot9{,}8}=0{,}204\ \mathrm{m}$$</div><div class="res"><b>h = 20,4 cm</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q1" onclick="go('q1');return false;">← Anterior</a>
+    <a href="#q2-2" onclick="go('q2-2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2-2">
+  <div class="crumb">Inicio / BLOQUE 2</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2</span> Cuestión 2.2 · Diagrama Fe-C y perlita</div>
+  <div class="qmeta">Opción B · 2 puntos (a·b·c·d: 0,5 c/u)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>A la vista del diagrama de fases simplificado hierro–carbono:</p><ol type="a"><li>Justifique si las aleaciones con <b>1,5 %</b> y <b>3,0 %</b> de C son aceros o fundiciones. <span class="pts">(0,5)</span></li><li>Indique la proporción (% en peso) de Fe y C de la aleación de composición <b>eutectoide</b>. ¿Qué fases se forman en enfriamiento para esa composición? <span class="pts">(0,5)</span></li><li>Determine, a temperatura ambiente, la proporción de las fases de equilibrio para la composición eutectoide e indique el constituyente resultante. <span class="pts">(0,5)</span></li><li>Dibuje esquemáticamente la microestructura de equilibrio a esa temperatura. <span class="pts">(0,5)</span></li></ol>
+    <figure class="fig"><figure class="fig"><svg viewBox="0 0 620 400" width="100%" style="max-width:620px" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="360.0" x2="580" y2="360.0" stroke="#26324e" stroke-width="1"/><text x="62" y="364.0" fill="#94a3c0" font-size="13" text-anchor="end">300</text><line x1="70" y1="306.7" x2="580" y2="306.7" stroke="#26324e" stroke-width="1"/><text x="62" y="310.7" fill="#94a3c0" font-size="13" text-anchor="end">500</text><line x1="70" y1="253.3" x2="580" y2="253.3" stroke="#26324e" stroke-width="1"/><text x="62" y="257.3" fill="#94a3c0" font-size="13" text-anchor="end">700</text><line x1="70" y1="200.0" x2="580" y2="200.0" stroke="#26324e" stroke-width="1"/><text x="62" y="204.0" fill="#94a3c0" font-size="13" text-anchor="end">900</text><line x1="70" y1="146.7" x2="580" y2="146.7" stroke="#26324e" stroke-width="1"/><text x="62" y="150.7" fill="#94a3c0" font-size="13" text-anchor="end">1.100</text><line x1="70" y1="93.3" x2="580" y2="93.3" stroke="#26324e" stroke-width="1"/><text x="62" y="97.3" fill="#94a3c0" font-size="13" text-anchor="end">1.300</text><line x1="70" y1="40.0" x2="580" y2="40.0" stroke="#26324e" stroke-width="1"/><text x="62" y="44.0" fill="#94a3c0" font-size="13" text-anchor="end">1.500</text><line x1="138.5" y1="40" x2="138.5" y2="360" stroke="#26324e" stroke-width="1"/><text x="138.5" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">0,9</text><line x1="222.2" y1="40" x2="222.2" y2="360" stroke="#26324e" stroke-width="1"/><text x="222.2" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">2,0</text><line x1="298.4" y1="40" x2="298.4" y2="360" stroke="#26324e" stroke-width="1"/><text x="298.4" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">3,0</text><line x1="397.3" y1="40" x2="397.3" y2="360" stroke="#26324e" stroke-width="1"/><text x="397.3" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">4,3</text><line x1="450.6" y1="40" x2="450.6" y2="360" stroke="#26324e" stroke-width="1"/><text x="450.6" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">5,0</text><line x1="526.7" y1="40" x2="526.7" y2="360" stroke="#26324e" stroke-width="1"/><text x="526.7" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">6,0</text><line x1="580.0" y1="40" x2="580.0" y2="360" stroke="#26324e" stroke-width="1"/><text x="580.0" y="378" fill="#94a3c0" font-size="13" text-anchor="middle">6,7</text><line x1="70" y1="40" x2="70" y2="360" stroke="#94a3c0" stroke-width="1.8"/><line x1="70" y1="360" x2="580" y2="360" stroke="#94a3c0" stroke-width="1.8"/><text x="70" y="30" fill="#e7ecf7" font-size="14" font-weight="700" text-anchor="middle">T ºC</text><text x="325" y="398" fill="#e7ecf7" font-size="14" font-weight="700" text-anchor="middle">% C en peso</text><line x1="70.0" y1="40.0" x2="397.3" y2="146.7" stroke="#22d3ee" stroke-width="2.6"/><line x1="397.3" y1="146.7" x2="580.0" y2="40.0" stroke="#22d3ee" stroke-width="2.6"/><line x1="70.0" y1="40.0" x2="222.2" y2="146.7" stroke="#f59e0b" stroke-width="2.6"/><line x1="222.2" y1="146.7" x2="580.0" y2="146.7" stroke="#e7ecf7" stroke-width="2.6"/><line x1="222.2" y1="146.7" x2="138.5" y2="253.3" stroke="#f59e0b" stroke-width="2.6"/><line x1="70.0" y1="200.0" x2="138.5" y2="253.3" stroke="#4ade80" stroke-width="2.6"/><line x1="70.0" y1="253.3" x2="580.0" y2="253.3" stroke="#e7ecf7" stroke-width="2.6"/><line x1="70.0" y1="200.0" x2="71.5" y2="253.3" stroke="#4ade80" stroke-width="1.8"/><line x1="138.5" y1="40" x2="138.5" y2="360" stroke="#fb7185" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="184.2" y1="40" x2="184.2" y2="360" stroke="#4ade80" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="298.4" y1="40" x2="298.4" y2="360" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="397.3" cy="146.7" r="4.5" fill="#22d3ee"/><text x="405.3" y="140.7" fill="#22d3ee" font-size="12" font-weight="700">E (4,3%)</text><circle cx="138.5" cy="253.3" r="4.5" fill="#fb7185"/><text x="124.5" y="249.3" fill="#fb7185" font-size="12" font-weight="700">S</text><text x="184.2" y="52" fill="#4ade80" font-size="11" text-anchor="middle">1,5%</text><text x="298.4" y="52" fill="#a78bfa" font-size="11" text-anchor="middle">3,0%</text><text x="313.6" y="66.7" fill="#22d3ee" font-size="12" text-anchor="middle">L</text><text x="184.2" y="93.3" fill="#f59e0b" font-size="12" text-anchor="middle">γ + L</text><text x="111.9" y="160.0" fill="#4ade80" font-size="12" text-anchor="middle">γ (austenita)</text><text x="420.2" y="200.0" fill="#e7ecf7" font-size="12" text-anchor="middle">γ + Fe₃C</text><text x="344.0" y="306.7" fill="#94a3c0" font-size="12" text-anchor="middle">perlita + Fe₃C</text><text x="96.6" y="290.7" fill="#94a3c0" font-size="12" text-anchor="middle">α+P</text></svg><figcaption>Diagrama Fe-C simplificado. E = eutéctico (4,3 % C); S = eutectoide (0,9 % C, 700 °C). Marcadas las aleaciones de 1,5 % (acero) y 3,0 % (fundición).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q2-2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Interpretamos el diagrama Fe-C: la frontera acero/fundición está en <b>2,0 % C</b>. Para las proporciones de fases aplicamos la <b>regla de la palanca</b> entre ferrita (0 % C) y cementita (6,67 % C).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2-2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q2-2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2-2">
+    <h5>a) ¿Aceros o fundiciones?</h5><p>Los <b>aceros</b> tienen entre 0,025 % y <b>2,0 %</b> de C; las <b>fundiciones</b>, entre 2,0 % y 6,67 %.</p><ul><li><b>1,5 % C → acero</b> (hipereutectoide, pues 1,5 % &gt; 0,9 %).</li><li><b>3,0 % C → fundición</b> (supera el 2,0 %).</li></ul><div class="res"><b>1,5 % C: acero hipereutectoide · 3,0 % C: fundición.</b></div><h5>b) Composición eutectoide y fases</h5><p>La composición eutectoide es <b>0,89 % C</b> (≈ 0,9 %) y <b>99,11 % Fe</b>. En enfriamiento, a partir de la austenita (Fe γ, FCC) de esa composición se produce la reacción eutectoide y se forman:</p><div class="res"><b>Ferrita (α, Fe BCC) + cementita (Fe₃C).</b>  Composición: 0,89 % C / 99,11 % Fe.</div><h5>c) Proporción de fases a temperatura ambiente</h5><p>Regla de la palanca entre ferrita (0 % C) y cementita (6,67 % C) para 0,89 % C:</p><div class="formula">$$\%\,\text{ferrita}=\frac{6{,}67-0{,}89}{6{,}67-0}\cdot100=86{,}7\%$$</div><div class="formula">$$\%\,\text{cementita}=\frac{0{,}89-0}{6{,}67-0}\cdot100=13{,}3\%$$</div><div class="res"><b>86,7 % ferrita y 13,3 % cementita.</b> El constituyente resultante de la reacción eutectoide es la <b>perlita</b>.</div><h5>d) Microestructura de equilibrio (perlita)</h5><p>La perlita está formada por <b>láminas alternadas</b> de ferrita (clara) y cementita (oscura):</p><figure class="fig"><svg viewBox="0 0 460 220" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="30" width="340" height="150" fill="#f2f5fb" stroke="#94a3c0" stroke-width="1.5"/><rect x="74" y="36" width="9" height="138" fill="#1f2a44"/><rect x="100" y="36" width="9" height="138" fill="#1f2a44"/><rect x="126" y="36" width="9" height="138" fill="#1f2a44"/><rect x="152" y="36" width="9" height="138" fill="#1f2a44"/><rect x="178" y="36" width="9" height="138" fill="#1f2a44"/><rect x="204" y="36" width="9" height="138" fill="#1f2a44"/><rect x="230" y="36" width="9" height="138" fill="#1f2a44"/><rect x="256" y="36" width="9" height="138" fill="#1f2a44"/><rect x="282" y="36" width="9" height="138" fill="#1f2a44"/><rect x="308" y="36" width="9" height="138" fill="#1f2a44"/><rect x="334" y="36" width="9" height="138" fill="#1f2a44"/><rect x="360" y="36" width="9" height="138" fill="#1f2a44"/><rect x="386" y="36" width="9" height="138" fill="#1f2a44"/><line x1="100" y1="26" x2="100" y2="48" stroke="#e7ecf7" stroke-width="1"/><text x="115" y="22" fill="#e7ecf7" font-size="12">Cementita (Fe₃C, oscura)</text><line x1="126" y1="184" x2="126" y2="162" stroke="#e7ecf7" stroke-width="1"/><text x="140" y="196" fill="#e7ecf7" font-size="12">Ferrita (α, clara)</text><text x="408" y="109.0" fill="#4ade80" font-size="13" font-weight="700">Perlita</text></svg><figcaption>Perlita: láminas alternadas de ferrita (α, clara) y cementita (Fe₃C, oscura).</figcaption></figure>
+  </div>
+  <div class="nav-q">
+    <a href="#q2-1" onclick="go('q2-1');return false;">← Anterior</a>
+    <a href="#q3-1" onclick="go('q3-1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3-1">
+  <div class="crumb">Inicio / BLOQUE 3</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3</span> Cuestión 3.1 · Reacciones y diagramas de esfuerzos</div>
+  <div class="qmeta">Opción A · 2 puntos (a: 0,5 · b: 1,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>De la viga que se muestra en la figura:</p><ol type="a"><li>Calcule las reacciones en los apoyos. <span class="pts">(0,5)</span></li><li>Represente los diagramas de esfuerzo cortante y momento flector. <span class="pts">(1,5)</span></li></ol><p class="pts">Viga biapoyada de 10 m: 1000 N ↓ a 4 m de A y 200 N ↓ a 6 m de A (4 m de B).</p>
+    <figure class="fig"><figure class="fig"><svg viewBox="0 0 640 260" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg"><rect x="70" y="155" width="500" height="16" fill="#334155" stroke="#94a3c0"/><polygon points="70,171 56,195 84,195" fill="none" stroke="#22d3ee" stroke-width="2.2"/><text x="70" y="147" fill="#e7ecf7" font-size="15" font-weight="700" text-anchor="middle">A</text><polygon points="570,171 556,193 584,193" fill="none" stroke="#22d3ee" stroke-width="2.2"/><circle cx="562" cy="198" r="4" fill="none" stroke="#22d3ee" stroke-width="1.6"/><circle cx="578" cy="198" r="4" fill="none" stroke="#22d3ee" stroke-width="1.6"/><text x="570" y="147" fill="#e7ecf7" font-size="15" font-weight="700" text-anchor="middle">B</text><line x1="270.0" y1="97" x2="270.0" y2="155" stroke="#fb7185" stroke-width="2.6"/><polygon points="270.0,157 264.0,143 276.0,143" fill="#fb7185"/><text x="270.0" y="91" fill="#fb7185" font-size="14" font-weight="700" text-anchor="middle">1000 N</text><line x1="370.0" y1="97" x2="370.0" y2="155" stroke="#fb7185" stroke-width="2.6"/><polygon points="370.0,157 364.0,143 376.0,143" fill="#fb7185"/><text x="370.0" y="91" fill="#fb7185" font-size="14" font-weight="700" text-anchor="middle">200 N</text><line x1="70" y1="225" x2="270.0" y2="225" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="220" x2="70" y2="230" stroke="#94a3c0"/><line x1="270.0" y1="220" x2="270.0" y2="230" stroke="#94a3c0"/><text x="170.0" y="219" fill="#e7ecf7" font-size="13" text-anchor="middle">4 m</text><line x1="370.0" y1="225" x2="570" y2="225" stroke="#94a3c0" stroke-width="1.2"/><line x1="370.0" y1="220" x2="370.0" y2="230" stroke="#94a3c0"/><line x1="570" y1="220" x2="570" y2="230" stroke="#94a3c0"/><text x="470.0" y="219" fill="#e7ecf7" font-size="13" text-anchor="middle">4 m</text><line x1="70" y1="253" x2="570" y2="253" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="248" x2="70" y2="258" stroke="#94a3c0"/><line x1="570" y1="248" x2="570" y2="258" stroke="#94a3c0"/><text x="320.0" y="247" fill="#e7ecf7" font-size="13" text-anchor="middle">10 m</text></svg><figcaption>Viga biapoyada (A fijo, B móvil), luz 10 m. Cargas: 1000 N ↓ a 4 m de A y 200 N ↓ a 6 m de A.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q3-1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Viga <b>isostática</b> biapoyada. Aplicamos \(\sum F_y=0\) y \(\sum M=0\) para las reacciones y construimos el cortante y el flector por tramos.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3-1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q3-1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3-1">
+    <h5>a) Reacciones</h5><div class="formula">$$\sum F_y=0:\;R_A+R_B=1000+200=1200\ \mathrm{N}$$</div><div class="formula">$$\sum M_A=0:\;1000\cdot4+200\cdot6-R_B\cdot10=0\Rightarrow R_B=520\ \mathrm{N}$$</div><div class="formula">$$R_A=1200-520=680\ \mathrm{N}$$</div><div class="res"><b>R<sub>A</sub> = 680 N ↑ · R<sub>B</sub> = 520 N ↑</b></div><h5>b) Cortante y flector</h5><div class="formula">$$V_{0\text{-}4}=+680;\quad V_{4\text{-}6}=680-1000=-320;\quad V_{6\text{-}10}=-320-200=-520\ \mathrm{N}$$</div><div class="formula">$$M(4)=680\cdot4=2720;\quad M(6)=-320\cdot6+4000=2080;\quad M(10)=0\ \mathrm{N\cdot m}$$</div><figure class="fig"><svg viewBox="0 0 640 420" width="100%" style="max-width:640px" xmlns="http://www.w3.org/2000/svg"><text x="70" y="24" fill="#e7ecf7" font-size="14" font-weight="700">Esfuerzo cortante V (N)</text><line x1="70" y1="64" x2="580" y2="64" stroke="#94a3c0" stroke-width="1.4"/><polygon points="70.0,64 70.0,30.0 270.0,30.0 270.0,64" fill="#22d3ee" fill-opacity="0.28" stroke="#22d3ee" stroke-width="2"/><text x="170" y="24" fill="#22d3ee" font-size="12" text-anchor="middle">+680</text><polygon points="270.0,64 270.0,80.0 370.0,80.0 370.0,64" fill="#fb7185" fill-opacity="0.28" stroke="#fb7185" stroke-width="2"/><text x="320" y="96" fill="#fb7185" font-size="12" text-anchor="middle">-320</text><polygon points="370.0,64 370.0,90.0 570.0,90.0 570.0,64" fill="#f59e0b" fill-opacity="0.28" stroke="#f59e0b" stroke-width="2"/><text x="470" y="106" fill="#f59e0b" font-size="12" text-anchor="middle">-520</text><text x="70" y="120" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><text x="270" y="120" fill="#94a3c0" font-size="11" text-anchor="middle">4m</text><text x="370" y="120" fill="#94a3c0" font-size="11" text-anchor="middle">6m</text><text x="570" y="120" fill="#94a3c0" font-size="11" text-anchor="middle">B</text><text x="70" y="180" fill="#e7ecf7" font-size="14" font-weight="700">Momento flector M (N·m)</text><line x1="70" y1="390" x2="580" y2="390" stroke="#94a3c0" stroke-width="1.4"/><polygon points="70.0,390 70,390.0 270,232.2 370,269.4 570,390.0 570.0,390" fill="#a78bfa" fill-opacity="0.25" stroke="#a78bfa" stroke-width="2"/><circle cx="70" cy="390.0" r="3" fill="#a78bfa"/><text x="270" y="226" fill="#a78bfa" font-size="12" text-anchor="middle">2720</text><circle cx="270" cy="232.2" r="3" fill="#a78bfa"/><text x="370" y="263" fill="#a78bfa" font-size="12" text-anchor="middle">2080</text><circle cx="370" cy="269.4" r="3" fill="#a78bfa"/><circle cx="570" cy="390.0" r="3" fill="#a78bfa"/><text x="70" y="408" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><text x="270" y="408" fill="#94a3c0" font-size="11" text-anchor="middle">4m</text><text x="370" y="408" fill="#94a3c0" font-size="11" text-anchor="middle">6m</text><text x="570" y="408" fill="#94a3c0" font-size="11" text-anchor="middle">B</text></svg><figcaption>Cortante (+680 / −320 / −520 N) y flector (máximo 2720 N·m bajo la carga de 1000 N, en x = 4 m).</figcaption></figure><div class="res"><b>Cortante:</b> +680 / −320 / −520 N. <b>Flector máx. = 2720 N·m en x = 4 m</b> (2080 N·m en x = 6 m).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2-2" onclick="go('q2-2');return false;">← Anterior</a>
+    <a href="#q3-2" onclick="go('q3-2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3-2">
+  <div class="crumb">Inicio / BLOQUE 3</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3</span> Cuestión 3.2 · Cilindro neumático con rendimiento</div>
+  <div class="qmeta">Opción B · 2 puntos (a: 0,75 · b: 0,75 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Un cilindro de simple efecto produce un trabajo de <b>300 J</b> con una presión de aire de <b>5 bar</b> (1 bar = 10⁵ N/m²). Contiene un muelle de resistencia <b>500 N</b>, la carrera es <b>100 mm</b> y el <b>rendimiento</b> del sistema de compresión es del <b>80 %</b>.</p><ol type="a"><li>Calcule la fuerza total necesaria para producir dicho trabajo. <span class="pts">(0,75)</span></li><li>Obtenga el diámetro del cilindro. <span class="pts">(0,75)</span></li><li>Enumere los tres elementos de una unidad de mantenimiento y dibuje su símbolo. <span class="pts">(0,5)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q3-2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>El trabajo útil es \(W=F\cdot L\). A la fuerza del trabajo se le suma la del muelle y se corrige por el rendimiento. Con la presión obtenemos la sección y el diámetro.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3-2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q3-2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3-2">
+    <h5>a) Fuerza total</h5><div class="formula">$$F=\frac{W}{L}=\frac{300}{0{,}1}=3000\ \mathrm{N}$$</div><p>Añadiendo el muelle y el rendimiento del 80 %:</p><div class="formula">$$F_{tot}=\frac{3000+500}{0{,}8}=4375\ \mathrm{N}$$</div><div class="res"><b>F<sub>tot</sub> = 4375 N</b></div><h5>b) Diámetro del cilindro</h5><div class="formula">$$S=\frac{F_{tot}}{P}=\frac{4375}{5\cdot10^{5}}=8{,}75\cdot10^{-3}\ \mathrm{m^2}$$</div><div class="formula">$$D=\sqrt{\frac{4S}{\pi}}=0{,}106\ \mathrm{m}$$</div><div class="res"><b>D ≈ 0,106 m = 106 mm</b></div><h5>c) Unidad de mantenimiento (F-R-L)</h5><ul><li><b>Filtro:</b> elimina impurezas y agua condensada del aire.</li><li><b>Regulador de presión</b> (con manómetro): mantiene constante la presión de trabajo.</li><li><b>Lubricador:</b> añade aceite micronizado para lubricar los elementos móviles.</li></ul><figure class="fig"><svg viewBox="0 0 460 190" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg"><polygon points="230,25 425,95 230,165 35,95" fill="none" stroke="#94a3c0" stroke-width="1.4" stroke-dasharray="6 5"/><line x1="20" y1="95" x2="440" y2="95" stroke="#e7ecf7" stroke-width="2"/><polygon points="100,71 122,95 100,119 78,95" fill="none" stroke="#22d3ee" stroke-width="2"/><line x1="90" y1="89" x2="100" y2="105" stroke="#22d3ee" stroke-width="1.6"/><line x1="110" y1="89" x2="100" y2="105" stroke="#22d3ee" stroke-width="1.6"/><line x1="100" y1="119" x2="100" y2="129" stroke="#22d3ee" stroke-width="1.6"/><text x="100" y="145" fill="#22d3ee" font-size="12" text-anchor="middle">Filtro</text><polygon points="230,71 252,95 230,119 208,95" fill="none" stroke="#f59e0b" stroke-width="2"/><line x1="216" y1="109" x2="246" y2="77" stroke="#f59e0b" stroke-width="1.8"/><polygon points="246,77 238,79 242,86" fill="#f59e0b"/><line x1="230" y1="71" x2="230" y2="55" stroke="#f59e0b" stroke-width="1.4"/><circle cx="230" cy="47" r="8" fill="none" stroke="#f59e0b" stroke-width="1.6"/><text x="230" y="145" fill="#f59e0b" font-size="12" text-anchor="middle">Regulador</text><polygon points="360,71 382,95 360,119 338,95" fill="none" stroke="#a78bfa" stroke-width="2"/><path d="M 360 83 q 7 10 0 16 q -7 -6 0 -16 Z" fill="#a78bfa"/><line x1="346" y1="81" x2="374" y2="81" stroke="#a78bfa" stroke-width="1.4"/><text x="360" y="145" fill="#a78bfa" font-size="12" text-anchor="middle">Lubricador</text></svg><figcaption>Símbolo de la unidad de mantenimiento (Filtro–Regulador–Lubricador), englobados por el rombo discontinuo.</figcaption></figure>
+  </div>
+  <div class="nav-q">
+    <a href="#q3-1" onclick="go('q3-1');return false;">← Anterior</a>
+    <a href="#q4-1" onclick="go('q4-1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4-1">
+  <div class="crumb">Inicio / BLOQUE 4</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4</span> Cuestión 4.1 · Circuito R∥L∥C en corriente alterna</div>
+  <div class="qmeta">Opción A · 2 puntos (a·b·c·d: 0,5 c/u)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Del circuito de la figura, determine:</p><ol type="a"><li>Valor de la autoinducción L y la capacidad C. <span class="pts">(0,5)</span></li><li>Valor eficaz de la corriente por R, L y C. <span class="pts">(0,5)</span></li><li>Potencia activa, reactiva y aparente en el generador. <span class="pts">(0,5)</span></li><li>Valor eficaz de la corriente por el generador. <span class="pts">(0,5)</span></li></ol><p class="pts">R = 10 Ω; X<sub>L</sub> = 10 Ω; X<sub>C</sub> = 5 Ω; e(t) = 100·√2·sen(60·t) V.</p>
+    <figure class="fig"><figure class="fig"><svg viewBox="0 0 560 300" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="60" x2="480" y2="60" stroke="#e7ecf7" stroke-width="2"/><line x1="70" y1="240" x2="480" y2="240" stroke="#e7ecf7" stroke-width="2"/><line x1="70" y1="60" x2="70" y2="120" stroke="#e7ecf7" stroke-width="2"/><line x1="70" y1="180" x2="70" y2="240" stroke="#e7ecf7" stroke-width="2"/><circle cx="70" cy="150" r="30" fill="none" stroke="#22d3ee" stroke-width="2"/><path d="M 55 150 q 7.5 -16 15 0 q 7.5 16 15 0" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="28" y="155" fill="#e7ecf7" font-size="16" font-weight="700">E</text><text x="28" y="118" fill="#e7ecf7" font-size="15">+</text><line x1="270" y1="60" x2="270" y2="115" stroke="#e7ecf7" stroke-width="2"/><path d="M 270 115 l 10 8 l -20 12 l 20 12 l -20 12 l 10 8" fill="none" stroke="#f59e0b" stroke-width="2.4"/><line x1="270" y1="185" x2="270" y2="240" stroke="#e7ecf7" stroke-width="2"/><text x="248" y="152" fill="#f59e0b" font-size="16" font-weight="700">R</text><line x1="380" y1="60" x2="380" y2="120" stroke="#e7ecf7" stroke-width="2"/><path d="M 380 120 a 8 8 0 1 1 0 16 a 8 8 0 1 1 0 16 a 8 8 0 1 1 0 16 a 8 8 0 1 1 0 16" fill="none" stroke="#a78bfa" stroke-width="2.4"/><line x1="380" y1="184" x2="380" y2="240" stroke="#e7ecf7" stroke-width="2"/><text x="358" y="156" fill="#a78bfa" font-size="16" font-weight="700">L</text><line x1="480" y1="60" x2="480" y2="142" stroke="#e7ecf7" stroke-width="2"/><line x1="466" y1="142" x2="494" y2="142" stroke="#4ade80" stroke-width="2.6"/><line x1="466" y1="158" x2="494" y2="158" stroke="#4ade80" stroke-width="2.6"/><line x1="480" y1="158" x2="480" y2="240" stroke="#e7ecf7" stroke-width="2"/><text x="490" y="156" fill="#4ade80" font-size="16" font-weight="700">C</text><circle cx="270" cy="60" r="3.5" fill="#e7ecf7"/><circle cx="270" cy="240" r="3.5" fill="#e7ecf7"/><circle cx="380" cy="60" r="3.5" fill="#e7ecf7"/><circle cx="380" cy="240" r="3.5" fill="#e7ecf7"/><circle cx="480" cy="60" r="3.5" fill="#e7ecf7"/><circle cx="480" cy="240" r="3.5" fill="#e7ecf7"/></svg><figcaption>Generador E con R, L y C conectados <b>en paralelo</b> (misma tensión E en las tres ramas).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q4-1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>R, L y C están <b>en paralelo</b>: soportan la misma tensión E. De la expresión temporal obtenemos ω y E<sub>ef</sub>; con \(X_L=\omega L\) y \(X_C=1/(\omega C)\) hallamos L y C; luego la ley de Ohm en cada rama y la <b>suma fasorial</b> de corrientes.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4-1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q4-1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4-1">
+    <h5>a) Autoinducción L y capacidad C</h5><p>De \(e(t)=100\sqrt2\,\mathrm{sen}(60t)\): \(\omega=60\ \mathrm{rad/s}\).</p><div class="formula">$$L=\frac{X_L}{\omega}=\frac{10}{60}=0{,}1666\ \mathrm{H}=166{,}6\ \mathrm{mH}$$</div><div class="formula">$$C=\frac{1}{\omega X_C}=\frac{1}{60\cdot5}=3{,}33\cdot10^{-3}\ \mathrm{F}=3{,}33\ \mathrm{mF}$$</div><h5>b) Corrientes eficaces (E<sub>ef</sub> = 100 V)</h5><p>Valor eficaz de la fem: \(E_{ef}=\dfrac{100\sqrt2}{\sqrt2}=100\ \mathrm{V}\).</p><div class="formula">$$I_R=\frac{E}{R}=10\ \mathrm{A};\quad I_L=\frac{E}{X_L}=10\ \mathrm{A};\quad I_C=\frac{E}{X_C}=\frac{100}{5}=20\ \mathrm{A}$$</div><div class="res"><b>I<sub>R</sub> = 10 A · I<sub>L</sub> = 10 A · I<sub>C</sub> = 20 A</b></div><h5>c) Potencias del generador</h5><div class="formula">$$P=R\,I_R^{2}=10\cdot10^{2}=1000\ \mathrm{W}$$</div><div class="formula">$$Q=X_L I_L^{2}-X_C I_C^{2}=10\cdot10^{2}-5\cdot20^{2}=1000-2000=-1000\ \mathrm{var}$$</div><div class="formula">$$S=\sqrt{P^{2}+Q^{2}}=\sqrt{1000^{2}+(-1000)^{2}}=1414{,}2\ \mathrm{VA}$$</div><div class="res"><b>P = 1000 W · Q = −1000 var (capacitiva) · S = 1414,2 VA</b> (cos φ = 0,707).</div><h5>d) Corriente por el generador</h5><p>Suma fasorial (E en el origen): \(\bar I_R=10\angle0°\), \(\bar I_L=10\angle{-}90°=-j10\), \(\bar I_C=20\angle90°=+j20\).</p><div class="formula">$$\bar I_E=10-j10+j20=10+j10=14{,}14\angle{+}45°\ \mathrm{A}$$</div><figure class="fig"><svg viewBox="0 0 360 250" width="100%" style="max-width:360px" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="130" x2="290" y2="130" stroke="#94a3c0" stroke-width="1.2"/><line x1="150" y1="20" x2="150" y2="220" stroke="#94a3c0" stroke-width="1.2"/><line x1="150" y1="130" x2="192" y2="130" stroke="#f59e0b" stroke-width="2.6"/><circle cx="192" cy="130" r="3.5" fill="#f59e0b"/><text x="198" y="134" fill="#f59e0b" font-size="12" font-weight="700">I_R=10 A</text><line x1="150" y1="130" x2="150" y2="172" stroke="#a78bfa" stroke-width="2.6"/><circle cx="150" cy="172" r="3.5" fill="#a78bfa"/><text x="156" y="186" fill="#a78bfa" font-size="12" font-weight="700">I_L=10 A</text><line x1="150" y1="130" x2="150" y2="46" stroke="#4ade80" stroke-width="2.6"/><circle cx="150" cy="46" r="3.5" fill="#4ade80"/><text x="156" y="46" fill="#4ade80" font-size="12" font-weight="700">I_C=20 A</text><line x1="150" y1="130" x2="192" y2="88" stroke="#22d3ee" stroke-width="2.6"/><circle cx="192" cy="88" r="3.5" fill="#22d3ee"/><text x="198" y="92" fill="#22d3ee" font-size="12" font-weight="700">I_E=14,14 A</text><text x="190" y="122" fill="#e7ecf7" font-size="11">φ = +45º</text><text x="268" y="124" fill="#94a3c0" font-size="11">Re (E)</text></svg><figcaption>Diagrama fasorial: I<sub>C</sub> adelanta 90°, I<sub>L</sub> retrasa 90°; como I<sub>C</sub> &gt; I<sub>L</sub>, la corriente total adelanta 45° (carácter capacitivo).</figcaption></figure><div class="res"><b>I<sub>E</sub> = 14,14 A</b> (adelantada 45° respecto de E).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3-2" onclick="go('q3-2');return false;">← Anterior</a>
+    <a href="#q4-2" onclick="go('q4-2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4-2">
+  <div class="crumb">Inicio / BLOQUE 4</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4</span> Cuestión 4.2 · Multiplexor 4:1 y cronograma</div>
+  <div class="qmeta">Opción B · 2 puntos (a: 0,75 · b: 1,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Un <b>multiplexor de 4 entradas</b> de datos (I0, I1, I2, I3) y dos de control (S0, S1, de menor a mayor peso). En los datos se conectan A, B, C, D y en el control las señales X (→S0) e Y (→S1).</p><ol type="a"><li>Describa el funcionamiento de un multiplexor. <span class="pts">(0,75)</span></li><li>Con A=0, B=1, C=1, D=0, complete el cronograma de la salida según X e Y, justificándolo. <span class="pts">(1,25)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q4-2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Un multiplexor selecciona una de sus entradas de datos según el valor binario de las entradas de control y la lleva a la salida. Aquí el selector es <b>sel = 2·Y + X</b> (Y es el bit de mayor peso).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4-2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q4-2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4-2">
+    <h5>a) Funcionamiento del multiplexor</h5><p>Un <b>multiplexor (MUX)</b> es un circuito <b>combinacional</b> con varias entradas de datos, unas entradas de <b>control (selección)</b> y una <b>única salida</b>. Según el valor binario de las entradas de control, conecta una (y solo una) de las entradas de datos a la salida. Con 2 líneas de control se seleccionan \(2^2=4\) entradas.</p><div class="res"><b>MUX:</b> selecciona, mediante las señales de control, cuál de las entradas de datos aparece en su salida única.</div><h5>b) Cronograma de la salida</h5><p>Con X = S0 (peso 1) e Y = S1 (peso 2), la entrada seleccionada es <b>sel = 2·Y + X</b>:</p><table class="dat"><thead><tr><th>Y X</th><th>sel</th><th>Entrada</th><th>Valor → F</th></tr></thead><tbody><tr><td>0 0</td><td>0</td><td>I0 = A</td><td>0</td></tr><tr><td>0 1</td><td>1</td><td>I1 = B</td><td>1</td></tr><tr><td>1 0</td><td>2</td><td>I2 = C</td><td>1</td></tr><tr><td>1 1</td><td>3</td><td>I3 = D</td><td>0</td></tr></tbody></table><p>Aplicando la tabla a los valores de X e Y de cada intervalo se obtiene la salida F:</p><figure class="fig"><svg viewBox="0 0 720 380" width="100%" style="max-width:720px" xmlns="http://www.w3.org/2000/svg"><rect x="110" y="40" width="90" height="150" rx="4" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="155.0" y="30" fill="#22d3ee" font-size="13" font-weight="700" text-anchor="middle">MUX 4:1</text><line x1="70" y1="66" x2="110" y2="66" stroke="#e7ecf7" stroke-width="1.6"/><text x="64" y="70" fill="#e7ecf7" font-size="12" text-anchor="end">A=0</text><text x="116" y="70" fill="#94a3c0" font-size="11">I0</text><line x1="70" y1="98" x2="110" y2="98" stroke="#e7ecf7" stroke-width="1.6"/><text x="64" y="102" fill="#e7ecf7" font-size="12" text-anchor="end">B=1</text><text x="116" y="102" fill="#94a3c0" font-size="11">I1</text><line x1="70" y1="130" x2="110" y2="130" stroke="#e7ecf7" stroke-width="1.6"/><text x="64" y="134" fill="#e7ecf7" font-size="12" text-anchor="end">C=1</text><text x="116" y="134" fill="#94a3c0" font-size="11">I2</text><line x1="70" y1="162" x2="110" y2="162" stroke="#e7ecf7" stroke-width="1.6"/><text x="64" y="166" fill="#e7ecf7" font-size="12" text-anchor="end">D=0</text><text x="116" y="166" fill="#94a3c0" font-size="11">I3</text><line x1="200" y1="115.0" x2="240" y2="115.0" stroke="#4ade80" stroke-width="2.2"/><text x="246" y="120.0" fill="#4ade80" font-size="15" font-weight="700">F</text><line x1="140" y1="190" x2="140" y2="218" stroke="#e7ecf7" stroke-width="1.6"/><line x1="170" y1="190" x2="170" y2="218" stroke="#e7ecf7" stroke-width="1.6"/><text x="140" y="204" fill="#94a3c0" font-size="10" text-anchor="middle">S0</text><text x="170" y="204" fill="#94a3c0" font-size="10" text-anchor="middle">S1</text><text x="140" y="230" fill="#fb7185" font-size="12" font-weight="700" text-anchor="middle">X</text><text x="170" y="230" fill="#a78bfa" font-size="12" font-weight="700" text-anchor="middle">Y</text><line x1="360" y1="60" x2="360" y2="96" stroke="#26324e" stroke-width="1"/><line x1="408" y1="60" x2="408" y2="96" stroke="#26324e" stroke-width="1"/><line x1="456" y1="60" x2="456" y2="96" stroke="#26324e" stroke-width="1"/><line x1="504" y1="60" x2="504" y2="96" stroke="#26324e" stroke-width="1"/><line x1="552" y1="60" x2="552" y2="96" stroke="#26324e" stroke-width="1"/><line x1="600" y1="60" x2="600" y2="96" stroke="#26324e" stroke-width="1"/><line x1="648" y1="60" x2="648" y2="96" stroke="#26324e" stroke-width="1"/><line x1="696" y1="60" x2="696" y2="96" stroke="#26324e" stroke-width="1"/><polyline points="360,90 408,90 408,90 456,90 456,64 504,64 504,64 552,64 552,90 600,90 600,90 648,90 648,64 696,64" fill="none" stroke="#fb7185" stroke-width="2.4"/><text x="344" y="81.0" fill="#fb7185" font-size="14" font-weight="700" text-anchor="end">X</text><text x="384" y="56" fill="#fb7185" font-size="11" text-anchor="middle">0</text><text x="432" y="56" fill="#fb7185" font-size="11" text-anchor="middle">0</text><text x="480" y="56" fill="#fb7185" font-size="11" text-anchor="middle">1</text><text x="528" y="56" fill="#fb7185" font-size="11" text-anchor="middle">1</text><text x="576" y="56" fill="#fb7185" font-size="11" text-anchor="middle">0</text><text x="624" y="56" fill="#fb7185" font-size="11" text-anchor="middle">0</text><text x="672" y="56" fill="#fb7185" font-size="11" text-anchor="middle">1</text><line x1="360" y1="150" x2="360" y2="186" stroke="#26324e" stroke-width="1"/><line x1="408" y1="150" x2="408" y2="186" stroke="#26324e" stroke-width="1"/><line x1="456" y1="150" x2="456" y2="186" stroke="#26324e" stroke-width="1"/><line x1="504" y1="150" x2="504" y2="186" stroke="#26324e" stroke-width="1"/><line x1="552" y1="150" x2="552" y2="186" stroke="#26324e" stroke-width="1"/><line x1="600" y1="150" x2="600" y2="186" stroke="#26324e" stroke-width="1"/><line x1="648" y1="150" x2="648" y2="186" stroke="#26324e" stroke-width="1"/><line x1="696" y1="150" x2="696" y2="186" stroke="#26324e" stroke-width="1"/><polyline points="360,180 408,180 408,154 456,154 456,154 504,154 504,180 552,180 552,180 600,180 600,154 648,154 648,154 696,154" fill="none" stroke="#a78bfa" stroke-width="2.4"/><text x="344" y="171.0" fill="#a78bfa" font-size="14" font-weight="700" text-anchor="end">Y</text><text x="384" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">0</text><text x="432" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">1</text><text x="480" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">1</text><text x="528" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">0</text><text x="576" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">0</text><text x="624" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">1</text><text x="672" y="146" fill="#a78bfa" font-size="11" text-anchor="middle">1</text><line x1="360" y1="260" x2="360" y2="296" stroke="#26324e" stroke-width="1"/><line x1="408" y1="260" x2="408" y2="296" stroke="#26324e" stroke-width="1"/><line x1="456" y1="260" x2="456" y2="296" stroke="#26324e" stroke-width="1"/><line x1="504" y1="260" x2="504" y2="296" stroke="#26324e" stroke-width="1"/><line x1="552" y1="260" x2="552" y2="296" stroke="#26324e" stroke-width="1"/><line x1="600" y1="260" x2="600" y2="296" stroke="#26324e" stroke-width="1"/><line x1="648" y1="260" x2="648" y2="296" stroke="#26324e" stroke-width="1"/><line x1="696" y1="260" x2="696" y2="296" stroke="#26324e" stroke-width="1"/><polyline points="360,290 408,290 408,264 456,264 456,290 504,290 504,264 552,264 552,290 600,290 600,264 648,264 648,290 696,290" fill="none" stroke="#4ade80" stroke-width="2.4"/><text x="344" y="281.0" fill="#4ade80" font-size="14" font-weight="700" text-anchor="end">F</text><text x="384" y="256" fill="#4ade80" font-size="11" text-anchor="middle">0</text><text x="432" y="256" fill="#4ade80" font-size="11" text-anchor="middle">1</text><text x="480" y="256" fill="#4ade80" font-size="11" text-anchor="middle">0</text><text x="528" y="256" fill="#4ade80" font-size="11" text-anchor="middle">1</text><text x="576" y="256" fill="#4ade80" font-size="11" text-anchor="middle">0</text><text x="624" y="256" fill="#4ade80" font-size="11" text-anchor="middle">1</text><text x="672" y="256" fill="#4ade80" font-size="11" text-anchor="middle">0</text><text x="384" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><text x="432" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">C</text><text x="480" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">D</text><text x="528" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">B</text><text x="576" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><text x="624" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">C</text><text x="672" y="320" fill="#94a3c0" font-size="11" text-anchor="middle">D</text><text x="360" y="342" fill="#94a3c0" font-size="11">entrada seleccionada (sel = 2·Y + X)</text></svg><figcaption>Símbolo del MUX 4:1 y cronograma resuelto. En cada intervalo F toma el valor de la entrada seleccionada por (Y, X): la salida resulta F = 0,1,0,1,0,1,0.</figcaption></figure><div class="res"><b>F sigue la secuencia 0 · 1 · 0 · 1 · 0 · 1 · 0</b>, tomando en cada tramo el valor de la entrada seleccionada (A, C, D, B, A, C, D respectivamente).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q4-1" onclick="go('q4-1');return false;">← Anterior</a>
+    <a href="#q5-1" onclick="go('q5-1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q5-1">
+  <div class="crumb">Inicio / BLOQUE 5</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5</span> Cuestión 5.1 · Ética de la IA y ciberseguridad</div>
+  <div class="qmeta">Opción A · 2 puntos (a: 1,0 · b: 1,0)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type="a"><li>¿Cuáles son los riesgos éticos asociados al uso de la inteligencia artificial? <span class="pts">(1 punto)</span></li><li>¿Cómo puede la ciberseguridad proteger a las empresas contra el robo de datos? <span class="pts">(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q5-1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestión teórica de <b>sistemas informáticos emergentes</b>: riesgos éticos de la IA y medidas de ciberseguridad frente al robo de datos.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q5-1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q5-1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q5-1">
+    <h5>a) Riesgos éticos de la IA</h5><ul><li><b>Sesgo y discriminación:</b> si los datos de entrenamiento están sesgados, el sistema replica y amplifica esos prejuicios.</li><li><b>Privacidad:</b> la IA usa grandes cantidades de datos, a menudo personales y sensibles.</li><li><b>Desplazamiento laboral:</b> la automatización puede sustituir empleos (manufactura, atención al cliente, logística).</li><li><b>Toma de decisiones autónoma:</b> decisiones sin intervención humana plantean problemas de responsabilidad y transparencia.</li><li><b>Control y autonomía:</b> temor a sistemas cada vez más autónomos que actúen contra los intereses humanos.</li></ul><div class="res"><b>Principales riesgos:</b> sesgo/discriminación, privacidad, desplazamiento laboral, responsabilidad de decisiones autónomas y pérdida de control.</div><h5>b) Ciberseguridad frente al robo de datos</h5><ul><li><b>Cifrado de datos:</b> convierte la información en ilegible sin la clave correcta.</li><li><b>Autenticación fuerte (MFA):</b> la autenticación multifactor dificulta el acceso aunque se robe una contraseña.</li><li><b>Monitorización continua y detección de intrusiones:</b> vigilancia en tiempo real de la red para detectar patrones anómalos.</li><li><b>Actualizaciones y parches:</b> cerrar brechas de seguridad conocidas.</li><li><b>Seguridad en la nube</b> y <b>copias de seguridad (backups)</b> periódicas frente a ransomware.</li><li><b>Formación y concienciación</b> de los empleados frente a phishing e ingeniería social.</li></ul><div class="res"><b>Estrategia:</b> prevenir (cifrado, MFA, parches), detectar (monitorización) y responder (backups), sin olvidar el factor humano (formación).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q4-2" onclick="go('q4-2');return false;">← Anterior</a>
+    <a href="#q5-2" onclick="go('q5-2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q5-2">
+  <div class="crumb">Inicio / BLOQUE 5</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5</span> Cuestión 5.2 · Diagrama de bloques Y/R = A·(B+C)</div>
+  <div class="qmeta">Opción B · 2 puntos (a: 1,0 · b: 0,5 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dada la función de transferencia \(\dfrac{Y}{R}=A\cdot(B+C)\):</p><ol type="a"><li>Dibuje un diagrama de bloques equivalente usando un bloque por cada letra (A, B, C). <span class="pts">(1)</span></li><li>Justifique si el sistema está en lazo cerrado o abierto. <span class="pts">(0,5)</span></li><li>Dibuje un diagrama de bloques con un solo bloque equivalente. <span class="pts">(0,5)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_ord/q5-2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La función \(Y/R=A(B+C)\) combina un producto (bloques en serie) y una suma (bloques en paralelo). B y C están <b>en paralelo</b> (se suman) y el conjunto va <b>en serie</b> con A.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q5-2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_ord/q5-2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q5-2">
+    <h5>a) Diagrama con un bloque por letra</h5><p>R pasa por el bloque A; su salida se reparte a los bloques B y C en <b>paralelo</b>, y las salidas se <b>suman</b> para dar Y. Así \(Y=A\,R\,(B+C)=A(B+C)R\).</p><figure class="fig"><svg viewBox="0 0 560 260" width="100%" style="max-width:560px" xmlns="http://www.w3.org/2000/svg"><text x="20" y="86" fill="#e7ecf7" font-size="15" font-weight="700">R</text><line x1="18" y1="100" x2="60" y2="100" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="60,100 50,106 50,94" fill="#e7ecf7"/><rect x="60" y="74" width="60" height="52" rx="4" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="90.0" y="106.0" fill="#e7ecf7" font-size="16" font-weight="700" text-anchor="middle">A</text><line x1="120" y1="100" x2="150" y2="100" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="150,100 140,106 140,94" fill="#e7ecf7"/><circle cx="150" cy="100" r="3" fill="#e7ecf7"/><line x1="150" y1="100" x2="150" y2="60" stroke="#e7ecf7" stroke-width="1.8"/><line x1="150" y1="60" x2="260" y2="60" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="260,60 250,66 250,54" fill="#e7ecf7"/><rect x="260" y="34" width="60" height="52" rx="4" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="290.0" y="66.0" fill="#e7ecf7" font-size="16" font-weight="700" text-anchor="middle">B</text><line x1="150" y1="100" x2="150" y2="170" stroke="#e7ecf7" stroke-width="1.8"/><line x1="150" y1="170" x2="260" y2="170" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="260,170 250,176 250,164" fill="#e7ecf7"/><rect x="260" y="144" width="60" height="52" rx="4" fill="none" stroke="#a78bfa" stroke-width="2"/><text x="290.0" y="176.0" fill="#e7ecf7" font-size="16" font-weight="700" text-anchor="middle">C</text><circle cx="400" cy="115" r="18" fill="none" stroke="#f59e0b" stroke-width="2"/><line x1="387" y1="115" x2="413" y2="115" stroke="#f59e0b" stroke-width="1.2"/><line x1="400" y1="102" x2="400" y2="128" stroke="#f59e0b" stroke-width="1.2"/><text x="391" y="110" fill="#e7ecf7" font-size="12">+</text><text x="391" y="130" fill="#e7ecf7" font-size="12">+</text><line x1="320" y1="60" x2="400" y2="60" stroke="#e7ecf7" stroke-width="1.8"/><line x1="400" y1="60" x2="400" y2="97" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="400,97 394,87 406,87" fill="#e7ecf7"/><line x1="320" y1="170" x2="400" y2="170" stroke="#e7ecf7" stroke-width="1.8"/><line x1="400" y1="170" x2="400" y2="133" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="400,133 406,143 394,143" fill="#e7ecf7"/><line x1="418" y1="115" x2="470" y2="115" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="470,115 460,121 460,109" fill="#e7ecf7"/><text x="484" y="120" fill="#e7ecf7" font-size="15" font-weight="700">Y</text></svg><figcaption>R → A → (B y C en paralelo) → sumador (+,+) → Y. Equivale a Y/R = A·(B+C).</figcaption></figure><h5>b) ¿Lazo abierto o cerrado?</h5><div class="res"><b>Lazo abierto:</b> no existe ningún camino de realimentación de la salida hacia la entrada.</div><h5>c) Diagrama de un solo bloque</h5><figure class="fig"><svg viewBox="0 0 420 120" width="100%" style="max-width:420px" xmlns="http://www.w3.org/2000/svg"><text x="30" y="46" fill="#e7ecf7" font-size="15" font-weight="700">R</text><line x1="28" y1="60" x2="110" y2="60" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="110,60 100,66 100,54" fill="#e7ecf7"/><rect x="110" y="30" width="150" height="60" rx="4" fill="none" stroke="#4ade80" stroke-width="2"/><text x="185" y="67" fill="#e7ecf7" font-size="18" font-weight="700" text-anchor="middle">A·(B+C)</text><line x1="260" y1="60" x2="340" y2="60" stroke="#e7ecf7" stroke-width="1.8"/><polygon points="340,60 330,66 330,54" fill="#e7ecf7"/><text x="352" y="65" fill="#e7ecf7" font-size="15" font-weight="700">Y</text></svg><figcaption>Bloque equivalente único con la función de transferencia A·(B+C).</figcaption></figure><div class="res"><b>Y/R = A·(B+C)</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q5-1" onclick="go('q5-1');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Dpto. Tecnología · Solucionario PAU 2025 · Tecnología e Ingeniería II (Ordinaria)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>

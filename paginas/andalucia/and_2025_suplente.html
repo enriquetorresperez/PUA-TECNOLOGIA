@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEvAU 2025 · <span>Tecnología e Ingeniería II</span> · Andalucía · Suplente (A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PEvAU 2025 · <span>Tecnología e Ingeniería II</span> · Andalucía · Suplente (A)</h1>
+    <div class="sub">Andalucía, Ceuta, Melilla y centros en Marruecos · Curso 2024-2025 · Examen resuelto y comentado</div>
+  </div>
+  <div class="pill">90 min · 10 puntos</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Ejercicio 1 · Materiales</div>
+<a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">E1·A · Ensayo Charpy</a>
+<a class="q" href="#q2" onclick="go('q2');return false;" id="l-q2">E1·B · Vickers y Brinell</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Ejercicio 2 · Máquinas térmicas</div>
+<a class="q" href="#q3" onclick="go('q3');return false;" id="l-q3">E2·A · Climatización</a>
+<a class="q" href="#q4" onclick="go('q4');return false;" id="l-q4">E2·B · Motor de combustión</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#34d399"></span> Ejercicio 3 · Electrónica digital y control</div>
+<a class="q" href="#q5" onclick="go('q5');return false;" id="l-q5">E3·A · Función + perturbaciones</a>
+<a class="q" href="#q6" onclick="go('q6');return false;" id="l-q6">E3·B · Luces + transferencia</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Ejercicio 4 · IA, datos y medio ambiente</div>
+<a class="q" href="#q7" onclick="go('q7');return false;" id="l-q7">E4 · Cuestiones teóricas</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PEvAU 2025 · <span>Tecnología e Ingeniería II</span> · Andalucía · Suplente (A)</h2>
+    <p>Selecciona un ejercicio o cuestión en la barra lateral. En los <b>ejercicios 1, 2 y 3</b> se responde <b>solo una</b> opción (A o B) y el <b>ejercicio 4</b> es de opción única. Aquí se resuelven <b>todas</b> para repasar.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_and_2025_suplente/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../examens/Andalucia/Tecnologia_Andalucia_2025_ordinaria_suplente2-a.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#f59e0b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M30 60L44 20l14 40M35 48h18'/><path d='M66 60V20h8a8 8 0 0 1 0 16h-8'/></svg></div>
+      <h3>Ejercicio 1 · Materiales</h3>
+      <p>Ensayo Charpy (energía y resiliencia) y durezas Vickers/Brinell.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">E1·A Charpy</a><a class="k1" href="#q2" onclick="go('q2');return false;">E1·B Durezas</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#22d3ee' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='22' y='22' width='38' height='34' rx='4'/><path d='M60 32h16M60 46h16M31 62v6M45 62v6'/></svg></div>
+      <h3>Ejercicio 2 · Máquinas térmicas</h3>
+      <p>Climatización (bomba de calor / frigorífica) y prestaciones de un motor de combustión.</p>
+      <div class="qlinks"><a class="k2" href="#q3" onclick="go('q3');return false;">E2·A Climatización</a><a class="k2" href="#q4" onclick="go('q4');return false;">E2·B Motor</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#34d399' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M22 26h20a16 16 0 0 1 0 28H22z'/><circle cx='64' cy='40' r='4'/><path d='M68 40h12'/></svg></div>
+      <h3>Ejercicio 3 · Electrónica digital y control</h3>
+      <p>Simplificación con indiferentes, diseño con NAND y función de transferencia.</p>
+      <div class="qlinks"><a class="k3" href="#q5" onclick="go('q5');return false;">E3·A Karnaugh</a><a class="k3" href="#q6" onclick="go('q6');return false;">E3·B Luces</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox='0 0 100 80' width='84' height='66' fill='none' stroke='#a78bfa' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><circle cx='40' cy='40' r='20'/><path d='M40 28v12l8 6M66 20l10-6M66 60l10 6'/></svg></div>
+      <h3>Ejercicio 4 · IA, datos y medio ambiente</h3>
+      <p>Aprendizaje automático, bases de datos distribuidas, impacto ambiental y Big Data.</p>
+      <div class="qlinks"><a class="k4" href="#q7" onclick="go('q7');return false;">E4 · Teoría</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1">
+  <div class="crumb">Inicio / EJERCICIO 1 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t1">EJERCICIO 1 · OPCIÓN A</span> Ejercicio 1 · Opción A · Ensayo Charpy</div>
+  <div class="qmeta">Materiales · 2,5 puntos (a:0,75 · b:0,75 · c:1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Se realiza un ensayo Charpy a una probeta de acero de <b>sección cuadrada de 10 mm</b> de lado con un péndulo de <b>20 kg</b>. Parte de una altura inicial de <b>1,2 m</b> y tras el impacto alcanza una altura final de <b>30 cm</b>. Se pide:</p><ol type='a'><li>La energía absorbida por la probeta. <span class='pts'>(0,75 puntos)</span></li><li>La resiliencia del material. <span class='pts'>(0,75 puntos)</span></li><li>Con un péndulo de <b>18 kg</b>, ¿desde qué altura debería caer para alcanzar la misma altura final tras romper la probeta? <span class='pts'>(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Energía absorbida = energía potencial perdida: \(E=mg(h_0-h_f)\).</li><li>Resiliencia \(\rho=E/S\), con \(S\) la sección de la probeta.</li><li>La energía absorbida por la probeta es la misma (mismo material y rotura); se despeja la nueva altura para otra masa.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1">
+    <h5>a) Energía absorbida</h5><div class='formula'>$$E=mg(h_0-h_f)=20\times9{,}81\times(1{,}2-0{,}30)=176{,}6\ \mathrm J$$</div><div class='res'><b>Resultado:</b> \(E\approx 176{,}6\ \mathrm J\).</div><h5>b) Resiliencia</h5><p>Sección de la probeta \(S=10\times10=100\ \mathrm{mm^2}=1\ \mathrm{cm^2}\):</p><div class='formula'>$$\rho=\frac{E}{S}=\frac{176{,}6}{1}=176{,}6\ \mathrm{J/cm^2}\;(=1{,}77\ \mathrm{J/mm^2})$$</div><div class='res'><b>Resultado:</b> \(\rho\approx 176{,}6\ \mathrm{J/cm^2}\).</div><h5>c) Altura con péndulo de 18 kg</h5><p>La energía absorbida es la misma (176,6 J) y la altura final 0,30 m:</p><div class='formula'>$$176{,}6=18\times9{,}81\,(h_0'-0{,}30)=176{,}6\,(h_0'-0{,}30)\Rightarrow h_0'-0{,}30=1{,}0$$</div><div class='res'><b>Resultado:</b> el péndulo debe caer desde \(h_0'=1{,}30\ \mathrm m\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q2" onclick="go('q2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2">
+  <div class="crumb">Inicio / EJERCICIO 1 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t1">EJERCICIO 1 · OPCIÓN B</span> Ejercicio 1 · Opción B · Durezas Vickers y Brinell</div>
+  <div class="qmeta">Materiales · 2,5 puntos (a:1,25 · b:1,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dos planchas de acero con durezas normalizadas: la primera <b>700 HV 25</b> y la segunda <b>120 HB 5 250 30</b>. Se pide:</p><ol type='a'><li>La diagonal de la huella del ensayo Vickers de la primera plancha. <span class='pts'>(1,25 puntos)</span></li><li>La profundidad de la huella del ensayo Brinell de la segunda plancha. <span class='pts'>(1,25 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Vickers: \(HV=1{,}8544\,\dfrac{F}{d^2}\Rightarrow d=\sqrt{\dfrac{1{,}8544\,F}{HV}}\).</li><li>Brinell (profundidad del casquete): \(HB=\dfrac{F}{\pi D h}\Rightarrow h=\dfrac{F}{\pi D\,HB}\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2">
+    <h5>a) Diagonal de la huella Vickers</h5><p>Primera plancha: \(HV=700\), \(F=25\ \mathrm{kp}\):</p><div class='formula'>$$d=\sqrt{\frac{1{,}8544\times25}{700}}=\sqrt{0{,}0662}=0{,}257\ \mathrm{mm}$$</div><div class='res'><b>Resultado:</b> \(d\approx 0{,}257\ \mathrm{mm}\).</div><h5>b) Profundidad de la huella Brinell</h5><p>Segunda plancha: \(HB=120\), \(D=5\ \mathrm{mm}\), \(F=250\ \mathrm{kp}\):</p><div class='formula'>$$h=\frac{F}{\pi D\,HB}=\frac{250}{\pi\cdot5\cdot120}=0{,}133\ \mathrm{mm}$$</div><div class='res'><b>Resultado:</b> \(h\approx 0{,}133\ \mathrm{mm}\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q1" onclick="go('q1');return false;">← Anterior</a>
+    <a href="#q3" onclick="go('q3');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3">
+  <div class="crumb">Inicio / EJERCICIO 2 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t2">EJERCICIO 2 · OPCIÓN A</span> Ejercicio 2 · Opción A · Climatización de un local</div>
+  <div class="qmeta">Máquinas térmicas · 2,5 puntos (a:1 · b:1,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Un acondicionador mantiene un local a <b>25 °C</b> todo el año. La temperatura exterior media es <b>10 °C</b> en invierno y <b>35 °C</b> en verano. La eficiencia es el <b>35 %</b> de la ideal y la potencia del compresor es <b>4 kW</b>. Calcular:</p><ol type='a'><li>La eficiencia de la máquina en invierno y en verano. <span class='pts'>(1 punto)</span></li><li>El calor extraído del local cada día en verano y el cedido en invierno, con 5 h de funcionamiento diario. <span class='pts'>(1,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q3.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Invierno (bomba de calor): \(COP_{ideal}=\dfrac{T_{int}}{T_{int}-T_{ext}}\).</li><li>Verano (frigorífica): \(EER_{ideal}=\dfrac{T_{int}}{T_{ext}-T_{int}}\). En ambos casos, eficiencia real = 0,35 · ideal.</li><li>Trabajo diario \(W=P\cdot t\); calor \(Q=\text{eficiencia}\cdot W\). Temperaturas en kelvin.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q3.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3">
+    <h5>a) Eficiencias</h5><p>\(T_{int}=298\ \mathrm K\), \(T_{inv}=283\ \mathrm K\), \(T_{ver}=308\ \mathrm K\).</p><div class='formula'>$$COP_{inv}=0{,}35\cdot\frac{298}{298-283}=0{,}35\cdot19{,}87=6{,}95$$</div><div class='formula'>$$EER_{ver}=0{,}35\cdot\frac{298}{308-298}=0{,}35\cdot29{,}8=10{,}43$$</div><div class='res'><b>Resultado:</b> eficiencia \(\approx 6{,}95\) en invierno y \(\approx 10{,}43\) en verano.</div><h5>b) Calor diario</h5><p>Trabajo diario \(W=P\,t=4\ \mathrm{kW}\times5\ \mathrm h=20\ \mathrm{kWh}\).</p><div class='formula'>$$Q_{ver}=EER_{ver}\cdot W=10{,}43\times20=208{,}6\ \mathrm{kWh/día}$$</div><div class='formula'>$$Q_{inv}=COP_{inv}\cdot W=6{,}95\times20=139{,}0\ \mathrm{kWh/día}$$</div><div class='res'><b>Resultado:</b> se extraen \(\approx 208{,}6\ \mathrm{kWh/día}\) en verano y se ceden \(\approx 139{,}0\ \mathrm{kWh/día}\) en invierno.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2" onclick="go('q2');return false;">← Anterior</a>
+    <a href="#q4" onclick="go('q4');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4">
+  <div class="crumb">Inicio / EJERCICIO 2 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t2">EJERCICIO 2 · OPCIÓN B</span> Ejercicio 2 · Opción B · Prototipo de motor de combustión</div>
+  <div class="qmeta">Máquinas térmicas · 2,5 puntos (a:1,5 · b:1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En un banco de pruebas de un motor se mide: consumo <b>9,5 l/h</b>, par <b>110 N·m</b>, régimen <b>2750 rpm</b>, densidad <b>0,8 kg/dm³</b> y poder calorífico <b>41 700 kJ/kg</b>. Calcular:</p><ol type='a'><li>La potencia suministrada y el consumo específico en g/(kW·h). <span class='pts'>(1,5 puntos)</span></li><li>El rendimiento del motor. <span class='pts'>(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q4.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>Potencia efectiva: \(P=M\,\omega\), con \(\omega=\dfrac{2\pi n}{60}\).</li><li>Consumo específico: \(C_e=\dfrac{\dot m}{P}\) (masa de combustible por energía útil).</li><li>Rendimiento: \(\eta=\dfrac{P}{\dot m\,PCI}\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q4.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4">
+    <h5>a) Potencia y consumo específico</h5><div class='formula'>$$\omega=\frac{2\pi\cdot2750}{60}=287{,}98\ \mathrm{rad/s}\qquad P=M\,\omega=110\times287{,}98=31{,}68\ \mathrm{kW}$$</div><p>Consumo másico \(\dot m=9{,}5\times0{,}8=7{,}6\ \mathrm{kg/h}=7600\ \mathrm{g/h}\):</p><div class='formula'>$$C_e=\frac{\dot m}{P}=\frac{7600}{31{,}68}=239{,}9\ \mathrm{g/(kW\,h)}$$</div><div class='res'><b>Resultado:</b> \(P\approx 31{,}7\ \mathrm{kW}\) y \(C_e\approx 240\ \mathrm{g/(kW\,h)}\).</div><h5>b) Rendimiento</h5><div class='formula'>$$\dot Q=\dot m\,PCI=\frac{7{,}6\times41700}{3600}=88{,}0\ \mathrm{kW}\qquad \eta=\frac{P}{\dot Q}=\frac{31{,}68}{88{,}0}=0{,}36$$</div><div class='res'><b>Resultado:</b> el rendimiento del motor es \(\eta\approx 36\,\%\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3" onclick="go('q3');return false;">← Anterior</a>
+    <a href="#q5" onclick="go('q5');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q5">
+  <div class="crumb">Inicio / EJERCICIO 3 · OPCIÓN A</div>
+  <div class="qtitle"><span class="tag t3">EJERCICIO 3 · OPCIÓN A</span> Ejercicio 3 · Opción A · Función con indiferentes y perturbaciones</div>
+  <div class="qmeta">Digital y control · 2,5 puntos (a:1,5 · b:1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>a)</b> Dada la tabla de verdad (X = estado indiferente):</p><table class='dat'><tr><th>#</th><th>A</th><th>B</th><th>C</th><th>D</th><th>F</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>2</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>X</td></tr><tr><td>4</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>5</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>6</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>X</td></tr><tr><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>9</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>10</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>11</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>12</td><td>1</td><td>1</td><td>0</td><td>0</td><td>X</td></tr><tr><td>13</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>14</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>15</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table><ul><li><b>a.1)</b> Obtener F lo más simplificada posible. <span class='pts'>(1 punto)</span></li><li><b>a.2)</b> Diseñar un circuito con puertas lógicas. <span class='pts'>(0,5 puntos)</span></li></ul><p><b>b)</b> ¿Qué son las perturbaciones en un sistema de control y sus causas? ¿Qué tipo de sistema corrige su efecto? Razonar. <span class='pts'>(1 punto)</span></p>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q5.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Se colocan los unos y los estados indiferentes (X) en un mapa de Karnaugh; los X se usan para formar los mayores grupos posibles y minimizar la expresión en suma de productos.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q5')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q5.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q5">
+    <h5>a.1) Simplificación de F</h5><p>F = 1 en los minterms 5, 10, 13, 14, 15 e indiferentes (X) en 3, 7 y 12. En el mapa de Karnaugh se forman dos grupos aprovechando los indiferentes:</p><ul><li>Un <b>cuádruple</b> con B = 1 y D = 1 (minterms 5, 7·X, 13, 15) → <b>B·D</b>.</li><li>Un <b>par</b> con A = 1, C = 1, D = 0 (minterms 10, 14) → <b>A·C·D′</b>.</li></ul><div class='formula'>$$F=B\,D+A\,C\,D'$$</div><div class='res'><b>Resultado:</b> \(F=B\,D+A\,C\,\overline{D}\).</div><h5>a.2) Circuito con puertas lógicas</h5><figure class='fig'><svg viewBox='0 0 460 240' width='100%' style='max-width:460px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='24' y='44' fill='#e2e8f0' font-size='15' text-anchor='middle'>A</text><text x='24' y='84' fill='#e2e8f0' font-size='15' text-anchor='middle'>C</text><text x='24' y='144' fill='#e2e8f0' font-size='15' text-anchor='middle'>D</text><text x='24' y='204' fill='#e2e8f0' font-size='15' text-anchor='middle'>B</text><line x1='38' y1='140' x2='110' y2='140' stroke='#cbd5e1'/><path d='M110,127 L110,153 L136,140.0 Z' stroke='#a78bfa'/><circle cx='140' cy='140' r='4' stroke='#a78bfa'/><text x='150' y='135' fill='#a78bfa' font-size='12' text-anchor='start'>D'</text><line x1='38' y1='40' x2='250' y2='40' stroke='#cbd5e1'/><line x1='38' y1='80' x2='250' y2='80' stroke='#cbd5e1'/><line x1='144' y1='140' x2='250' y2='140' stroke='#cbd5e1'/><path d='M250,26 L236.0,26 A64.0,64.0 0 0 1 236.0,154 L250,154 Z' stroke='#f59e0b'/><line x1='300' y1='90' x2='360' y2='90' stroke='#cbd5e1'/><text x='258' y='96' fill='#94a3b8' font-size='10' text-anchor='start'>ACD′</text><circle cx='90' cy='140' r='3' fill='#cbd5e1'/><line x1='90' y1='140' x2='90' y2='175' stroke='#cbd5e1'/><line x1='90' y1='175' x2='250' y2='175' stroke='#cbd5e1'/><line x1='38' y1='200' x2='250' y2='200' stroke='#cbd5e1'/><path d='M250,168 L278.0,168 A22.0,22.0 0 0 1 278.0,212 L250,212 Z' stroke='#22d3ee'/><line x1='300' y1='190' x2='360' y2='190' stroke='#cbd5e1'/><text x='258' y='194' fill='#94a3b8' font-size='10' text-anchor='start'>BD</text><path d='M360,60 Q388.6,60 412,105.0 Q388.6,150 360,150 Q376.64,105.0 360,60 Z' stroke='#4ade80'/><line x1='300' y1='90' x2='360' y2='90' stroke='#cbd5e1'/><line x1='300' y1='190' x2='360' y2='135' stroke='#cbd5e1'/><line x1='412' y1='105' x2='450' y2='105' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='456' y='110' fill='#4ade80' font-size='15' text-anchor='start'>F</text></svg><figcaption>Implementación de F = B·D + A·C·D′.</figcaption></figure><h5>b) Perturbaciones en sistemas de control</h5><p>Una <b>perturbación</b> es cualquier señal o efecto <b>no deseado</b>, ajeno a la entrada de referencia, que altera la variable controlada (p. ej. cambios de carga, de temperatura ambiente, rozamientos, variaciones de tensión). Los <b>sistemas de control en lazo cerrado</b> (realimentados) son capaces de corregir su efecto: al medir la salida real y compararla con la consigna, generan un error que el controlador usa para <b>contrarrestar la perturbación</b>, algo imposible en lazo abierto.</p>
+  </div>
+  <div class="nav-q">
+    <a href="#q4" onclick="go('q4');return false;">← Anterior</a>
+    <a href="#q6" onclick="go('q6');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q6">
+  <div class="crumb">Inicio / EJERCICIO 3 · OPCIÓN B</div>
+  <div class="qtitle"><span class="tag t3">EJERCICIO 3 · OPCIÓN B</span> Ejercicio 3 · Opción B · Control de luces y función de transferencia</div>
+  <div class="qmeta">Digital y control · 2,5 puntos (a:1,75 · b:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p><b>a)</b> Un sistema controla las luces F según: sensor de movimiento M, sensor de luz ambiente L (insuficiente = 1) e interruptor manual S. Las luces se encienden si <i>i)</i> hay movimiento y luz insuficiente, o <i>ii)</i> el interruptor manual está activado. Se pide:</p><ul><li><b>a.1)</b> Tabla de verdad de F y función canónica. <span class='pts'>(0,75 puntos)</span></li><li><b>a.2)</b> Simplificar por Karnaugh e implementar con puertas NAND. <span class='pts'>(1 punto)</span></li></ul><p><b>b)</b> Obtener la función de transferencia C/E del sistema de control de la figura. <span class='pts'>(0,75 puntos)</span></p><figure class='fig'><svg viewBox='0 0 480 200' width='100%' style='max-width:480px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='20' y1='70' x2='60' y2='70' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='14' y='62' fill='#e2e8f0' font-size='15' text-anchor='start'>E</text><rect x='60' y='52' width='58' height='36' rx='5' stroke='#22d3ee'/><text x='89.0' y='75.0' fill='#e2e8f0' font-size='15' text-anchor='middle'>G₁</text><line x1='118' y1='70' x2='150' y2='70' stroke='#cbd5e1' marker-end='url(#ar)'/><circle cx='168' cy='70' r='15' stroke='#e2e8f0'/><line x1='158' y1='60' x2='178' y2='80' stroke='#94a3b8'/><line x1='178' y1='60' x2='158' y2='80' stroke='#94a3b8'/><text x='156' y='64' fill='#4ade80' font-size='12' text-anchor='start'>+</text><text x='156' y='88' fill='#f87171' font-size='13' text-anchor='start'>−</text><line x1='183' y1='70' x2='230' y2='70' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='230' y='52' width='58' height='36' rx='5' stroke='#22d3ee'/><text x='259.0' y='75.0' fill='#e2e8f0' font-size='15' text-anchor='middle'>G₂</text><line x1='288' y1='70' x2='400' y2='70' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='406' y='64' fill='#e2e8f0' font-size='15' text-anchor='start'>C</text><circle cx='350' cy='70' r='3' fill='#cbd5e1'/><line x1='350' y1='70' x2='350' y2='150' stroke='#cbd5e1'/><line x1='350' y1='150' x2='230' y2='150' stroke='#cbd5e1'/><rect x='178' y='132' width='58' height='36' rx='5' stroke='#34d399'/><text x='207.0' y='155.0' fill='#e2e8f0' font-size='15' text-anchor='middle'>H₁</text><line x1='178' y1='150' x2='168' y2='150' stroke='#cbd5e1'/><line x1='168' y1='150' x2='168' y2='85' stroke='#cbd5e1' marker-end='url(#ar)'/></svg><figcaption>Sistema de control con G₁ en serie y realimentación H₁.</figcaption></figure>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q6.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <ul><li>La condición se traduce directamente: \(F=M\cdot L+S\).</li><li>Para NAND: \(F=M L+S=\big((ML)'\cdot S'\big)'\) (doble negación + De Morgan).</li><li>Álgebra de bloques: \(C=G_2(G_1E-H_1C)\Rightarrow C/E=\dfrac{G_1G_2}{1+G_2H_1}\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q6')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q6.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q6">
+    <h5>a.1) Tabla de verdad y función canónica</h5><p>\(F=M\cdot L+S\). Vale 1 siempre que S = 1, o cuando M = L = 1:</p><table class='dat'><tr><th>M</th><th>L</th><th>S</th><th>F</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td></tr></table><div class='formula'>$$F=\sum m(1,3,5,6,7)$$</div><h5>a.2) Simplificación e implementación con NAND</h5><p>El mapa de Karnaugh agrupa directamente a la forma mínima:</p><div class='formula'>$$F=M\,L+S$$</div><p>Con puertas NAND, \(F=\big(\,(M L)'\cdot S'\,\big)'=\mathrm{NAND}\big(\mathrm{NAND}(M,L),\ \mathrm{NAND}(S,S)\big)\):</p><figure class='fig'><svg viewBox='0 0 440 220' width='100%' style='max-width:440px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='24' y='54' fill='#e2e8f0' font-size='15' text-anchor='middle'>M</text><text x='24' y='104' fill='#e2e8f0' font-size='15' text-anchor='middle'>L</text><text x='24' y='174' fill='#e2e8f0' font-size='15' text-anchor='middle'>S</text><line x1='38' y1='50' x2='150' y2='50' stroke='#cbd5e1'/><line x1='38' y1='100' x2='150' y2='85' stroke='#cbd5e1'/><path d='M150,36 L170.0,36 A30.0,30.0 0 0 1 170.0,96 L150,96 Z' stroke='#f59e0b'/><circle cx='204' cy='66' r='4' stroke='#e2e8f0'/><line x1='208' y1='66' x2='300' y2='66' stroke='#cbd5e1'/><text x='150' y='30' fill='#94a3b8' font-size='10' text-anchor='start'>(ML)′</text><line x1='38' y1='170' x2='150' y2='158' stroke='#cbd5e1'/><line x1='38' y1='170' x2='80' y2='170' stroke='#cbd5e1'/><circle cx='80' cy='170' r='3' fill='#cbd5e1'/><line x1='80' y1='170' x2='80' y2='190' stroke='#cbd5e1'/><line x1='80' y1='190' x2='150' y2='190' stroke='#cbd5e1'/><path d='M150,150 L175.0,150 A25.0,25.0 0 0 1 175.0,200 L150,200 Z' stroke='#a78bfa'/><circle cx='204' cy='175' r='4' stroke='#e2e8f0'/><line x1='208' y1='175' x2='300' y2='175' stroke='#cbd5e1'/><text x='150' y='146' fill='#94a3b8' font-size='10' text-anchor='start'>S′</text><path d='M300,80 L312.0,80 A40.0,40.0 0 0 1 312.0,160 L300,160 Z' stroke='#4ade80'/><circle cx='356' cy='120' r='4' stroke='#e2e8f0'/><line x1='300' y1='66' x2='300' y2='66' stroke='#cbd5e1'/><line x1='300' y1='175' x2='300' y2='175' stroke='#cbd5e1'/><line x1='360' y1='120' x2='410' y2='120' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='416' y='125' fill='#4ade80' font-size='16' text-anchor='start'>F</text></svg><figcaption>Implementación de F = M·L + S con tres puertas NAND.</figcaption></figure><h5>b) Función de transferencia C/E</h5><p>\(G_1\) está en serie con la entrada y \(H_1\) realimenta la salida al sumador (signo −):</p><div class='formula'>$$C=G_2\,(G_1E-H_1C)\Rightarrow C\,(1+G_2H_1)=G_1G_2E$$</div><div class='formula'>$$\frac{C}{E}=\frac{G_1\,G_2}{1+G_2\,H_1}$$</div><div class='res'><b>Resultado:</b> \(\dfrac{C}{E}=\dfrac{G_1G_2}{1+G_2H_1}\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q5" onclick="go('q5');return false;">← Anterior</a>
+    <a href="#q7" onclick="go('q7');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q7">
+  <div class="crumb">Inicio / EJERCICIO 4 · OPCIÓN ÚNICA</div>
+  <div class="qtitle"><span class="tag t4">EJERCICIO 4 · OPCIÓN ÚNICA</span> Ejercicio 4 · Opción única · Cuestiones teóricas</div>
+  <div class="qmeta">Cuestiones cortas · 2,5 puntos (a:0,5 · b:0,5 · c:0,75 · d:0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type='a'><li>Un algoritmo clasifica imágenes de perros y gatos usando imágenes <b>etiquetadas</b> con su resultado. Identificar y razonar si es aprendizaje automático supervisado o no supervisado. <span class='pts'>(0,5 puntos)</span></li><li>¿Qué es una base de datos distribuida? Indicar dos ventajas frente a una centralizada. <span class='pts'>(0,5 puntos)</span></li><li>¿Qué es un informe de evaluación de impacto ambiental? Indicar cuatro apartados que debe contener. <span class='pts'>(0,75 puntos)</span></li><li>Definir <i>Big Data</i> y enumerar cuatro de sus atributos. <span class='pts'>(0,75 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_and_2025_suplente/q7.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestiones conceptuales sobre inteligencia artificial, gestión de datos y legislación medioambiental.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q7')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_and_2025_suplente/q7.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q7">
+    <h5>a) Tipo de aprendizaje automático</h5><p>Es <b>aprendizaje supervisado</b>: el algoritmo se entrena con <b>datos etiquetados</b> (cada imagen viene marcada como “perro” o “gato”), de modo que aprende la relación entre las características (color, forma, tamaño) y la etiqueta conocida. En el <b>no supervisado</b> no habría etiquetas y el sistema agruparía por similitud sin conocer la clase.</p><h5>b) Base de datos distribuida</h5><p>Es una base de datos cuyos datos están <b>repartidos en varios nodos o ubicaciones físicas</b> conectados por red, funcionando como un único sistema lógico. Ventajas frente a la centralizada:</p><ul><li><b>Mayor disponibilidad y tolerancia a fallos:</b> si un nodo cae, los demás siguen operando.</li><li><b>Escalabilidad y rendimiento:</b> se accede a los datos localmente y se reparte la carga entre nodos.</li></ul><h5>c) Informe de evaluación de impacto ambiental</h5><p>Es el documento técnico que <b>identifica, describe y valora los efectos de un proyecto sobre el medio ambiente</b> y propone medidas para evitarlos o reducirlos. Cuatro apartados:</p><ul><li>Descripción del proyecto y sus acciones.</li><li>Inventario ambiental (estado inicial del entorno).</li><li>Identificación y valoración de impactos.</li><li>Medidas protectoras/correctoras y programa de vigilancia ambiental.</li></ul><h5>d) Big Data</h5><p><b>Big Data</b> es el conjunto de tecnologías y técnicas para <b>almacenar, procesar y analizar volúmenes enormes de datos</b> que las herramientas tradicionales no pueden manejar. Cuatro atributos (las “V”):</p><ul><li><b>Volumen</b> (gran cantidad de datos).</li><li><b>Velocidad</b> (generación y procesamiento rápidos).</li><li><b>Variedad</b> (datos estructurados y no estructurados).</li><li><b>Veracidad</b> (fiabilidad/calidad de los datos).</li></ul>
+  </div>
+  <div class="nav-q">
+    <a href="#q6" onclick="go('q6');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Dpto. Tecnología · Solucionario PEvAU 2025 · Andalucía · Tecnología e Ingeniería II (Suplente A)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>

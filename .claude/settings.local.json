@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p documentos/mat documentos/fis documentos/tec documentos/quim)",
+      "Bash(mv \"matemÁticas-ii-21 \\(1\\).pdf\" \"matemÁticas-ii-21.pdf\" documentos/mat/)",
+      "Bash(mv \"fisica-21 \\(1\\).pdf\" \"fisica-21.pdf\" \"fisica-22 \\(1\\).pdf\" \"fisica-22.pdf\" documentos/fis/)",
+      "Bash(mv \"2026-modelo-tecnologia-e-ingenieria-ii-2.pdf\" \"tecnologÍa-e-ingenierÍa-ii-6.pdf\" \"tecnologia_2026_ord.pdf\" \"tecnologia_2026_ord_coin.pdf\" documentos/tec/)",
+      "Bash(mv \"quÍmica-23.pdf\" documentos/quim/)",
+      "Bash(python3 build_json.py)",
+      "Bash(npm ls *)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(mkdir -p /private/tmp/claude-501/-Users-quique-Documents-documentos-eva-PAU/8698ce99-f7b7-4f83-9212-07279a26b593/scratchpad/node_env)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx playwright *)",
+      "Bash(mkdir -p pdf_tec_26_ord)",
+      "Bash(NODE_PATH=/private/tmp/claude-501/-Users-quique-Documents-documentos-eva-PAU/8698ce99-f7b7-4f83-9212-07279a26b593/scratchpad/node_env/node_modules node .claude/skills/pau-dashboard/scripts/build_pdfs.js tec_26_ord.html pdf_tec_26_ord/)",
+      "Bash(python3 -c \"import pypdf\")",
+      "Bash(python3 -c \"import fitz; print\\('pymupdf ok'\\)\")",
+      "Bash(python3 -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import fitz; print\\('pymupdf', fitz.__doc__[:30]\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(pkill -f \"http.server 8731\")",
+      "Bash(NODE_PATH=/private/tmp/claude-501/-Users-quique-Documents-documentos-eva-PAU/6c6a6c49-6b0d-4093-aeda-bbe0aca9e05d/scratchpad/node_env/node_modules node .claude/skills/pau-dashboard/scripts/build_pdfs.js tec_26_ord_coin.html pdf_tec_26_ord_coin/)",
+      "Bash(mkdir -p .claude/skill_backups)",
+      "Bash(mv .claude/skills/pau-dashboard.bak_* .claude/skill_backups/)",
+      "Bash(python3 -c \"import fitz; d=fitz.open\\('documentos/tec/tecnologÍa_25_ord_coin.pdf'\\); print\\('paginas:', d.page_count\\)\")",
+      "Bash(python3 *)"
+    ]
+  }
+}

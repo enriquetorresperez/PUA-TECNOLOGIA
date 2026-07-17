@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Extraordinaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Extraordinaria</h1>
+    <div class="sub">Universidades Públicas de la Comunidad de Madrid · Curso 2024-2025 · Convocatoria Extraordinaria · Examen resuelto y comentado</div>
+  </div>
+  <div class="pill">90 min · 2 pt/cuestión</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Bloque 1 · Proyectos y sostenibilidad</div>
+<a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">Cuestión 1 · Planta de residuos</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Bloque 2 · Materiales y fabricación</div>
+<a class="q" href="#q21" onclick="go('q21');return false;" id="l-q21">Cuestión 2.1 · Titanio (HCP)</a>
+<a class="q" href="#q22" onclick="go('q22');return false;" id="l-q22">Cuestión 2.2 · Diagrama de fases</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#4ade80"></span> Bloque 3 · Sistemas mecánicos</div>
+<a class="q" href="#q31" onclick="go('q31');return false;" id="l-q31">Cuestión 3.1 · Viga</a>
+<a class="q" href="#q32" onclick="go('q32');return false;" id="l-q32">Cuestión 3.2 · Bomba de calor</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Bloque 4 · Sistemas eléctricos y electrónicos</div>
+<a class="q" href="#q41" onclick="go('q41');return false;" id="l-q41">Cuestión 4.1 · Circuito CA</a>
+<a class="q" href="#q42" onclick="go('q42');return false;" id="l-q42">Cuestión 4.2 · Lógica y Karnaugh</a>
+</div>
+<div class="blk c5">
+<div class="bt"><span class="dot" style="background:#fb7185"></span> Bloque 5 · Sistemas informáticos y automáticos</div>
+<a class="q" href="#q51" onclick="go('q51');return false;" id="l-q51">Cuestión 5.1 · Ciberseguridad</a>
+<a class="q" href="#q52" onclick="go('q52');return false;" id="l-q52">Cuestión 5.2 · Diagrama de bloques</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Convocatoria Extraordinaria</h2>
+    <p>Selecciona un bloque o una cuestión en la barra lateral. Cada cuestión incluye el enunciado oficial, una introducción con los conceptos que vamos a aplicar y la solución paso a paso. El Bloque 1 es obligatorio; en el resto se responde <b>una de las dos</b> cuestiones de cada bloque.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_tec_25_extr/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../documentos/tec/tecnologia_25_extr.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox="0 0 100 80" width="88" height="70" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="35" cy="30" r="10" stroke="#f59e0b"/><circle cx="62" cy="30" r="10" stroke="#f59e0b"/><path d="M20 62 q15 -18 30 -3 q15 -15 30 3" stroke="#f59e0b"/></svg></div>
+      <h3>Bloque 1 · Proyectos y sostenibilidad</h3>
+      <p>Documentos técnicos, metodologías de desarrollo software y sostenibilidad de proyectos.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">Q1</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox="0 0 100 80" width="88" height="70" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M50 12 L78 28 L78 56 L50 72 L22 56 L22 28 Z" stroke="#a78bfa"/><path d="M50 12 L50 42 M50 42 L78 28 M50 42 L22 28" stroke="#a78bfa"/></svg></div>
+      <h3>Bloque 2 · Materiales y fabricación</h3>
+      <p>Estructura cristalina del titanio (HCP) y diagrama de equilibrio de fases con eutéctico.</p>
+      <div class="qlinks"><a class="k2" href="#q21" onclick="go('q21');return false;">Q21</a><a class="k2" href="#q22" onclick="go('q22');return false;">Q22</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox="0 0 100 80" width="88" height="70" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="34" width="64" height="10" stroke="#4ade80"/><path d="M24 44 L18 56 L30 56 Z" stroke="#4ade80"/><path d="M70 20 L70 34" stroke="#4ade80"/><path d="M65 28 L70 34 L75 28" stroke="#4ade80"/></svg></div>
+      <h3>Bloque 3 · Sistemas mecánicos</h3>
+      <p>Viga biapoyada con voladizo (cortante y flector) y bomba de calor con ciclo de Carnot.</p>
+      <div class="qlinks"><a class="k3" href="#q31" onclick="go('q31');return false;">Q31</a><a class="k3" href="#q32" onclick="go('q32');return false;">Q32</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox="0 0 100 80" width="88" height="70" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 45 q12 -25 24 0 t24 0 t24 0" stroke="#22d3ee"/></svg></div>
+      <h3>Bloque 4 · Sistemas eléctricos y electrónicos</h3>
+      <p>Circuito de corriente alterna RLC y análisis de una función lógica con Karnaugh.</p>
+      <div class="qlinks"><a class="k4" href="#q41" onclick="go('q41');return false;">Q41</a><a class="k4" href="#q42" onclick="go('q42');return false;">Q42</a></div>
+    </div>
+    <div class="card h5">
+      <div class="ico"><svg viewBox="0 0 100 80" width="88" height="70" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M50 12 L76 22 V42 q0 20 -26 30 q-26 -10 -26 -30 V22 Z" stroke="#fb7185"/><path d="M38 40 l9 9 l16 -18" stroke="#fb7185"/></svg></div>
+      <h3>Bloque 5 · Sistemas informáticos y automáticos</h3>
+      <p>Ciberseguridad y amenazas habituales, y simplificación de un diagrama de bloques.</p>
+      <div class="qlinks"><a class="k5" href="#q51" onclick="go('q51');return false;">Q51</a><a class="k5" href="#q52" onclick="go('q52');return false;">Q52</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1">
+  <div class="crumb">Inicio / BLOQUE 1</div>
+  <div class="qtitle"><span class="tag t1">BLOQUE 1</span> Cuestión 1 · Planta de residuos sólidos urbanos</div>
+  <div class="qmeta">Cuestión única y obligatoria · 2 puntos (a: 0,5 · b: 1,0 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Se va a construir una <b>planta de residuos sólidos urbanos</b> en las afueras de una población, con el objetivo de gestionar de manera más eficiente los desechos generados por la comunidad local. La planta usará las últimas tecnologías de tratamiento y reciclaje para reducir el impacto ambiental. Su ubicación en las afueras se ha seleccionado para minimizar las molestias a los residentes y a las áreas de interés turístico o recreativo.</p><ol type="a"><li>Justifique brevemente qué documento técnico se debe presentar para detallar económicamente dicho proyecto. <span class="pts">(0,5 puntos)</span></li><li>Para supervisar las emisiones contaminantes se desarrolla un software que mide en tiempo real el estado del aire en distintos puntos. Razone qué metodología de trabajo será la más conveniente. <span class="pts">(1 punto)</span></li><li>Analice dos aspectos en los que se puede incidir para mejorar la sostenibilidad del proyecto. <span class="pts">(0,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Es una cuestión competencial de <b>gestión de proyectos y tecnología sostenible</b>. Repasamos:</p><ul><li>Los <b>documentos de un proyecto técnico</b> (memoria, planos, pliego de condiciones, mediciones y <b>presupuesto</b>).</li><li>Las <b>metodologías de desarrollo de software</b>: tradicional en cascada frente a las <b>metodologías ágiles (Agile)</b>, iterativas e incrementales.</li><li>Los pilares de la <b>sostenibilidad</b>: ambiental, social y económica.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1">
+    <h5>a) Documento técnico para detallar económicamente el proyecto</h5><p>El documento adecuado es el <b>presupuesto</b>. Es el documento del proyecto que, a partir de las <b>mediciones</b>, valora económicamente cada unidad de obra y recurso.</p><p>En él se recogen las cantidades de trabajo, materiales y equipos necesarios, desglosados en <b>partidas</b> (excavación, cimentación, estructura, instalaciones, mano de obra, etc.), junto con costes de subcontratas, plazos y gastos de planificación, supervisión y gestión. Permite estimar el coste total y controlar la ejecución.</p><div class="res"><b>Documento: el presupuesto</b> (basado en las mediciones del proyecto).</div><h5>b) Metodología de desarrollo del software de medición</h5><p>La metodología más conveniente es una <b>metodología ágil (Agile)</b>, por tratarse de un software que debe evolucionar y validarse continuamente con datos reales. Razones:</p><ul><li><b>Flexibilidad y adaptación:</b> el sistema debe adaptarse a cambios (nuevos sensores, nuevas regulaciones medioambientales); Agile permite responder a esos cambios con rapidez.</li><li><b>Desarrollo iterativo e incremental:</b> conviene disponer cuanto antes de un producto funcional para hacer pruebas en tiempo real con los datos de calidad del aire.</li><li><b>Colaboración y comunicación continuas</b> entre desarrolladores y usuarios finales (responsables de la supervisión ambiental), manteniendo el sistema alineado con las necesidades.</li></ul><div class="res"><b>Metodología ágil (Agile)</b>: iterativa, incremental y adaptable.</div><h5>c) Dos aspectos para mejorar la sostenibilidad</h5><p>Cualquier par de medidas coherentes es válido. Por ejemplo:</p><ul><li><b>Aprovechamiento energético:</b> incorporar tecnologías de reciclaje avanzadas y sistemas de recuperación de energía (conversión de residuos orgánicos en <b>biogás</b>, paneles solares), reduciendo el consumo energético externo.</li><li><b>Separación en origen y participación ciudadana:</b> fomentar la separación y clasificación de residuos desde el origen, implicando a la comunidad local (economía circular y concienciación).</li></ul><p>Otras válidas: minimizar la <b>huella de carbono</b> con materiales de construcción sostenibles y medidas que reduzcan las emisiones durante el tratamiento.</p><div class="res">Dos medidas sostenibles justificadas (p. ej. <b>recuperación energética + separación en origen</b>).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q21" onclick="go('q21');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q21">
+  <div class="crumb">Inicio / BLOQUE 2 · Opción 1</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2 · Opción 1</span> Cuestión 2.1 · Titanio: estructura HCP</div>
+  <div class="qmeta">Opción 1 de 2 · 2 puntos (a: 0,5 · b: 0,5 · c: 0,75 · d: 0,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>El <b>titanio</b> tiene un radio atómico de <b>0,147 nm</b> y cristaliza en el sistema <b>hexagonal compacto (HCP)</b>:</p><ol type="a"><li>Represente de forma esquemática su celda unitaria. <span class="pts">(0,5 puntos)</span></li><li>Determine el índice de coordinación y el número de átomos por celdilla. <span class="pts">(0,5 puntos)</span></li><li>Calcule las constantes reticulares. <span class="pts">(0,75 puntos)</span></li><li>Explique brevemente qué quiere decir que su estado sólido es policristalino. <span class="pts">(0,25 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q21.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Trabajamos la <b>estructura hexagonal compacta (HCP)</b>, típica de metales como el titanio, el magnesio o el cinc. Necesitamos:</p><ul><li>El <b>índice de coordinación</b>: número de átomos que rodean (tocan) a un átomo dado. En HCP es <b>12</b>.</li><li>El recuento de <b>átomos por celdilla</b> (vértices, centros de cara y átomos internos).</li><li>Las <b>constantes reticulares</b> \(a\) y \(c\): en la HCP ideal \(a=2r\) y \(c=\tfrac{4r}{\sqrt{3}}\cdot\ldots\) (relación \(c/a=\sqrt{8/3}\approx1{,}633\)).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q21')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q21.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q21">
+    <h5>a) Celda unitaria hexagonal compacta</h5><p>La celdilla es un <b>prisma hexagonal</b>: 12 átomos en los vértices, 1 átomo en el centro de cada base (2) y 3 átomos en el <b>plano intermedio</b>, alojados en huecos alternos.</p><figure class="fig"><svg viewBox="0 0 300 300" width="100%" style="max-width:300px" font-family="JetBrains Mono, monospace"><line x1="150.0" y1="50.6" x2="150.0" y2="190.6" stroke="#94a3c0" stroke-width="1.4"/><line x1="210.6" y1="65.3" x2="210.6" y2="205.3" stroke="#94a3c0" stroke-width="1.4"/><line x1="210.6" y1="94.7" x2="210.6" y2="234.7" stroke="#94a3c0" stroke-width="1.4"/><line x1="150.0" y1="109.4" x2="150.0" y2="249.4" stroke="#94a3c0" stroke-width="1.4"/><line x1="89.4" y1="94.7" x2="89.4" y2="234.7" stroke="#94a3c0" stroke-width="1.4"/><line x1="89.4" y1="65.3" x2="89.4" y2="205.3" stroke="#94a3c0" stroke-width="1.4"/><path d="M 150.0,190.6 L 210.6,205.3 L 210.6,234.7 L 150.0,249.4 L 89.4,234.7 L 89.4,205.3 Z" fill="none" stroke="#94a3c0" stroke-width="1.4"/><path d="M 150.0,50.6 L 210.6,65.3 L 210.6,94.7 L 150.0,109.4 L 89.4,94.7 L 89.4,65.3 Z" fill="none" stroke="#22d3ee" stroke-width="1.8"/><line x1="150" y1="80" x2="150" y2="220" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3"/><text x="158" y="98" fill="#f59e0b" font-size="12" font-style="italic">c</text><line x1="150.0" y1="50.6" x2="150" y2="80" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 3"/><text x="150" y="74" fill="#f59e0b" font-size="12" font-style="italic">a</text><circle cx="150.0" cy="80.0" r="8" fill="#a78bfa" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="150.0" cy="220.0" r="8" fill="#a78bfa" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="150.0" cy="50.6" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="210.6" cy="65.3" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="210.6" cy="94.7" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="150.0" cy="109.4" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="89.4" cy="94.7" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="89.4" cy="65.3" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="150.0" cy="190.6" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="210.6" cy="205.3" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="210.6" cy="234.7" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="150.0" cy="249.4" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="89.4" cy="234.7" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="89.4" cy="205.3" r="6" fill="#22d3ee" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="167.5" cy="133.0" r="7" fill="#fb7185" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="167.5" cy="167.0" r="7" fill="#fb7185" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/><circle cx="115.0" cy="150.0" r="7" fill="#fb7185" fill-opacity="0.85" stroke="#e7ecf7" stroke-width="1"/></svg><figcaption>Celda unitaria HCP: vértices (azul), centros de base (violeta) y 3 átomos del plano medio (rosa). Constantes \(a\) y \(c\).</figcaption></figure><h5>b) Índice de coordinación y átomos por celdilla</h5><p>El <b>índice de coordinación</b> es el número de átomos que rodean a cada átomo. Tomando el átomo del centro de la base inferior: lo rodean <b>6</b> en los vértices de esa base, <b>3</b> en el plano medio de la celda y <b>3</b> en el plano medio de la celda inferior.</p><div class="formula">$$\text{Índice de coordinación} = 6+3+3 = \mathbf{12}$$</div><p><b>Número de átomos por celdilla:</b></p><div class="formula">$$N = \underbrace{12\cdot\tfrac{1}{6}}_{\text{vértices}} + \underbrace{2\cdot\tfrac{1}{2}}_{\text{centros de base}} + \underbrace{3}_{\text{internos}} = 2+1+3 = \mathbf{6}$$</div><div class="res"><b>Índice de coordinación = 12</b> · <b>6 átomos por celdilla</b>.</div><h5>c) Constantes reticulares</h5><p>En la estructura hexagonal compacta los átomos de la base se tocan a lo largo de la arista, luego:</p><div class="formula">$$a=b=2r=2\cdot 0{,}147\ \text{nm}=\mathbf{0{,}294\ nm}$$</div><p>La altura de la celda se obtiene de la geometría del apilamiento compacto:</p><div class="formula">$$c=\frac{4r}{\sqrt{3}}=\frac{4\cdot 0{,}147}{\sqrt{3}}=\mathbf{0{,}339\ nm}$$</div><div class="res"><b>\(a=b=0{,}294\) nm</b> · <b>\(c=0{,}339\) nm</b>.</div><h5>d) Significado de estado policristalino</h5><p>Que el sólido sea <b>policristalino</b> significa que la estructura cristalina se forma por la repetición de la celda unitaria en las tres direcciones del espacio, pero <b>no como un único cristal</b>, sino formando <b>granos</b>: regiones cristalinas con distintas orientaciones separadas por <b>bordes de grano</b>.</p>
+  </div>
+  <div class="nav-q">
+    <a href="#q1" onclick="go('q1');return false;">← Anterior</a>
+    <a href="#q22" onclick="go('q22');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q22">
+  <div class="crumb">Inicio / BLOQUE 2 · Opción 2</div>
+  <div class="qtitle"><span class="tag t2">BLOQUE 2 · Opción 2</span> Cuestión 2.2 · Diagrama de equilibrio de fases</div>
+  <div class="qmeta">Opción 2 de 2 · 2 puntos (a: 0,5 · b: 0,5 · c: 0,5 · d: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>A partir del <b>diagrama de equilibrio de fases</b> de la figura, para los metales A y B:</p><ol type="a"><li>Indique la solubilidad máxima en estado sólido de A en B y de B en A. Determine la temperatura de fusión de A y B. <span class="pts">(0,5 puntos)</span></li><li>Determine la proporción de A y B con comportamiento eutéctico. ¿A qué temperatura funde? <span class="pts">(0,5 puntos)</span></li><li>Describa el enfriamiento desde 400 ºC hasta temperatura ambiente de una aleación con 90 % de B. <span class="pts">(0,5 puntos)</span></li><li>Calcule la proporción de cada fase para una aleación con 20 % de B a 450 ºC. <span class="pts">(0,5 puntos)</span></li></ol>
+    <figure class="fig"><svg viewBox="0 0 520 400" width="100%" style="max-width:520px" font-family="JetBrains Mono, monospace"><line x1="80" y1="40" x2="80" y2="346" stroke="#26324e" stroke-width="1"/><text x="80" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">0</text><line x1="119" y1="40" x2="119" y2="346" stroke="#26324e" stroke-width="1"/><text x="119" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">10</text><line x1="158" y1="40" x2="158" y2="346" stroke="#26324e" stroke-width="1"/><text x="158" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">20</text><line x1="197" y1="40" x2="197" y2="346" stroke="#26324e" stroke-width="1"/><text x="197" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">30</text><line x1="236" y1="40" x2="236" y2="346" stroke="#26324e" stroke-width="1"/><text x="236" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">40</text><line x1="275" y1="40" x2="275" y2="346" stroke="#26324e" stroke-width="1"/><text x="275" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">50</text><line x1="314" y1="40" x2="314" y2="346" stroke="#26324e" stroke-width="1"/><text x="314" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">60</text><line x1="353" y1="40" x2="353" y2="346" stroke="#26324e" stroke-width="1"/><text x="353" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">70</text><line x1="392" y1="40" x2="392" y2="346" stroke="#26324e" stroke-width="1"/><text x="392" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">80</text><line x1="431" y1="40" x2="431" y2="346" stroke="#26324e" stroke-width="1"/><text x="431" y="386" fill="#94a3c0" font-size="12" text-anchor="middle">90</text><line x1="470" y1="40" x2="470" y2="346" stroke="#26324e" stroke-width="1"/><line x1="80" y1="346" x2="470" y2="346" stroke="#26324e" stroke-width="1"/><text x="72" y="350" fill="#94a3c0" font-size="12" text-anchor="end">200</text><line x1="80" y1="312" x2="470" y2="312" stroke="#26324e" stroke-width="1"/><text x="72" y="316" fill="#94a3c0" font-size="12" text-anchor="end">250</text><line x1="80" y1="278" x2="470" y2="278" stroke="#26324e" stroke-width="1"/><text x="72" y="282" fill="#94a3c0" font-size="12" text-anchor="end">300</text><line x1="80" y1="244" x2="470" y2="244" stroke="#26324e" stroke-width="1"/><text x="72" y="248" fill="#94a3c0" font-size="12" text-anchor="end">350</text><line x1="80" y1="210" x2="470" y2="210" stroke="#26324e" stroke-width="1"/><text x="72" y="214" fill="#94a3c0" font-size="12" text-anchor="end">400</text><line x1="80" y1="176" x2="470" y2="176" stroke="#26324e" stroke-width="1"/><text x="72" y="180" fill="#94a3c0" font-size="12" text-anchor="end">450</text><line x1="80" y1="142" x2="470" y2="142" stroke="#26324e" stroke-width="1"/><text x="72" y="146" fill="#94a3c0" font-size="12" text-anchor="end">500</text><line x1="80" y1="108" x2="470" y2="108" stroke="#26324e" stroke-width="1"/><text x="72" y="112" fill="#94a3c0" font-size="12" text-anchor="end">550</text><line x1="80" y1="74" x2="470" y2="74" stroke="#26324e" stroke-width="1"/><text x="72" y="78" fill="#94a3c0" font-size="12" text-anchor="end">600</text><line x1="80" y1="40" x2="80" y2="380" stroke="#94a3c0" stroke-width="1.6"/><line x1="80" y1="380" x2="470" y2="380" stroke="#94a3c0" stroke-width="1.6"/><path d="M 80.0,40.0 L 119.0,67.2 L 158.0,91.0 L 197.0,111.4 L 236.0,138.6 L 275.0,163.8 L 314.0,193.0 L 353.0,227.0 L 372.5,254.2 L 392.0,312.0" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 392.0,312.0 L 411.5,288.2 L 431.0,267.8 L 450.5,254.2 L 470.0,244.0" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 80.0,40.0 L 99.5,176.0 L 111.2,264.4 L 119.0,312.0" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 119.0,312.0 L 103.4,339.2 L 87.8,373.2" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="119" y1="312" x2="470" y2="312" stroke="#f59e0b" stroke-width="2.4"/><circle cx="392" cy="312" r="3.2" fill="#f59e0b"/><text x="392" y="330" fill="#f59e0b" font-size="11" text-anchor="middle">E (80% B, 250 ºC)</text><text x="92" y="278" fill="#e7ecf7" font-size="16" font-style="italic">α</text><text x="314" y="142" fill="#e7ecf7" font-size="16">L</text><text x="216" y="326" fill="#94a3c0" font-size="11">α + B</text><text x="138" y="210" fill="#94a3c0" font-size="11">α + L</text><text x="314" y="278" fill="#94a3c0" font-size="11">L + B</text><text x="18" y="210" fill="#e7ecf7" font-size="13" transform="rotate(-90 18 210)" text-anchor="middle">T (ºC)</text><text x="275" y="395" fill="#e7ecf7" font-size="13" text-anchor="middle">% en peso B</text></svg></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q22.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Interpretamos un <b>diagrama de fases binario con eutéctico</b> y solubilidad parcial en estado sólido:</p><ul><li>Las líneas de <b>liquidus</b> (por encima, todo líquido) y <b>solidus</b>/<b>solvus</b> delimitan las regiones \(\alpha\), \(L\), \(\alpha+L\), \(L+B\) y \(\alpha+B\).</li><li>El <b>punto eutéctico</b> es el mínimo de la línea de liquidus: la aleación de menor temperatura de fusión.</li><li>La <b>regla de la palanca</b> permite calcular la proporción de fases en una región bifásica.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q22')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q22.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q22">
+    <h5>a) Solubilidad máxima y temperaturas de fusión</h5><ul><li><b>A en B</b>: no hay solubilidad → <b>solubilidad máxima 0 %</b> (no aparece fase sólida rica en B con A disuelto).</li><li><b>B en A</b> (fase \(\alpha\)): la solubilidad máxima es del <b>10 %</b>, a la temperatura eutéctica de <b>250 ºC</b>.</li><li>Temperatura de fusión de <b>A = 650 ºC</b> (liquidus en 0 % B) y de <b>B = 350 ºC</b> (liquidus en 100 % B).</li></ul><div class="res">Sol. A en B = <b>0 %</b> · Sol. B en A = <b>10 % (a 250 ºC)</b> · \(T_f^A=650\) ºC · \(T_f^B=350\) ºC.</div><h5>b) Composición y temperatura eutéctica</h5><p>La aleación eutéctica es la de <b>menor temperatura de fusión</b>, situada en el mínimo del liquidus: <b>80 % B y 20 % A</b>, que funde (o solidifica) a <b>250 ºC</b>.</p><div class="res"><b>20 % A – 80 % B</b>, eutéctico a <b>250 ºC</b>.</div><h5>c) Enfriamiento de una aleación con 90 % B desde 400 ºC</h5><ul><li>A <b>400 ºC</b> la aleación está totalmente <b>líquida</b>.</li><li>Al enfriar, hacia <b>340 ºC</b> se corta el liquidus y empieza a solidificar <b>metal B</b>; el resto sigue líquido. Al bajar la temperatura crece la cantidad de B sólido y disminuye el líquido.</li><li>Al llegar a <b>250 ºC</b> (temperatura eutéctica) el líquido restante solidifica de golpe formando el <b>eutéctico</b> (mezcla de <b>B</b> y solución sólida <b>\(\alpha\)</b>, que es A con hasta un 10 % de B disuelto).</li><li>Por debajo de 250 ºC coexisten <b>\(\alpha\) y B</b>; al seguir enfriando disminuye el B disuelto en \(\alpha\) (línea solvus) hasta que, a temperatura ambiente, las fases son prácticamente <b>A puro y B puro</b>.</li></ul><h5>d) Proporción de fases: 20 % B a 450 ºC (regla de la palanca)</h5><p>A 450 ºC y 20 % B coexisten <b>líquido</b> y sólido <b>\(\alpha\)</b>. Los extremos de la horizontal a 450 ºC son \(\alpha\) con <b>5 % B</b> (solidus) y líquido con <b>60 % B</b> (liquidus). Aplicando la regla de la palanca:</p><div class="formula">$$\%\,\alpha=\frac{60-20}{60-5}\cdot100=\mathbf{72{,}7\%}\qquad \%\,L=\frac{20-5}{60-5}\cdot100=\mathbf{27{,}3\%}$$</div><div class="res">A 450 ºC: <b>72,7 % de \(\alpha\)</b> y <b>27,3 % de líquido</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q21" onclick="go('q21');return false;">← Anterior</a>
+    <a href="#q31" onclick="go('q31');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q31">
+  <div class="crumb">Inicio / BLOQUE 3 · Opción 1</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3 · Opción 1</span> Cuestión 3.1 · Viga: reacciones y diagramas</div>
+  <div class="qmeta">Opción 1 de 2 · 2 puntos (a: 0,5 · b: 1,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>De la viga que se muestra en la figura (apoyo fijo en A, apoyo móvil en B a 2 m de A y carga puntual \(P=400\ \text{N}\) en el extremo, a 1 m de B):</p><ol type="a"><li>Calcule las reacciones en los apoyos. <span class="pts">(0,5 puntos)</span></li><li>Represente los diagramas de esfuerzo cortante y momento flector. <span class="pts">(1,5 puntos)</span></li></ol>
+    <figure class="fig"><svg viewBox="0 0 540 210" width="100%" style="max-width:540px" font-family="JetBrains Mono, monospace"><rect x="70" y="95" width="390" height="17" fill="#334155" stroke="#e7ecf7" stroke-width="1.5"/><path d="M 70,112 L 59,132 L 81,132 Z" fill="none" stroke="#4ade80" stroke-width="2"/><line x1="55" y1="132" x2="85" y2="132" stroke="#4ade80" stroke-width="2"/><text x="66" y="87" fill="#e7ecf7" font-size="15" text-anchor="end">A</text><path d="M 330,112 L 319,128 L 341,128 Z" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="324" cy="132" r="4" fill="none" stroke="#4ade80" stroke-width="1.6"/><circle cx="336" cy="132" r="4" fill="none" stroke="#4ade80" stroke-width="1.6"/><line x1="315" y1="136" x2="345" y2="136" stroke="#4ade80" stroke-width="2"/><text x="326" y="87" fill="#e7ecf7" font-size="15" text-anchor="end">B</text><line x1="460" y1="35" x2="460" y2="95" stroke="#fb7185" stroke-width="2.6"/><path d="M 455,86 L 460,95 L 465,86 Z" fill="#fb7185"/><text x="454" y="30" fill="#fb7185" font-size="14" font-weight="bold" text-anchor="middle">P = 400 N</text><line x1="70" y1="170" x2="330" y2="170" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="166" x2="70" y2="174" stroke="#94a3c0" stroke-width="1.2"/><line x1="330" y1="166" x2="330" y2="174" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="138" x2="70" y2="170" stroke="#94a3c0" stroke-width="0.7" stroke-dasharray="3 3"/><text x="200" y="164" fill="#e7ecf7" font-size="13" text-anchor="middle">2 m</text><line x1="330" y1="170" x2="460" y2="170" stroke="#94a3c0" stroke-width="1.2"/><line x1="330" y1="166" x2="330" y2="174" stroke="#94a3c0" stroke-width="1.2"/><line x1="460" y1="166" x2="460" y2="174" stroke="#94a3c0" stroke-width="1.2"/><line x1="330" y1="138" x2="330" y2="170" stroke="#94a3c0" stroke-width="0.7" stroke-dasharray="3 3"/><text x="395" y="164" fill="#e7ecf7" font-size="13" text-anchor="middle">1 m</text><line x1="460" y1="95" x2="460" y2="170" stroke="#94a3c0" stroke-width="0.7" stroke-dasharray="3 3"/></svg></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q31.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Es una <b>viga biapoyada con voladizo</b>. Aplicamos:</p><ul><li><b>Equilibrio estático:</b> \(\sum F_y=0\) y \(\sum M=0\) para hallar las reacciones \(R_A\) y \(R_B\).</li><li>El <b>esfuerzo cortante</b> \(V(x)\) y el <b>momento flector</b> \(M(x)\) por tramos, con el criterio de signos habitual y la relación \(\dfrac{dM}{dx}=V\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q31')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q31.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q31">
+    <h5>a) Reacciones en los apoyos</h5><p>Viga simplemente apoyada: apoyo simple en A y apoyo móvil en B, ambos con reacción vertical \(R_A\) y \(R_B\).</p><p><b>Equilibrio de fuerzas verticales:</b></p><div class="formula">$$R_A+R_B=400\ \text{N}$$</div><p><b>Equilibrio de momentos respecto de A</b> (la carga está a 3 m de A y B a 2 m):</p><div class="formula">$$400\cdot 3 - R_B\cdot 2 = 0 \;\Rightarrow\; R_B=\frac{1200}{2}=600\ \text{N}$$</div><div class="formula">$$R_A = 400 - 600 = -200\ \text{N}$$</div><div class="res"><b>\(R_A=-200\ \text{N}\)</b> (hacia abajo) · <b>\(R_B=+600\ \text{N}\)</b> (hacia arriba).</div><h5>b) Diagramas de esfuerzo cortante y momento flector</h5><p><b>Tramo 0 ≤ x ≤ 2 m</b> (entre A y B):</p><div class="formula">$$V(x)=R_A=-200\ \text{N};\qquad M(x)=R_A\,x=-200\,x\ (\mathrm{N{\cdot}m})$$</div><p><b>Tramo 2 ≤ x ≤ 3 m</b> (voladizo):</p><div class="formula">$$V(x)=R_A+R_B=400\ \text{N};\qquad M(x)=R_A\,x+R_B(x-2)=400\,x-1200\ (\mathrm{N{\cdot}m})$$</div><p>Valores clave: \(M(0)=0\), \(M(2)=-400\ \mathrm{N{\cdot}m}\) (mínimo, sobre el apoyo B) y \(M(3)=0\) en el extremo cargado.</p><figure class="fig"><svg viewBox="0 0 540 380" width="100%" style="max-width:540px" font-family="JetBrains Mono, monospace"><text x="30" y="60" fill="#e7ecf7" font-size="12">V(x) [N]</text><line x1="70" y1="90" x2="480" y2="90" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="45" x2="70" y2="135" stroke="#94a3c0" stroke-width="1.2"/><path d="M 70,90 L 70,108 L 330,108 L 330,54 L 460,54 L 460,90" fill="#22d3ee" fill-opacity="0.18" stroke="#22d3ee" stroke-width="2.2" stroke-linejoin="round"/><text x="200" y="124" fill="#22d3ee" font-size="12" text-anchor="middle">−200</text><text x="395" y="48" fill="#22d3ee" font-size="12" text-anchor="middle">+400</text><text x="70" y="148" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><text x="330" y="148" fill="#94a3c0" font-size="11" text-anchor="middle">B</text><text x="460" y="148" fill="#94a3c0" font-size="11" text-anchor="middle">P</text><text x="30" y="235" fill="#e7ecf7" font-size="12">M(x) [N·m]</text><line x1="70" y1="290" x2="480" y2="290" stroke="#94a3c0" stroke-width="1.2"/><line x1="70" y1="240" x2="70" y2="300" stroke="#94a3c0" stroke-width="1.2"/><path d="M 70,290 L 330,330 L 460,290 Z" fill="#f59e0b" fill-opacity="0.18" stroke="#f59e0b" stroke-width="2.2" stroke-linejoin="round"/><text x="330" y="346" fill="#f59e0b" font-size="12" text-anchor="middle">−400</text><line x1="70" y1="288" x2="70" y2="294" stroke="#94a3c0" stroke-width="1"/><text x="70" y="284" fill="#94a3c0" font-size="11" text-anchor="middle">A</text><line x1="330" y1="288" x2="330" y2="294" stroke="#94a3c0" stroke-width="1"/><text x="330" y="284" fill="#94a3c0" font-size="11" text-anchor="middle">B</text><line x1="460" y1="288" x2="460" y2="294" stroke="#94a3c0" stroke-width="1"/><text x="460" y="284" fill="#94a3c0" font-size="11" text-anchor="middle">P</text></svg><figcaption>Diagrama de esfuerzo cortante (constante a tramos) y de momento flector (triangular, mínimo −400 N·m en B).</figcaption></figure><div class="res">Cortante: <b>−200 N</b> (0–2 m) y <b>+400 N</b> (2–3 m). Momento mínimo <b>−400 N·m en B</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q22" onclick="go('q22');return false;">← Anterior</a>
+    <a href="#q32" onclick="go('q32');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q32">
+  <div class="crumb">Inicio / BLOQUE 3 · Opción 2</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE 3 · Opción 2</span> Cuestión 3.2 · Bomba de calor (Carnot)</div>
+  <div class="qmeta">Opción 2 de 2 · 2 puntos (a: 1,0 · b: 0,5 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Una <b>bomba de calor</b> se emplea como calefacción para mantener una vivienda a <b>25 ºC</b> cuando en el exterior hay <b>−2 ºC</b>. Se necesitan suministrar <b>5000 MJ al día</b> al foco caliente.</p><ol type="a"><li>Potencia teórica, suponiendo que la bomba sigue un ciclo de Carnot. <span class="pts">(1 punto)</span></li></ol><p>Si el rendimiento del ciclo operativo real es el <b>20 %</b> del de Carnot:</p><ol type="a" start="2"><li>Determine la potencia consumida por la bomba. <span class="pts">(0,5 puntos)</span></li><li>Calcule el calor absorbido del foco frío por día. <span class="pts">(0,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q32.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Aplicamos el modelo de <b>bomba de calor de Carnot</b>. Conceptos:</p><ul><li>La <b>eficiencia (COP) de una bomba de calor</b> de Carnot: \(\varepsilon_{BC}=\dfrac{Q_C}{W}=\dfrac{T_C}{T_C-T_F}\), con temperaturas en <b>kelvin</b>.</li><li>Relación entre trabajo, calor y <b>potencia</b>: \(P=\dfrac{W}{t}\).</li><li>Balance de energía: \(Q_C=Q_F+W\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q32')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q32.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q32">
+    <h5>a) Potencia teórica (ciclo de Carnot)</h5><p>Temperaturas absolutas: \(T_C=25+273=298\ \text{K}\), \(T_F=-2+273=271\ \text{K}\). Eficiencia de la bomba de calor de Carnot:</p><div class="formula">$$\varepsilon_{BC}=\frac{T_C}{T_C-T_F}=\frac{298}{298-271}=\frac{298}{27}\approx 11$$</div><p>Trabajo necesario en un día para aportar \(Q_C=5000\ \text{MJ}\):</p><div class="formula">$$W=\frac{Q_C}{\varepsilon_{BC}}=\frac{5000}{11}=454{,}5\ \text{MJ}$$</div><p>Potencia teórica (un día = \(24\cdot 3600\ \text{s}\)):</p><div class="formula">$$P=\frac{W}{t}=\frac{454{,}5\cdot10^{6}\ \text{J}}{24\cdot 3600\ \text{s}}=\mathbf{5{,}26\ kW}$$</div><div class="res"><b>\(\varepsilon_{BC}\approx 11\)</b> · Potencia teórica <b>\(P\approx 5{,}26\) kW</b>.</div><h5>b) Potencia consumida real</h5><p>La eficiencia real es el 20 % de la de Carnot:</p><div class="formula">$$\varepsilon_{real}=0{,}2\cdot 11 = 2{,}2$$</div><div class="formula">$$W_{real}=\frac{Q_C}{\varepsilon_{real}}=\frac{5000}{2{,}2}=2272{,}7\ \text{MJ}$$</div><div class="formula">$$P=\frac{W_{real}}{t}=\frac{2272{,}7\cdot10^{6}}{24\cdot 3600}=\mathbf{26{,}3\ kW}$$</div><div class="res">Potencia real consumida <b>\(P\approx 26{,}3\) kW</b>.</div><h5>c) Calor absorbido del foco frío por día</h5><p>Por el balance de energía \(Q_C=Q_F+W_{real}\):</p><div class="formula">$$Q_F=Q_C-W_{real}=5000-2272{,}7=\mathbf{2727{,}3\ MJ/día}$$</div><div class="res">Calor absorbido del foco frío <b>\(Q_F\approx 2727{,}3\) MJ al día</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q31" onclick="go('q31');return false;">← Anterior</a>
+    <a href="#q41" onclick="go('q41');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q41">
+  <div class="crumb">Inicio / BLOQUE 4 · Opción 1</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4 · Opción 1</span> Cuestión 4.1 · Circuito de corriente alterna</div>
+  <div class="qmeta">Opción 1 de 2 · 2 puntos (a: 0,5 · b: 0,5 · c: 1,0)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dado el circuito de la figura, determine:</p><ol type="a"><li>Valor de la impedancia total del circuito. <span class="pts">(0,5 puntos)</span></li><li>Valor eficaz de la corriente que circula por el generador. <span class="pts">(0,5 puntos)</span></li><li>Potencia activa, reactiva y aparente en el generador. <span class="pts">(1 punto)</span></li></ol><p class="datos"><b>Datos:</b> \(E=20\ \text{V}\) (eficaces); \(R_1=8\ \Omega\); \(R_2=8\ \Omega\); \(X_{L1}=10\ \Omega\); \(X_{L2}=10\ \Omega\); \(X_{C1}=2\ \Omega\).</p>
+    <figure class="fig"><svg viewBox="0 0 560 300" width="100%" style="max-width:560px" font-family="JetBrains Mono, monospace"><line x1="90" y1="80" x2="90" y2="146" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="90" y1="194" x2="90" y2="250" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><circle cx="90" cy="170" r="24" fill="none" stroke="#22d3ee" stroke-width="2.4"/><path d="M 78,170 q 6,-12 12,0 q 6,12 12,0" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="56" y="175" fill="#e7ecf7" font-size="16" font-style="italic">E</text><text x="99" y="142" fill="#e7ecf7" font-size="16">+</text><line x1="90" y1="80" x2="175" y2="80" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="300" y1="80" x2="350" y2="80" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="440" y1="80" x2="475" y2="80" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="489" y1="80" x2="520" y2="80" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="520" y1="80" x2="520" y2="250" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="520" y1="250" x2="90" y2="250" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="175" y1="54" x2="175" y2="106" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="300" y1="54" x2="300" y2="106" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><path d="M 175,54 L 185,54 L 196,46 L 217,62 L 238,46 L 258,62 L 279,46 L 290,54 L 300,54" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 175,106 L 185,106 L 196,98 L 217,114 L 238,98 L 258,114 L 279,98 L 290,106 L 300,106" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="238" y="41" fill="#e7ecf7" font-size="15" text-anchor="middle" font-style="italic">R₁</text><text x="238" y="130" fill="#e7ecf7" font-size="15" text-anchor="middle" font-style="italic">R₂</text><line x1="350" y1="54" x2="350" y2="106" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><line x1="440" y1="54" x2="440" y2="106" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/><path d="M 350,54 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0" fill="none" stroke="#22d3ee" stroke-width="2.4"/><path d="M 350,106 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0 a 11.2,11.2 0 0 1 22.5,0" fill="none" stroke="#22d3ee" stroke-width="2.4"/><text x="395" y="41" fill="#e7ecf7" font-size="15" text-anchor="middle" font-style="italic">L₁</text><text x="395" y="130" fill="#e7ecf7" font-size="15" text-anchor="middle" font-style="italic">L₂</text><line x1="475" y1="65" x2="475" y2="95" stroke="#22d3ee" stroke-width="2.6"/><line x1="489" y1="65" x2="489" y2="95" stroke="#22d3ee" stroke-width="2.6"/><text x="482" y="58" fill="#e7ecf7" font-size="15" text-anchor="middle" font-style="italic">C₁</text><circle cx="175" cy="80" r="3.2" fill="#22d3ee"/><circle cx="300" cy="80" r="3.2" fill="#22d3ee"/><circle cx="350" cy="80" r="3.2" fill="#22d3ee"/><circle cx="440" cy="80" r="3.2" fill="#22d3ee"/></svg></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q41.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Circuito de <b>corriente alterna</b> con asociaciones de componentes:</p><ul><li><b>Asociación en paralelo</b> de las dos resistencias y de las dos reactancias inductivas.</li><li><b>Impedancia</b> de un circuito serie R-L-C: \(Z=\sqrt{R^2+(X_L-X_C)^2}\).</li><li><b>Ley de Ohm</b> en alterna y el <b>triángulo de potencias</b> (activa \(P\), reactiva \(Q\), aparente \(S\)).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q41')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q41.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q41">
+    <h5>a) Impedancia total</h5><p>\(R_1\) y \(R_2\) están en <b>paralelo</b>:</p><div class="formula">$$R_{eq}=\frac{R_1 R_2}{R_1+R_2}=\frac{8\cdot 8}{8+8}=4\ \Omega$$</div><p>Igualmente \(X_{L1}\) y \(X_{L2}\) en paralelo:</p><div class="formula">$$X_{Leq}=\frac{X_{L1}X_{L2}}{X_{L1}+X_{L2}}=\frac{10\cdot 10}{10+10}=5\ \Omega$$</div><p>El circuito queda como \(R_{eq}\), \(X_{Leq}\) y \(X_{C1}\) en serie:</p><div class="formula">$$Z=\sqrt{R_{eq}^2+(X_{Leq}-X_{C1})^2}=\sqrt{4^2+(5-2)^2}=\sqrt{25}=\mathbf{5\ \Omega}$$</div><p>En forma compleja: \(\bar Z = 4+j(5-2)=(4+j3)\ \Omega\).</p><div class="res"><b>\(Z=5\ \Omega\)</b> \(\;(\bar Z=4+j3\ \Omega)\).</div><h5>b) Valor eficaz de la corriente del generador</h5><div class="formula">$$I_E=\frac{E}{Z}=\frac{20}{5}=\mathbf{4\ A}$$</div><p>En forma fasorial: \(\bar I_E=\dfrac{20}{4+j3}=3{,}2-j2{,}4=4\angle{-36{,}87^\circ}\ \text{A}\).</p><div class="res"><b>\(I_E=4\ \text{A}\)</b> (eficaces).</div><h5>c) Potencias en el generador</h5><p><b>Potencia activa</b> (disipada por \(R_{eq}\)):</p><div class="formula">$$P_E=R_{eq}\,I_E^2=4\cdot 4^2=\mathbf{64\ W}$$</div><p><b>Potencia reactiva</b> (diferencia entre la de \(X_{Leq}\) y la de \(X_{C1}\)):</p><div class="formula">$$Q_E=(X_{Leq}-X_{C1})\,I_E^2=(5-2)\cdot 4^2=\mathbf{48\ var}$$</div><p><b>Potencia aparente</b> (triángulo de potencias):</p><div class="formula">$$S_E=\sqrt{P_E^2+Q_E^2}=\sqrt{64^2+48^2}=\mathbf{80\ VA}$$</div><div class="res"><b>\(P_E=64\) W</b> · <b>\(Q_E=48\) var</b> · <b>\(S_E=80\) VA</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q32" onclick="go('q32');return false;">← Anterior</a>
+    <a href="#q42" onclick="go('q42');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q42">
+  <div class="crumb">Inicio / BLOQUE 4 · Opción 2</div>
+  <div class="qtitle"><span class="tag t4">BLOQUE 4 · Opción 2</span> Cuestión 4.2 · Circuito digital y Karnaugh</div>
+  <div class="qmeta">Opción 2 de 2 · 2 puntos (a: 0,75 · b: 0,75 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dado el circuito digital de la figura:</p><ol type="a"><li>Obtenga la tabla de verdad de la función \(F(A,B,C)\). <span class="pts">(0,75 puntos)</span></li><li>Obtenga la expresión lógica más simplificada de \(F(A,B,C)\) usando el método de Karnaugh. <span class="pts">(0,75 puntos)</span></li><li>Represente el circuito simplificado correspondiente. <span class="pts">(0,5 puntos)</span></li></ol>
+    <figure class="fig"><svg viewBox="0 0 680 360" width="100%" style="max-width:680px" font-family="JetBrains Mono, monospace"><text x="26" y="55" fill="#e7ecf7" font-size="15" font-weight="bold">A</text><text x="26" y="95" fill="#e7ecf7" font-size="15" font-weight="bold">B</text><text x="26" y="305" fill="#e7ecf7" font-size="15" font-weight="bold">C</text><path d="M 165,45 Q 180,45 219,70 Q 180,95 165,95 Q 181,70 165,45 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><path d="M 40,50 L 165,50" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 40,90 L 165,90" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="95" cy="50" r="3.2" fill="#e7ecf7"/><circle cx="125" cy="90" r="3.2" fill="#e7ecf7"/><path d="M 95,50 L 95,230" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="95" cy="150" r="3.2" fill="#e7ecf7"/><path d="M 95,150 L 150,150" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 150,135 L 150,165 L 177,150 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><circle cx="181" cy="150" r="4" fill="none" stroke="#e7ecf7" stroke-width="2.2"/><path d="M 125,90 L 125,152 L 235,152" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 185,150 L 235,172" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 235,140 L 269,140 A 22.0,22.0 0 0 1 269,184 L 235,184 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><path d="M 291,162 L 330,162" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="330" cy="162" r="3.2" fill="#e7ecf7"/><path d="M 219,70 L 270,70 L 270,110 L 300,110" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 300,95 L 300,125 L 327,110 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><circle cx="331" cy="110" r="4" fill="none" stroke="#e7ecf7" stroke-width="2.2"/><path d="M 335,110 L 400,110" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 330,162 L 330,121 L 400,121" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 400,80 Q 415,80 454,107 Q 415,134 400,134 Q 416,107 400,80 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><path d="M 40,300 L 250,300" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 250,285 L 250,315 L 277,300 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><circle cx="281" cy="300" r="4" fill="none" stroke="#e7ecf7" stroke-width="2.2"/><path d="M 330,162 L 330,212 L 430,212" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 95,230 L 430,230" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 285,300 L 410,300 L 410,248 L 430,248" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 430,200 L 470,200 A 30.0,30.0 0 0 1 470,260 L 430,260 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><path d="M 454,107 L 530,107 L 530,167 L 575,167" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 500,230 L 555,230 L 555,203 L 575,203" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 575,150 Q 591,150 631,185 Q 591,220 575,220 Q 592,185 575,150 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><path d="M 631,185 L 653,185" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="661" y="190" fill="#e7ecf7" font-size="15" font-weight="bold">F</text></svg></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q42.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Análisis de un <b>circuito lógico combinacional</b>:</p><ul><li>Obtener la <b>función lógica</b> propagando las entradas por cada puerta (OR, AND, NOT) hasta la salida, o dando valores para rellenar la <b>tabla de verdad</b>.</li><li>Simplificar con un <b>mapa de Karnaugh</b> agrupando 1 (o 0) en potencias de dos.</li><li>Dibujar el <b>circuito mínimo</b> equivalente.</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q42')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q42.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q42">
+    <h5>a) Tabla de verdad</h5><p>Propagando las entradas por las puertas (o dando valores), se obtiene:</p><table class="dat"><thead><tr><th>A</th><th>B</th><th>C</th><th>F</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>0</td></tr></tbody></table><p>Se observa que \(F\) vale 1 siempre que \(A=0\) y 0 siempre que \(A=1\), independientemente de B y C.</p><h5>b) Simplificación por Karnaugh</h5><p>Colocando los valores en el mapa, todos los 1 quedan en las dos filas con \(A=0\); se agrupan en un único bloque de 8 celdas que elimina B y C:</p><figure class="fig"><svg viewBox="0 0 300 230" width="100%" style="max-width:300px" font-family="JetBrains Mono, monospace"><text x="38" y="44" fill="#94a3c0" font-size="13">AB</text><text x="60" y="22" fill="#94a3c0" font-size="13">C</text><line x1="32" y1="8" x2="90" y2="44" stroke="#94a3c0" stroke-width="1"/><text x="125" y="36" fill="#94a3c0" font-size="13" text-anchor="middle">0</text><text x="195" y="36" fill="#94a3c0" font-size="13" text-anchor="middle">1</text><text x="76" y="81" fill="#94a3c0" font-size="13" text-anchor="end">00</text><rect x="90" y="60" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="125" y="81" fill="#4ade80" font-size="16" text-anchor="middle" font-weight="bold">1</text><rect x="160" y="60" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="195" y="81" fill="#4ade80" font-size="16" text-anchor="middle" font-weight="bold">1</text><text x="76" y="113" fill="#94a3c0" font-size="13" text-anchor="end">01</text><rect x="90" y="92" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="125" y="113" fill="#4ade80" font-size="16" text-anchor="middle" font-weight="bold">1</text><rect x="160" y="92" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="195" y="113" fill="#4ade80" font-size="16" text-anchor="middle" font-weight="bold">1</text><text x="76" y="145" fill="#94a3c0" font-size="13" text-anchor="end">11</text><rect x="90" y="124" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="125" y="145" fill="#94a3c0" font-size="16" text-anchor="middle" font-weight="bold">0</text><rect x="160" y="124" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="195" y="145" fill="#94a3c0" font-size="16" text-anchor="middle" font-weight="bold">0</text><text x="76" y="177" fill="#94a3c0" font-size="13" text-anchor="end">10</text><rect x="90" y="156" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="125" y="177" fill="#94a3c0" font-size="16" text-anchor="middle" font-weight="bold">0</text><rect x="160" y="156" width="70" height="32" fill="none" stroke="#26324e" stroke-width="1.2"/><text x="195" y="177" fill="#94a3c0" font-size="16" text-anchor="middle" font-weight="bold">0</text><rect x="86" y="56" width="148" height="72" rx="16" fill="none" stroke="#f59e0b" stroke-width="2.4"/><text x="160" y="218" fill="#e7ecf7" font-size="15" text-anchor="middle">F(A,B,C) = Ā</text></svg><figcaption>Mapa de Karnaugh: la agrupación de los cuatro 1 (filas AB=00 y 01) da \(F=\bar A\). Agrupando ceros se obtiene la misma expresión.</figcaption></figure><div class="res"><b>\(F(A,B,C)=\overline{A}\)</b>.</div><h5>c) Circuito simplificado</h5><p>La función simplificada es un simple <b>inversor</b> (puerta NOT) aplicado a la entrada A:</p><figure class="fig"><svg viewBox="0 0 260 120" width="100%" style="max-width:260px" font-family="JetBrains Mono, monospace"><text x="26" y="65" fill="#e7ecf7" font-size="15" font-weight="bold">A</text><path d="M 45,60 L 110,60" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 110,38 L 110,82 L 150,60 Z" fill="none" stroke="#e7ecf7" stroke-width="2.2" stroke-linejoin="round"/><circle cx="154" cy="60" r="4" fill="none" stroke="#e7ecf7" stroke-width="2.2"/><path d="M 158,60 L 198,60" fill="none" stroke="#e7ecf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="206" y="65" fill="#e7ecf7" font-size="15" font-weight="bold">F</text></svg><figcaption>Circuito mínimo equivalente: \(F=\bar A\) (una única puerta NOT).</figcaption></figure><div class="res">El circuito se reduce a <b>una puerta NOT</b>: \(F=\bar A\).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q41" onclick="go('q41');return false;">← Anterior</a>
+    <a href="#q51" onclick="go('q51');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q51">
+  <div class="crumb">Inicio / BLOQUE 5 · Opción 1</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5 · Opción 1</span> Cuestión 5.1 · Ciberseguridad</div>
+  <div class="qmeta">Opción 1 de 2 · 2 puntos (a: 1,0 · b: 1,0)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type="a"><li>¿Qué es la ciberseguridad? <span class="pts">(1 punto)</span></li><li>Indique algunas de las amenazas más habituales que pueden sufrir los equipos informáticos y las redes telemáticas. <span class="pts">(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q51.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cuestión teórica de <b>seguridad informática</b>. Conviene definir la ciberseguridad en torno a la tríada <b>confidencialidad, integridad y disponibilidad</b> (CIA) y enumerar las <b>amenazas</b> más comunes con una breve descripción de cada una.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q51')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q51.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q51">
+    <h5>a) ¿Qué es la ciberseguridad?</h5><p>La <b>ciberseguridad</b> es el conjunto de <b>medidas, herramientas y técnicas</b> diseñadas para proteger los sistemas informáticos, redes, dispositivos y datos frente a accesos no autorizados, daños o robos. Su objetivo es garantizar la <b>confidencialidad, la integridad y la disponibilidad</b> de la información, así como la protección de los recursos digitales frente a amenazas internas y externas.</p><div class="res">Protección de sistemas, redes y datos garantizando <b>confidencialidad, integridad y disponibilidad</b>.</div><h5>b) Amenazas más habituales</h5><ul><li><b>Denegación de servicio (DoS):</b> se satura un sistema con un volumen elevado de peticiones para interrumpir su funcionamiento.</li><li><b>Malware:</b> software malicioso diseñado para acceder a los sistemas sin autorización (virus, troyanos, gusanos, spyware…).</li><li><b>Phishing:</b> engañar al usuario (correos o webs falsas) para obtener datos sensibles como contraseñas o datos bancarios.</li><li><b>Ransomware:</b> software que bloquea el acceso del usuario a sus propios datos (cifrándolos) y exige un pago para recuperarlos.</li><li><b>Ingeniería social:</b> aprovechar la confianza, ingenuidad o descuido de las personas para que revelen información confidencial o den acceso a los sistemas.</li></ul><div class="res">Ejemplos: <b>DoS, malware, phishing, ransomware, ingeniería social</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q42" onclick="go('q42');return false;">← Anterior</a>
+    <a href="#q52" onclick="go('q52');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q52">
+  <div class="crumb">Inicio / BLOQUE 5 · Opción 2</div>
+  <div class="qtitle"><span class="tag t5">BLOQUE 5 · Opción 2</span> Cuestión 5.2 · Diagrama de bloques</div>
+  <div class="qmeta">Opción 2 de 2 · 2 puntos (a: 0,5 · b: 1,0 · c: 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Observa el diagrama de bloques de la figura y realiza las tareas indicadas.</p><ol type="a"><li>Justifique si el sistema está en lazo cerrado o en lazo abierto. <span class="pts">(0,5 puntos)</span></li><li>Simplifique el diagrama para obtener uno equivalente con un solo bloque. <span class="pts">(1 punto)</span></li><li>¿Cuál es la función de transferencia entre R e Y? <span class="pts">(0,5 puntos)</span></li></ol>
+    <figure class="fig"><svg viewBox="0 0 560 200" width="100%" style="max-width:560px" font-family="JetBrains Mono, monospace"><text x="40" y="62" fill="#e7ecf7" font-size="16">R</text><path d="M 30,70 L 95,70" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 92,66 L 100,70 L 92,74 Z" fill="#22d3ee"/><circle cx="118" cy="70" r="18" fill="none" stroke="#e7ecf7" stroke-width="2"/><line x1="100" y1="70" x2="136" y2="70" stroke="#e7ecf7" stroke-width="1"/><line x1="118" y1="52" x2="118" y2="88" stroke="#e7ecf7" stroke-width="1"/><text x="107" y="66" fill="#e7ecf7" font-size="12">+</text><text x="106" y="85" fill="#e7ecf7" font-size="14">−</text><path d="M 136,70 L 200,70" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 197,66 L 205,70 L 197,74 Z" fill="#22d3ee"/><rect x="205" y="44" width="80" height="52" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="245" y="77" fill="#e7ecf7" font-size="18" text-anchor="middle" font-style="italic">C</text><path d="M 285,70 L 330,70" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 327,66 L 335,70 L 327,74 Z" fill="#22d3ee"/><rect x="335" y="44" width="80" height="52" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="375" y="77" fill="#e7ecf7" font-size="18" text-anchor="middle" font-style="italic">G</text><path d="M 415,70 L 510,70" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 507,66 L 515,70 L 507,74 Z" fill="#22d3ee"/><text x="470" y="62" fill="#e7ecf7" font-size="16">Y</text><path d="M 455,70 L 455,150 L 118,150 L 118,88" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 114,96 L 118,88 L 122,96 Z" fill="#a78bfa"/></svg></figure>
+    <a class="enlace-pdf" href="pdf_tec_25_extr/q52.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p><b>Álgebra de diagramas de bloques</b> en sistemas de control:</p><ul><li>Un sistema está en <b>lazo cerrado</b> si existe un camino de <b>realimentación</b> de la salida hacia la entrada (punto de suma).</li><li>Bloques en <b>serie</b> se multiplican; un <b>lazo con realimentación</b> negativa unitaria se reduce a \(\dfrac{G}{1+G}\).</li></ul>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q52')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_tec_25_extr/q52.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q52">
+    <h5>a) ¿Lazo abierto o cerrado?</h5><p>El sistema está en <b>lazo cerrado</b>: existe un <b>camino de realimentación</b> desde la salida Y hacia el <b>punto de suma</b> de la entrada (con signo negativo), de modo que la salida influye en la señal de error.</p><div class="res">Sistema en <b>lazo cerrado</b> (realimentación negativa unitaria).</div><h5>b) Simplificación a un solo bloque</h5><p><b>Paso 1.</b> Los bloques \(C\) y \(G\) están en <b>serie</b>, se fusionan en uno: \(C\cdot G\).</p><p><b>Paso 2.</b> Se simplifica el <b>lazo cerrado</b> con realimentación unitaria:</p><div class="formula">$$\frac{C\cdot G}{1+C\cdot G}$$</div><figure class="fig"><svg viewBox="0 0 560 220" width="100%" style="max-width:560px" font-family="JetBrains Mono, monospace"><text x="20" y="65" fill="#94a3c0" font-size="12">Paso 1</text><text x="80" y="52" fill="#e7ecf7" font-size="14">R</text><path d="M 75,60 L 112,60" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="130" cy="60" r="16" fill="none" stroke="#e7ecf7" stroke-width="2"/><text x="118" y="57" fill="#e7ecf7" font-size="11">+</text><text x="117" y="74" fill="#e7ecf7" font-size="12">−</text><path d="M 146,60 L 215,60" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="215" y="36" width="110" height="48" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="270" y="66" fill="#e7ecf7" font-size="16" text-anchor="middle" font-style="italic">C · G</text><path d="M 325,60 L 470,60" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="440" y="52" fill="#e7ecf7" font-size="14">Y</text><path d="M 400,60 L 400,115 L 130,115 L 130,76" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="20" y="175" fill="#94a3c0" font-size="12">Paso 2</text><text x="80" y="162" fill="#e7ecf7" font-size="14">R</text><path d="M 75,170 L 215,170" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="215" y="144" width="130" height="52" fill="none" stroke="#4ade80" stroke-width="2"/><text x="280" y="172" fill="#e7ecf7" font-size="13" text-anchor="middle">C·G</text><line x1="248" y1="177" x2="312" y2="177" stroke="#e7ecf7" stroke-width="1"/><text x="280" y="192" fill="#e7ecf7" font-size="13" text-anchor="middle">1+C·G</text><path d="M 345,170 L 470,170" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="440" y="162" fill="#e7ecf7" font-size="14">Y</text></svg><figcaption>Simplificación: primero se agrupan C·G en serie y después se reduce el lazo de realimentación unitaria a un único bloque.</figcaption></figure><h5>c) Función de transferencia entre R e Y</h5><div class="formula">$$\frac{Y}{R}=\frac{C\cdot G}{1+C\cdot G}$$</div><div class="res"><b>\(\dfrac{Y}{R}=\dfrac{C\cdot G}{1+C\cdot G}\)</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q51" onclick="go('q51');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Dpto. Tecnología · Solucionario PAU 2025 · Tecnología e Ingeniería II (Extraordinaria)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>
