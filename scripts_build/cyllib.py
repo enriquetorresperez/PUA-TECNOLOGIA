@@ -119,6 +119,28 @@ class Plot:
         return self.s + "</svg>"
 
 
+def phase_eutectic(TfL, TfR, xe, Te, ymin, ymax, left='A', right='B', w=470, h=350,
+                   maxw=470, yticks=None):
+    """Diagrama de fases eutéctico simple (insolubles en sólido).
+    Eje x = % del componente derecho (0..100). TfL = Tf del izq (x=0), TfR = Tf der (x=100).
+    xe, Te = composición y temperatura del eutéctico."""
+    p = Plot((0, 100), (ymin, ymax), w=w, h=h, xlabel='% ' + right, ylabel='T (°C)', maxw=maxw)
+    p.axes(xticks=[0, 20, 40, 60, 80, 100], yticks=yticks or [], grid=True)
+    p.polyline([(0, TfL), (xe, Te)], color=CURVE, width=2.6)   # liquidus izq
+    p.polyline([(xe, TfR if False else Te), (100, TfR)], color=CURVE, width=2.6)  # liquidus der
+    p.hline(Te, 0, 100, color=ROSE, dash='none')              # línea eutéctica
+    p.point(xe, Te, 'E', color=ROSE, dx=4, dy=16)
+    # etiquetas de regiones
+    p.text((xe)/2, (max(TfL, TfR)+Te)/2+30, 'L', color=INK, fs=14)
+    p.text(xe*0.5, (Te+ymin)/2+30, 'L + ' + left, color=MUT, fs=12)
+    p.text((xe+100)/2, (Te+ymin)/2+30, 'L + ' + right, color=MUT, fs=12)
+    p.text(50, (Te+ymin)/2-20, left + ' + ' + right, color=MUT, fs=12)
+    # marcas de metales puros
+    p.rawtext(p.mx(0), p.gy0+34, f'100% {left}', color=MUT, fs=11)
+    p.rawtext(p.mx(100), p.gy0+34, f'0% {left}', color=MUT, fs=11)
+    return p.close()
+
+
 # ----------------------------------------------------------------------------
 #  VIGA (beam) con apoyos, cargas y cotas
 # ----------------------------------------------------------------------------
@@ -349,38 +371,73 @@ def ac_series(items, V='230 V', f='50 Hz', w=470, h=170, maxw=470):
     return s + "</svg>"
 
 
+def ac_parallel(items, V='220 V', f='50 Hz', w=470, h=210, maxw=470):
+    """Circuito con ramas en paralelo entre dos raíles verticales.
+    items: lista de (tipo, etiqueta) con tipo in {'R','L','C'}."""
+    s = _hdr(f'{w} {h}', maxw)
+    left, right, top, bot = 60, w-30, 34, h-30
+    mid = (top+bot)/2
+    # fuente vertical a la izquierda
+    s += _ac_source(left, mid)
+    s += f"<text x='{left-8}' y='{mid-24}' fill='{INK}' font-size='12' text-anchor='end'>{V}</text>"
+    s += f"<text x='{left-8}' y='{mid+30}' fill='{MUT}' font-size='12' text-anchor='end'>{f}</text>"
+    s += line(left, top, left, mid-17, INK)
+    s += line(left, mid+17, left, bot, INK)
+    # raíles superior e inferior
+    s += line(left, top, right, top, INK)
+    s += line(left, bot, right, bot, INK)
+    n = len(items)
+    for i, (typ, lab) in enumerate(items):
+        bx = left + (right-left)*(i+1)/(n+1)
+        s += f"<circle cx='{bx}' cy='{top}' r='2.6' fill='{INK}'/>"
+        s += f"<circle cx='{bx}' cy='{bot}' r='2.6' fill='{INK}'/>"
+        cy0 = mid-22
+        s += line(bx, top, bx, cy0, INK)
+        if typ == 'R':
+            s += _res_v(bx, cy0, 44, lab)
+        elif typ == 'L':
+            s += _ind_v(bx, cy0, 44, lab)
+        elif typ == 'C':
+            s += _cap_v(bx, cy0, 44, lab)
+        s += line(bx, cy0+44, bx, bot, INK)
+    return s + "</svg>"
+
+
 # ----------------------------------------------------------------------------
 #  Triángulo de potencias
 # ----------------------------------------------------------------------------
-def power_triangle(P, Q, S, phi_deg, w=430, h=250, inductive=True, maxw=430,
+def power_triangle(P, Q, S, phi_deg, w=440, h=260, inductive=True, maxw=440,
                    punit='W', labels=None):
-    """P (horizontal), Q (vertical), S (hipotenusa)."""
+    """Triángulo de potencias: P (horizontal), Q (vertical), S (hipotenusa).
+    inductivo -> Q hacia arriba;  capacitivo -> Q hacia abajo."""
     s = _hdr(f'{w} {h}', maxw)
-    ox, oy = 70, h-50
-    L = min(w-150, 300)
-    scale = L / max(P, 1e-9)
-    px = ox + P*scale
-    qy = oy - (Q*scale if inductive else -Q*scale)  # Q positiva hacia arriba (inductivo)
-    # cateto P
-    s += f"<line x1='{ox}' y1='{oy}' x2='{px:.1f}' y2='{oy}' stroke='{OK}' stroke-width='2.5'/>"
-    # cateto Q (vertical en el extremo)
-    s += f"<line x1='{px:.1f}' y1='{oy}' x2='{px:.1f}' y2='{qy:.1f}' stroke='{ROSE}' stroke-width='2.5'/>"
-    # hipotenusa S
-    s += f"<line x1='{ox}' y1='{oy}' x2='{px:.1f}' y2='{qy:.1f}' stroke='{ACC}' stroke-width='2.5'/>"
-    # arco del ángulo
+    ox = 68
+    availw, availh = w-140, h-96
+    sc = min(availw/max(P, 1e-9), availh/max(abs(Q), 1e-9))
+    Pl, Ql = P*sc, abs(Q)*sc
+    if inductive:
+        oy = h-42
+        px, qy = ox+Pl, oy-Ql
+    else:
+        oy = 42
+        px, qy = ox+Pl, oy+Ql
+    s += f"<line x1='{ox}' y1='{oy}' x2='{px:.1f}' y2='{oy}' stroke='{OK}' stroke-width='2.6'/>"
+    s += f"<line x1='{px:.1f}' y1='{oy}' x2='{px:.1f}' y2='{qy:.1f}' stroke='{ROSE}' stroke-width='2.6'/>"
+    s += f"<line x1='{ox}' y1='{oy}' x2='{px:.1f}' y2='{qy:.1f}' stroke='{ACC}' stroke-width='2.6'/>"
+    # arco del ángulo φ en el origen
     r = 34
-    ang = math.radians(phi_deg)
-    ax = ox + r
-    ay = oy - (r*math.tan(ang) if False else 0)
-    ex = ox + r*math.cos(ang)
-    ey = oy - r*math.sin(ang) if inductive else oy + r*math.sin(ang)
-    sweep = 0 if inductive else 1
-    s += f"<path d='M{ax},{oy} A{r},{r} 0 0 {sweep} {ex:.1f},{ey:.1f}' stroke='{MUT}' stroke-width='1.5' fill='none'/>"
+    ex = ox + r
+    ey = oy - r*math.tan(math.radians(phi_deg)) if inductive else oy + r*math.tan(math.radians(phi_deg))
+    sweep = 1 if inductive else 0
+    s += f"<path d='M{ox+r},{oy} A{r},{r} 0 0 {sweep} {ex:.1f},{ey:.1f}' stroke='{MUT}' stroke-width='1.5' fill='none'/>"
+    s += f"<text x='{ox+r+8:.1f}' y='{oy-8 if inductive else oy+18}' fill='{MUT}' font-size='13'>&phi;</text>"
     lbl = labels or {}
-    s += f"<text x='{(ox+px)/2:.1f}' y='{oy+20}' fill='{OK}' font-size='12.5' text-anchor='middle'>{lbl.get('P','P')}</text>"
-    s += f"<text x='{px+8:.1f}' y='{(oy+qy)/2:.1f}' fill='{ROSE}' font-size='12.5' text-anchor='start'>{lbl.get('Q','Q')}</text>"
-    s += f"<text x='{(ox+px)/2-10:.1f}' y='{(oy+qy)/2-6:.1f}' fill='{ACC}' font-size='12.5' text-anchor='end'>{lbl.get('S','S')}</text>"
-    s += f"<text x='{ox+r+6:.1f}' y='{oy-6 if inductive else oy+16}' fill='{MUT}' font-size='12'>&phi;</text>"
+    yP = oy+20 if inductive else oy-8
+    s += f"<text x='{(ox+px)/2:.1f}' y='{yP:.1f}' fill='{OK}' font-size='12.5' text-anchor='middle'>{lbl.get('P','P')}</text>"
+    s += f"<text x='{px+10:.1f}' y='{(oy+qy)/2+4:.1f}' fill='{ROSE}' font-size='12.5' text-anchor='start'>{lbl.get('Q','Q')}</text>"
+    xm, ym = (ox+px)/2, (oy+qy)/2
+    dyS = -8 if inductive else 16
+    s += f"<text x='{xm-8:.1f}' y='{ym+dyS:.1f}' fill='{ACC}' font-size='12.5' text-anchor='end'>{lbl.get('S','S')}</text>"
     return s + "</svg>"
 
 
