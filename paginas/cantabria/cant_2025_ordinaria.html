@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Cantabria · Ordinaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.hdr-back{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:.8rem;color:var(--mut);
+  border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap;transition:.16s}
+.hdr-back:hover{color:var(--txt);border-color:var(--acc);background:rgba(56,189,248,.08)}
+.hdr-back svg{transition:.16s}
+.hdr-back:hover svg{transform:translateX(-3px)}
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards,.hdr-back{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Cantabria · Ordinaria</h1>
+    <div class="sub">Prueba de Acceso a la Universidad · Cantabria · Ordinaria (Junio) 2025 · Examen resuelto y comentado</div>
+  </div>
+  <a class="hdr-back" href="index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    Exámenes de Cantabria
+  </a>
+  <div class="pill">5 apartados · elige 1 pregunta de cada uno · 2 puntos cada apartado</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Apartado 1 · Materiales</div>
+<a class="q" href="#a1p1" onclick="go('a1p1');return false;" id="l-a1p1">A1·P1 · Diagrama Fe-C</a>
+<a class="q" href="#a1p2" onclick="go('a1p2');return false;" id="l-a1p2">A1·P2 · Ensayo de tracción</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#38bdf8"></span> Apartado 2 · Termodinámica y neumática</div>
+<a class="q" href="#a2p1" onclick="go('a2p1');return false;" id="l-a2p1">A2·P1 · Aire acondicionado</a>
+<a class="q" href="#a2p2" onclick="go('a2p2');return false;" id="l-a2p2">A2·P2 · Circuito neumático</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Apartado 3 · Sistemas digitales</div>
+<a class="q" href="#a3p1" onclick="go('a3p1');return false;" id="l-a3p1">A3·P1 · Función de un circuito</a>
+<a class="q" href="#a3p2" onclick="go('a3p2');return false;" id="l-a3p2">A3·P2 · Karnaugh y NAND</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#4ade80"></span> Apartado 4 · Ciberseguridad e IA</div>
+<a class="q" href="#a4p1" onclick="go('a4p1');return false;" id="l-a4p1">A4·P1 · Phishing y malware</a>
+<a class="q" href="#a4p2" onclick="go('a4p2');return false;" id="l-a4p2">A4·P2 · Inteligencia artificial</a>
+</div>
+<div class="blk c5">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Apartado 5 · Sistemas de control</div>
+<a class="q" href="#a5" onclick="go('a5');return false;" id="l-a5">A5 · Control y Routh</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Cantabria · Ordinaria</h2>
+    <p>El examen consta de <b>5 apartados</b> de 2 puntos; en cada uno se elige <b>una</b> de las dos preguntas propuestas (el apartado 5 es único). Aquí se resuelven <b>todas</b>. Selecciona un apartado o una pregunta en la barra lateral: cada una incluye el enunciado oficial, una introducción con los conceptos que se aplican y la solución paso a paso.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_cant_2025_ordinaria/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../examens/Cantabria/Tecnologia_Cantabria_2025_ordinaria_criterios.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#f59e0b' stroke-width='3'><path d='M10 12 C40 12 40 48 80 48'/><path d='M10 30 L70 30'/><circle cx='70' cy='30' r='3' fill='#f59e0b' stroke='none'/></svg></div>
+      <h3>Apartado 1 · Materiales</h3>
+      <p>Elige una: diagrama Hierro-Carbono de un acero hipoeutectoide o ensayo de tracción de una probeta cilíndrica.</p>
+      <div class="qlinks"><a class="k1" href="#a1p1" onclick="go('a1p1');return false;">A1P1</a><a class="k1" href="#a1p2" onclick="go('a1p2');return false;">A1P2</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#38bdf8' stroke-width='3'><rect x='12' y='20' width='40' height='18' rx='2'/><path d='M52 29h16'/><circle cx='72' cy='29' r='4'/><path d='M20 29h24'/></svg></div>
+      <h3>Apartado 2 · Termodinámica y neumática</h3>
+      <p>Elige una: máquina de aire acondicionado (ciclo de Carnot) o análisis de un circuito neumático con regulador de caudal.</p>
+      <div class="qlinks"><a class="k2" href="#a2p1" onclick="go('a2p1');return false;">A2P1</a><a class="k2" href="#a2p2" onclick="go('a2p2');return false;">A2P2</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#a78bfa' stroke-width='3'><path d='M18 18 h14 a12 12 0 0 1 0 24 h-14 z'/><path d='M6 24h12M6 36h12M56 30h14'/><circle cx='74' cy='30' r='3'/></svg></div>
+      <h3>Apartado 3 · Sistemas digitales</h3>
+      <p>Elige una: obtener y simplificar la función de un circuito lógico, o analizar y simplificar (Karnaugh + NAND/NOR) una función booleana dada.</p>
+      <div class="qlinks"><a class="k3" href="#a3p1" onclick="go('a3p1');return false;">A3P1</a><a class="k3" href="#a3p2" onclick="go('a3p2');return false;">A3P2</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#4ade80' stroke-width='3'><path d='M45 10 L68 20 V32 C68 45 45 52 45 52 C45 52 22 45 22 32 V20 Z'/><path d='M37 30l6 6 12-13'/></svg></div>
+      <h3>Apartado 4 · Ciberseguridad e IA</h3>
+      <p>Elige una: concepto de ciberseguridad con phishing y malware, o concepto de inteligencia artificial con impactos positivos y negativos.</p>
+      <div class="qlinks"><a class="k4" href="#a4p1" onclick="go('a4p1');return false;">A4P1</a><a class="k4" href="#a4p2" onclick="go('a4p2');return false;">A4P2</a></div>
+    </div>
+    <div class="card h5">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#22d3ee' stroke-width='3'><rect x='34' y='12' width='22' height='12' rx='2'/><rect x='34' y='36' width='22' height='12' rx='2'/><path d='M8 30h26M56 18h16M56 42h16M72 18v24'/></svg></div>
+      <h3>Apartado 5 · Sistemas de control</h3>
+      <p>Simplificación de un sistema de control con tres bloques en paralelo y estudio de estabilidad por el criterio de Routh.</p>
+      <div class="qlinks"><a class="k5" href="#a5" onclick="go('a5');return false;">A5</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="a1p1">
+  <div class="crumb">Inicio / MATERIALES</div>
+  <div class="qtitle"><span class="tag t1">MATERIALES</span> Apartado 1 · Pregunta 1 · Diagrama Hierro-Carbono</div>
+  <div class="qmeta">2 puntos (a 0,6 · b 0,7 · c 0,7)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Disponemos de una aleación Hierro-Carbono de <b>180 kg</b> con el <b>0,39 % de Carbono</b>. A partir del diagrama de equilibrio Hierro-Carbono en la zona de los aceros de la Figura 1, se pide calcular:</p><ol type='a'><li>Masa sólida y líquida a la temperatura de 910 °C. <span class='pts'>(0,6 ptos.)</span></li><li>Masa de ferrita y de cementita a la temperatura de 723,1 °C. <span class='pts'>(0,7 ptos.)</span></li><li>Masa de ferrita dentro de la perlita a la temperatura de 722,9 °C. <span class='pts'>(0,7 ptos.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><img src='fig/cant25ord_fases.png' alt='Diagrama Hierro-Carbono con 1130, 910 y 723 ºC y eutectoide en 0,89 % C' style='max-width:470px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Figura 1. Diagrama Fe-C simplificado: aleación de 0,39 % C (acero hipoeutectoide). Eutectoide a 0,89 % C y 723 ºC; cementita a 6,67 % C.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a1p1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Es un <b>acero hipoeutectoide</b> (0,39 % &lt; 0,89 %). A 910 ºC el punto está en pleno campo de la <b>austenita</b> (una sola fase sólida). Al enfriar precipita <b>ferrita proeutectoide</b> y, al cruzar los 723 ºC, la austenita restante (0,89 % C) forma <b>perlita</b> (ferrita + cementita). Se resuelve con la <b>regla de la palanca</b> (ferrita ≈ 0 % C, cementita 6,67 % C).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a1p1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a1p1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a1p1">
+    <h5>a) Masa sólida y líquida a 910 °C</h5><p>A 910 ºC la vertical del 0,39 % C está por encima de la línea A₃ y muy por debajo de la solidus: el material es <b>austenita</b> (sólido monofásico). No hay fase líquida.</p><div class='formula'>$$m_{s\acute olido}=180\ \text{kg (austenita)}\qquad m_{l\acute\i quido}=0\ \text{kg}$$</div><div class='res'><b>Sólido = 180 kg · Líquido = 0 kg</b></div><h5>b) Masa de ferrita y de cementita</h5><p>Justo por debajo de la eutectoide la estructura es <b>ferrita</b> (≈ 0 % C) + <b>cementita</b> (6,67 % C). Palanca global sobre el 0,39 % C:</p><div class='formula'>$$m_{Fe_3C}=\dfrac{0{,}39-0}{6{,}67-0}\cdot180=0{,}0585\cdot180=10{,}5\ \text{kg}$$</div><div class='formula'>$$m_{\alpha}=\dfrac{6{,}67-0{,}39}{6{,}67}\cdot180=0{,}9415\cdot180=169{,}5\ \text{kg}$$</div><div class='res'><b>Ferrita total ≈ 169,5 kg · Cementita ≈ 10,5 kg</b> (169,5 + 10,5 = 180 kg)</div><h5>c) Ferrita dentro de la perlita a 722,9 °C</h5><p>La <b>perlita</b> procede de la austenita (0,89 % C) presente antes de la eutectoide:</p><div class='formula'>$$m_{perlita}=\dfrac{0{,}39-0}{0{,}89-0}\cdot180=0{,}4382\cdot180=78{,}9\ \text{kg}$$</div><p>Dentro de la perlita (0,89 % C), la fracción de ferrita eutectoide es:</p><div class='formula'>$$m_{\alpha}^{perlita}=\dfrac{6{,}67-0{,}89}{6{,}67}\cdot78{,}9=0{,}8666\cdot78{,}9=68{,}4\ \text{kg}$$</div><div class='res'><b>Ferrita dentro de la perlita ≈ 68,4 kg</b> (el resto, 169,5 − 68,4 ≈ 101,1 kg, es ferrita proeutectoide)</div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#a1p2" onclick="go('a1p2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a1p2">
+  <div class="crumb">Inicio / MATERIALES</div>
+  <div class="qtitle"><span class="tag t1">MATERIALES</span> Apartado 1 · Pregunta 2 · Ensayo de tracción</div>
+  <div class="qmeta">2 puntos (a 0,5 · b 0,5 · c 0,5 · d 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Se realiza un ensayo de tracción de un cierto material utilizando una probeta cilíndrica de <b>15 mm de diámetro</b> y <b>20 cm de longitud</b>. Se aplica una fuerza de tracción sobre la probeta, la cual se deforma elásticamente hasta que la fuerza alcanza los <b>12000 N</b>, presentando la probeta en ese momento un alargamiento de <b>0,25 mm</b>. Al aplicar una fuerza superior empiezan a producirse deformaciones plásticas hasta llegar a los <b>16000 N</b> donde se produce la rotura de la probeta. Se pide:</p><ol type='a'><li>La tensión en el límite elástico. <span class='pts'>(0,5 ptos.)</span></li><li>La tensión de rotura. <span class='pts'>(0,5 ptos.)</span></li><li>El módulo de elasticidad E del material. <span class='pts'>(0,5 ptos.)</span></li><li>El diagrama de tracción en la zona de comportamiento elástico del material. <span class='pts'>(0,5 ptos.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a1p2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La <b>tensión</b> es fuerza entre sección inicial, \(\sigma=F/S_0\), con \(S_0=\frac{\pi}{4}D^2\). En la zona <b>elástica</b> se cumple la <b>ley de Hooke</b> \(\sigma=E\,\varepsilon\), con la deformación unitaria \(\varepsilon=\Delta l/L_0\); el <b>módulo de elasticidad</b> \(E\) es la pendiente de la recta.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a1p2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a1p2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a1p2">
+    <h5>Sección inicial de la probeta</h5><div class='formula'>$$S_0=\dfrac{\pi}{4}D^2=\dfrac{\pi}{4}(15)^2=176{,}7\ \mathrm{mm^2}$$</div><h5>a) Tensión en el límite elástico</h5><div class='formula'>$$\sigma_e=\dfrac{F_e}{S_0}=\dfrac{12000}{176{,}7}=67{,}9\ \mathrm{N/mm^2}=67{,}9\ \text{MPa}$$</div><div class='res'><b>σ<sub>e</sub> ≈ 67,9 MPa</b></div><h5>b) Tensión de rotura</h5><div class='formula'>$$\sigma_r=\dfrac{F_r}{S_0}=\dfrac{16000}{176{,}7}=90{,}5\ \mathrm{N/mm^2}=90{,}5\ \text{MPa}$$</div><div class='res'><b>σ<sub>r</sub> ≈ 90,5 MPa</b></div><h5>c) Módulo de elasticidad E</h5><p>La deformación unitaria en el límite elástico (\(L_0=200\) mm):</p><div class='formula'>$$\varepsilon=\dfrac{\Delta l}{L_0}=\dfrac{0{,}25}{200}=1{,}25\cdot10^{-3}$$</div><div class='formula'>$$E=\dfrac{\sigma_e}{\varepsilon}=\dfrac{67{,}9}{1{,}25\cdot10^{-3}}=54325\ \text{MPa}\approx 54{,}3\ \text{GPa}$$</div><div class='res'><b>E ≈ 54,3 GPa</b> (≈ 54325 MPa)</div><h5>d) Diagrama de tracción (zona elástica)</h5><p>En la zona elástica es una <b>recta</b> desde el origen (0, 0) hasta el límite elástico (ε = 1,25·10⁻³ ; σ = 67,9 MPa):</p><figure class='fig'><svg viewBox='0 0 440 300' width='100%' style='max-width:440px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='60' y1='250' x2='60' y2='40' stroke='#cbd5e1'/><line x1='60' y1='250' x2='410' y2='250' stroke='#cbd5e1'/><text x='30' y='45' fill='#e2e8f0' font-size='15' text-anchor='start'>σ</text><text x='400' y='272' fill='#e2e8f0' font-size='15' text-anchor='start'>ε</text><line x1='60' y1='250' x2='60' y2='40' stroke='#cbd5e1' marker-end='url(#ar)'/><line x1='60' y1='250' x2='410' y2='250' stroke='#cbd5e1' marker-end='url(#ar)'/><line x1='60' y1='250' x2='360' y2='70' stroke='#22d3ee' stroke-width='2.6'/><circle cx='360' cy='70' r='4' fill='#22d3ee'/><line x1='360' y1='70' x2='360' y2='250' stroke='#94a3c0' stroke-width='1' stroke-dasharray='4 4'/><line x1='360' y1='70' x2='60' y2='70' stroke='#94a3c0' stroke-width='1' stroke-dasharray='4 4'/><text x='360' y='270' fill='#94a3c0' font-size='12' text-anchor='middle'>0,00125</text><text x='52' y='74' fill='#94a3c0' font-size='12' text-anchor='end'>67,9</text><text x='366' y='64' fill='#4ade80' font-size='12' text-anchor='start'>límite elástico</text></svg><figcaption>Recta de Hooke: pendiente E = σ/ε en el tramo elástico.</figcaption></figure><div class='res'><b>Recta (0,0) → (0,00125 ; 67,9 MPa), de pendiente E ≈ 54,3 GPa</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#a1p1" onclick="go('a1p1');return false;">← Anterior</a>
+    <a href="#a2p1" onclick="go('a2p1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a2p1">
+  <div class="crumb">Inicio / TERMODINÁMICA</div>
+  <div class="qtitle"><span class="tag t2">TERMODINÁMICA</span> Apartado 2 · Pregunta 1 · Máquina de aire acondicionado</div>
+  <div class="qmeta">2 puntos (a 0,8 · b 0,6 · c 0,6)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Se instala en un aula una máquina de aire acondicionado para conseguir una temperatura de <b>21 ºC</b>. La temperatura en el exterior es de <b>28 ºC</b> y el rendimiento de la máquina es del <b>45 % del ciclo de Carnot</b>. Se pide:</p><ol type='a'><li>Eficiencia de la máquina. <span class='pts'>(0,8 ptos.)</span></li><li>Calor que cede la máquina al exterior si la máquina absorbe 1875 kJ del interior del aula. <span class='pts'>(0,6 ptos.)</span></li><li>Trabajo realizado por el compresor de la máquina. <span class='pts'>(0,6 ptos.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a2p1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>El aire acondicionado es una <b>máquina frigorífica</b>: extrae calor del foco frío (aula, 21 ºC) y lo cede al foco caliente (exterior, 28 ºC). Su eficiencia máxima (Carnot) es \(\varepsilon_{C}=\frac{T_f}{T_c-T_f}\); la real es el 45 % de ella. El balance energético es \(Q_c=Q_f+W\), con \(\varepsilon=Q_f/W\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a2p1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a2p1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a2p1">
+    <h5>a) Eficiencia de la máquina</h5><p>Temperaturas absolutas: \(T_f=21+273=294\text{ K}\), \(T_c=28+273=301\text{ K}\).</p><div class='formula'>$$\varepsilon_C=\dfrac{T_f}{T_c-T_f}=\dfrac{294}{301-294}=\dfrac{294}{7}=42$$</div><div class='formula'>$$\varepsilon=0{,}45\cdot\varepsilon_C=0{,}45\cdot42=18{,}9$$</div><div class='res'><b>ε = 18,9</b> (COP frigorífico real)</div><h5>b) Calor cedido al exterior</h5><p>El trabajo del compresor sale de \(\varepsilon=Q_f/W\) con \(Q_f=1875\text{ kJ}\), y el calor cedido del balance \(Q_c=Q_f+W\):</p><div class='formula'>$$W=\dfrac{Q_f}{\varepsilon}=\dfrac{1875}{18{,}9}=99{,}2\ \text{kJ}$$</div><div class='formula'>$$Q_c=Q_f+W=1875+99{,}2=1974{,}2\ \text{kJ}$$</div><div class='res'><b>Q<sub>c</sub> ≈ 1974,2 kJ</b> cedidos al exterior</div><h5>c) Trabajo del compresor</h5><div class='formula'>$$W=\dfrac{Q_f}{\varepsilon}=\dfrac{1875}{18{,}9}\approx 99{,}2\ \text{kJ}$$</div><div class='res'><b>W ≈ 99,2 kJ</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#a1p2" onclick="go('a1p2');return false;">← Anterior</a>
+    <a href="#a2p2" onclick="go('a2p2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a2p2">
+  <div class="crumb">Inicio / NEUMÁTICA</div>
+  <div class="qtitle"><span class="tag t2">NEUMÁTICA</span> Apartado 2 · Pregunta 2 · Circuito neumático</div>
+  <div class="qmeta">2 puntos (a 0,7 · b 1 · c 0,3)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Respecto al circuito neumático representado en la Figura 2 adjunta, se solicita:</p><ol type='a'><li>Identificar los componentes del circuito. <span class='pts'>(0,7 ptos.)</span></li><li>Explicar el funcionamiento del circuito. <span class='pts'>(1 pto.)</span></li><li>¿Cómo se podría aumentar la velocidad de salida del vástago? <span class='pts'>(0,3 ptos.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><img src='fig/cant25ord_neumatica.png' alt='Circuito neumático: cilindro 1.0, regulador 1.01, válvula 5/2 (1.1) y válvulas 3/2 (1.2, 1.3), final de carrera A1' style='max-width:470px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Figura 2. Cilindro de doble efecto 1.0, regulador de caudal 1.01 (al 50 %), distribuidor 5/2 (1.1) y válvulas 3/2 (1.2 de marcha y 1.3 accionada por el final de carrera A1).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a2p2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Hay que reconocer la <b>simbología neumática</b> (norma ISO 1219) —cilindro, distribuidor, válvula reguladora de caudal y válvulas de mando— y razonar la secuencia de <b>avance</b> y <b>retroceso</b> del vástago, así como el papel del regulador en la velocidad.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a2p2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a2p2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a2p2">
+    <h5>a) Componentes del circuito</h5><ul><li><b>1.0 · Cilindro de doble efecto</b> (con amortiguación). Actuador: avanza y retrocede con aire a presión en cada cámara. Lleva un <b>final de carrera A1</b> al final de su recorrido.</li><li><b>1.01 · Válvula reguladora de caudal unidireccional</b> (estranguladora con antirretorno), ajustada al <b>50 %</b>. Estrangula el aire en un sentido (regulando la velocidad) y lo deja pasar libre en el contrario.</li><li><b>1.1 · Distribuidor 5/2</b> (biestable, pilotado neumáticamente por ambos extremos). Mando principal: 5 vías (1 alimentación, 2 y 4 utilización, 3 y 5 escapes) y 2 posiciones.</li><li><b>1.2 · Válvula 3/2</b> (NC, retorno por muelle) accionada por <b>pulsador/palanca</b>: señal de <b>marcha</b> que pilota la 5/2 para el avance.</li><li><b>1.3 · Válvula 3/2</b> (NC, muelle) accionada por el <b>final de carrera A1</b>: pilota la 5/2 en sentido contrario para el retroceso.</li></ul><h5>b) Funcionamiento del circuito</h5><ol><li><b>Reposo:</b> la 5/2 mantiene el vástago recogido; nada actúa.</li><li><b>Accionamiento:</b> al pulsar <b>1.2</b> se pilota la 5/2, que conmuta y envía aire a la cámara trasera del cilindro: el vástago <b>avanza</b>. La válvula reguladora <b>1.01</b> estrangula el caudal, de modo que el avance se produce a <b>velocidad controlada</b> (≈ 50 %).</li><li><b>Secuencia:</b> al llegar el vástago al final de su carrera acciona el <b>final de carrera A1</b>, que abre la válvula <b>1.3</b>; ésta pilota la 5/2 por el otro extremo y el vástago <b>retrocede</b>.</li><li><b>Vuelta a reposo:</b> el cilindro queda recogido; como la 5/2 es <b>biestable</b>, memoriza la posición hasta una nueva orden de marcha.</li></ol><div class='res'><b>Ciclo: marcha (1.2) → avance regulado → A1 → retroceso (1.3) → reposo</b></div><h5>c) Aumentar la velocidad de salida del vástago</h5><p>El avance está frenado por el regulador <b>1.01</b> (al 50 %). Para que el vástago salga más rápido se puede <b>abrir más (o eliminar) el regulador 1.01</b>, aumentando el caudal de entrada; alternativamente, instalar una <b>válvula de escape rápido</b> en la cámara que se vacía durante el avance, para evacuar su aire directamente a la atmósfera.</p><div class='res'><b>Abrir/quitar el regulador 1.01 o añadir una válvula de escape rápido</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#a2p1" onclick="go('a2p1');return false;">← Anterior</a>
+    <a href="#a3p1" onclick="go('a3p1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a3p1">
+  <div class="crumb">Inicio / DIGITAL</div>
+  <div class="qtitle"><span class="tag t3">DIGITAL</span> Apartado 3 · Pregunta 1 · Función de un circuito lógico</div>
+  <div class="qmeta">2 puntos (salidas 1,1 · función 0,4 · simplificación 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Obtener la ecuación lógica correspondiente al circuito de la Figura 3 y simplificar algebraicamente todo lo posible.</p>
+    <figure class="fig"><figure class='fig'><img src='fig/cant25ord_logica.png' alt='Circuito lógico de 4 entradas A, B, C, D con puertas XOR, NOT, NAND, NOR, OR y AND' style='max-width:600px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Figura 3. Circuito lógico: XOR(A,B), inversor de C, NAND(C,D), NOR(D); una OR y una NOR intermedias, una AND y una OR final que da S.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a3p1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Se recorre el circuito por <b>niveles</b>, escribiendo la salida de cada puerta (XOR = 1, NOT, NAND/NOR con círculo, OR = ≥1, AND = &). Luego se agrupa el álgebra de Boole aplicando De Morgan y la propiedad \(A\cdot(A\oplus B)=A\bar B\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a3p1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a3p1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a3p1">
+    <h5>Nivel 1 — salida de las puertas de entrada</h5><div class='formula'>$$A\oplus B\ (\text{XOR}),\quad \bar C\ (\text{NOT}),\quad \overline{C\cdot D}\ (\text{NAND}),\quad \bar D\ (\text{NOR de una entrada})$$</div><p>Además, la entrada <b>A</b> se lleva directamente (por arriba) a la puerta AND del nivel 3.</p><h5>Nivel 2 — puertas OR y NOR</h5><p>La <b>OR</b> superior combina la XOR y \(\bar C\); la <b>NOR</b> inferior combina la NAND y \(\bar D\):</p><div class='formula'>$$M=(A\oplus B)+\bar C$$</div><div class='formula'>$$N=\overline{\overline{CD}+\bar D}=\overline{\bar C+\bar D+\bar D}=\overline{\bar C+\bar D}=C\cdot D$$</div><h5>Nivel 3 — puerta AND</h5><div class='formula'>$$P=A\cdot M=A\big[(A\oplus B)+\bar C\big]$$</div><h5>Nivel 4 — puerta OR de salida</h5><div class='formula'>$$S=P+N=A\big[(A\oplus B)+\bar C\big]+C\,D$$</div><h5>Simplificación algebraica</h5><p>Como \(A\cdot(A\oplus B)=A(\bar AB+A\bar B)=A\bar B\):</p><div class='formula'>$$S=A\bar B+A\bar C+C\,D$$</div><div class='formula'>$$\boxed{\ S=A\bar B+A\bar C+C\,D\ }$$</div><div class='res'><b>S = A·B̄ + A·C̄ + C·D</b> &nbsp;(minterms de S = 3, 7, 8, 9, 10, 11, 12, 13 y 15)</div>
+  </div>
+  <div class="nav-q">
+    <a href="#a2p2" onclick="go('a2p2');return false;">← Anterior</a>
+    <a href="#a3p2" onclick="go('a3p2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a3p2">
+  <div class="crumb">Inicio / DIGITAL</div>
+  <div class="qtitle"><span class="tag t3">DIGITAL</span> Apartado 3 · Pregunta 2 · Función booleana (Karnaugh y NAND)</div>
+  <div class="qmeta">2 puntos (a 0,6 · b 0,4 · c 0,5 · d 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Una máquina dispone de tres pulsadores identificados como a, b y c. El funcionamiento sigue la función booleana S:</p><div class='formula'>$$S=b\cdot c+\bar a\cdot\bar b\cdot\bar c+\bar a\cdot b$$</div><p>Se pide:</p><ol type='a'><li>Obtener la tabla de verdad de la función lógica. <span class='pts'>(0,6 ptos.)</span></li><li>Obtener su función booleana en primera forma canónica (suma de productos o minterms). <span class='pts'>(0,4 ptos.)</span></li><li>Simplificar la función mediante el método de Karnaugh. <span class='pts'>(0,5 ptos.)</span></li><li>Implementar la función simplificada utilizando únicamente puertas lógicas de dos entradas NAND o NOR. <span class='pts'>(0,5 ptos.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a3p2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Se evalúa la expresión en las 8 combinaciones para construir la <b>tabla de verdad</b>, de la que sale la <b>forma canónica en minterms</b>. El <b>mapa de Karnaugh</b> agrupa los unos adyacentes, y la forma mínima se implementa con <b>NAND</b> (doble negación + De Morgan).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a3p2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a3p2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a3p2">
+    <h5>a) Tabla de verdad</h5><p>Evaluando \(S=bc+\bar a\bar b\bar c+\bar a b\) en cada fila:</p><table class='dat'><thead><tr><th>a</th><th>b</th><th>c</th><th>S</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td><b>1</b></td></tr><tr><td>0</td><td>0</td><td>1</td><td><b>0</b></td></tr><tr><td>0</td><td>1</td><td>0</td><td><b>1</b></td></tr><tr><td>0</td><td>1</td><td>1</td><td><b>1</b></td></tr><tr><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr><tr><td>1</td><td>0</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>0</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>1</td><td><b>1</b></td></tr></tbody></table><h5>b) Primera forma canónica (minterms)</h5><div class='formula'>$$S=\sum m(0,2,3,7)=\bar a\,\bar b\,\bar c+\bar a\,b\,\bar c+\bar a\,b\,c+a\,b\,c$$</div><h5>c) Simplificación por Karnaugh</h5><table class='dat'><thead><tr><th>a\bc</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead><tbody><tr><td><b>0</b></td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td><b>1</b></td><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table><p>Columna <b>bc = 11</b> (m3, m7) &rarr; \(b\,c\). Unos de la fila <b>a = 0</b> en 00 y 10 (m0, m2), es decir \(a=0,\ c=0\) &rarr; \(\bar a\,\bar c\):</p><div class='formula'>$$\boxed{\ S=b\,c+\bar a\,\bar c\ }$$</div><h5>d) Implementación con NAND de dos entradas</h5><p>Como \(S=bc+\bar a\bar c=\overline{\overline{bc}\cdot\overline{\bar a\bar c}}\), y usando inversores NAND para \(\bar a\) y \(\bar c\), bastan <b>5 puertas NAND-2</b>:</p><div class='formula'>$$\bar a=\overline{a\cdot a},\quad \bar c=\overline{c\cdot c},\quad S=\overline{\ \overline{b\cdot c}\cdot\overline{\bar a\cdot\bar c}\ }$$</div><figure class='fig'><svg viewBox='0 0 470 280' width='100%' style='max-width:470px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='14' y='60' fill='#e2e8f0' font-size='15' text-anchor='start'>a</text><text x='14' y='150' fill='#e2e8f0' font-size='15' text-anchor='start'>b</text><text x='14' y='210' fill='#e2e8f0' font-size='15' text-anchor='start'>c</text><line x1='24' y1='56' x2='80' y2='44' stroke='#cbd5e1'/><line x1='24' y1='56' x2='80' y2='58' stroke='#cbd5e1'/><path d='M80,34 L103.0,34 A17.0,17.0 0 0 1 103.0,68 L80,68 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='131' cy='51.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='99.32' y='55.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><text x='140' y='40' fill='#94a3c0' font-size='12' text-anchor='start'>a'</text><line x1='24' y1='206' x2='60' y2='206' stroke='#cbd5e1'/><line x1='60' y1='206' x2='60' y2='130' stroke='#cbd5e1'/><line x1='60' y1='130' x2='80' y2='130' stroke='#cbd5e1'/><line x1='60' y1='130' x2='80' y2='146' stroke='#cbd5e1'/><path d='M80,120 L103.0,120 A17.0,17.0 0 0 1 103.0,154 L80,154 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='131' cy='137.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='99.32' y='141.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><text x='140' y='126' fill='#94a3c0' font-size='12' text-anchor='start'>c'</text><line x1='24' y1='150' x2='80' y2='200' stroke='#cbd5e1'/><line x1='24' y1='206' x2='44' y2='206' stroke='#cbd5e1'/><line x1='44' y1='206' x2='44' y2='216' stroke='#cbd5e1'/><line x1='44' y1='216' x2='80' y2='216' stroke='#cbd5e1'/><path d='M80,190 L103.0,190 A17.0,17.0 0 0 1 103.0,224 L80,224 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='131' cy='207.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='99.32' y='211.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='136' y1='51.0' x2='220' y2='80' stroke='#cbd5e1'/><line x1='136' y1='137.0' x2='220' y2='96' stroke='#cbd5e1'/><path d='M220,70 L243.0,70 A17.0,17.0 0 0 1 243.0,104 L220,104 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='271' cy='87.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='239.32' y='91.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='276' y1='87.0' x2='350' y2='148' stroke='#cbd5e1'/><line x1='136' y1='207.0' x2='350' y2='172' stroke='#cbd5e1'/><path d='M350,138 L373.0,138 A17.0,17.0 0 0 1 373.0,172 L350,172 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='401' cy='155.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='369.32' y='159.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='406' y1='155.0' x2='446' y2='155.0' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='454' y='160.0' fill='#4ade80' font-size='16' text-anchor='start'>S</text></svg><figcaption>S = b·c + a′·c′ con 5 NAND-2 (dos actúan de inversores).</figcaption></figure><div class='res'><b>S = b·c + ā·c̄ = NAND( NAND(b,c) , NAND(ā,c̄) )</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#a3p1" onclick="go('a3p1');return false;">← Anterior</a>
+    <a href="#a4p1" onclick="go('a4p1');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a4p1">
+  <div class="crumb">Inicio / CIBERSEGURIDAD</div>
+  <div class="qtitle"><span class="tag t4">CIBERSEGURIDAD</span> Apartado 4 · Pregunta 1 · Ciberseguridad (phishing y malware)</div>
+  <div class="qmeta">2 puntos · pregunta teórica</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Defina qué es la <b>ciberseguridad</b> y describa qué es y cómo funcionan el <b>phishing</b> y el <b>malware</b>.</p>
+    
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a4p1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Definir el concepto y explicar el funcionamiento de dos amenazas muy habituales.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a4p1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a4p1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a4p1">
+    <h5>¿Qué es la ciberseguridad?</h5><p>La <b>ciberseguridad</b> es el conjunto de técnicas, herramientas y buenas prácticas destinadas a <b>proteger</b> los sistemas informáticos, las redes y los datos frente a accesos no autorizados, ataques o daños, garantizando la <b>confidencialidad, integridad y disponibilidad</b> de la información.</p><h5>Phishing</h5><p>El <b>phishing</b> es una técnica de <b>ingeniería social</b>: el atacante envía correos, mensajes o crea webs <b>falsos</b> que suplantan a una entidad de confianza (banco, red social, administración). Engaña a la víctima para que <b>revele datos sensibles</b> (contraseñas, números de tarjeta) o haga clic en enlaces/adjuntos maliciosos. Funciona explotando la confianza y la urgencia ("su cuenta será bloqueada"), no un fallo técnico.</p><h5>Malware</h5><p>El <b>malware</b> (software malicioso) es cualquier programa diseñado para <b>dañar o infiltrarse</b> en un equipo sin permiso: virus, troyanos, gusanos, <b>ransomware</b> o spyware. Se instala al abrir un archivo infectado, un enlace o una descarga, y una vez dentro puede robar información, cifrar los datos para pedir un rescate, espiar al usuario o tomar control del sistema.</p><div class='res'><b>Ciberseguridad = proteger sistemas y datos · Phishing = engaño/suplantación para robar datos · Malware = software que daña o infecta el equipo</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#a3p2" onclick="go('a3p2');return false;">← Anterior</a>
+    <a href="#a4p2" onclick="go('a4p2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a4p2">
+  <div class="crumb">Inicio / IA</div>
+  <div class="qtitle"><span class="tag t4">IA</span> Apartado 4 · Pregunta 2 · Inteligencia artificial</div>
+  <div class="qmeta">2 puntos · pregunta teórica</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>¿Qué se entiende por <b>Inteligencia artificial</b>? Describa <b>dos impactos positivos</b> y <b>dos negativos</b> que la inteligencia artificial puede tener en la sociedad.</p>
+    
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a4p2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Definir el concepto de IA y valorar de forma equilibrada sus efectos sociales.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a4p2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a4p2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a4p2">
+    <h5>¿Qué es la inteligencia artificial?</h5><p>La <b>inteligencia artificial (IA)</b> es la rama de la informática que desarrolla sistemas capaces de realizar tareas que normalmente requieren <b>inteligencia humana</b> —aprender de los datos, razonar, reconocer patrones, comprender el lenguaje o tomar decisiones—, mejorando su comportamiento con la experiencia (aprendizaje automático).</p><h5>Dos impactos positivos</h5><ul><li><b>Avances en medicina y ciencia:</b> ayuda al diagnóstico precoz (análisis de imágenes médicas), al descubrimiento de fármacos y a la investigación, salvando vidas y ganando precisión.</li><li><b>Automatización y productividad:</b> libera a las personas de tareas repetitivas o peligrosas, mejora la eficiencia industrial y ofrece servicios personalizados (asistentes, traducción, accesibilidad).</li></ul><h5>Dos impactos negativos</h5><ul><li><b>Destrucción/transformación del empleo:</b> la automatización puede eliminar puestos de trabajo y aumentar la desigualdad si no se acompaña de formación y reorientación laboral.</li><li><b>Privacidad, sesgos y desinformación:</b> el uso masivo de datos personales amenaza la privacidad, los algoritmos pueden heredar <b>sesgos</b> discriminatorios y la IA generativa facilita bulos y <b>deepfakes</b>.</li></ul><div class='res'>La IA es una herramienta muy potente: su efecto depende de un uso <b>ético, regulado y responsable</b>.</div>
+  </div>
+  <div class="nav-q">
+    <a href="#a4p1" onclick="go('a4p1');return false;">← Anterior</a>
+    <a href="#a5" onclick="go('a5');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="a5">
+  <div class="crumb">Inicio / CONTROL</div>
+  <div class="qtitle"><span class="tag t5">CONTROL</span> Apartado 5 · Sistema de control y estabilidad (Routh)</div>
+  <div class="qmeta">2 puntos (simplificación 1,2 · estabilidad 0,8)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Dado el sistema de control de la Figura 4, se pide:</p><ol type='a'><li>Simplifica al máximo el sistema de control (obtén su función de transferencia). <span class='pts'>(1,2 ptos.)</span></li><li>La expresión (2) representa el denominador de la función de transferencia del sistema. Determinar, mediante el método de Routh, si el sistema es estable e indicar el número de polos. <span class='pts'>(0,8 ptos.)</span></li></ol><div class='formula'>$$s^5+2s^4+18s^3+20s^2+46s+64=0\quad(2)$$</div>
+    <figure class="fig"><figure class='fig'><img src='fig/cant25ord_control.png' alt='Sistema de control: G1 seguido de G2, G3 y G4 en paralelo, con realimentación H1·H2' style='max-width:560px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Figura 4. Bloque G1 seguido de tres bloques en paralelo (G2, G3, G4) sumados, con realimentación negativa a través de H2 y H1.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_cant_2025_ordinaria/a5.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Las ramas en <b>paralelo</b> se suman (G₂+G₃+G₄); los bloques de realimentación en serie se multiplican (H₁·H₂); y el <b>lazo cerrado</b> con realimentación negativa aplica \(\frac{G}{1+GH}\). La estabilidad se estudia con el <b>criterio de Routh</b> sobre el denominador.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-a5')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_cant_2025_ordinaria/a5.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-a5">
+    <h5>a) Simplificación del sistema</h5><p>Los tres bloques reciben la misma entrada (salida de G₁) y sus salidas se suman: van en <b>paralelo</b> &rarr; \(G_2+G_3+G_4\). La cadena directa es entonces \(G_1(G_2+G_3+G_4)\). La realimentación en serie es \(H_1H_2\).</p><figure class='fig'><svg viewBox='0 0 700 210' width='100%' style='max-width:640px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='18' y='105' fill='#e2e8f0' font-size='15' text-anchor='start'>R</text><line x1='34' y1='100' x2='68' y2='100' stroke='#cbd5e1' marker-end='url(#ar)'/><circle cx='86' cy='100' r='15' stroke='#e2e8f0'/><line x1='76' y1='90' x2='96' y2='110' stroke='#94a3b8'/><line x1='96' y1='90' x2='76' y2='110' stroke='#94a3b8'/><text x='70' y='88' fill='#4ade80' font-size='15' text-anchor='start'>+</text><text x='72' y='130' fill='#fb7185' font-size='17' text-anchor='start'>−</text><line x1='102' y1='100' x2='190' y2='100' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='190' y='78' width='120' height='44' rx='5' stroke='#22d3ee'/><text x='250.0' y='105.0' fill='#e2e8f0' font-size='14' text-anchor='middle'>G₁(G₂+G₃+G₄)</text><line x1='310' y1='100' x2='470' y2='100' stroke='#cbd5e1' marker-end='url(#ar)'/><circle cx='470' cy='100' r='3.4' fill='#cbd5e1'/><line x1='470' y1='100' x2='520' y2='100' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='532' y='105' fill='#e2e8f0' font-size='15' text-anchor='start'>C</text><line x1='470' y1='100' x2='470' y2='170' stroke='#cbd5e1'/><line x1='470' y1='170' x2='300' y2='170' stroke='#cbd5e1'/><rect x='230' y='148' width='70' height='40' rx='5' stroke='#a78bfa'/><text x='265.0' y='173.0' fill='#e2e8f0' font-size='14' text-anchor='middle'>H₁H₂</text><line x1='230' y1='170' x2='86' y2='170' stroke='#cbd5e1'/><line x1='86' y1='170' x2='86' y2='115' stroke='#cbd5e1' marker-end='url(#ar)'/></svg><figcaption>Sistema equivalente: un bloque directo con realimentación negativa H₁H₂.</figcaption></figure><p>Cerrando el lazo (realimentación negativa) con \(\frac{G}{1+GH}\):</p><div class='formula'>$$\boxed{\ \dfrac{C(s)}{R(s)}=\dfrac{G_1(G_2+G_3+G_4)}{1+G_1(G_2+G_3+G_4)\,H_1H_2}\ }$$</div><div class='res'><b>C/R = G₁(G₂+G₃+G₄) / [ 1 + G₁(G₂+G₃+G₄)·H₁H₂ ]</b></div><h5>b) Estabilidad por el criterio de Routh</h5><p>Denominador (grado 5): coeficientes 1, 2, 18, 20, 46, 64. Tabla de Routh:</p><table class='dat'><tbody><tr><th>s⁵</th><td>1</td><td>18</td><td>46</td></tr><tr><th>s⁴</th><td>2</td><td>20</td><td>64</td></tr><tr><th>s³</th><td>8</td><td>14</td><td>0</td></tr><tr><th>s²</th><td>16,5</td><td>64</td><td></td></tr><tr><th>s¹</th><td>−17,03</td><td>0</td><td></td></tr><tr><th>s⁰</th><td>64</td><td></td><td></td></tr></tbody></table><div class='formula'>$$s^3:\ \dfrac{2\cdot18-1\cdot20}{2}=8,\ \dfrac{2\cdot46-1\cdot64}{2}=14$$</div><div class='formula'>$$s^2:\ \dfrac{8\cdot20-2\cdot14}{8}=16{,}5,\ \dfrac{8\cdot64}{8}=64;\quad s^1:\ \dfrac{16{,}5\cdot14-8\cdot64}{16{,}5}=-17{,}03;\quad s^0:\ 64$$</div><p>Primera columna: \(1,\ 2,\ 8,\ 16{,}5,\ -17{,}03,\ 64\). Hay <b>dos cambios de signo</b> (de 16,5 a −17,03 y de −17,03 a 64).</p><div class='res'><b>Sistema INESTABLE</b> · 2 cambios de signo &rarr; 2 polos con parte real positiva. El sistema tiene <b>5 polos</b> (2 en el semiplano derecho y 3 en el izquierdo).</div>
+  </div>
+  <div class="nav-q">
+    <a href="#a4p2" onclick="go('a4p2');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Solucionario PAU · Cantabria · Tecnología e Ingeniería II (Ordinaria 2025)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Región de Murcia · Junio (Ordinaria)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.hdr-back{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:.8rem;color:var(--mut);
+  border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap;transition:.16s}
+.hdr-back:hover{color:var(--txt);border-color:var(--acc);background:rgba(56,189,248,.08)}
+.hdr-back svg{transition:.16s}
+.hdr-back:hover svg{transform:translateX(-3px)}
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards,.hdr-back{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Región de Murcia · Junio (Ordinaria)</h1>
+    <div class="sub">PAU · Región de Murcia · Junio 2025 (Ordinaria) · Examen resuelto y comentado</div>
+  </div>
+  <a class="hdr-back" href="index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    Exámenes de la Región de Murcia
+  </a>
+  <div class="pill">Bloque I: IA (1 de 2) + IB (1 de 2) · Bloque II: 3 de 4</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#f59e0b"></span> Bloque I · Apartado IA (1 de 2)</div>
+<a class="q" href="#q1" onclick="go('q1');return false;" id="l-q1">IA1 · Diagrama de fases</a>
+<a class="q" href="#q2" onclick="go('q2');return false;" id="l-q2">IA2 · Latones (σ–ε)</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#fbbf24"></span> Bloque I · Apartado IB (1 de 2)</div>
+<a class="q" href="#q3" onclick="go('q3');return false;" id="l-q3">IB1 · Frigorífica (COP)</a>
+<a class="q" href="#q4" onclick="go('q4');return false;" id="l-q4">IB2 · MEP y diagrama indicado</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#22d3ee"></span> Bloque II · Ejercicios (3 de 4)</div>
+<a class="q" href="#q5" onclick="go('q5');return false;" id="l-q5">II.1 · Viga en voladizo</a>
+<a class="q" href="#q6" onclick="go('q6');return false;" id="l-q6">II.2 · Circuito neumático</a>
+<a class="q" href="#q7" onclick="go('q7');return false;" id="l-q7">II.3 · RLC y resonancia</a>
+<a class="q" href="#q8" onclick="go('q8');return false;" id="l-q8">II.4 · Puente grúa (NAND)</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2025 · <span>Tecnología e Ingeniería II</span> · Región de Murcia · Junio (Ordinaria)</h2>
+    <p>PAU de la <b>Región de Murcia</b>, convocatoria de <b>junio de 2025</b> (ordinaria). El <b>Bloque I</b> (2,5 pt) tiene dos apartados: se elige una cuestión del <b>IA</b> y una del <b>IB</b> (1,25 pt c/u). El <b>Bloque II</b> (7,5 pt) tiene cuatro ejercicios de los que se responden <b>tres</b> (2,5 pt c/u). Aquí se resuelven <b>todos</b>.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_mur_2025_ordinaria/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../examens/Murcia/Tecnologia_Murcia_2025_junio.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#f59e0b' stroke-width='3'><path d='M10 48 L40 20 L80 12M10 48 L45 34 L80 12'/></svg></div>
+      <h3>Bloque I · Apartado IA (1 de 2)</h3>
+      <p>Diagrama de equilibrio de fases de una aleación A–B y diagrama σ–ε de dos latones.</p>
+      <div class="qlinks"><a class="k1" href="#q1" onclick="go('q1');return false;">IA1</a><a class="k1" href="#q2" onclick="go('q2');return false;">IA2</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#fbbf24' stroke-width='3'><rect x='22' y='14' width='46' height='32' rx='4'/><path d='M32 30h26M45 22v16'/></svg></div>
+      <h3>Bloque I · Apartado IB (1 de 2)</h3>
+      <p>Máquina frigorífica de Carnot (COP) y motor MCIA de encendido provocado.</p>
+      <div class="qlinks"><a class="k2" href="#q3" onclick="go('q3');return false;">IB1</a><a class="k2" href="#q4" onclick="go('q4');return false;">IB2</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#22d3ee' stroke-width='3'><path d='M12 14v34M12 22h60M40 22v10M64 22v10'/></svg></div>
+      <h3>Bloque II · Ejercicios (3 de 4)</h3>
+      <p>Viga en voladizo, circuito neumático, circuito RLC con dos bobinas y resonancia, y combinacional con NAND.</p>
+      <div class="qlinks"><a class="k3" href="#q5" onclick="go('q5');return false;">II.1</a><a class="k3" href="#q6" onclick="go('q6');return false;">II.2</a><a class="k3" href="#q7" onclick="go('q7');return false;">II.3</a><a class="k3" href="#q8" onclick="go('q8');return false;">II.4</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1">
+  <div class="crumb">Inicio / APARTADO IA</div>
+  <div class="qtitle"><span class="tag t1">APARTADO IA</span> Cuestión IA1 · Diagrama de equilibrio de fases</div>
+  <div class="qmeta">Cuestión de 1,25 puntos (a 0,25 · b.1 0,25 · b.2 0,5 · b.3 0,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Diagrama de equilibrio de fases de una aleación de dos metales A y B (figura). Se pide:</p><ol type='a'><li>Indicar las líneas características, las temperaturas de solidificación de los metales puros y las fases de cada zona. <span class='pts'>(0,25 p.)</span></li><li>Para una aleación 70 % A &ndash; 30 % B: <span class='pts'>(1,0 p.)</span><ul><li>b.1) Número de fases a 1110 °C, 1220 °C y 1300 °C.</li><li>b.2) Si hay mezcla L+S, porcentaje de cada fase.</li><li>b.3) Composición (% de cada metal) de la fase líquida y de la sólida a esa temperatura.</li></ul></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 470 320' width='100%' style='max-width:470px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='11'><defs><marker id='arPh' markerWidth='8' markerHeight='7' refX='6' refY='3' orient='auto'><path d='M0,0 L6,3 L0,6 Z' fill='#94a3c0'/></marker></defs><g stroke='#26324e' stroke-width='1'><line x1='60' y1='40' x2='60' y2='285'/><line x1='60' y1='285' x2='430' y2='285'/><line x1='60' y1='56' x2='420' y2='56'/><line x1='60' y1='96' x2='420' y2='96'/><line x1='60' y1='136' x2='420' y2='136'/><line x1='60' y1='176' x2='420' y2='176'/><line x1='60' y1='216' x2='420' y2='216'/><line x1='60' y1='256' x2='420' y2='256'/><line x1='132' y1='40' x2='132' y2='285'/><line x1='204' y1='40' x2='204' y2='285'/><line x1='276' y1='40' x2='276' y2='285'/><line x1='348' y1='40' x2='348' y2='285'/><line x1='420' y1='40' x2='420' y2='285'/></g><g fill='#94a3c0' font-size='10' text-anchor='end'><text x='55' y='60'>1500</text><text x='55' y='100'>1400</text><text x='55' y='140'>1300</text><text x='55' y='180'>1200</text><text x='55' y='220'>1100</text><text x='55' y='260'>1000</text></g><g fill='#94a3c0' font-size='10' text-anchor='middle'><text x='60' y='298'>0</text><text x='204' y='298'>40</text><text x='348' y='298'>80</text><text x='420' y='298'>100</text></g><text x='30' y='160' fill='#94a3c0' font-size='11' transform='rotate(-90 30 160)'>T (°C)</text><text x='240' y='313' fill='#94a3c0'>% en B</text><text x='60' y='313' fill='#e7ecf7' font-weight='700'>A</text><text x='418' y='313' fill='#e7ecf7' font-weight='700'>B</text><path d='M60,204 L168,132 L240,104 L420,56' stroke='#fb7185' stroke-width='2.4' fill='none'/><path d='M60,204 L168,168 L240,136 L420,56' stroke='#38bdf8' stroke-width='2.4' fill='none'/><text x='150' y='96' fill='#e7ecf7' font-style='italic'>Zona 1 (L)</text><text x='196' y='150' fill='#e7ecf7' font-style='italic'>Zona 2 (L+&alpha;)</text><text x='150' y='230' fill='#e7ecf7' font-style='italic'>Zona 3 (&alpha;)</text><line x1='168' y1='40' x2='168' y2='285' stroke='#fbbf24' stroke-width='1.2' stroke-dasharray='4 3'/><text x='168' y='52' fill='#fbbf24' font-size='9.5' text-anchor='middle'>30%B</text></svg><figcaption>Diagrama de equilibrio isomorfo A&ndash;B. L&iacute;nea superior = <b>liquidus</b> (Zona 1 / Zona 2); l&iacute;nea inferior = <b>solidus</b> (Zona 2 / Zona 3). T<sub>f</sub>(A) &approx; 1090 °C, T<sub>f</sub>(B) &approx; 1460 °C (valores le&iacute;dos, aproximados).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q1.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Es un diagrama <b>isomorfo</b>: la línea superior (<i>liquidus</i>) y la inferior (<i>solidus</i>) delimitan tres zonas. Para las proporciones se usa la <b>regla de la palanca</b>. Valores leídos del diagrama (aproximados).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q1.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1">
+    <h5>a) Líneas, temperaturas y fases</h5><ul><li><b>Líneas:</b> la superior es la <b>liquidus</b> (por encima todo es líquido) y la inferior la <b>solidus</b> (por debajo todo es sólido).</li><li><b>Temperaturas de fusión:</b> extremo izquierdo (A puro) T<sub>f</sub>(A) &approx; <b>1090 °C</b>; extremo derecho (B puro) T<sub>f</sub>(B) &approx; <b>1460 °C</b>.</li><li><b>Fases:</b> Zona 1 = <b>líquido (L)</b>; Zona 2 = <b>líquido + sólido (L + &alpha;)</b>; Zona 3 = <b>sólido (&alpha;)</b>.</li></ul><h5>b.1) Número de fases (aleación 30 % B)</h5><ul><li><b>1300 °C:</b> por encima de la liquidus &rarr; Zona 1 &rarr; <b>1 fase</b> (líquido).</li><li><b>1220 °C:</b> entre liquidus y solidus &rarr; Zona 2 &rarr; <b>2 fases</b> (L + &alpha;).</li><li><b>1110 °C:</b> por debajo de la solidus &rarr; Zona 3 &rarr; <b>1 fase</b> (sólido &alpha;).</li></ul><h5>b.2) Proporción de fases a 1220 °C (regla de la palanca)</h5><p>A 1220 °C la isoterma corta la liquidus en C<sub>L</sub> &approx; 20 % B y la solidus en C<sub>&alpha;</sub> &approx; 33 % B, con C<sub>0</sub> = 30 % B:</p><div class='formula'>$$\%\,L=\frac{C_\alpha-C_0}{C_\alpha-C_L}=\frac{33-30}{33-20}=\frac{3}{13}\approx23\%$$</div><div class='formula'>$$\%\,\alpha=\frac{C_0-C_L}{C_\alpha-C_L}=\frac{30-20}{13}\approx77\%$$</div><div class='res'><b>&approx; 23 % líquido y &approx; 77 % sólido &alpha;</b> (valores aproximados)</div><h5>b.3) Composición de cada fase a 1220 °C</h5><ul><li><b>Fase líquida:</b> C<sub>L</sub> &approx; 20 % B &rarr; <b>80 % A &ndash; 20 % B</b>.</li><li><b>Fase sólida &alpha;:</b> C<sub>&alpha;</sub> &approx; 33 % B &rarr; <b>67 % A &ndash; 33 % B</b>.</li></ul><div class='res'><b>Líquido &approx; 80 %A/20 %B · Sólido &approx; 67 %A/33 %B</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q2" onclick="go('q2');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2">
+  <div class="crumb">Inicio / APARTADO IA</div>
+  <div class="qtitle"><span class="tag t1">APARTADO IA</span> Cuestión IA2 · Diagrama σ–ε de latones</div>
+  <div class="qmeta">Cuestión de 1,25 puntos (a 0,25 · b 0,25 · c.1 0,25 · c.2 0,25 · c.3 0,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Diagrama σ–ε de dos latones Cu-Zn (A y B). Se pide:</p><ol type='a'><li>Puntos y zonas de la aleación de mayor resistencia y dureza. Explicar el ensayo de dureza <b>Vickers</b>. <span class='pts'>(0,25 p.)</span></li><li>En qué consiste el <b>recocido</b>; efecto sobre la dureza del Latón B. <span class='pts'>(0,25 p.)</span></li><li>Probeta de Latón A rectangular 25 × 6 mm, L = 250 mm: elástica hasta 2,5 kN, rotura a 5 kN, E = 20 GPa. Calcular: <span class='pts'>(0,75 p.)</span><ul><li>c.1) Tensión límite elástica (MPa).</li><li>c.2) Deformación límite elástica en % y en mm (σ<sub>e</sub> = σ<sub>prop</sub>).</li><li>c.3) Tensión máxima de trabajo (n = 3 sobre la rotura).</li></ul></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 460 280' width='100%' style='max-width:460px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arLt' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#94a3c0'/></marker></defs><line x1='55' y1='240' x2='55' y2='25' stroke='#94a3c0' stroke-width='1.6' marker-end='url(#arLt)'/><line x1='55' y1='240' x2='445' y2='240' stroke='#94a3c0' stroke-width='1.6' marker-end='url(#arLt)'/><text x='38' y='36' fill='#94a3c0'>&sigma;</text><text x='442' y='258' fill='#94a3c0'>&epsilon;</text><path d='M55,240 C110,150 175,105 250,92' stroke='#a78bfa' stroke-width='2.6' fill='none'/><circle cx='180' cy='104' r='3' fill='#a78bfa'/><circle cx='250' cy='92' r='3' fill='#a78bfa'/><path d='M55,240 C130,185 230,150 370,140' stroke='#38bdf8' stroke-width='2.6' fill='none'/><circle cx='215' cy='158' r='3' fill='#38bdf8'/><circle cx='370' cy='140' r='3' fill='#38bdf8'/><g fill='#e7ecf7' font-size='12.5' font-style='italic'><text x='150' y='84'>Lat&oacute;n B</text><text x='258' y='96'>2B</text><text x='168' y='120'>1B</text><text x='270' y='168'>Lat&oacute;n A</text><text x='378' y='143'>2A</text><text x='200' y='176'>1A</text></g></svg><figcaption>Diagrama &sigma;&ndash;&epsilon; de dos latones: el <b>Lat&oacute;n B</b> alcanza mayor tensi&oacute;n (mayor resistencia y dureza) y el <b>Lat&oacute;n A</b> es m&aacute;s d&uacute;ctil (mayor alargamiento).</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q2.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La aleación de mayor resistencia es la de <b>mayor tensión</b> en la curva (Latón B). Para los cálculos: \(A=b\cdot h\), \(\sigma=F/A\), \(\varepsilon=\sigma/E\), \(\Delta L=\varepsilon L_0\) y \(\sigma_{trab}=\sigma_{rotura}/n\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q2.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2">
+    <h5>a) Aleación más resistente y ensayo Vickers</h5><p>La de mayor resistencia y dureza es el <b>Latón B</b> (curva superior, mayor tensión). Sus puntos característicos: <b>1B</b> (límite elástico) y <b>2B</b> (rotura), con su zona elástica (recta inicial) y su zona plástica.</p><p>El <b>ensayo Vickers</b> mide la dureza penetrando con una <b>pirámide de diamante</b> de base cuadrada (ángulo 136°) bajo una carga conocida; se miden las diagonales de la huella y la dureza es \(HV=1{,}854\,F/d^2\) (carga entre superficie de la huella).</p><h5>b) Recocido</h5><p>El <b>recocido</b> es un tratamiento de <b>calentamiento y enfriamiento lento</b> que ablanda el material, elimina tensiones y aumenta la ductilidad. Aplicado al Latón B, <b>disminuiría su dureza</b> (y su resistencia), haciéndolo más blando y maleable.</p><h5>c) Cálculos (Latón A)</h5><div class='formula'>$$A=25\cdot6=150\ \mathrm{mm^2}\qquad E=20\ \mathrm{GPa}=20\,000\ \mathrm{MPa}$$</div><h5>c.1) Tensión límite elástica</h5><div class='formula'>$$\sigma_e=\frac{F_e}{A}=\frac{2\,500}{150}=16{,}67\ \mathrm{MPa}$$</div><div class='res'><b>&sigma;<sub>e</sub> &approx; 16,67 MPa</b></div><h5>c.2) Deformación límite elástica</h5><div class='formula'>$$\varepsilon_e=\frac{\sigma_e}{E}=\frac{16{,}67}{20\,000}=8{,}33\cdot10^{-4}=0{,}083\%$$</div><div class='formula'>$$\Delta L_e=\varepsilon_e L_0=8{,}33\cdot10^{-4}\cdot250=0{,}208\ \mathrm{mm}$$</div><div class='res'><b>&epsilon;<sub>e</sub> = 0,083 % · &Delta;L<sub>e</sub> = 0,208 mm</b></div><h5>c.3) Tensión máxima de trabajo (n = 3)</h5><div class='formula'>$$\sigma_{rotura}=\frac{5\,000}{150}=33{,}33\ \mathrm{MPa}\ \Rightarrow\ \sigma_{trab}=\frac{33{,}33}{3}=11{,}11\ \mathrm{MPa}$$</div><div class='res'><b>&sigma;<sub>trabajo</sub> &approx; 11,11 MPa</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q1" onclick="go('q1');return false;">← Anterior</a>
+    <a href="#q3" onclick="go('q3');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3">
+  <div class="crumb">Inicio / APARTADO IB</div>
+  <div class="qtitle"><span class="tag t2">APARTADO IB</span> Cuestión IB1 · Máquina frigorífica y COP</div>
+  <div class="qmeta">Cuestión de 1,25 puntos (a 0,5 · b 0,25 · c 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type='a'><li>Funcionamiento de una máquina frigorífica según el ciclo de Carnot; diagrama p&ndash;v. <span class='pts'>(0,5 p.)</span></li><li>COP con focos frío y caliente a 5 °C y 40 °C. <span class='pts'>(0,25 p.)</span></li><li>Componentes de una instalación frigorífica y su función. <span class='pts'>(0,5 p.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q3.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La máquina frigorífica de Carnot (ciclo inverso) extrae calor del foco frío consumiendo trabajo. \(\mathrm{COP}=\dfrac{T_f}{T_c-T_f}\) en kelvin.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q3.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3">
+    <h5>a) Funcionamiento</h5><p>Extrae calor Q<sub>f</sub> del foco frío y lo cede al caliente consumiendo trabajo W; ciclo de Carnot inverso (dos isotermas y dos adiabáticas recorridas en sentido antihorario): compresión adiabática, cesión isoterma de Q<sub>c</sub>, expansión adiabática y absorción isoterma de Q<sub>f</sub>.</p><figure class='fig'><svg viewBox='0 0 320 200' width='100%' style='max-width:320px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='12'><defs><marker id='arPVo' markerWidth='8' markerHeight='7' refX='6' refY='3' orient='auto'><path d='M0,0 L6,3 L0,6 Z' fill='#94a3c0'/></marker></defs><line x1='40' y1='175' x2='40' y2='20' stroke='#94a3c0' marker-end='url(#arPVo)'/><line x1='40' y1='175' x2='300' y2='175' stroke='#94a3c0' marker-end='url(#arPVo)'/><text x='26' y='28' fill='#94a3c0'>p</text><text x='295' y='192' fill='#94a3c0'>v</text><path d='M80,58 C130,44 195,44 235,68 C250,96 235,132 190,150 C138,162 88,132 72,102 C64,80 70,66 80,58 Z' fill='none' stroke='#38bdf8' stroke-width='2.4'/><path d='M140,102 l-13,-6 m13,6 l-6,12' stroke='#38bdf8' stroke-width='1.5' fill='none'/></svg><figcaption>Ciclo de Carnot inverso (p&ndash;v), sentido antihorario.</figcaption></figure><h5>b) COP</h5><p>T<sub>f</sub> = 5 °C = 278 K, T<sub>c</sub> = 40 °C = 313 K:</p><div class='formula'>$$\mathrm{COP}=\frac{T_f}{T_c-T_f}=\frac{278}{313-278}=\frac{278}{35}=7{,}94$$</div><div class='res'><b>COP &approx; 7,94</b></div><h5>c) Componentes</h5><table class='dat'><tr><th>Componente</th><th>Función</th></tr><tr><td><b>Compresor</b></td><td>Comprime el vapor: eleva su presión y temperatura.</td></tr><tr><td><b>Condensador</b></td><td>Cede calor al ambiente y condensa el fluido.</td></tr><tr><td><b>Válvula de expansión</b></td><td>Reduce la presión; el fluido se enfría.</td></tr><tr><td><b>Evaporador</b></td><td>Absorbe calor del recinto (produce el frío) y evapora el fluido.</td></tr></table>
+  </div>
+  <div class="nav-q">
+    <a href="#q2" onclick="go('q2');return false;">← Anterior</a>
+    <a href="#q4" onclick="go('q4');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4">
+  <div class="crumb">Inicio / APARTADO IB</div>
+  <div class="qtitle"><span class="tag t2">APARTADO IB</span> Cuestión IB2 · Motores MCIA (MEP)</div>
+  <div class="qmeta">Cuestión de 1,25 puntos (a 0,5 · b 0,25 · c 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <ol type='a'><li>Funcionamiento básico de un MCIA de encendido provocado (MEP). <span class='pts'>(0,5 p.)</span></li><li>Qué es el <b>diagrama indicado</b>. <span class='pts'>(0,25 p.)</span></li><li>Diferencias básicas MEP / MEC. <span class='pts'>(0,5 p.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q4.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>El MEP (Otto) quema una mezcla aire-gasolina encendida por chispa. El diagrama indicado representa la presión frente al volumen en el cilindro a lo largo del ciclo real.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q4.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4">
+    <h5>a) Funcionamiento del MEP</h5><p>Aspira una <b>mezcla de aire y gasolina</b>, la comprime y la enciende con una <b>chispa</b> (bujía). Ciclo de 4 tiempos: admisión, compresión, explosión-expansión (carrera motriz) y escape.</p><h5>b) Diagrama indicado</h5><p>Es la representación de la <b>presión en el cilindro frente al volumen</b> (p&ndash;V) durante el ciclo <b>real</b>; el <b>área encerrada</b> es el <b>trabajo indicado</b> por ciclo.</p><h5>c) Diferencias MEP / MEC</h5><table class='dat'><tr><th></th><th>MEP (Otto)</th><th>MEC (Diésel)</th></tr><tr><td>Combustible</td><td>Gasolina</td><td>Gasóleo</td></tr><tr><td>Encendido</td><td>Chispa (bujía)</td><td>Autoinflamación por compresión</td></tr><tr><td>Mezcla</td><td>Aire + combustible</td><td>Solo aire; inyección al final</td></tr><tr><td>Relación de compresión / rendimiento</td><td>Menor</td><td>Mayor</td></tr></table><div class='res'><b>MEP:</b> chispa · <b>MEC:</b> autoinflamación</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3" onclick="go('q3');return false;">← Anterior</a>
+    <a href="#q5" onclick="go('q5');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q5">
+  <div class="crumb">Inicio / BLOQUE II</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE II</span> Ejercicio II.1 · Viga en voladizo</div>
+  <div class="qmeta">Ejercicio de 2,5 puntos (a 0,75 · b 1,25 · c 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Viga empotrada en voladizo (figura). Se pide:</p><ol type='a'><li>Las reacciones en el empotramiento A. <span class='pts'>(0,75 p.)</span></li><li>Ecuaciones de cortantes y momentos por tramos en función de x. <span class='pts'>(1,25 p.)</span></li><li>Representar ambas ecuaciones e indicar dónde el momento flector es nulo. <span class='pts'>(0,5 p.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 560 210' width='100%' style='max-width:560px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arVe' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#fb7185'/></marker></defs><rect x='90' y='108' width='380' height='13' rx='2' fill='#1b2640' stroke='#e7ecf7' stroke-width='2'/><rect x='74' y='80' width='16' height='70' fill='#26324e' stroke='#e7ecf7' stroke-width='1.6'/><g stroke='#94a3c0' stroke-width='1.1'><line x1='74' y1='84' x2='68' y2='90'/><line x1='74' y1='96' x2='68' y2='102'/><line x1='74' y1='108' x2='68' y2='114'/><line x1='74' y1='120' x2='68' y2='126'/><line x1='74' y1='132' x2='68' y2='138'/><line x1='74' y1='144' x2='68' y2='150'/></g><text x='96' y='170' fill='#38bdf8' font-size='13' font-weight='700'>A</text><line x1='280' y1='48' x2='280' y2='105' stroke='#fb7185' stroke-width='2.2' marker-end='url(#arVe)'/><text x='280' y='40' fill='#fb7185' font-size='13' font-weight='700' text-anchor='middle'>P&#8321; = 40 kN</text><line x1='470' y1='48' x2='470' y2='105' stroke='#fb7185' stroke-width='2.2' marker-end='url(#arVe)'/><text x='470' y='40' fill='#fb7185' font-size='13' font-weight='700' text-anchor='middle'>P&#8322; = 40 kN</text><text x='285' y='100' fill='#e7ecf7' font-size='12'>1</text><text x='476' y='100' fill='#e7ecf7' font-size='12'>2</text><line x1='108' y1='92' x2='132' y2='92' stroke='#94a3c0' stroke-width='1.4' marker-end='url(#arVe)'/><text x='115' y='86' fill='#94a3c0' font-size='12' font-style='italic'>x</text><g stroke='#94a3c0' stroke-width='1.2' font-size='11.5'><line x1='90' y1='186' x2='280' y2='186'/><line x1='90' y1='181' x2='90' y2='191'/><line x1='280' y1='181' x2='280' y2='191'/><text x='185' y='182' fill='#94a3c0' text-anchor='middle'>2 m</text><line x1='280' y1='186' x2='470' y2='186'/><line x1='470' y1='181' x2='470' y2='191'/><text x='375' y='182' fill='#94a3c0' text-anchor='middle'>2 m</text></g></svg><figcaption>Viga en voladizo empotrada en A (x = 0). Cargas P&#8321; = 40 kN en x = 2 m y P&#8322; = 40 kN en el extremo libre (x = 4 m), ambas hacia abajo.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q5.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>En un empotramiento hay <b>tres reacciones</b>: fuerza vertical, horizontal y un <b>momento</b>. Como las cargas son verticales, la reacción horizontal es nula. <b>Criterio de signos:</b> momento negativo (hogging) cuando la viga flecta cóncava hacia abajo, como en un voladizo.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q5')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q5.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q5">
+    <h5>a) Reacciones en el empotramiento A</h5><div class='formula'>$$\sum F_y=0:\ R_A=P_1+P_2=40+40=80\ \mathrm{kN}\ (\uparrow)$$</div><div class='formula'>$$\sum M_A=0:\ M_A=P_1\cdot2+P_2\cdot4=40\cdot2+40\cdot4=240\ \mathrm{kN\cdot m}$$</div><div class='res'><b>R<sub>A</sub> = 80 kN (&uarr;) · M<sub>A</sub> = 240 kN·m</b></div><h5>b) Cortantes y momentos por tramos</h5><p>Tomamos x desde A. <b>Cortante</b> (fuerzas verticales a la izquierda):</p><div class='formula'>$$\text{A–1 }(0\le x\le2):\ V=+80\ \mathrm{kN}\qquad \text{1–2 }(2\le x\le4):\ V=80-40=+40\ \mathrm{kN}$$</div><p><b>Momento</b> (calculado desde el extremo libre para evitar la reacción):</p><div class='formula'>$$\text{1–2 }(2\le x\le4):\ M=-40(4-x)\quad\Rightarrow\quad M(2)=-80,\ M(4)=0$$</div><div class='formula'>$$\text{A–1 }(0\le x\le2):\ M=-40(2-x)-40(4-x)=-240+80x\quad\Rightarrow\quad M(0)=-240,\ M(2)=-80$$</div><div class='res'><b>V:</b> +80 / +40 kN · <b>M:</b> &minus;240 (en A) a &minus;80 (en 1) a 0 (extremo)</div><h5>c) Diagramas y momento nulo</h5><figure class='fig'><svg viewBox='0 0 560 175' width='100%' style='max-width:560px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arVec' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='280' y='15' fill='#e7ecf7' font-size='13' text-anchor='middle'>Esfuerzo cortante V (kN)</text><path d='M90,110 L90,54 L280,54 L280,82 L470,82 L470,110 Z' fill='#4ade8022' stroke='none'/><path d='M90,54 L280,54 L280,82 L470,82 L470,110' fill='none' stroke='#4ade80' stroke-width='2.5'/><line x1='80' y1='110' x2='500' y2='110' stroke='#e7ecf7' stroke-width='1.4' marker-end='url(#arVec)'/><g fill='#e7ecf7' font-size='11.5' text-anchor='middle'><text x='185' y='48'>+80</text><text x='375' y='76'>+40</text></g><g fill='#94a3c0' font-size='11'><text x='90' y='125' text-anchor='middle'>A</text><text x='280' y='125' text-anchor='middle'>1</text><text x='470' y='125' text-anchor='middle'>2</text></g></svg><figcaption>Cortante: +80 kN en A&ndash;1 y +40 kN en 1&ndash;2 (se anula en el extremo libre).</figcaption></figure><figure class='fig'><svg viewBox='0 0 560 180' width='100%' style='max-width:560px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arMec' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='280' y='15' fill='#e7ecf7' font-size='13' text-anchor='middle'>Momento flector M (kN&middot;m)</text><path d='M90,45 L280,105 L470,133 L90,133 Z' fill='#a78bfa22' stroke='none'/><path d='M90,45 L280,105 L470,133' fill='none' stroke='#a78bfa' stroke-width='2.5'/><line x1='80' y1='133' x2='500' y2='133' stroke='#e7ecf7' stroke-width='1.4' marker-end='url(#arMec)'/><circle cx='90' cy='45' r='2.6' fill='#a78bfa'/><text x='108' y='42' fill='#e7ecf7' font-size='11.5'>-240 (en A)</text><circle cx='280' cy='105' r='2.6' fill='#a78bfa'/><text x='280' y='99' fill='#e7ecf7' font-size='11' text-anchor='middle'>-80</text><g fill='#94a3c0' font-size='11'><text x='90' y='148' text-anchor='middle'>A</text><text x='280' y='148' text-anchor='middle'>1</text><text x='470' y='148' text-anchor='middle'>2</text></g></svg><figcaption>Momento flector (negativo, la viga flecta hacia abajo): m&aacute;ximo en valor absoluto en el empotramiento A (&minus;240 kN&middot;m) y nulo solo en el extremo libre (x = 4 m).</figcaption></figure><p>El momento flector es <b>negativo en toda la viga</b> y máximo en valor absoluto en el <b>empotramiento A</b> (&minus;240 kN&middot;m). Solo se anula en el <b>extremo libre</b> (x = 4 m); no hay ninguna sección intermedia con momento nulo.</p>
+  </div>
+  <div class="nav-q">
+    <a href="#q4" onclick="go('q4');return false;">← Anterior</a>
+    <a href="#q6" onclick="go('q6');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q6">
+  <div class="crumb">Inicio / BLOQUE II</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE II</span> Ejercicio II.2 · Sistema neumático</div>
+  <div class="qmeta">Ejercicio de 2,5 puntos (a 0,5 · b 1,0 · c 0,5 · d 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Circuito neumático con simbología normalizada. Se pide:</p><ol type='a'><li>Identificar y describir: 1A1, 1B1, 1V1, 1V2, 1S2 y 0Z1. <span class='pts'>(0,5 p.)</span></li><li>Funcionamiento del circuito y condiciones para las carreras de extensión y retracción. <span class='pts'>(1,0 p.)</span></li><li>Fuerza neta de extensión en función del diámetro D del émbolo: p = 7 bar(rel), contrapresión nula, rozamiento 10 %. <span class='pts'>(0,5 p.)</span></li><li>Consumo de aire (m³/h en condiciones normales): 9 ciclos/min, carrera 100 mm, émbolo Ø 50 mm, vástago Ø 10 mm (p<sub>atm</sub> = 1 bar). <span class='pts'>(0,5 p.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><img src='fig/mur25ord_neumatica.png' alt='Circuito neumático' style='max-width:440px;width:100%;background:#fff;border-radius:8px;padding:10px'><figcaption>Circuito neumático: cilindro de doble efecto 1A1, distribuidor 5/2 (1V2), válvula selectora 1V1, finales de carrera/pulsadores 1S1, 1S2 y 1B1, y unidad de alimentación 0Z1.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q6.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Fuerza del cilindro \(F=p\cdot A\) con \(A=\pi D^2/4\) en extensión. El consumo de aire referido a condiciones normales multiplica el volumen barrido por la presión absoluta: \(V_N=V\cdot p_{abs}/p_{atm}\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q6')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q6.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q6">
+    <h5>a) Componentes</h5><ul><li><b>1A1</b> &mdash; <b>Cilindro de doble efecto</b> (actuador).</li><li><b>1B1</b> &mdash; Válvula <b>3/2 con rodillo</b> (final de carrera accionado por la leva del vástago).</li><li><b>1V1</b> &mdash; Válvula <b>selectora (OR)</b>.</li><li><b>1V2</b> &mdash; <b>Distribuidor 5/2</b> biestable (doble pilotaje, con memoria).</li><li><b>1S2</b> &mdash; Válvula <b>3/2 de accionamiento manual</b> (pulsador) con retorno por muelle.</li><li><b>0Z1</b> &mdash; <b>Unidad de alimentación/acondicionamiento de aire</b> (fuente de presión con filtro-regulador) que suministra el aire al circuito.</li></ul><h5>b) Funcionamiento</h5><p>El distribuidor biestable <b>1V2</b> gobierna el cilindro y mantiene su posición por memoria. Para la <b>extensión</b> se pilota 1V2 por el lado <b>14</b>: la señal llega a través de la selectora <b>1V1 (OR)</b> cuando se acciona <b>1S1 o 1S2</b>; el aire entra por la cámara del émbolo y el vástago avanza. Para la <b>retracción</b> se pilota 1V2 por el lado <b>12</b> mediante el final de carrera <b>1B1</b> (que se acciona al llegar el vástago al final de la extensión); el aire entra por la cámara del vástago y el cilindro retrocede.</p><h5>c) Fuerza neta de extensión</h5><p>Con p = 7 bar = 0,7 N/mm² y área del émbolo \(A=\pi D^2/4\) (D en mm):</p><div class='formula'>$$F_{teórica}=p\,\frac{\pi D^2}{4}=0{,}7\cdot\frac{\pi}{4}D^2=0{,}550\,D^2\ \mathrm N$$</div><div class='formula'>$$F_{neta}=\frac{F_{teórica}}{1{,}10}=\frac{0{,}550\,D^2}{1{,}10}=0{,}50\,D^2\ \mathrm N\quad(D\ \text{en mm})$$</div><div class='res'><b>F<sub>neta</sub> &approx; 0,50·D² N</b> (D en mm)</div><h5>d) Consumo de aire</h5><p>Volumen barrido por ciclo (extensión con área del émbolo + retracción con área anular), carrera s = 0,1 m:</p><div class='formula'>$$V_{emb}=\frac{\pi}{4}D^2 s=\frac{\pi}{4}(0{,}05)^2(0{,}1)=1{,}963\cdot10^{-4}\ \mathrm{m^3}$$</div><div class='formula'>$$V_{anular}=\frac{\pi}{4}(D^2-d^2)s=\frac{\pi}{4}(0{,}05^2-0{,}01^2)(0{,}1)=1{,}885\cdot10^{-4}\ \mathrm{m^3}$$</div><p>Suma por ciclo = 3,848·10⁻⁴ m³ (a presión de trabajo). Referido a condiciones normales, con p<sub>abs</sub> = 7 + 1 = 8 bar:</p><div class='formula'>$$V_N=3{,}848\cdot10^{-4}\cdot\frac{8}{1}=3{,}079\cdot10^{-3}\ \mathrm{m^3/ciclo}$$</div><div class='formula'>$$Q=3{,}079\cdot10^{-3}\cdot9\ \frac{\text{ciclos}}{\min}\cdot60\ \frac{\min}{\text{h}}=1{,}66\ \mathrm{m^3/h}$$</div><div class='res'><b>Consumo &approx; 1,66 m³/h</b> (condiciones normales)</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q5" onclick="go('q5');return false;">← Anterior</a>
+    <a href="#q7" onclick="go('q7');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q7">
+  <div class="crumb">Inicio / BLOQUE II</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE II</span> Ejercicio II.3 · RLC con dos bobinas y resonancia</div>
+  <div class="qmeta">Ejercicio de 2,5 puntos (a 1,0 · b 0,5 · c 0,5 · d 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Circuito con R = 100 &Omega;, L<sub>f</sub> = 100 mH (fija), L<sub>r</sub> (regulable) en serie, C = 80 &micro;F y v(t)=225&#8730;2&#183;sen(320t) V. Con <b>L<sub>r</sub> = 0 mH</b>: </p><ol type='a'><li>Impedancia total (binómica y polar); inductivo o capacitivo; ángulo y f.d.p. <span class='pts'>(1,0 p.)</span></li><li>Intensidades eficaz, máxima e instantánea. <span class='pts'>(0,5 p.)</span></li><li>Potencias P, Q, S y diagrama fasorial. <span class='pts'>(0,5 p.)</span></li><li>¿Resonancia? ¿Con qué L<sub>r</sub>? <span class='pts'>(0,5 p.)</span></li></ol>
+    <figure class="fig"><figure class='fig'><svg viewBox='0 0 500 200' width='100%' style='max-width:500px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arRo' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#38bdf8'/></marker></defs><circle cx='55' cy='115' r='18' fill='none' stroke='#e7ecf7' stroke-width='2'/><path d='M45,115 q5,-10 10,0 q5,10 10,0' stroke='#e7ecf7' stroke-width='1.6' fill='none'/><text x='36' y='95' fill='#4ade80' font-size='15' font-weight='700'>+</text><line x1='79' y1='95' x2='89' y2='95' stroke='#38bdf8' stroke-width='2' marker-end='url(#arRo)'/><text x='91' y='99' fill='#38bdf8' font-size='12' font-style='italic'>i(t)</text><line x1='55' y1='55' x2='55' y2='97' stroke='#e7ecf7'/><line x1='55' y1='133' x2='55' y2='175' stroke='#e7ecf7'/><line x1='55' y1='55' x2='95' y2='55' stroke='#e7ecf7'/><path d='M95,55 h6 l4,-7 l6,14 l6,-14 l6,14 l6,-14 l4,7 h6' stroke='#f59e0b' stroke-width='2' fill='none'/><text x='125' y='42' fill='#e7ecf7' font-size='12' text-anchor='middle'>R = 100 &Omega;</text><line x1='149' y1='55' x2='185' y2='55' stroke='#e7ecf7'/><path d='M185,55 a5 5 0 0 1 10 0 a5 5 0 0 1 10 0 a5 5 0 0 1 10 0' stroke='#a78bfa' stroke-width='2' fill='none'/><text x='200' y='42' fill='#e7ecf7' font-size='11.5' text-anchor='middle'>L_f=100mH</text><line x1='215' y1='55' x2='250' y2='55' stroke='#e7ecf7'/><path d='M250,55 a5 5 0 0 1 10 0 a5 5 0 0 1 10 0 a5 5 0 0 1 10 0' stroke='#a78bfa' stroke-width='2' fill='none'/><line x1='248' y1='48' x2='282' y2='40' stroke='#94a3c0' stroke-width='1.3' marker-end='url(#arRo)'/><text x='265' y='42' fill='#e7ecf7' font-size='11.5' text-anchor='middle'>L_r</text><line x1='280' y1='55' x2='320' y2='55' stroke='#e7ecf7'/><line x1='320' y1='44' x2='320' y2='66' stroke='#38bdf8' stroke-width='2'/><line x1='332' y1='44' x2='332' y2='66' stroke='#38bdf8' stroke-width='2'/><text x='326' y='38' fill='#e7ecf7' font-size='12' text-anchor='middle'>C = 80 &micro;F</text><line x1='332' y1='55' x2='440' y2='55' stroke='#e7ecf7'/><line x1='440' y1='55' x2='440' y2='175' stroke='#e7ecf7'/><line x1='55' y1='175' x2='440' y2='175' stroke='#e7ecf7'/><text x='150' y='160' fill='#94a3c0' font-size='12'>v(t) = 225&#8730;2&#183;sen(320t)</text></svg><figcaption>Dos bobinas en serie (L<sub>f</sub> = 100 mH fija y L<sub>r</sub> regulable), con R y C. Se analiza con L<sub>r</sub> = 0 mH.</figcaption></figure></figure>
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q7.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Las dos bobinas en serie suman inductancias (L = L<sub>f</sub> + L<sub>r</sub>). Con L<sub>r</sub> = 0, L = 100 mH. \(X_L=\omega L\), \(X_C=1/(\omega C)\), \(Z=R+j(X_L-X_C)\). En resonancia X<sub>L</sub>=X<sub>C</sub>.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q7')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q7.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q7">
+    <h5>a) Impedancia</h5><div class='formula'>$$X_L=\omega L=320\cdot0{,}1=32\ \Omega\qquad X_C=\frac{1}{\omega C}=\frac{1}{320\cdot80\cdot10^{-6}}=39{,}06\ \Omega$$</div><div class='formula'>$$\overline{Z}=R+j(X_L-X_C)=100-j\,7{,}06\ \Omega\ \Rightarrow\ |Z|=100{,}25\ \Omega,\ \varphi=-4{,}04^\circ$$</div><p>Como \(X_C>X_L\), el circuito es <b>capacitivo</b> (la corriente adelanta).</p><div class='formula'>$$\cos\varphi=\frac{R}{|Z|}=\frac{100}{100{,}25}=0{,}9975$$</div><div class='res'><b>Z = 100 &minus; j7,06 &Omega; = 100,25∠&minus;4,04° &Omega; (capacitivo) · cos&phi; = 0,997</b></div><h5>b) Intensidades</h5><div class='formula'>$$I_{ef}=\frac{225}{100{,}25}=2{,}24\ \mathrm A\qquad I_{max}=2{,}24\sqrt2=3{,}17\ \mathrm A$$</div><div class='formula'>$$i(t)=3{,}17\,\operatorname{sen}(320t+4{,}04^\circ)\ \mathrm A$$</div><div class='res'><b>I<sub>ef</sub> = 2,24 A · I<sub>max</sub> = 3,17 A</b></div><h5>c) Potencias y fasorial</h5><div class='formula'>$$S=225\cdot2{,}24=504{,}9\ \mathrm{VA}\quad P=I^2R=2{,}24^2\cdot100=503{,}6\ \mathrm W\quad Q=I^2(X_L-X_C)=-35{,}6\ \mathrm{VAr}$$</div><div class='res'><b>S &approx; 505 VA · P &approx; 504 W · Q &approx; &minus;35,6 VAr (capacitiva)</b></div><figure class='fig'><svg viewBox='0 0 420 240' width='100%' style='max-width:420px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='arFo' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='50' y1='140' x2='400' y2='140' stroke='#94a3c0' stroke-width='1.2'/><line x1='60' y1='210' x2='60' y2='30' stroke='#94a3c0' stroke-width='1.2'/><line x1='60' y1='140' x2='360' y2='140' stroke='#38bdf8' stroke-width='2.6' marker-end='url(#arFo)'/><text x='300' y='158' fill='#38bdf8' font-size='12.5'>I (adelanta)</text><line x1='60' y1='140' x2='356' y2='118' stroke='#f59e0b' stroke-width='2.6' marker-end='url(#arFo)'/><text x='300' y='108' fill='#f59e0b' font-size='12.5'>V = 225 V</text><path d='M120,140 A60,60 0 0 1 119,135' stroke='#94a3c0' stroke-width='1.4' fill='none'/><text x='128' y='134' fill='#94a3c0' font-size='11'>&phi;=4&deg;</text></svg><figcaption>Circuito ligeramente <b>capacitivo</b> (X<sub>C</sub> &gt; X<sub>L</sub>): I adelanta a V un peque&ntilde;o &aacute;ngulo &phi; &approx; 4&deg;.</figcaption></figure><h5>d) Resonancia</h5><p>Sí: en resonancia \(X_L=X_C\Rightarrow \omega(L_f+L_r)=\dfrac{1}{\omega C}\), luego</p><div class='formula'>$$L_f+L_r=\frac{1}{\omega^2 C}=\frac{1}{320^2\cdot80\cdot10^{-6}}=0{,}1221\ \mathrm H=122{,}1\ \mathrm{mH}$$</div><div class='formula'>$$L_r=122{,}1-100=22{,}1\ \mathrm{mH}$$</div><div class='res'><b>Sí; con L<sub>r</sub> &approx; 22,1 mH</b> el circuito entra en resonancia (Z = R, f.d.p. = 1)</div>
+  </div>
+  <div class="nav-q">
+    <a href="#q6" onclick="go('q6');return false;">← Anterior</a>
+    <a href="#q8" onclick="go('q8');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q8">
+  <div class="crumb">Inicio / BLOQUE II</div>
+  <div class="qtitle"><span class="tag t3">BLOQUE II</span> Ejercicio II.4 · Combinacional con NAND</div>
+  <div class="qmeta">Ejercicio de 2,5 puntos (a 0,75 · b 1,0 · c 0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Puesta en marcha del motor de un puente grúa con 3 variables M (operarios), P (pulsador), T (carga suspendida). El motor arranca (F=1): cuando <b>M=0 y P=1</b> (sea cual sea T); <b>o</b> cuando <b>P=1 y T=0</b> (aunque M=1). Se pide:</p><ol type='a'><li>Tabla de verdad y función en su primera forma canónica (desarrollada y compacta). <span class='pts'>(0,75 p.)</span></li><li>Mapa de Karnaugh y función simplificada (minterms). <span class='pts'>(1,0 p.)</span></li><li>Circuito con el mínimo número de NAND de 2 entradas, indicando la salida de cada puerta. <span class='pts'>(0,75 p.)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_mur_2025_ordinaria/q8.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Traducimos las condiciones a \(F=\overline{M}\,P+P\,\overline{T}=P(\overline M+\overline T)\), y como \(\overline M+\overline T=\overline{MT}\), resulta \(F=P\cdot\overline{M\,T}\), inmediato de implementar con NAND.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q8')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_mur_2025_ordinaria/q8.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q8">
+    <h5>a) Tabla de verdad y primera forma canónica</h5><p>Dec = 4M+2P+T. F = M&#39;P + PT&#39;:</p><table class='dat'><tr><th>Dec</th><th>M</th><th>P</th><th>T</th><th>F</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>3</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>4</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>5</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>6</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>7</td><td>1</td><td>1</td><td>1</td><td>0</td></tr></table><p><b>Primera forma canónica</b> (suma de minterms): compacta \(F=\sum m(2,3,6)\); desarrollada:</p><div class='formula'>$$F=\overline{M}\,P\,\overline{T}+\overline{M}\,P\,T+M\,P\,\overline{T}$$</div><h5>b) Karnaugh y simplificación</h5><table class='dat'><tr><th>MP \ T</th><th>0</th><th>1</th></tr><tr><td><b>00</b></td><td>0</td><td>0</td></tr><tr><td><b>01</b></td><td>1</td><td>1</td></tr><tr><td><b>11</b></td><td>1</td><td>0</td></tr><tr><td><b>10</b></td><td>0</td><td>0</td></tr></table><p>Grupos: fila MP=01 (minterms 2,3) &rarr; <b>M&#39;P</b>; casillas 2 y 6 (P=1, T=0) &rarr; <b>PT&#39;</b>.</p><div class='formula'>$$F=\overline{M}\,P+P\,\overline{T}=P\,(\overline M+\overline T)$$</div><div class='res'><b>F = M&#39;P + PT&#39;</b></div><h5>c) Circuito con NAND de 2 entradas</h5><p>Como \(\overline M+\overline T=\overline{MT}\), se tiene \(F=P\cdot\overline{MT}\). Con <b>3 puertas NAND</b>:</p><div class='formula'>$$g_1=\mathrm{NAND}(M,T)=\overline{MT},\quad g_2=\mathrm{NAND}(P,g_1),\quad F=\mathrm{NAND}(g_2,g_2)=P\cdot\overline{MT}$$</div><p>Salidas: \(g_1=(M\,T)'\); \(g_2=(P\,(MT)')'\); \(F=P\,(MT)'=\overline M P+P\overline T\). ✓</p><figure class='fig'><svg viewBox='0 0 500 190' width='100%' style='max-width:500px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='12' stroke-linejoin='round'><defs><marker id='arNo' markerWidth='8' markerHeight='7' refX='6' refY='3' orient='auto'><path d='M0,0 L6,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><g stroke='#22d3ee' stroke-width='2' fill='none'><path d='M120,40 h28 a20,20 0 0 1 0,40 h-28 Z'/><circle cx='172' cy='60' r='4'/></g><text x='134' y='64' fill='#e7ecf7' font-size='10' text-anchor='middle'>(MT)&#39;</text><g stroke='#22d3ee' stroke-width='2' fill='none'><path d='M250,90 h28 a20,20 0 0 1 0,40 h-28 Z'/><circle cx='302' cy='110' r='4'/></g><text x='264' y='114' fill='#e7ecf7' font-size='9' text-anchor='middle'>g&#8322;</text><g stroke='#a78bfa' stroke-width='2' fill='none'><path d='M370,90 h28 a20,20 0 0 1 0,40 h-28 Z'/><circle cx='422' cy='110' r='4'/></g><text x='384' y='114' fill='#e7ecf7' font-size='11' text-anchor='middle'>F</text><g stroke='#cbd5e1' stroke-width='1.6'><line x1='40' y1='52' x2='120' y2='52'/><line x1='40' y1='68' x2='120' y2='68'/><line x1='40' y1='100' x2='250' y2='100'/><line x1='176' y1='60' x2='215' y2='60'/><line x1='215' y1='60' x2='215' y2='120'/><line x1='215' y1='120' x2='250' y2='120'/><line x1='306' y1='110' x2='340' y2='110'/><line x1='340' y1='110' x2='340' y2='100'/><line x1='340' y1='100' x2='370' y2='100'/><line x1='306' y1='110' x2='340' y2='110'/><line x1='340' y1='110' x2='340' y2='120'/><line x1='340' y1='120' x2='370' y2='120'/><line x1='426' y1='110' x2='470' y2='110' marker-end='url(#arNo)'/></g><g fill='#e7ecf7' font-size='12'><text x='28' y='56'>M</text><text x='28' y='72'>T</text><text x='28' y='104'>P</text><text x='476' y='114'>F</text></g><text x='250' y='180' fill='#94a3c0' font-size='11' text-anchor='middle'>g&#8321;=(M&middot;T)&#39; · g&#8322;=NAND(P,g&#8321;) · F=NAND(g&#8322;,g&#8322;)=P&middot;(M&middot;T)&#39;</text></svg><figcaption>Implementaci&oacute;n de F = M&#39;P + PT&#39; con 3 puertas NAND de 2 entradas.</figcaption></figure>
+  </div>
+  <div class="nav-q">
+    <a href="#q7" onclick="go('q7');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Dpto. Tecnología · Solucionario PAU · Región de Murcia · Tecnología e Ingeniería II (Junio 2025)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>

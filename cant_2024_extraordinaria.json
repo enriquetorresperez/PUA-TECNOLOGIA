@@ -1,0 +1,176 @@
+{
+ "meta": {
+  "titulo": "Tecnología e Ingeniería II",
+  "subtitulo": "Prueba de Acceso a la Universidad · Cantabria · Extraordinaria (Julio) 2024 · Examen resuelto y comentado",
+  "cabecera_titulo": "EBAU 2024 · <span>Tecnología e Ingeniería II</span> · Cantabria · Extraordinaria",
+  "pill": "Elige 5 de 10 ejercicios · 2 puntos cada uno",
+  "enunciado_pdf": "../../examens/Cantabria/Tecnologia_Cantabria_2024_extraordinaria.pdf",
+  "pdf_dir": "pdf_cant_2024_extraordinaria",
+  "footer": "Solucionario EBAU · Cantabria · Tecnología e Ingeniería II (Extraordinaria 2024)",
+  "intro_inicio": "El alumno debe escoger <b>cinco ejercicios de los diez</b> propuestos (cada uno vale 2 puntos). Aquí se resuelven <b>todos</b>. Selecciona un bloque o un ejercicio en la barra lateral: cada uno incluye el enunciado oficial, una introducción con los conceptos que se aplican y la solución paso a paso.",
+  "indice_nombre": "Exámenes de Cantabria",
+  "indice_url": "index.html"
+ },
+ "bloques": [
+  {
+   "id": "b1",
+   "titulo": "Bloque 1 · Materiales y motores",
+   "color": "#f59e0b",
+   "descripcion_tarjeta": "Ensayo de dureza Brinell, diagrama Hierro-Carbono de un acero hipoeutectoide y parámetros de un motor de motocicleta.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#f59e0b' stroke-width='3'><circle cx='34' cy='28' r='14'/><path d='M34 6 v8'/><path d='M8 48 h64'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q1",
+     "titulo": "Ejercicio 1 · Dureza Brinell",
+     "etiqueta": "MATERIALES",
+     "menu": "E1 · Ensayo Brinell",
+     "titulo_corto": "E1",
+     "meta": "Ejercicio de 2 puntos (a 1 · b 1)",
+     "enunciado_html": "<p>Se realiza un <b>ensayo Brinell</b> para determinar la dureza de un cierto material. En el ensayo se ha utilizado una bola de <b>8 mm</b> de diámetro sobre la que se ha aplicado durante 30 segundos una cierta carga. Si la constante de proporcionalidad utilizada es <b>K = 30</b> y la huella obtenida tiene una superficie de <b>8,67 mm²</b>. Se pide:</p><ol type='a'><li>Calcular la dureza Brinell del material. <span class='pts'>(1 pto.)</span></li><li>Si utilizamos una bola de 5 mm de diámetro, ¿qué carga se debería aplicar? ¿Cuál será la superficie de la huella obtenida en este caso? <span class='pts'>(1 pto.)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'><img src='fig/cant24ext_brinell.png' alt='Ensayo Brinell: bola de 8 mm sometida a una carga sobre el material' style='max-width:300px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Ensayo de dureza Brinell: una bola de diámetro D se presiona con una carga F sobre el material y deja una huella de superficie S.</figcaption></figure>",
+     "aplica_html": "<p>En el ensayo <b>Brinell</b> la carga aplicada se fija con la relación \\(F=K\\,D^2\\), donde \\(K\\) es la constante de ensayo (depende del material) y \\(D\\) el diámetro de la bola. La <b>dureza</b> es la carga por unidad de superficie de la huella (casquete esférico): \\(HB=\\dfrac{F}{S}\\). Como el material es el mismo, su dureza \\(HB\\) y la constante \\(K\\) no cambian al variar la bola.</p>",
+     "solucion_html": "<h5>a) Dureza Brinell</h5><p>La carga del ensayo se obtiene de \\(F=K\\,D^2\\) (con la fuerza en kp y \\(D\\) en mm):</p><div class='formula'>$$F=K\\,D^2=30\\cdot 8^2=30\\cdot 64=1920\\ \\text{kp}$$</div><p>La dureza es la carga entre la superficie de la huella:</p><div class='formula'>$$HB=\\dfrac{F}{S}=\\dfrac{1920\\ \\text{kp}}{8{,}67\\ \\mathrm{mm^2}}\\approx 221{,}5\\ \\mathrm{kp/mm^2}$$</div><div class='res'><b>HB ≈ 221,5</b> (kp/mm²)</div><h5>b) Bola de 5 mm: carga y superficie de la huella</h5><p>Con el mismo material, la constante \\(K=30\\) se mantiene, luego la nueva carga es:</p><div class='formula'>$$F'=K\\,D'^2=30\\cdot 5^2=30\\cdot 25=750\\ \\text{kp}$$</div><p>La dureza \\(HB\\) del material no cambia, así que la superficie de la nueva huella sale de \\(HB=F'/S'\\):</p><div class='formula'>$$S'=\\dfrac{F'}{HB}=\\dfrac{750}{221{,}5}\\approx 3{,}39\\ \\mathrm{mm^2}$$</div><p>(Coherente con que la superficie escala con \\(D^2\\): \\(S'=8{,}67\\cdot\\tfrac{25}{64}=3{,}39\\ \\mathrm{mm^2}\\).)</p><div class='res'><b>F′ = 750 kp · S′ ≈ 3,39 mm²</b></div>"
+    },
+    {
+     "id": "q2",
+     "titulo": "Ejercicio 2 · Diagrama Hierro-Carbono",
+     "etiqueta": "MATERIALES",
+     "menu": "E2 · Diagrama Fe-C",
+     "titulo_corto": "E2",
+     "meta": "Ejercicio de 2 puntos (a 0,6 · b 0,7 · c 0,7)",
+     "enunciado_html": "<p>El diagrama de equilibrio de la figura representa el diagrama <b>Hierro-Carbono</b> en la zona de los aceros. Si disponemos de una aleación Hierro-Carbono de <b>120 kg</b> con el <b>0,45 % de Carbono</b>, se pide calcular:</p><ol type='a'><li>Masa sólida y líquida a la temperatura de 910 °C. <span class='pts'>(0,6 ptos.)</span></li><li>Masa de ferrita y de cementita a 723,1 °C. <span class='pts'>(0,7 ptos.)</span></li><li>Masa de ferrita dentro de la perlita a 722,9 °C. <span class='pts'>(0,7 ptos.)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'><img src='fig/cant24ext_fases.png' alt='Diagrama Hierro-Carbono con temperaturas 1130, 910 y 723 ºC y eutectoide en 0,89 % C' style='max-width:470px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Diagrama Fe-C simplificado: aleación de 0,45 % C (acero hipoeutectoide). Eutectoide a 0,89 % C y 723 ºC; cementita a 6,67 % C.</figcaption></figure>",
+     "aplica_html": "<p>Es un <b>acero hipoeutectoide</b> (0,45 % &lt; 0,89 % de la eutectoide). A 910 ºC el punto está en pleno campo de la <b>austenita</b> (una sola fase sólida), por encima de la línea A<sub>3</sub> y muy por debajo de la línea de solidus. Al enfriar, entre A<sub>3</sub> y la eutectoide precipita <b>ferrita proeutectoide</b>; al cruzar los 723 ºC la austenita restante (0,89 % C) se convierte en <b>perlita</b> (ferrita + cementita). Todo se calcula con la <b>regla de la palanca</b> (ferrita ≈ 0 % C, cementita 6,67 % C).</p>",
+     "solucion_html": "<h5>a) Masa sólida y líquida a 910 °C</h5><p>A 910 ºC la vertical del 0,45 % C está <b>por encima de la línea A₃</b> (que en esta composición ronda los 815 ºC) y muy <b>por debajo de la solidus</b> (~1400 ºC): el material se encuentra en el <b>campo monofásico de la austenita</b>. No hay nada de fase líquida.</p><div class='formula'>$$m_{s\\acute olido}=120\\ \\text{kg (austenita)}\\qquad m_{l\\acute\\i quido}=0\\ \\text{kg}$$</div><div class='res'><b>Sólido (austenita) = 120 kg · Líquido = 0 kg</b> (aleación totalmente solidificada)</div><h5>b) Masa de ferrita y de cementita (estructura a 722,9 °C)</h5><p>Justo por debajo de la eutectoide la estructura está formada por <b>ferrita</b> (≈ 0 % C) y <b>cementita</b> (6,67 % C). Sus masas totales se obtienen con la palanca global sobre el 0,45 % C:</p><div class='formula'>$$x_{Fe_3C}=\\dfrac{0{,}45-0}{6{,}67-0}=\\dfrac{0{,}45}{6{,}67}=0{,}0675\\;\\Rightarrow\\; m_{Fe_3C}=0{,}0675\\cdot120=8{,}1\\ \\text{kg}$$</div><div class='formula'>$$x_{\\alpha}=\\dfrac{6{,}67-0{,}45}{6{,}67}=0{,}9325\\;\\Rightarrow\\; m_{\\alpha}=0{,}9325\\cdot120=111{,}9\\ \\text{kg}$$</div><div class='res'><b>Ferrita total ≈ 111,9 kg · Cementita total ≈ 8,1 kg</b> (comprobación: 111,9 + 8,1 = 120 kg)</div><p style='color:#94a3c0;font-size:.9em'>Nota: a 723,1 ºC (justo por encima de la eutectoide) coexisten ferrita proeutectoide y austenita; la cementita aparece cuando esa austenita se transforma en perlita al bajar de los 723 ºC.</p><h5>c) Ferrita dentro de la perlita a 722,9 °C</h5><p>Primero se calcula la <b>perlita</b>, que procede de la austenita (0,89 % C) presente justo antes de la eutectoide. Su fracción sale de la palanca entre ferrita proeutectoide (0 % C) y austenita (0,89 % C):</p><div class='formula'>$$x_{perlita}=\\dfrac{0{,}45-0}{0{,}89-0}=0{,}5056\\;\\Rightarrow\\; m_{perlita}=0{,}5056\\cdot120=60{,}7\\ \\text{kg}$$</div><p>Dentro de la perlita (0,89 % C) la fracción de ferrita eutectoide es:</p><div class='formula'>$$x_{\\alpha}^{perlita}=\\dfrac{6{,}67-0{,}89}{6{,}67-0}=\\dfrac{5{,}78}{6{,}67}=0{,}8666\\;\\Rightarrow\\; m_{\\alpha}^{perlita}=0{,}8666\\cdot60{,}7=52{,}6\\ \\text{kg}$$</div><div class='res'><b>Ferrita dentro de la perlita ≈ 52,6 kg</b> (la ferrita restante, 111,9 − 52,6 ≈ 59,3 kg, es ferrita proeutectoide)</div>"
+    },
+    {
+     "id": "q3",
+     "titulo": "Ejercicio 3 · Motor de motocicleta",
+     "etiqueta": "MOTORES",
+     "menu": "E3 · Motor 125 cc",
+     "titulo_corto": "E3",
+     "meta": "Ejercicio de 2 puntos (a 0,7 · b 0,7 · c 0,6)",
+     "enunciado_html": "<p>Una motocicleta de <b>125 c.c.</b> alcanza una potencia máxima de <b>16 C.V.</b> a <b>12.000 rpm</b>. Sabiendo que el pistón tiene una carrera de <b>45,5 mm</b> y la relación de compresión es de <b>11:1</b>. Se pide calcular:</p><ol type='a'><li>El diámetro del cilindro. <span class='pts'>(0,7 ptos.)</span></li><li>El volumen de la cámara de combustión. <span class='pts'>(0,7 ptos.)</span></li><li>El par que proporciona el motor a la potencia máxima. <span class='pts'>(0,6 ptos.)</span></li></ol>",
+     "aplica_html": "<p>La <b>cilindrada</b> (unitaria, un cilindro) es el volumen barrido por el pistón: \\(V_D=\\frac{\\pi}{4}D^2\\,L\\), con \\(L\\) la carrera. La <b>relación de compresión</b> es \\(r=\\frac{V_D+V_c}{V_c}\\), con \\(V_c\\) el volumen de la cámara de combustión. La <b>potencia</b> y el <b>par</b> se relacionan por \\(P=M\\,\\omega\\), con \\(\\omega\\) en rad/s.</p>",
+     "solucion_html": "<h5>a) Diámetro del cilindro</h5><p>La cilindrada es \\(V_D=125\\ \\mathrm{cm^3}\\) y la carrera \\(L=45{,}5\\ \\text{mm}=4{,}55\\ \\text{cm}\\). Despejando el diámetro de \\(V_D=\\frac{\\pi}{4}D^2L\\):</p><div class='formula'>$$D=\\sqrt{\\dfrac{4\\,V_D}{\\pi\\,L}}=\\sqrt{\\dfrac{4\\cdot125}{\\pi\\cdot4{,}55}}=\\sqrt{34{,}98}\\approx 5{,}91\\ \\text{cm}$$</div><div class='res'><b>D ≈ 5,91 cm ≈ 59,1 mm</b></div><h5>b) Volumen de la cámara de combustión</h5><p>De la relación de compresión \\(r=\\dfrac{V_D+V_c}{V_c}=11\\) se obtiene \\(V_D=(r-1)V_c\\):</p><div class='formula'>$$V_c=\\dfrac{V_D}{r-1}=\\dfrac{125}{11-1}=\\dfrac{125}{10}=12{,}5\\ \\mathrm{cm^3}$$</div><div class='res'><b>V<sub>c</sub> = 12,5 cm³</b></div><h5>c) Par a la potencia máxima</h5><p>Pasamos la potencia a vatios (1 C.V. = 735,5 W) y la velocidad a rad/s:</p><div class='formula'>$$P=16\\cdot735{,}5=11768\\ \\text{W}\\qquad \\omega=12000\\cdot\\dfrac{2\\pi}{60}=1256{,}6\\ \\tfrac{\\text{rad}}{\\text{s}}$$</div><div class='formula'>$$M=\\dfrac{P}{\\omega}=\\dfrac{11768}{1256{,}6}\\approx 9{,}37\\ \\mathrm{N{\\cdot}m}$$</div><div class='res'><b>M ≈ 9,37 N·m</b> (par motor a 12.000 rpm)</div>"
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "titulo": "Bloque 2 · Neumática",
+   "color": "#38bdf8",
+   "descripcion_tarjeta": "Circuito neumático con dos cilindros de doble efecto y mando secuencial mediante finales de carrera.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#38bdf8' stroke-width='3'><rect x='10' y='16' width='34' height='14' rx='2'/><rect x='10' y='34' width='34' height='14' rx='2'/><path d='M44 23h16M44 41h16'/><circle cx='66' cy='23' r='4'/><circle cx='66' cy='41' r='4'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q4",
+     "titulo": "Ejercicio 4 · Instalación neumática",
+     "etiqueta": "NEUMÁTICA",
+     "menu": "E4 · Instalación neumática",
+     "titulo_corto": "E4",
+     "meta": "Ejercicio de 2 puntos (a 0,6 · b 1 · c 0,4)",
+     "enunciado_html": "<p>En la instalación neumática de la figura se pide:</p><ol type='a'><li>Para cada componente del circuito, nómbralo y explica brevemente su funcionamiento. <span class='pts'>(0,6 ptos.)</span></li><li>Explica el funcionamiento de la instalación. <span class='pts'>(1 pto.)</span></li><li>Si se quisiese reducir la velocidad de retorno del vástago del cilindro etiquetado \"1.0\", ¿qué componente se necesita? ¿Cómo se conectaría en el esquema? <span class='pts'>(0,4 ptos.)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'><img src='fig/cant24ext_neumatica.png' alt='Instalación neumática con dos cilindros 1.0 y 2.0, distribuidor 5/2 y válvulas 3/2 con finales de carrera S2 y S3' style='max-width:620px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Circuito neumático secuencial: cilindros de doble efecto 1.0 y 2.0, distribuidor 5/2 (1.1), válvulas 3/2 (1.2, 1.3, 2.1, 2.2) y finales de carrera S2 (en 1.0) y S3 (en 2.0).</figcaption></figure>",
+     "aplica_html": "<p>Hay que reconocer la <b>simbología neumática</b> (norma ISO 1219) —actuadores, distribuidor principal, válvulas de mando y finales de carrera— y razonar la <b>secuencia</b> de avance y retroceso de los dos cilindros gobernada por los detectores de posición S2 y S3.</p>",
+     "solucion_html": "<h5>a) Componentes del circuito</h5><ul><li><b>1.0 y 2.0 · Cilindros de doble efecto.</b> Son los actuadores: el aire entra por una u otra cámara para el avance o el retroceso del vástago con fuerza en ambos sentidos. Llevan un <b>detector de posición</b> al final de la carrera (S2 en 1.0, S3 en 2.0).</li><li><b>1.1 · Válvula distribuidora 5/2</b> (biestable, pilotada neumáticamente por sus dos extremos). Es el mando principal del cilindro 1.0: dirige el aire a una u otra cámara y comunica la contraria con el escape (5 vías, 2 posiciones).</li><li><b>1.2 · Válvula 3/2</b> (normalmente cerrada, con retorno por muelle) accionada por <b>pulsador</b>: es la señal de <b>marcha</b> (start) que pilota la 5/2 para el avance de 1.0.</li><li><b>1.3 · Válvula 3/2</b> (NC, muelle) accionada por el final de carrera <b>S3</b>: pilota la 5/2 en sentido contrario para el retroceso de 1.0.</li><li><b>2.1 y 2.2 · Válvulas 3/2</b> (NC, muelle). 2.1, accionada por el final de carrera <b>S2</b>, envía aire para el <b>avance</b> del cilindro 2.0; 2.2, accionada por rodillo, gobierna su <b>retroceso</b>.</li><li><b>S2 y S3 · Finales de carrera</b> (detectores de posición de rodillo): S2 detecta el cilindro 1.0 en el final de su carrera y S3 el cilindro 2.0; encadenan las fases de la secuencia.</li></ul><h5>b) Funcionamiento de la instalación</h5><p>Es un <b>automatismo secuencial</b> de dos cilindros (A = 1.0, B = 2.0):</p><ol><li>Al accionar el pulsador <b>1.2</b> (marcha), se pilota la 5/2 (1.1) y el cilindro <b>1.0 avanza (A+)</b>.</li><li>Al llegar 1.0 al final de carrera, acciona <b>S2</b>, que abre la válvula 2.1 y hace <b>avanzar el cilindro 2.0 (B+)</b>.</li><li>Cuando 2.0 alcanza su final de carrera, acciona <b>S3</b>, que abre la válvula 1.3 y conmuta la 5/2 en sentido contrario: el cilindro <b>1.0 retrocede (A−)</b>.</li><li>Por último, la válvula <b>2.2</b> hace <b>retroceder el cilindro 2.0 (B−)</b>, dejando la instalación en su posición inicial lista para un nuevo ciclo.</li></ol><p>Como la 5/2 es <b>biestable</b>, mantiene la última orden hasta que llega la señal contraria (memoria de posición).</p><div class='res'><b>Secuencia: A+ → B+ → A− → B−</b> (mando encadenado por los finales de carrera S2 y S3)</div><h5>c) Reducir la velocidad de retorno de 1.0</h5><p>Se necesita una <b>válvula reguladora de caudal unidireccional</b> (estranguladora con antirretorno). Para no perder fuerza, se monta con <b>regulación por escape</b> (\"meter-out\"): se intercala en la conducción de la cámara que <b>se vacía durante el retroceso</b> (la del lado del vástago), de modo que estrangule el aire que <b>sale</b> del cilindro y deje pasar libremente el de entrada. Así se frena solo la carrera de retorno sin afectar al avance.</p><div class='res'><b>Válvula estranguladora antirretorno regulando el escape de la cámara del vástago de 1.0</b></div>"
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "titulo": "Bloque 3 · Sistemas digitales",
+   "color": "#a78bfa",
+   "descripcion_tarjeta": "Simplificación por Karnaugh e implementación con NAND, y obtención de la función y la tabla de verdad de un circuito lógico.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#a78bfa' stroke-width='3'><path d='M18 18 h14 a12 12 0 0 1 0 24 h-14 z'/><path d='M6 24h12M6 36h12M56 30h14'/><circle cx='74' cy='30' r='3'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q5",
+     "titulo": "Ejercicio 5 · Karnaugh y NAND",
+     "etiqueta": "DIGITAL",
+     "menu": "E5 · Karnaugh y NAND",
+     "titulo_corto": "E5",
+     "meta": "Ejercicio de 2 puntos (a 1 · b 1)",
+     "enunciado_html": "<p>Dada la siguiente función lógica</p><div class='formula'>$$S=(\\bar a\\cdot b\\cdot c)+(a\\cdot b\\cdot \\bar c)+(a\\cdot b\\cdot c)$$</div><p>Se pide:</p><ol type='a'><li>Obtener la función simplificada mediante el método de Karnaugh. <span class='pts'>(1 pto.)</span></li><li>Implementar la función simplificada con el menor número posible de puertas lógicas y utilizando únicamente puertas NAND de dos entradas. <span class='pts'>(1 pto.)</span></li></ol><p><i>Nota</i>: Para representar las puertas puede usarse los símbolos de la norma DIN o los de la norma ASA.</p>",
+     "aplica_html": "<p>Se identifican los <b>minterms</b> de la función (filas con salida 1), se colocan en un <b>mapa de Karnaugh</b> y se agrupan los unos adyacentes en potencias de 2. La forma mínima se implementa después solo con <b>NAND</b> aplicando la doble negación y De Morgan.</p>",
+     "solucion_html": "<h5>a) Simplificación por Karnaugh</h5><p>Los tres términos son los minterms \\(m_3=\\bar a b c\\), \\(m_6=a b\\bar c\\) y \\(m_7=a b c\\): \\(S=\\sum m(3,6,7)\\). En el mapa (filas = a; columnas = bc en Gray):</p><table class='dat'><thead><tr><th>a\\bc</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead><tbody><tr><td><b>0</b></td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td><b>1</b></td><td>0</td><td>0</td><td>1</td><td>1</td></tr></tbody></table><p>La columna <b>bc = 11</b> (m3 y m7) agrupa <b>\\(b\\,c\\)</b>; los unos de la fila <b>a = 1</b> en 11 y 10 (m7 y m6) agrupan <b>\\(a\\,b\\)</b>:</p><div class='formula'>$$\\boxed{\\ S=b\\,c+a\\,b=b\\,(a+c)\\ }$$</div><h5>b) Implementación con NAND de dos entradas</h5><p>Con doble negación y De Morgan, una suma de productos se hace con NAND: \\(S=ab+bc=\\overline{\\overline{ab}\\cdot\\overline{bc}}\\). Bastan <b>3 puertas NAND-2</b>:</p><div class='formula'>$$N_1=\\overline{a\\cdot b},\\quad N_2=\\overline{b\\cdot c},\\quad S=\\overline{N_1\\cdot N_2}=ab+bc$$</div><figure class='fig'><svg viewBox='0 0 460 250' width='100%' style='max-width:460px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><text x='14' y='70' fill='#e2e8f0' font-size='15' text-anchor='start'>a</text><text x='14' y='118' fill='#e2e8f0' font-size='15' text-anchor='start'>b</text><text x='14' y='190' fill='#e2e8f0' font-size='15' text-anchor='start'>c</text><line x1='24' y1='66' x2='110' y2='58' stroke='#cbd5e1'/><line x1='24' y1='114' x2='110' y2='74' stroke='#cbd5e1'/><path d='M110,46 L133.0,46 A17.0,17.0 0 0 1 133.0,80 L110,80 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='161' cy='63.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='129.32' y='67.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><text x='128' y='40' fill='#94a3c0' font-size='12' text-anchor='start'>(ab)'</text><line x1='24' y1='114' x2='110' y2='162' stroke='#cbd5e1'/><line x1='24' y1='186' x2='110' y2='178' stroke='#cbd5e1'/><path d='M110,150 L133.0,150 A17.0,17.0 0 0 1 133.0,184 L110,184 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='161' cy='167.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='129.32' y='171.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><text x='128' y='205' fill='#94a3c0' font-size='12' text-anchor='start'>(bc)'</text><line x1='166' y1='63.0' x2='300' y2='108' stroke='#cbd5e1'/><line x1='166' y1='167.0' x2='300' y2='132' stroke='#cbd5e1'/><path d='M300,98 L323.0,98 A17.0,17.0 0 0 1 323.0,132 L300,132 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='351' cy='115.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='319.32' y='119.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='356' y1='115.0' x2='396' y2='115.0' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='404' y='120.0' fill='#4ade80' font-size='16' text-anchor='start'>S</text></svg><figcaption>S = a·b + b·c con 3 NAND-2 (símbolos ASA).</figcaption></figure><div class='res'><b>S = ab + bc = NAND( NAND(a,b) , NAND(b,c) )</b> · 3 puertas NAND de 2 entradas</div>"
+    },
+    {
+     "id": "q6",
+     "titulo": "Ejercicio 6 · Función lógica de un circuito",
+     "etiqueta": "DIGITAL",
+     "menu": "E6 · Función de un circuito",
+     "titulo_corto": "E6",
+     "meta": "Ejercicio de 2 puntos (a 1,4 · b 0,6)",
+     "enunciado_html": "<p>Dado el circuito de la figura siguiente, se pide:</p><ol type='a'><li>Obtén la función lógica y simplifícala algebraicamente si es posible. <span class='pts'>(1,4 ptos.)</span></li><li>Confecciona la tabla de verdad correspondiente. <span class='pts'>(0,6 ptos.)</span></li></ol>",
+     "figura_enunciado_svg": "<figure class='fig'><img src='fig/cant24ext_logica.png' alt='Circuito lógico de 4 entradas A, B, C, D con puertas NOT, XOR, NAND, OR, AND, NOR y OR final' style='max-width:620px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Circuito lógico: A pasa por un inversor; A,B por una XOR; C por una NAND (inversor) y D por una NOR (inversor); una OR, una AND, una NOR intermedia y una OR final producen S.</figcaption></figure>",
+     "aplica_html": "<p>Se recorre el circuito de las entradas a la salida escribiendo la salida de cada puerta (NOT, XOR = 1, NAND/NOR con círculo, OR = ≥1, AND = &). Después se agrupa el álgebra de Boole y se comprueba con la tabla de verdad de las 16 combinaciones.</p>",
+     "solucion_html": "<h5>a) Función lógica</h5><p>Recorriendo el circuito puerta a puerta:</p><div class='formula'>$$\\bar A\\ (\\text{NOT}),\\quad A\\oplus B\\ (\\text{XOR}),\\quad \\bar C\\ (\\text{NAND de una entrada}),\\quad \\bar D\\ (\\text{NOR de una entrada})$$</div><p>La OR central combina la XOR y \\(\\bar C\\). Llamamos \\(M\\) a esa señal:</p><div class='formula'>$$M=(A\\oplus B)+\\bar C$$</div><p>\\(M\\) va a la vez a la <b>AND</b> superior (con \\(\\bar A\\)) y a la <b>NOR</b> inferior (con \\(\\bar D\\)). La OR final suma las dos:</p><div class='formula'>$$S=\\underbrace{\\bar A\\cdot M}_{\\text{AND}}+\\underbrace{\\overline{M+\\bar D}}_{\\text{NOR}}=\\bar A\\,M+M'\\,D$$</div><p>Sustituyendo \\(M\\) y simplificando por casos (para \\(A=0\\): \\(S=M+D=B+\\bar C+D\\); para \\(A=1\\): \\(S=M'D=B\\,C\\,D\\)):</p><div class='formula'>$$\\boxed{\\ S=\\bar A\\,(B+\\bar C+D)+A\\,B\\,C\\,D\\ }$$</div><h5>b) Tabla de verdad</h5><p>Con \\(M=(A\\oplus B)+\\bar C\\) y \\(S=\\bar A M+M'D\\), las 16 combinaciones dan:</p><table class='dat'><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>M</th><th>S</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td><b>1</b></td></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td><b>1</b></td></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td><b>1</b></td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td><b>1</b></td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td><b>1</b></td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td><b>1</b></td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td><b>1</b></td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td><b>1</b></td></tr></tbody></table><div class='res'><b>S = 1 en los minterms 0, 1, 3, 4, 5, 6, 7 y 15 → S = Ā(B + C̄ + D) + A·B·C·D</b></div>"
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "titulo": "Bloque 4 · Ciberseguridad e Inteligencia Artificial",
+   "color": "#4ade80",
+   "descripcion_tarjeta": "Medidas de protección en ciberseguridad a nivel usuario y concepto de inteligencia artificial y de chatbot.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#4ade80' stroke-width='3'><path d='M45 10 L68 20 V32 C68 45 45 52 45 52 C45 52 22 45 22 32 V20 Z'/><path d='M37 30l6 6 12-13'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q7",
+     "titulo": "Ejercicio 7 · Medidas de ciberseguridad",
+     "etiqueta": "CIBERSEGURIDAD",
+     "menu": "E7 · Medidas de ciberseguridad",
+     "titulo_corto": "E7",
+     "meta": "Ejercicio de 2 puntos · pregunta teórica",
+     "enunciado_html": "<p>Describe <b>4 medidas de protección</b> en materia de ciberseguridad a nivel usuario.</p>",
+     "aplica_html": "<p>Se trata de citar y explicar brevemente buenas prácticas al alcance del usuario final para proteger sus equipos y datos.</p>",
+     "solucion_html": "<ul><li><b>Contraseñas robustas y doble factor (2FA).</b> Usar contraseñas largas y distintas para cada servicio (mejor con un gestor de contraseñas) y activar la <b>verificación en dos pasos</b>, de modo que la contraseña sola no baste para acceder.</li><li><b>Mantener el software actualizado.</b> Instalar las actualizaciones del sistema operativo y de las aplicaciones cierra las <b>vulnerabilidades</b> conocidas que aprovechan los atacantes.</li><li><b>Antivirus/antimalware y cortafuegos.</b> Tener un antivirus actualizado y el <b>firewall</b> activo detecta y bloquea programas maliciosos y conexiones no autorizadas.</li><li><b>Copias de seguridad periódicas.</b> Hacer <b>backups</b> de los datos importantes (y guardarlos aparte) permite recuperarlos ante un borrado, una avería o un <b>ransomware</b>.</li></ul><div class='res'>Otras medidas válidas: desconfiar de correos y enlaces sospechosos (<b>phishing</b>), navegar solo por webs con <b>HTTPS</b>, evitar wifis públicas o usar <b>VPN</b>, y cerrar sesión en equipos compartidos.</div>"
+    },
+    {
+     "id": "q8",
+     "titulo": "Ejercicio 8 · Inteligencia artificial y chatbots",
+     "etiqueta": "IA",
+     "menu": "E8 · IA y chatbots",
+     "titulo_corto": "E8",
+     "meta": "Ejercicio de 2 puntos · pregunta teórica",
+     "enunciado_html": "<p>¿Qué es la inteligencia artificial? Describa qué es un <b>chatbot</b> y desarrolle brevemente su aplicación en <b>dos posibles campos</b>.</p>",
+     "aplica_html": "<p>Definir el concepto de IA, explicar qué es un chatbot como aplicación concreta de la IA y describir dos campos donde se utiliza.</p>",
+     "solucion_html": "<h5>¿Qué es la inteligencia artificial?</h5><p>La <b>inteligencia artificial (IA)</b> es la rama de la informática que crea sistemas capaces de realizar tareas que normalmente requieren <b>inteligencia humana</b>: aprender de los datos, razonar, reconocer patrones, comprender el lenguaje natural o tomar decisiones, mejorando su comportamiento con la experiencia (aprendizaje automático).</p><h5>¿Qué es un chatbot?</h5><p>Un <b>chatbot</b> es un programa que <b>conversa con el usuario</b> mediante lenguaje natural (texto o voz), interpretando sus preguntas y generando respuestas de forma automática. Los más avanzados emplean <b>procesamiento del lenguaje natural (PLN)</b> e IA generativa para mantener diálogos coherentes y resolver tareas.</p><h5>Dos campos de aplicación</h5><ul><li><b>Atención al cliente.</b> Los chatbots atienden consultas frecuentes en webs y apps las 24 horas (estado de un pedido, dudas, incidencias), filtran y derivan al operador humano solo los casos complejos, reduciendo tiempos de espera.</li><li><b>Educación y salud.</b> En educación actúan como <b>tutores virtuales</b> que resuelven dudas y proponen ejercicios personalizados; en salud, orientan al paciente, recuerdan la medicación o hacen un primer <b>triaje</b> de síntomas antes de acudir al profesional.</li></ul><div class='res'>Otros campos: comercio electrónico, banca, reservas y turismo, o asistentes personales de los teléfonos móviles.</div>"
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "titulo": "Bloque 5 · Sistemas de control",
+   "color": "#22d3ee",
+   "descripcion_tarjeta": "Reducción de un diagrama de bloques con doble lazo hasta su función de transferencia y estudio de estabilidad por Routh.",
+   "svg_tarjeta": "<svg viewBox='0 0 90 60' fill='none' stroke='#22d3ee' stroke-width='3'><rect x='34' y='22' width='24' height='16' rx='3'/><path d='M8 30h26M58 30h24'/><circle cx='20' cy='30' r='6'/></svg>",
+   "cuestiones": [
+    {
+     "id": "q9",
+     "titulo": "Ejercicio 9 · Diagrama de bloques",
+     "etiqueta": "CONTROL",
+     "menu": "E9 · Función de transferencia",
+     "titulo_corto": "E9",
+     "meta": "Ejercicio de 2 puntos",
+     "enunciado_html": "<p>Dado el sistema de control de la figura siguiente, se pide <b>simplificar el sistema hasta obtener su función de transferencia</b> \\(C(s)/R(s)\\).</p>",
+     "figura_enunciado_svg": "<figure class='fig'><img src='fig/cant24ext_control.png' alt='Diagrama de bloques: dos sumadores, bloques 20 y 5/(s(s+8)), realimentación (s+5) al primer sumador y realimentación unitaria al segundo' style='max-width:620px;width:100%;background:#fff;border-radius:8px;padding:8px'><figcaption>Diagrama de bloques: cadena directa 20 · 5/[s(s+8)]; realimentación unitaria negativa al 2º sumador y realimentación (s+5) positiva al 1er sumador.</figcaption></figure>",
+     "aplica_html": "<p>Se reduce por lazos: primero el <b>lazo interno</b> (cadena directa con realimentación unitaria negativa), \\(\\frac{G}{1+G}\\); después el <b>lazo externo</b> con realimentación \\((s+5)\\) <b>positiva</b>, \\(\\frac{M}{1-M(s+5)}\\).</p>",
+     "solucion_html": "<h5>Datos del diagrama</h5><p>Cadena directa: bloque \\(20\\) seguido de \\(\\dfrac{5}{s(s+8)}\\), luego</p><div class='formula'>$$G=20\\cdot\\dfrac{5}{s(s+8)}=\\dfrac{100}{s(s+8)}=\\dfrac{100}{s^2+8s}$$</div><p>El 2.º sumador tiene realimentación <b>unitaria negativa</b> desde \\(C\\); el 1.º sumador recibe, en <b>positivo</b>, la señal \\((s+5)\\,C\\).</p><h5>a) Lazo interno (realimentación unitaria)</h5><div class='formula'>$$M=\\dfrac{G}{1+G}=\\dfrac{100}{s^2+8s+100}$$</div><h5>b) Lazo externo (realimentación positiva (s+5))</h5><p>Con \\(A=R+(s+5)C\\) y \\(C=M\\,A\\):</p><div class='formula'>$$C=M\\,[\\,R+(s+5)C\\,]\\;\\Rightarrow\\;\\dfrac{C}{R}=\\dfrac{M}{1-M(s+5)}$$</div><div class='formula'>$$\\dfrac{C}{R}=\\dfrac{\\frac{100}{s^2+8s+100}}{1-\\frac{100(s+5)}{s^2+8s+100}}=\\dfrac{100}{s^2+8s+100-100(s+5)}$$</div><div class='formula'>$$\\boxed{\\ \\dfrac{C(s)}{R(s)}=\\dfrac{100}{s^2-92s-400}\\ }$$</div><div class='res'><b>C/R = 100 / (s² − 92s − 400)</b> · los coeficientes negativos del denominador indican un sistema inestable (realimentación positiva).</div>"
+    },
+    {
+     "id": "q10",
+     "titulo": "Ejercicio 10 · Estabilidad (criterio de Routh)",
+     "etiqueta": "CONTROL",
+     "menu": "E10 · Criterio de Routh",
+     "titulo_corto": "E10",
+     "meta": "Ejercicio de 2 puntos (a 1,4 · b 0,6)",
+     "enunciado_html": "<p>Estudiar la estabilidad del sistema dado por la siguiente función de transferencia aplicando el <b>método de Routh</b>. A partir de dicho estudio se pide:</p><ol type='a'><li>Indicar si el sistema es estable. <span class='pts'>(1,4 ptos.)</span></li><li>Indicar el número de polos del sistema. <span class='pts'>(0,6 ptos.)</span></li></ol><div class='formula'>$$G(s)=\\dfrac{4s^2-5}{4s^5+3s^4+2s^3+s^2+7s+4}$$</div>",
+     "aplica_html": "<p>La estabilidad depende de los <b>polos</b> (raíces del denominador). El <b>criterio de Routh-Hurwitz</b> construye una tabla con los coeficientes del denominador y cuenta los <b>cambios de signo</b> en la primera columna: cada cambio es un polo con parte real positiva. El sistema es estable solo si no hay ninguno.</p>",
+     "solucion_html": "<h5>Polinomio característico</h5><p>Los polos son las raíces del denominador \\(4s^5+3s^4+2s^3+s^2+7s+4\\). Coeficientes: 4, 3, 2, 1, 7, 4.</p><h5>Tabla de Routh</h5><table class='dat'><tbody><tr><th>s⁵</th><td>4</td><td>2</td><td>7</td></tr><tr><th>s⁴</th><td>3</td><td>1</td><td>4</td></tr><tr><th>s³</th><td>0,667</td><td>1,667</td><td>0</td></tr><tr><th>s²</th><td>−6,5</td><td>4</td><td></td></tr><tr><th>s¹</th><td>2,077</td><td>0</td><td></td></tr><tr><th>s⁰</th><td>4</td><td></td><td></td></tr></tbody></table><div class='formula'>$$b_1=\\dfrac{3\\cdot2-4\\cdot1}{3}=0{,}667,\\quad b_2=\\dfrac{3\\cdot7-4\\cdot4}{3}=1{,}667$$</div><div class='formula'>$$c_1=\\dfrac{b_1\\cdot1-3\\,b_2}{b_1}=-6{,}5,\\quad c_2=\\dfrac{b_1\\cdot4}{b_1}=4;\\quad d_1=\\dfrac{c_1 b_2-b_1 c_2}{c_1}=2{,}077;\\quad e_1=4$$</div><h5>a) ¿Es estable?</h5><p>Primera columna: \\(4,\\ 3,\\ 0{,}667,\\ -6{,}5,\\ 2{,}077,\\ 4\\). Hay <b>dos cambios de signo</b> (de 0,667 a −6,5 y de −6,5 a 2,077).</p><div class='res'><b>El sistema es INESTABLE</b> (2 cambios de signo → 2 polos con parte real positiva).</div><h5>b) Número de polos</h5><p>El denominador es de <b>grado 5</b>, luego el sistema tiene <b>5 polos</b>; según Routh, <b>2</b> están en el semiplano derecho (parte real positiva) y <b>3</b> en el izquierdo.</p><div class='res'><b>5 polos en total · 2 con parte real positiva (inestable)</b></div>"
+    }
+   ]
+  }
+ ]
+}
