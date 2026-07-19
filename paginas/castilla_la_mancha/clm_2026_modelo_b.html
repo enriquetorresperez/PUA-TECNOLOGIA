@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAU 2026 · <span>Tecnología e Ingeniería II</span> · UCLM · Modelo B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>:root{
+  --bg:#0d1220; --bg2:#111828; --panel:#161f33; --panel2:#1b2640;
+  --line:#26324e; --txt:#e7ecf7; --mut:#94a3c0;
+  --b1:#f59e0b; --b2:#22d3ee; --b3:#a78bfa; --b4:#34d399; --b5:#fb7185;
+  --acc:#38bdf8; --ok:#4ade80; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.65}
+a{color:var(--acc)}
+.wrap{display:flex;min-height:100vh}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;width:100%;
+  background:linear-gradient(90deg,#101a30 0%,#0d1424 60%,#101a30 100%);
+  border-bottom:1px solid var(--line);
+  padding:14px 26px;display:flex;align-items:center;gap:16px;
+}
+header .logo{width:44px;height:44px;flex:none}
+header h1{font-family:'Sora',sans-serif;font-size:1.12rem;font-weight:700;letter-spacing:.2px}
+header h1 span{color:var(--acc)}
+header .sub{font-size:.78rem;color:var(--mut);margin-top:2px}
+header .pill{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#0d1220;background:var(--warn);padding:5px 12px;border-radius:999px;font-weight:600;white-space:nowrap}
+/* ---------- SIDEBAR ---------- */
+aside{
+  width:288px;flex:none;background:var(--bg2);border-right:1px solid var(--line);
+  padding:18px 14px 90px;position:sticky;top:73px;height:calc(100vh - 73px);overflow-y:auto;
+}
+aside .home-btn{display:flex;align-items:center;gap:10px;width:100%;background:var(--panel);border:1px solid var(--line);
+  color:var(--txt);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:.9rem;margin-bottom:16px}
+aside .home-btn:hover{border-color:var(--acc)}
+.blk{margin-bottom:14px}
+.blk .bt{display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--mut);padding:6px 8px}
+.blk .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.blk a.q{display:block;padding:8px 12px 8px 26px;margin:2px 0;border-radius:8px;color:var(--txt);
+  text-decoration:none;font-size:.86rem;border-left:3px solid transparent}
+.blk a.q:hover{background:var(--panel)}
+.blk a.q.active{background:var(--panel2);font-weight:600}
+.c1 .dot{background:var(--b1)} .c1 a.q.active{border-left-color:var(--b1)}
+.c2 .dot{background:var(--b2)} .c2 a.q.active{border-left-color:var(--b2)}
+.c3 .dot{background:var(--b3)} .c3 a.q.active{border-left-color:var(--b3)}
+.c4 .dot{background:var(--b4)} .c4 a.q.active{border-left-color:var(--b4)}
+.c5 .dot{background:var(--b5)} .c5 a.q.active{border-left-color:var(--b5)}
+/* ---------- MAIN ---------- */
+main{flex:1;padding:28px 34px 110px;max-width:1060px}
+.view{display:none}
+.view.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* home cards */
+.intro-exam{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:24px}
+.intro-exam h2{font-family:'Sora',sans-serif;font-size:1.3rem;margin-bottom:8px}
+.intro-exam p{color:var(--mut);font-size:.93rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px)}
+.card .ico{height:88px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:10px}
+.card h3{font-family:'Sora',sans-serif;font-size:.98rem}
+.card p{font-size:.82rem;color:var(--mut);flex:1}
+.card .qlinks{display:flex;gap:8px;flex-wrap:wrap}
+.card .qlinks a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line);color:var(--txt)}
+.k1:hover{border-color:var(--b1)} .k2:hover{border-color:var(--b2)} .k3:hover{border-color:var(--b3)} .k4:hover{border-color:var(--b4)} .k5:hover{border-color:var(--b5)}
+.card.h1{border-top:3px solid var(--b1)} .card.h2{border-top:3px solid var(--b2)} .card.h3x{border-top:3px solid var(--b3)}
+.card.h4{border-top:3px solid var(--b4)} .card.h5{border-top:3px solid var(--b5)}
+/* question view */
+.crumb{font-size:.78rem;color:var(--mut);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.qtitle{font-family:'Sora',sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:4px}
+.qmeta{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:8px;color:#0d1220}
+.t1{background:var(--b1)} .t2{background:var(--b2)} .t3{background:var(--b3)} .t4{background:var(--b4)} .t5{background:var(--b5)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:18px}
+.box h4{font-family:'Sora',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.enun p, .enun li{font-size:.93rem}
+.enun ol{padding-left:22px;margin-top:8px}
+.enun li{margin:6px 0}
+.pts{color:var(--warn);font-size:.8rem;font-weight:600}
+.enlace-pdf{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.83rem;font-weight:600}
+.aplica{border-left:4px solid var(--acc)}
+.aplica p{font-size:.9rem;color:#c9d5ec}
+.aplica ul{padding-left:20px;margin-top:8px}
+.aplica li{font-size:.88rem;margin:4px 0;color:#c9d5ec}
+.btn-sol{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#0ea5e9,#2563eb);
+  color:#fff;border:none;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 26px;border-radius:12px;cursor:pointer;margin:4px 0 20px;box-shadow:0 6px 18px rgba(14,165,233,.25)}
+.btn-sol:hover{filter:brightness(1.12)}
+.sol{display:none;background:var(--panel);border:1px solid #1e3a5f;border-radius:14px;padding:22px 26px;margin-bottom:20px}
+.sol.open{display:block;animation:fade .3s ease}
+.sol h5{font-family:'Sora',sans-serif;font-size:1rem;color:var(--acc);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.sol h5:first-child{margin-top:0}
+.sol p{font-size:.92rem;margin:8px 0}
+.sol ul,.sol ol{padding-left:22px;margin:8px 0}
+.sol li{font-size:.9rem;margin:5px 0}
+.res{background:#0c2436;border:1px solid #155e75;border-left:4px solid var(--ok);border-radius:10px;padding:10px 16px;margin:12px 0;font-size:.95rem}
+.res b{color:var(--ok)}
+.formula{overflow-x:auto;padding:4px 0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.fig figcaption{font-size:.76rem;color:var(--mut);margin-top:8px}
+table.dat{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+table.dat th,table.dat td{border:1px solid var(--line);padding:7px 12px;text-align:center}
+table.dat th{background:var(--panel2);font-family:'Sora',sans-serif;font-size:.78rem}
+.nav-q{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+.nav-q a{font-size:.85rem;font-weight:600;text-decoration:none;padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--txt)}
+.nav-q a:hover{border-color:var(--acc)}
+/* footer */
+footer{
+  position:fixed;bottom:0;left:0;width:100%;z-index:60;
+  background:linear-gradient(90deg,#101a30,#0d1424);border-top:1px solid var(--line);
+  padding:11px 26px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:.82rem;color:var(--mut)
+}
+footer b{color:var(--txt);font-family:'Sora',sans-serif;font-weight:600}
+footer .gear{color:var(--acc)}
+@media(max-width:900px){
+  aside{display:none}
+  main{padding:20px 16px 120px}
+}
+
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+/* ---------- IMPRESIÓN / PDF ---------- */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--panel:#ffffff;--panel2:#eef2f7;--line:#b8c2d4;
+        --txt:#111827;--mut:#44506a;--acc:#075985;--ok:#166534;--warn:#92400e}
+  body{background:#fff;color:#111827;padding-bottom:46px}
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards{display:none!important}
+  .wrap{display:block}
+  main{padding:0 4px;max-width:100%}
+  .view{display:none!important}
+  .view.print-me{display:block!important;animation:none}
+  .view.print-me .sol{display:block!important;border:1px solid var(--line)}
+  header{position:static;background:#fff!important;border-bottom:2.5px solid #111827;padding:8px 2px 12px}
+  header .logo{display:none}
+  header h1 span{color:#075985}
+  header .sub{color:#44506a}
+  header .pill{background:#111827;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{position:fixed;bottom:0;background:#fff!important;border-top:1.5px solid #111827;color:#44506a;padding:7px 0}
+  footer b{color:#111827}
+  .box,.sol{break-inside:auto;box-shadow:none}
+  footer{display:none!important}
+  .view.pb{break-before:page}
+  .fig{background:#0d1220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .fig figcaption{color:#8fa0bf}
+  .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res{background:#f0fdf4;border-color:#166534;border-left-color:#166534;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res b{color:#166534}
+  .sol h5{color:#075985;border-bottom-color:#b8c2d4}
+  .pts{color:#92400e}
+  a{color:#075985;text-decoration:none}
+  .enlace-pdf{display:none}
+}
+
+.hdr-back{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:.8rem;color:var(--mut);
+  border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap;transition:.16s}
+.hdr-back:hover{color:var(--txt);border-color:var(--acc);background:rgba(56,189,248,.08)}
+.hdr-back svg{transition:.16s}
+.hdr-back:hover svg{transform:translateX(-3px)}
+.btn-pdf{text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--warn);
+  border:1.5px solid var(--warn);font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:12px;cursor:pointer;margin:4px 0 20px 12px}
+.btn-pdf:hover{background:rgba(251,191,36,.12)}
+@media print{
+  aside,.btn-sol,.btn-pdf,.nav-q,.crumb,.intro-exam,.cards,.hdr-back{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 48 48" fill="none" style="width:44px;height:44px;flex:none">
+    <rect x="2" y="2" width="44" height="44" rx="10" fill="#16233f" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M14 30 L22 16 L27 25 L31 19 L36 30" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="36" r="2.4" fill="#38bdf8"/>
+  </svg>
+  <div>
+    <h1>PAU 2026 · <span>Tecnología e Ingeniería II</span> · UCLM · Modelo B</h1>
+    <div class="sub">Prueba de Acceso a la Universidad · UCLM (Castilla-La Mancha) · Curso 2025/26 · Modelo B · Examen resuelto</div>
+  </div>
+  <a class="hdr-back" href="index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    Exámenes de Castilla-La Mancha
+  </a>
+  <div class="pill">4 ejercicios · 2,5 pt cada uno · 90 min</div>
+</header>
+<div class="wrap">
+<aside>
+  <button class="home-btn" onclick="go('home')">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21H3z"/></svg>
+    Pantalla de inicio
+  </button>
+<div class="blk c1">
+<div class="bt"><span class="dot" style="background:#38bdf8"></span> Ejercicio 1 · Corriente alterna</div>
+<a class="q" href="#q1a" onclick="go('q1a');return false;" id="l-q1a">1a · Circuito RC serie</a>
+<a class="q" href="#q1b" onclick="go('q1b');return false;" id="l-q1b">1b · Señal alterna</a>
+</div>
+<div class="blk c2">
+<div class="bt"><span class="dot" style="background:#fb7185"></span> Ejercicio 2 · Termodinámica y motores</div>
+<a class="q" href="#q2a" onclick="go('q2a');return false;" id="l-q2a">2a · Máquina reversible (COP)</a>
+<a class="q" href="#q2b" onclick="go('q2b');return false;" id="l-q2b">2b · Motor alternativo</a>
+</div>
+<div class="blk c3">
+<div class="bt"><span class="dot" style="background:#a78bfa"></span> Ejercicio 3 · Sistemas digitales</div>
+<a class="q" href="#q3a" onclick="go('q3a');return false;" id="l-q3a">3a · Canónica, Karnaugh, NAND</a>
+<a class="q" href="#q3b" onclick="go('q3b');return false;" id="l-q3b">3b · Alarma (Karnaugh)</a>
+</div>
+<div class="blk c4">
+<div class="bt"><span class="dot" style="background:#38bdf8"></span> Ejercicio 4 · Diseño neumático</div>
+<a class="q" href="#q4" onclick="go('q4');return false;" id="l-q4">E4 · Diseño neumático (prensado)</a>
+</div>
+</aside>
+<main>
+
+<section class="view show" id="home">
+  <div class="intro-exam">
+    <h2>PAU 2026 · <span>Tecnología e Ingeniería II</span> · UCLM · Modelo B</h2>
+    <p>Modelo orientativo del curso 2025/26. La prueba consta de <b>4 ejercicios</b> de 2,5 puntos; en los ejercicios <b>1, 2 y 3</b> se elige una de las dos opciones (a o b) y el <b>ejercicio 4</b> es obligatorio. Aquí se resuelven <b>todas</b> las opciones con el enunciado oficial, los conceptos aplicados y la solución paso a paso.</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:10px"><a class="enlace-pdf" href="pdf_clm_2026_modelo_b/soluciones_completas.pdf" target="_blank" rel="noopener" style="color:var(--warn)">📄 Ver examen completo resuelto (PDF)</a><a class="enlace-pdf" href="../../examens/UCLM/Tecnologia e Ingenieria-26.pdf" target="_blank" rel="noopener">📄 Enunciado oficial (PDF)</a></div>
+  </div>
+  <div class="cards">
+    <div class="card h1">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#38bdf8' stroke-width='3'><path d='M10 30 q10 -16 20 0 t20 0 t20 0'/><circle cx='78' cy='30' r='4'/></svg></div>
+      <h3>Ejercicio 1 · Corriente alterna</h3>
+      <p>Circuito serie RC (impedancia y potencias) y análisis de una señal alterna senoidal.</p>
+      <div class="qlinks"><a class="k1" href="#q1a" onclick="go('q1a');return false;">1a</a><a class="k1" href="#q1b" onclick="go('q1b');return false;">1b</a></div>
+    </div>
+    <div class="card h2">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#fb7185' stroke-width='3'><circle cx='45' cy='30' r='16'/><path d='M45 14v-8M45 54v-8M61 30h8M13 30h8'/></svg></div>
+      <h3>Ejercicio 2 · Termodinámica y motores</h3>
+      <p>Máquina térmica reversible (verano/invierno) y motor alternativo de 6 cilindros.</p>
+      <div class="qlinks"><a class="k2" href="#q2a" onclick="go('q2a');return false;">2a</a><a class="k2" href="#q2b" onclick="go('q2b');return false;">2b</a></div>
+    </div>
+    <div class="card h3x">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#a78bfa' stroke-width='3'><path d='M22 18 h14 a12 12 0 0 1 0 24 h-14 z'/><path d='M8 24h14M8 36h14M60 30h14'/><circle cx='78' cy='30' r='3'/></svg></div>
+      <h3>Ejercicio 3 · Sistemas digitales</h3>
+      <p>Forma canónica, Karnaugh e implementación NAND; diseño de una alarma con cuatro sensores.</p>
+      <div class="qlinks"><a class="k3" href="#q3a" onclick="go('q3a');return false;">3a</a><a class="k3" href="#q3b" onclick="go('q3b');return false;">3b</a></div>
+    </div>
+    <div class="card h4">
+      <div class="ico"><svg viewBox='0 0 90 60' fill='none' stroke='#38bdf8' stroke-width='3'><rect x='12' y='22' width='40' height='16' rx='2'/><path d='M52 30h16M20 30h24'/><circle cx='72' cy='30' r='4'/></svg></div>
+      <h3>Ejercicio 4 · Diseño neumático</h3>
+      <p>Automatización del prensado de piezas con un cilindro de doble efecto, velocidad controlada y retorno automático.</p>
+      <div class="qlinks"><a class="k4" href="#q4" onclick="go('q4');return false;">E4</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="q1a">
+  <div class="crumb">Inicio / ALTERNA</div>
+  <div class="qtitle"><span class="tag t1">ALTERNA</span> Opción a · Circuito serie RC</div>
+  <div class="qmeta">Opción a · 2,5 puntos (a 1 · b 0,5 · c 1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Un circuito serie <b>RC</b> tiene un generador de <b>220 V</b> y <b>50 Hz</b>. Su resistencia es de <b>15 Ω</b> y la capacidad del condensador es de <b>159 µF</b>. Averigua:</p><ol type='a'><li>Impedancia del circuito. <span class='pts'>(1 punto)</span></li><li>La intensidad que pasa por el circuito. <span class='pts'>(0,5 puntos)</span></li><li>Potencia aparente, activa y reactiva del circuito. <span class='pts'>(1 punto)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q1a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>En un RC serie: reactancia capacitiva \(X_C=\dfrac{1}{2\pi f C}\), impedancia \(Z=\sqrt{R^2+X_C^2}\) e intensidad \(I=V/Z\). Potencias: aparente \(S=V\,I\), activa \(P=I^2R\) y reactiva \(Q=I^2X_C\) (capacitiva).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q1a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1a">
+    <h5>a) Impedancia</h5><div class='formula'>$$X_C=\dfrac{1}{2\pi f C}=\dfrac{1}{2\pi\cdot 50\cdot 159\cdot10^{-6}}=20\ \Omega$$</div><div class='formula'>$$Z=\sqrt{R^2+X_C^2}=\sqrt{15^2+20^2}=\sqrt{625}=25\ \Omega$$</div><div class='res'><b>Z = 25 Ω</b></div><h5>b) Intensidad</h5><div class='formula'>$$I=\dfrac{V}{Z}=\dfrac{220}{25}=8{,}8\ \mathrm{A}$$</div><div class='res'><b>I = 8,8 A</b></div><h5>c) Potencias</h5><div class='formula'>$$S=V\,I=220\cdot 8{,}8=1936\ \mathrm{VA}$$</div><div class='formula'>$$P=I^2R=8{,}8^2\cdot 15=1161{,}6\ \mathrm{W}\quad(\cos\varphi=R/Z=0{,}6)$$</div><div class='formula'>$$Q=I^2X_C=8{,}8^2\cdot 20=1548{,}8\ \mathrm{VAr}\ (\text{capacitiva})$$</div><figure class='fig'><svg viewBox='0 0 470 280' width='100%' style='max-width:450px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='68' y1='42' x2='206.0' y2='42' stroke='#4ade80' stroke-width='2.6'/><line x1='206.0' y1='42' x2='206.0' y2='226.0' stroke='#fb7185' stroke-width='2.6'/><line x1='68' y1='42' x2='206.0' y2='226.0' stroke='#38bdf8' stroke-width='2.6'/><path d='M102,42 A34,34 0 0 0 102.0,87.3' stroke='#94a3c0' stroke-width='1.5' fill='none'/><text x='110.0' y='60' fill='#94a3c0' font-size='13'>&phi;</text><text x='137.0' y='34.0' fill='#4ade80' font-size='12.5' text-anchor='middle'>P = 1161,6 W</text><text x='216.0' y='138.0' fill='#fb7185' font-size='12.5' text-anchor='start'>Q = 1548,8 VAr</text><text x='129.0' y='150.0' fill='#38bdf8' font-size='12.5' text-anchor='end'>S = 1936 VA</text></svg><figcaption>Triángulo de potencias (carga capacitiva): P = 1161,6 W, Q = 1548,8 VAr, S = 1936 VA.</figcaption></figure><div class='res'><b>S = 1936 VA · P = 1161,6 W · Q = 1548,8 VAr (capacitiva)</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#home" onclick="go('home');return false;">← Inicio</a>
+    <a href="#q1b" onclick="go('q1b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q1b">
+  <div class="crumb">Inicio / ALTERNA</div>
+  <div class="qtitle"><span class="tag t1">ALTERNA</span> Opción b · Señal alterna senoidal</div>
+  <div class="qmeta">Opción b · 2,5 puntos (a 0,5 · b 0,5 · c 1 · d 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Calcula, en la expresión de la señal alterna \(v=250\cdot\operatorname{sen}(800\,t)\), las magnitudes que siguen:</p><ol type='a'><li>Periodo y frecuencia. <span class='pts'>(0,5 puntos)</span></li><li>Valor instantáneo para t = 5 ms. <span class='pts'>(0,5 puntos)</span></li><li>Valor máximo, medio y eficaz. <span class='pts'>(1 punto)</span></li><li>Factor de forma. <span class='pts'>(0,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q1b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>En \(v=V_0\operatorname{sen}(\omega t)\): pulsación \(\omega=800\ \mathrm{rad/s}\), frecuencia \(f=\omega/2\pi\) y periodo \(T=1/f\). Valores: máximo \(V_0\), medio (de un semiperiodo) \(V_m=\tfrac{2}{\pi}V_0\), eficaz \(V_{ef}=V_0/\sqrt2\). Factor de forma \(=V_{ef}/V_m\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q1b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q1b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q1b">
+    <h5>a) Periodo y frecuencia</h5><div class='formula'>$$\omega=800\ \mathrm{rad/s}\;\Rightarrow\; f=\dfrac{\omega}{2\pi}=\dfrac{800}{2\pi}=127{,}3\ \mathrm{Hz},\quad T=\dfrac1f=7{,}85\ \mathrm{ms}$$</div><h5>b) Valor instantáneo en t = 5 ms</h5><div class='formula'>$$v=250\operatorname{sen}(800\cdot 0{,}005)=250\operatorname{sen}(4\ \mathrm{rad})=250\cdot(-0{,}757)=-189{,}2\ \mathrm{V}$$</div><figure class='fig'><svg viewBox='0 0 560 300' width='100%' style='max-width:540px;height:auto' fill='none' font-family='Inter,system-ui,sans-serif' font-size='13'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='58.0' y1='254' x2='58.0' y2='20' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='177.0' y1='254' x2='177.0' y2='20' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='296.0' y1='254' x2='296.0' y2='20' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='415.0' y1='254' x2='415.0' y2='20' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='534.0' y1='254' x2='534.0' y2='20' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='58' y1='237.9' x2='534' y2='237.9' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='58' y1='137.0' x2='534' y2='137.0' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='58' y1='36.1' x2='534' y2='36.1' stroke='#31405f' stroke-width='1' stroke-dasharray='3 4'/><line x1='58' y1='254' x2='548' y2='254' stroke='#e7ecf7' stroke-width='2' marker-end='url(#ar)'/><line x1='58' y1='254' x2='58' y2='6' stroke='#e7ecf7' stroke-width='2' marker-end='url(#ar)'/><line x1='58.0' y1='254' x2='58.0' y2='259' stroke='#e7ecf7' stroke-width='1.5'/><text x='58.0' y='272' fill='#94a3c0' font-size='12' text-anchor='middle'>0</text><line x1='177.0' y1='254' x2='177.0' y2='259' stroke='#e7ecf7' stroke-width='1.5'/><text x='177.0' y='272' fill='#94a3c0' font-size='12' text-anchor='middle'>4</text><line x1='296.0' y1='254' x2='296.0' y2='259' stroke='#e7ecf7' stroke-width='1.5'/><text x='296.0' y='272' fill='#94a3c0' font-size='12' text-anchor='middle'>8</text><line x1='415.0' y1='254' x2='415.0' y2='259' stroke='#e7ecf7' stroke-width='1.5'/><text x='415.0' y='272' fill='#94a3c0' font-size='12' text-anchor='middle'>12</text><line x1='534.0' y1='254' x2='534.0' y2='259' stroke='#e7ecf7' stroke-width='1.5'/><text x='534.0' y='272' fill='#94a3c0' font-size='12' text-anchor='middle'>16</text><line x1='53' y1='237.9' x2='58' y2='237.9' stroke='#e7ecf7' stroke-width='1.5'/><text x='50' y='241.9' fill='#94a3c0' font-size='12' text-anchor='end'>-250</text><line x1='53' y1='137.0' x2='58' y2='137.0' stroke='#e7ecf7' stroke-width='1.5'/><text x='50' y='141.0' fill='#94a3c0' font-size='12' text-anchor='end'>0</text><line x1='53' y1='36.1' x2='58' y2='36.1' stroke='#e7ecf7' stroke-width='1.5'/><text x='50' y='40.1' fill='#94a3c0' font-size='12' text-anchor='end'>250</text><text x='542' y='244' fill='#e7ecf7' font-size='13' text-anchor='end'>t (ms)</text><text x='64' y='16' fill='#e7ecf7' font-size='13'>v (V)</text><polyline points='58.0,137.0 64.0,120.9 69.9,105.3 75.8,90.4 81.8,76.8 87.8,64.6 93.7,54.4 99.7,46.2 105.6,40.4 111.6,37.0 117.5,36.2 123.5,37.9 129.4,42.2 135.4,48.9 141.3,57.9 147.2,68.9 153.2,81.6 159.2,95.7 165.1,110.9 171.1,126.8 177.0,142.9 182.9,158.9 188.9,174.3 194.9,188.7 200.8,201.9 206.8,213.3 212.7,222.9 218.7,230.2 224.6,235.2 230.6,237.6 236.5,237.5 242.5,234.8 248.4,229.6 254.4,222.0 260.3,212.3 266.2,200.7 272.2,187.4 278.1,172.8 284.1,157.4 290.1,141.4 296.0,125.2 302.0,109.4 307.9,94.3 313.9,80.3 319.8,67.7 325.8,56.9 331.7,48.2 337.7,41.7 343.6,37.7 349.6,36.1 355.5,37.2 361.5,40.8 367.4,46.9 373.4,55.3 379.3,65.7 385.2,78.0 391.2,91.8 397.2,106.7 403.1,122.4 409.1,138.5 415.0,154.6 421.0,170.2 426.9,184.9 432.9,198.5 438.8,210.4 444.8,220.5 450.7,228.4 456.7,234.1 462.6,237.2 468.6,237.8 474.5,235.8 480.5,231.2 486.4,224.3 492.4,215.1 498.3,204.0 504.2,191.1 510.2,176.9 516.2,161.6 522.1,145.7 528.0,129.6 534.0,113.6' fill='none' stroke='#22d3ee' stroke-width='2.6'/><circle cx='206.8' cy='213.3' r='3.6' fill='#fb7185' stroke='#0d1220' stroke-width='1'/><text x='214.8' y='233.3' fill='#e7ecf7' font-size='12.5' text-anchor='start'>t = 5 ms → v ≈ −189 V</text><line x1='58.0' y1='36.1' x2='534.0' y2='36.1' stroke='#94a3c0' stroke-width='1.3' stroke-dasharray='3 4'/><text x='516.1500000000001' y='28.13793103448276' fill='#94a3c0' font-size='11' text-anchor='end'>V₀ = 250 V</text></svg><figcaption>Señal v = 250·sen(800t): V₀ = 250 V, T ≈ 7,85 ms; en t = 5 ms, v ≈ −189 V.</figcaption></figure><h5>c) Valor máximo, medio y eficaz</h5><div class='formula'>$$V_0=250\ \mathrm{V},\quad V_m=\dfrac{2}{\pi}V_0=159{,}2\ \mathrm{V},\quad V_{ef}=\dfrac{V_0}{\sqrt2}=176{,}8\ \mathrm{V}$$</div><h5>d) Factor de forma</h5><div class='formula'>$$k_f=\dfrac{V_{ef}}{V_m}=\dfrac{176{,}8}{159{,}2}=1{,}11$$</div><div class='res'><b>f = 127,3 Hz · T = 7,85 ms · v(5 ms) = −189,2 V · V₀ = 250 V · V<sub>m</sub> = 159,2 V · V<sub>ef</sub> = 176,8 V · k<sub>f</sub> = 1,11</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q1a" onclick="go('q1a');return false;">← Anterior</a>
+    <a href="#q2a" onclick="go('q2a');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2a">
+  <div class="crumb">Inicio / TERMODINÁMICA</div>
+  <div class="qtitle"><span class="tag t2">TERMODINÁMICA</span> Opción a · Máquina térmica reversible</div>
+  <div class="qmeta">Opción a · 2,5 puntos (a 1,25 · b 1,25)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Una máquina térmica reversible mantiene la temperatura de una vivienda a <b>22 ºC</b>. En verano el ambiente exterior está a <b>35 ºC</b>; en invierno desciende a <b>0 ºC</b>.</p><ol type='a'><li>Determina el COP ideal de la máquina tanto en verano como en invierno. <span class='pts'>(1,25 puntos)</span></li><li>Para la estación en la que la máquina opera con menor eficiencia, calcula la potencia del motor del compresor si se deben extraer <b>1000 kcal/min</b> del foco frío. La eficiencia real es el <b>40 %</b> del COP de Carnot. <span class='pts'>(1,25 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q2a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>En <b>verano</b> la máquina refrigera la vivienda (foco frío = interior): \(COP_R=\dfrac{T_f}{T_c-T_f}\). En <b>invierno</b> actúa como bomba de calor (foco caliente = interior): \(COP_{BC}=\dfrac{T_c}{T_c-T_f}\). Temperaturas: 22 ºC = 295 K, 35 ºC = 308 K, 0 ºC = 273 K.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q2a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2a">
+    <h5>a) COP en verano y en invierno</h5><p><b>Verano</b> (refrigerador; T<sub>f</sub> = 295 K interior, T<sub>c</sub> = 308 K exterior):</p><div class='formula'>$$COP_{verano}=\dfrac{T_f}{T_c-T_f}=\dfrac{295}{308-295}=\dfrac{295}{13}=22{,}7$$</div><p><b>Invierno</b> (bomba de calor; T<sub>c</sub> = 295 K interior, T<sub>f</sub> = 273 K exterior):</p><div class='formula'>$$COP_{invierno}=\dfrac{T_c}{T_c-T_f}=\dfrac{295}{295-273}=\dfrac{295}{22}=13{,}4$$</div><div class='res'><b>COP<sub>verano</sub> = 22,7 · COP<sub>invierno</sub> = 13,4</b></div><h5>b) Potencia del compresor (estación de menor eficiencia)</h5><p>La menor eficiencia es en <b>invierno</b> (COP = 13,4). Eficiencia real:</p><div class='formula'>$$COP_{real}=0{,}4\cdot 13{,}4=5{,}36$$</div><p>Extrayendo \(Q_f=1000\ \mathrm{kcal/min}\) del foco frío, con \(Q_c=Q_f+W\) y \(COP=Q_c/W\):</p><div class='formula'>$$W=\dfrac{Q_f}{COP_{real}-1}=\dfrac{1000}{5{,}36-1}=229{,}4\ \mathrm{kcal/min}$$</div><div class='formula'>$$P=229{,}4\ \tfrac{\mathrm{kcal}}{\mathrm{min}}\cdot\dfrac{4186\ \mathrm{J/kcal}}{60\ \mathrm{s/min}}\approx 16\,000\ \mathrm{W}$$</div><div class='res'><b>P ≈ 16 kW</b></div><p style='color:#94a3c0;font-size:.9em'><i>Nota:</i> en invierno la máquina funciona como <b>bomba de calor</b> (calienta la vivienda) pero extrae Q<sub>f</sub> del foco frío exterior; por el balance Q<sub>c</sub> = Q<sub>f</sub> + W se usa W = Q<sub>f</sub>/(COP−1). Con la aproximación de refrigerador W = Q<sub>f</sub>/COP saldría ≈ 13 kW.</p>
+  </div>
+  <div class="nav-q">
+    <a href="#q1b" onclick="go('q1b');return false;">← Anterior</a>
+    <a href="#q2b" onclick="go('q2b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q2b">
+  <div class="crumb">Inicio / MOTORES</div>
+  <div class="qtitle"><span class="tag t2">MOTORES</span> Opción b · Motor alternativo (6 cilindros)</div>
+  <div class="qmeta">Opción b · 2,5 puntos (a 0,75 · b 1 · c 0,75)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Un motor alternativo de <b>6 cilindros</b> genera un par máximo de <b>M<sub>máx</sub> = 350 N·m</b> girando a <b>4200 rpm</b>. El diámetro de cada cilindro es <b>75 mm</b>, la carrera <b>85 mm</b> y el volumen de la cámara de combustión de cada cilindro es <b>62 cm³</b>. Determina:</p><ol type='a'><li>La cilindrada total del motor. <span class='pts'>(0,75 puntos)</span></li><li>La potencia desarrollada operando en par máximo. <span class='pts'>(1 punto)</span></li><li>La relación volumétrica de compresión. <span class='pts'>(0,75 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q2b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Cilindrada unitaria \(V_u=\dfrac{\pi D^2}{4}\,L\); total \(V_T=z\,V_u\). La potencia es \(P=M\,\omega\), con \(\omega=\dfrac{2\pi n}{60}\). La relación de compresión \(r=\dfrac{V_u+V_c}{V_c}\).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q2b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q2b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q2b">
+    <h5>a) Cilindrada total</h5><div class='formula'>$$V_u=\dfrac{\pi D^2}{4}L=\dfrac{\pi\,7{,}5^2}{4}\cdot 8{,}5=375{,}5\ \mathrm{cm^3}$$</div><div class='formula'>$$V_T=6\cdot 375{,}5=2253\ \mathrm{cm^3}\approx 2{,}25\ \mathrm{L}$$</div><div class='res'><b>V<sub>T</sub> ≈ 2253 cm³ (2,25 L)</b></div><h5>b) Potencia en par máximo</h5><div class='formula'>$$\omega=\dfrac{2\pi n}{60}=\dfrac{2\pi\cdot 4200}{60}=439{,}8\ \mathrm{rad/s}$$</div><div class='formula'>$$P=M\,\omega=350\cdot 439{,}8=153\,900\ \mathrm{W}\approx 153{,}9\ \mathrm{kW}\ (\approx 209\ \mathrm{CV})$$</div><div class='res'><b>P ≈ 153,9 kW</b></div><h5>c) Relación de compresión</h5><div class='formula'>$$r=\dfrac{V_u+V_c}{V_c}=\dfrac{375{,}5+62}{62}=7{,}06$$</div><div class='res'><b>r ≈ 7,06 : 1</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2a" onclick="go('q2a');return false;">← Anterior</a>
+    <a href="#q3a" onclick="go('q3a');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3a">
+  <div class="crumb">Inicio / DIGITAL</div>
+  <div class="qtitle"><span class="tag t3">DIGITAL</span> Opción a · Karnaugh e implementación NAND</div>
+  <div class="qmeta">Opción a · 2,5 puntos (a 0,5 · b 1 · c 1)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Partiendo de la tabla de verdad mostrada (A, B, C, D entradas; S salida), se pide:</p><ol type='a'><li>Escribe la primera forma canónica de la función lógica. <span class='pts'>(0,5 puntos)</span></li><li>Simplificar al máximo la función mediante el mapa de Karnaugh. <span class='pts'>(1 punto)</span></li><li>Implementar el circuito con el menor número de puertas lógicas utilizando puertas <b>NAND</b>. <span class='pts'>(1 punto)</span></li></ol><table class='dat'><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>S</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></tbody></table>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q3a.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>La <b>1ª forma canónica</b> es la suma de minterms (filas con S = 1). Los unos se agrupan en el <b>mapa de Karnaugh</b> 4×4 (columnas AB, filas CD) y el resultado se implementa con <b>NAND</b> (estructura NAND-NAND de la suma de productos).</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3a')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q3a.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3a">
+    <h5>a) Primera forma canónica (minterms)</h5><div class='formula'>$$S=\sum m(0,2,4,5,7,8,10,13,15)$$</div><p>Es decir, la suma de los productos de las 9 filas con salida 1 (\(\bar A\bar B\bar C\bar D+\bar A\bar B C\bar D+\dots+ABCD\)).</p><h5>b) Simplificación por Karnaugh</h5><table class='dat'><thead><tr><th>CD\AB</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead><tbody><tr><td><b>00</b></td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td><b>01</b></td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td><b>11</b></td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td><b>10</b></td><td>1</td><td>0</td><td>0</td><td>1</td></tr></tbody></table><p>Grupos: <b>B̄·D̄</b> (B = 0 y D = 0, las cuatro esquinas), <b>B·D</b> (B = 1 y D = 1) y el par <b>Ā·C̄·D̄</b> que recoge el 1 restante (m4):</p><div class='formula'>$$\boxed{\ S=\bar B\,\bar D+B\,D+\bar A\,\bar C\,\bar D\ }$$</div><h5>c) Implementación con puertas NAND</h5><p>Suma de tres productos ⇒ estructura <b>NAND-NAND</b>:</p><div class='formula'>$$S=\mathrm{NAND}\big(\overline{\bar B\bar D},\ \overline{BD},\ \overline{\bar A\bar C\bar D}\big)=\mathrm{NAND}\big(\mathrm{NAND}(\bar B,\bar D),\ \mathrm{NAND}(B,D),\ \mathrm{NAND}(\bar A,\bar C,\bar D)\big)$$</div><figure class='fig'><svg viewBox='0 0 560 320' width='100%' style='max-width:540px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='120' y1='38.0' x2='160' y2='38.0' stroke='#cbd5e1'/><text x='114' y='42.0' fill='#e7ecf7' font-size='13' text-anchor='end'>B̄</text><line x1='120' y1='54.0' x2='160' y2='54.0' stroke='#cbd5e1'/><text x='114' y='58.0' fill='#e7ecf7' font-size='13' text-anchor='end'>D̄</text><path d='M160,20 L188.0,20 A26.0,26.0 0 0 1 188.0,72 L160,72 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='221' cy='46.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='183.52' y='50.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='120' y1='143.0' x2='160' y2='143.0' stroke='#cbd5e1'/><text x='114' y='147.0' fill='#e7ecf7' font-size='13' text-anchor='end'>B</text><line x1='120' y1='159.0' x2='160' y2='159.0' stroke='#cbd5e1'/><text x='114' y='163.0' fill='#e7ecf7' font-size='13' text-anchor='end'>D</text><path d='M160,125 L188.0,125 A26.0,26.0 0 0 1 188.0,177 L160,177 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='221' cy='151.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='183.52' y='155.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='120' y1='244.0' x2='160' y2='244.0' stroke='#cbd5e1'/><text x='114' y='248.0' fill='#e7ecf7' font-size='13' text-anchor='end'>Ā</text><line x1='120' y1='260.0' x2='160' y2='260.0' stroke='#cbd5e1'/><text x='114' y='264.0' fill='#e7ecf7' font-size='13' text-anchor='end'>C̄</text><line x1='120' y1='276.0' x2='160' y2='276.0' stroke='#cbd5e1'/><text x='114' y='280.0' fill='#e7ecf7' font-size='13' text-anchor='end'>D̄</text><path d='M160,228 L188.0,228 A32.0,32.0 0 0 1 188.0,292 L160,292 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='221' cy='260.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='183.52' y='264.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='226' y1='46.0' x2='380' y2='46.0' stroke='#cbd5e1'/><line x1='380' y1='46.0' x2='380' y2='150' stroke='#cbd5e1'/><line x1='380' y1='150' x2='400' y2='150' stroke='#cbd5e1'/><line x1='226' y1='151.0' x2='400' y2='185' stroke='#cbd5e1'/><line x1='226' y1='260.0' x2='380' y2='260.0' stroke='#cbd5e1'/><line x1='380' y1='260.0' x2='380' y2='220' stroke='#cbd5e1'/><line x1='380' y1='220' x2='400' y2='220' stroke='#cbd5e1'/><path d='M400,110 L432.0,110 A75.0,75.0 0 0 1 432.0,260 L400,260 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><circle cx='469' cy='185.0' r='4.5' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.6'/><text x='426.88' y='189.0' fill='#94a3c0' font-size='10' text-anchor='middle'>NAND</text><line x1='474' y1='185.0' x2='514' y2='185.0' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='522' y='190.0' fill='#4ade80' font-size='16' text-anchor='start'>S</text><text x='20' y='300' fill='#94a3c0' font-size='11' text-anchor='start'>Los literales negados (Ā, B̄, C̄, D̄) se obtienen con NAND-inversores.</text></svg><figcaption>S = B̄D̄ + BD + ĀC̄D̄ con estructura NAND-NAND (los literales negados salen de NAND-inversores).</figcaption></figure><div class='res'><b>S = B̄·D̄ + B·D + Ā·C̄·D̄</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q2b" onclick="go('q2b');return false;">← Anterior</a>
+    <a href="#q3b" onclick="go('q3b');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q3b">
+  <div class="crumb">Inicio / DIGITAL</div>
+  <div class="qtitle"><span class="tag t3">DIGITAL</span> Opción b · Diseño de una alarma</div>
+  <div class="qmeta">Opción b · 2,5 puntos (a 1 · b 1 · c 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>Diseña un sistema de control para activar una alarma. Depende de cuatro sensores (A, B, C, D). La alarma se activa (<b>S = 1</b>) cuando:</p><ul><li>Se activan <b>3 o 4</b> sensores simultáneamente.</li><li>Se activan <b>2</b> sensores simultáneamente, siempre que sean <b>C y D</b> o <b>A y D</b>.</li></ul><ol type='a'><li>Obtén la tabla de verdad del sistema. <span class='pts'>(1 punto)</span></li><li>Simplifica la función lógica mediante mapas de Karnaugh. <span class='pts'>(1 punto)</span></li><li>Dibuja el diagrama lógico de la función simplificada. <span class='pts'>(0,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q3b.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Se cuenta cuántos sensores están activos en cada combinación: S = 1 si hay 3 o 4 activos, o si hay exactamente 2 y son {C,D} o {A,D}. Con la tabla se rellena el mapa de Karnaugh y se agrupan los unos.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q3b')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q3b.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q3b">
+    <h5>a) Tabla de verdad</h5><table class='dat'><thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>S</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></tbody></table><h5>b) Mapa de Karnaugh y función simplificada</h5><table class='dat'><thead><tr><th>CD\AB</th><th>00</th><th>01</th><th>11</th><th>10</th></tr></thead><tbody><tr><td><b>00</b></td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td><b>01</b></td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td><b>11</b></td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td><b>10</b></td><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table><p>Grupos: fila CD = 11 (<b>C·D</b>), bloque A = 1 · D = 1 (<b>A·D</b>) y el par m14–m15 (<b>A·B·C</b>):</p><div class='formula'>$$\boxed{\ S=C\,D+A\,D+A\,B\,C\ }$$</div><h5>c) Diagrama lógico</h5><figure class='fig'><svg viewBox='0 0 540 320' width='100%' style='max-width:520px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><line x1='130' y1='41.0' x2='170' y2='41.0' stroke='#cbd5e1'/><text x='124' y='45.0' fill='#e7ecf7' font-size='13' text-anchor='end'>C</text><line x1='130' y1='57.0' x2='170' y2='57.0' stroke='#cbd5e1'/><text x='124' y='61.0' fill='#e7ecf7' font-size='13' text-anchor='end'>D</text><path d='M170,25 L199.0,25 A24.0,24.0 0 0 1 199.0,73 L170,73 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><text x='194.36' y='53.0' fill='#94a3c0' font-size='10' text-anchor='middle'>AND</text><line x1='130' y1='146.0' x2='170' y2='146.0' stroke='#cbd5e1'/><text x='124' y='150.0' fill='#e7ecf7' font-size='13' text-anchor='end'>A</text><line x1='130' y1='162.0' x2='170' y2='162.0' stroke='#cbd5e1'/><text x='124' y='166.0' fill='#e7ecf7' font-size='13' text-anchor='end'>D</text><path d='M170,130 L199.0,130 A24.0,24.0 0 0 1 199.0,178 L170,178 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><text x='194.36' y='158.0' fill='#94a3c0' font-size='10' text-anchor='middle'>AND</text><line x1='130' y1='247.0' x2='170' y2='247.0' stroke='#cbd5e1'/><text x='124' y='251.0' fill='#e7ecf7' font-size='13' text-anchor='end'>A</text><line x1='130' y1='263.0' x2='170' y2='263.0' stroke='#cbd5e1'/><text x='124' y='267.0' fill='#e7ecf7' font-size='13' text-anchor='end'>B</text><line x1='130' y1='279.0' x2='170' y2='279.0' stroke='#cbd5e1'/><text x='124' y='283.0' fill='#e7ecf7' font-size='13' text-anchor='end'>C</text><path d='M170,232 L199.0,232 A31.0,31.0 0 0 1 199.0,294 L170,294 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><text x='194.36' y='267.0' fill='#94a3c0' font-size='10' text-anchor='middle'>AND</text><line x1='228' y1='49.0' x2='360' y2='49.0' stroke='#cbd5e1'/><line x1='360' y1='49.0' x2='360' y2='152' stroke='#cbd5e1'/><line x1='360' y1='152' x2='380' y2='152' stroke='#cbd5e1'/><line x1='228' y1='154.0' x2='380' y2='185' stroke='#cbd5e1'/><line x1='228' y1='263.0' x2='360' y2='263.0' stroke='#cbd5e1'/><line x1='360' y1='263.0' x2='360' y2='218' stroke='#cbd5e1'/><line x1='360' y1='218' x2='380' y2='218' stroke='#cbd5e1'/><path d='M380,110 Q414.1,110 442,185.0 Q414.1,260 380,260 Q397.36,185.0 380,110 Z' fill='#1b2640' stroke='#e7ecf7' stroke-width='1.8'/><text x='406.04' y='189.0' fill='#94a3c0' font-size='10' text-anchor='middle'>OR</text><line x1='442' y1='185.0' x2='482' y2='185.0' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='490' y='190.0' fill='#4ade80' font-size='16' text-anchor='start'>S</text></svg><figcaption>S = C·D + A·D + A·B·C con tres puertas AND y una OR.</figcaption></figure><div class='res'><b>S = C·D + A·D + A·B·C</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3a" onclick="go('q3a');return false;">← Anterior</a>
+    <a href="#q4" onclick="go('q4');return false;">Siguiente →</a>
+  </div>
+</section>
+
+<section class="view" id="q4">
+  <div class="crumb">Inicio / NEUMÁTICA</div>
+  <div class="qtitle"><span class="tag t4">NEUMÁTICA</span> Ejercicio 4 · Automatización del prensado</div>
+  <div class="qmeta">Obligatorio · 2,5 puntos (a 2 · b 0,5)</div>
+
+  <div class="box enun">
+    <h4>📄 Enunciado</h4>
+    <p>En una planta de ensamblaje se automatiza el <b>prensado de piezas</b> con un <b>cilindro neumático de doble efecto</b>. El sistema debe cumplir:</p><ol><li>El prensado comienza cuando el operario acciona <b>momentáneamente</b> una válvula de <b>pulsador</b>, provocando de forma <b>indirecta</b> el avance del cilindro.</li><li>Durante el avance, el cilindro debe moverse a <b>velocidad controlada</b>.</li><li>Cuando el cilindro ha avanzado lo máximo, debe <b>retornar automáticamente</b> a la posición inicial.</li></ol><ol type='a'><li>Diseñar el circuito neumático que responda a los puntos anteriores. <span class='pts'>(2 puntos)</span></li><li>Indica el nombre de los elementos utilizados. <span class='pts'>(0,5 puntos)</span></li></ol>
+    
+    <a class="enlace-pdf" href="pdf_clm_2026_modelo_b/q4.pdf" target="_blank" rel="noopener">📄 Ver esta pregunta resuelta (PDF)</a>
+  </div>
+
+  <div class="box aplica">
+    <h4>💡 ¿Qué vamos a aplicar?</h4>
+    <p>Se necesita un <b>mando indirecto con memoria</b>: una válvula <b>5/2 biestable</b> gobierna el cilindro de doble efecto; un <b>pulsador 3/2</b> ordena el avance y un <b>final de carrera 3/2 (rodillo)</b> ordena el retorno automático; una <b>válvula reguladora de caudal</b> controla la velocidad de avance.</p>
+  </div>
+
+  <button class="btn-sol" onclick="tg(this,'s-q4')">▶ Ver solución detallada</button>
+  <a class="btn-pdf" href="pdf_clm_2026_modelo_b/q4.pdf" target="_blank" rel="noopener">📄 Ver PDF (pregunta + solución)</a>
+  <div class="sol" id="s-q4">
+    <h5>a) Diseño del circuito</h5><p>El esquema de mando (indirecto, con memoria) es:</p><figure class='fig'><svg viewBox='0 0 680 320' width='100%' style='max-width:660px;height:auto' fill='none' stroke='#cbd5e1' stroke-width='2' font-family='Inter,system-ui,sans-serif' font-size='14'><defs><marker id='ar' markerWidth='9' markerHeight='8' refX='7' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#cbd5e1'/></marker></defs><rect x='20' y='130' width='70' height='40' rx='5' stroke='#94a3c0'/><text x='55.0' y='155.0' fill='#e2e8f0' font-size='13' text-anchor='middle'>0P</text><line x1='90' y1='150' x2='128' y2='150' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='128' y='122' width='104' height='56' rx='5' stroke='#38bdf8'/><text x='180.0' y='155.0' fill='#e2e8f0' font-size='13' text-anchor='middle'>0Z1<tspan x="180" dy="18" font-size="11">unidad mant.</tspan></text><line x1='232' y1='150' x2='300' y2='150' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='300' y='118' width='110' height='64' rx='5' stroke='#22d3ee'/><text x='355.0' y='155.0' fill='#e2e8f0' font-size='13' text-anchor='middle'>1.1<tspan x="355" dy="18" font-size="10.5">válvula 5/2</tspan><tspan x="355" dy="14" font-size="10.5">biestable</tspan></text><rect x='300' y='24' width='110' height='44' rx='5' stroke='#a78bfa'/><text x='355.0' y='51.0' fill='#e2e8f0' font-size='12' text-anchor='middle'>1.2 · pulsador 3/2</text><line x1='355' y1='68' x2='355' y2='116' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='362' y='96' fill='#4ade80' font-size='10' text-anchor='start'>avance</text><line x1='410' y1='150' x2='452' y2='150' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='452' y='128' width='70' height='44' rx='5' stroke='#f59e0b'/><text x='487.0' y='155.0' fill='#e2e8f0' font-size='12' text-anchor='middle'>1.01<tspan x="487" dy="16" font-size="10">regulador Q</tspan></text><line x1='522' y1='150' x2='560' y2='150' stroke='#cbd5e1' marker-end='url(#ar)'/><rect x='560' y='130' width='90' height='40' rx='5' stroke='#4ade80'/><text x='605.0' y='155.0' fill='#e2e8f0' font-size='12' text-anchor='middle'>1.0 cilindro D.E.</text><rect x='300' y='232' width='110' height='44' rx='5' stroke='#a78bfa'/><text x='355.0' y='259.0' fill='#e2e8f0' font-size='12' text-anchor='middle'>1.3 · rodillo 3/2</text><line x1='605' y1='170' x2='605' y2='254' stroke='#cbd5e1'/><line x1='605' y1='254' x2='410' y2='254' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='500' y='246' fill='#94a3c0' font-size='10' text-anchor='middle'>final de carrera</text><line x1='355' y1='232' x2='355' y2='184' stroke='#cbd5e1' marker-end='url(#ar)'/><text x='362' y='210' fill='#fb7185' font-size='10' text-anchor='start'>retorno</text></svg><figcaption>Esquema del circuito: el pulsador 1.2 y el final de carrera 1.3 pilotan la válvula 5/2 biestable (1.1), que gobierna el cilindro de doble efecto 1.0; la reguladora 1.01 controla la velocidad de avance.</figcaption></figure><p><b>Funcionamiento:</b> al <b>pulsar 1.2</b> (momentáneamente) se pilota un extremo de la válvula <b>5/2 biestable 1.1</b>, que envía aire a la cámara trasera del cilindro <b>1.0</b>: el vástago <b>avanza</b> a velocidad regulada por la <b>válvula de caudal 1.01</b>. Como la 5/2 es <b>biestable (memoria)</b>, el cilindro sigue avanzando aunque se suelte el pulsador. Al llegar al final de carrera, el vástago acciona el <b>rodillo 1.3</b>, que pilota el otro extremo de la 1.1; ésta conmuta y el cilindro <b>retrocede automáticamente</b> a su posición inicial.</p><h5>b) Elementos utilizados</h5><ul><li><b>1.0 · Cilindro de doble efecto</b> (actuador de prensado).</li><li><b>1.1 · Válvula distribuidora 5/2 biestable</b>, pilotada neumáticamente por ambos extremos (función memoria).</li><li><b>1.2 · Válvula 3/2 NC de pulsador</b> con retorno por muelle (orden de marcha/avance).</li><li><b>1.3 · Válvula 3/2 NC de rodillo</b> (final de carrera) con retorno por muelle (orden de retorno automático).</li><li><b>1.01 · Válvula reguladora de caudal unidireccional</b> (estrangulamiento + antirretorno) para la velocidad de avance.</li><li><b>0Z1 · Unidad de mantenimiento</b> y <b>0P · toma de aire comprimido</b>.</li></ul><div class='res'><b>Mando indirecto con memoria: 1.2 (marcha) y 1.3 (final de carrera) pilotan la 5/2 biestable 1.1, que gobierna el cilindro; 1.01 regula la velocidad de avance.</b></div>
+  </div>
+  <div class="nav-q">
+    <a href="#q3b" onclick="go('q3b');return false;">← Anterior</a>
+    <a href="#home" onclick="go('home');return false;">Inicio →</a>
+  </div>
+</section>
+</main></div>
+
+<footer>
+  <svg class="gear" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1z"/></svg>
+  <span><b>Solucionario PAU · UCLM (Castilla-La Mancha) · Tecnología e Ingeniería II (Modelo B, curso 2025/26)</b></span>
+</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('show')});
+  var t=document.getElementById(id); if(t){t.classList.add('show')}
+  document.querySelectorAll('aside a.q').forEach(function(a){a.classList.remove('active')});
+  var l=document.getElementById('l-'+id); if(l){l.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(history.replaceState){history.replaceState(null,'','#'+id)}
+}
+function tg(btn,id){
+  var s=document.getElementById(id);
+  var open=s.classList.toggle('open');
+  btn.innerHTML=open?'▼ Ocultar solución':'▶ Ver solución detallada';
+  if(open && window.renderMathInElement && !s.dataset.katex){
+    renderMathInElement(s,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+    s.dataset.katex='1';
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var h=(location.hash||'').replace('#','');
+  if(h && document.getElementById(h)){go(h)}
+  var iv=setInterval(function(){
+    if(window.renderMathInElement){
+      clearInterval(iv);
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false,strict:false});
+      document.querySelectorAll('.sol').forEach(function(x){x.dataset.katex='1'});
+    }
+  },200);
+});
+</script>
+</body>
+</html>
